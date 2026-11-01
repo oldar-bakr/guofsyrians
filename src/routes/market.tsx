@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ShoppingBag } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { products } from "@/lib/data";
+import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/market")({
   head: () => ({
@@ -17,6 +17,7 @@ export const Route = createFileRoute("/market")({
 });
 
 function Market() {
+  const { data: products = [] } = useContent<any>("products");
   const [cart, setCart] = useState(0);
   return (
     <AppShell title="السوق">

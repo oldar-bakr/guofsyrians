@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { MapPin } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { deals } from "@/lib/data";
+import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/deals")({
   head: () => ({
@@ -19,8 +19,9 @@ export const Route = createFileRoute("/deals")({
 const cities = ["الكل", "إسطنبول", "أنقرة", "غازي عنتاب"];
 
 function Deals() {
+  const { data: deals = [] } = useContent<any>("deals");
   const [city, setCity] = useState("الكل");
-  const list = deals.filter((d) => city === "الكل" || d.city === city);
+  const list = deals.filter((d: any) => city === "الكل" || d.city === city);
   return (
     <AppShell title="التخفيضات">
       <div className="mb-4 flex gap-2 overflow-x-auto">

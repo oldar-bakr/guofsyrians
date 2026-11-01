@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarDays, ShoppingBag, Building2, GraduationCap, Tag, Sparkles } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { news, student } from "@/lib/data";
+import { student } from "@/lib/data";
+import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,6 +26,7 @@ const services = [
 ] as const;
 
 function Index() {
+  const { data: news = [] } = useContent<any>("news");
   return (
     <AppShell>
       <section className="bg-hero rounded-3xl p-6 text-primary-foreground shadow-soft">

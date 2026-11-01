@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PlayCircle } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { courses } from "@/lib/data";
+import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/courses")({
   head: () => ({
@@ -16,6 +16,7 @@ export const Route = createFileRoute("/courses")({
 });
 
 function Courses() {
+  const { data: courses = [] } = useContent<any>("courses");
   return (
     <AppShell title="الدورات">
       <div className="space-y-4">
@@ -28,7 +29,7 @@ function Courses() {
                 <h3 className="font-bold">{c.title}</h3>
               </div>
             </div>
-            {c.progress > 0 ? (
+            {(c.progress ?? 0) > 0 ? (
               <div className="mt-3">
                 <div className="h-2 rounded-full bg-muted"><div className="h-2 rounded-full bg-primary" style={{ width: `${c.progress}%` }} /></div>
                 <p className="mt-1 text-xs text-muted-foreground">أنجزت {c.progress}%</p>
