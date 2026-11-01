@@ -94,8 +94,8 @@ function SectionManager({ table }: { table: ContentTable }) {
     setError("");
     const payload: Record<string, any> = {};
     fields.forEach((f) => (payload[f.key] = f.type === "number" ? Number(row[f.key] || 0) : row[f.key] ?? ""));
-    const { error } = row.id
-      ? await supabase.from(table).update(payload as never).eq("id", row.id)
+    const { error } = row["id"]
+      ? await supabase.from(table).update(payload as never).eq("id", row["id"])
       : await supabase.from(table).insert(payload as never);
     if (error) return setError("تعذّر الحفظ: " + error.message);
     setEditing(null);
@@ -124,12 +124,12 @@ function SectionManager({ table }: { table: ContentTable }) {
           <tbody>
             {isLoading && <tr><td className="p-4" colSpan={fields.length + 1}>جارٍ التحميل...</td></tr>}
             {data.map((row: any) => (
-              <tr key={row.id} className="border-t">
+              <tr key={row["id"]} className="border-t">
                 {fields.map((f) => <td key={f.key} className="px-4 py-3">{row[f.key]}</td>)}
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     <button aria-label="تعديل" onClick={() => setEditing(row)} className="text-primary"><Pencil className="h-4 w-4" /></button>
-                    <button aria-label="حذف" onClick={() => remove(row.id)} className="text-destructive"><Trash2 className="h-4 w-4" /></button>
+                    <button aria-label="حذف" onClick={() => remove(row["id"])} className="text-destructive"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 </td>
               </tr>
@@ -148,7 +148,7 @@ function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row:
     <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/40 p-4">
       <form onSubmit={(e) => { e.preventDefault(); onSave(form); }} className="w-full max-w-md space-y-3 rounded-3xl bg-card p-6 shadow-soft">
         <div className="flex items-center justify-between">
-          <h3 className="font-display text-lg font-bold">{row.id ? "تعديل" : "إضافة"} — {sections[table].label}</h3>
+          <h3 className="font-display text-lg font-bold">{row["id"] ? "تعديل" : "إضافة"} — {sections[table].label}</h3>
           <button type="button" onClick={onClose} aria-label="إغلاق"><X className="h-5 w-5" /></button>
         </div>
         {sections[table].fields.map((f, i) => (
