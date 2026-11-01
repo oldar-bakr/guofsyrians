@@ -20,7 +20,10 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
             <img src={logo.url} alt="شعار الاتحاد" className="h-9 w-9 object-contain" />
             <span className="font-display text-sm font-bold text-primary">اتحاد الطلبة</span>
           </Link>
-          {title && <h1 className="font-display text-lg font-bold">{title}</h1>}
+          <div className="flex items-center gap-3">
+            {title && <h1 className="font-display text-lg font-bold">{title}</h1>}
+            <Link to="/admin" className="rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary">الإدارة</Link>
+          </div>
         </header>
         <main className="flex-1 px-5 pb-28 pt-5">{children}</main>
         <nav className="fixed inset-x-0 bottom-0 z-10 mx-auto grid max-w-md grid-cols-5 border-t bg-card md:absolute">

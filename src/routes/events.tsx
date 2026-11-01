@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { AppShell } from "@/components/AppShell";
-import { events } from "@/lib/data";
+import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/events")({
   head: () => ({
@@ -16,6 +16,7 @@ export const Route = createFileRoute("/events")({
 });
 
 function Events() {
+  const { data: events = [] } = useContent<any>("events");
   const [joined, setJoined] = useState<string[]>([]);
   return (
     <AppShell title="الفعاليات">

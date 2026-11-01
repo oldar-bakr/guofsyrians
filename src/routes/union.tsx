@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, User } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { branches, student } from "@/lib/data";
+import { student } from "@/lib/data";
+import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/union")({
   head: () => ({
@@ -16,6 +17,7 @@ export const Route = createFileRoute("/union")({
 });
 
 function Union() {
+  const { data: branches = [] } = useContent<any>("branches");
   return (
     <AppShell title="دليل الاتحاد">
       <section className="rounded-2xl bg-hero p-5 text-primary-foreground">
