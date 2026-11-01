@@ -31,13 +31,14 @@ export function UsersManager({ myId }: { myId: string }) {
     }
   };
 
-  const users = data.filter((u) => u.email.toLowerCase().includes(search.toLowerCase()));
+  const q = search.toLowerCase();
+  const users = data.filter((u) => u.email.toLowerCase().includes(q) || u.fullName.toLowerCase().includes(q) || u.university.toLowerCase().includes(q));
 
   return (
     <section>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <h2 className="font-display text-2xl font-bold">المستخدمون <span className="text-base text-muted-foreground">({data.length})</span></h2>
-        <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="ابحث بالبريد..." className="rounded-xl border bg-card px-4 py-2 text-sm" />
+        <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="ابحث بالاسم أو البريد أو الجامعة..." className="rounded-xl border bg-card px-4 py-2 text-sm" />
       </div>
 
       <div className="mb-4 grid gap-3 sm:grid-cols-3">
@@ -55,7 +56,8 @@ export function UsersManager({ myId }: { myId: string }) {
         <table className="w-full text-sm">
           <thead className="bg-secondary text-right">
             <tr>
-              <th className="px-4 py-3">البريد</th>
+              <th className="px-4 py-3">الطالب</th>
+              <th className="px-4 py-3">الجامعة</th>
               <th className="px-4 py-3">طريقة الدخول</th>
               <th className="px-4 py-3">آخر دخول</th>
               <th className="px-4 py-3">الصلاحية</th>
@@ -64,17 +66,21 @@ export function UsersManager({ myId }: { myId: string }) {
             </tr>
           </thead>
           <tbody>
-            {isLoading && <tr><td className="p-4" colSpan={6}>جارٍ التحميل...</td></tr>}
+            {isLoading && <tr><td className="p-4" colSpan={7}>جارٍ التحميل...</td></tr>}
             {users.map((u) => {
               const me = u.id === myId;
               return (
                 <tr key={u.id} className="border-t">
-                  <td className="px-4 py-3">{u.email}{me && <span className="mr-2 text-xs text-primary">(أنت)</span>}</td>
+                  <td className="px-4 py-3">
+                    <p className="font-bold">{u.fullName || "— لم يكمل بياناته —"}{me && <span className="mr-2 text-xs text-primary">(أنت)</span>}{u.isOwner && <span className="mr-2 rounded-full bg-accent px-2 text-xs text-accent-foreground">المالك</span>}</p>
+                    <p className="text-xs text-muted-foreground">{u.email}{u.phone && ` · ${u.phone}`}</p>
+                  </td>
+                  <td className="px-4 py-3">{u.university}{u.city && <span className="block text-xs text-muted-foreground">{u.city}</span>}</td>
                   <td className="px-4 py-3">{u.provider === "google" ? "Google" : "البريد"}</td>
                   <td className="px-4 py-3 text-muted-foreground">{u.lastSignIn ? new Date(u.lastSignIn).toLocaleDateString("ar") : "—"}</td>
                   <td className="px-4 py-3">
                     <select
-                      disabled={me}
+                      disabled={me || u.isOwner}
                       value={u.role}
                       onChange={(e) => run(() => changeRole({ data: { userId: u.id, role: e.target.value as ManagedRole } }))}
                       className="rounded-lg border bg-background px-2 py-1 disabled:opacity-60"
@@ -86,7 +92,7 @@ export function UsersManager({ myId }: { myId: string }) {
                     {u.banned ? <span className="font-bold text-destructive">موقوف</span> : <span className="text-primary">فعّال</span>}
                   </td>
                   <td className="px-4 py-3">
-                    {!me && (
+                    {!me && !u.isOwner && (
                       <div className="flex gap-3">
                         <button
                           aria-label={u.banned ? "إعادة تفعيل" : "إيقاف"}

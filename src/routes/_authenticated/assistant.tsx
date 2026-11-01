@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Send } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 
-export const Route = createFileRoute("/assistant")({
+export const Route = createFileRoute("/_authenticated/assistant")({
   head: () => ({
     meta: [
       { title: "المساعد الذكي | تطبيق خدمات الطلاب" },

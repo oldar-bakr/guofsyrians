@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarDays, ShoppingBag, Building2, GraduationCap, Tag, Sparkles } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { student } from "@/lib/data";
+import { useStudent } from "@/lib/profile";
 import { useContent } from "@/lib/content";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
       { title: "الرئيسية | تطبيق خدمات الطلاب" },
@@ -26,6 +26,7 @@ const services = [
 ] as const;
 
 function Index() {
+  const student = useStudent();
   const { data: news = [] } = useContent<any>("news");
   return (
     <AppShell>

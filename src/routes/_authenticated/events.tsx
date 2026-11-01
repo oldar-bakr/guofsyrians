@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { useContent } from "@/lib/content";
 
-export const Route = createFileRoute("/events")({
+export const Route = createFileRoute("/_authenticated/events")({
   head: () => ({
     meta: [
       { title: "الفعاليات | تطبيق خدمات الطلاب" },

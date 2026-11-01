@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, User } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { student } from "@/lib/data";
+import { useStudent } from "@/lib/profile";
 import { useContent } from "@/lib/content";
 
-export const Route = createFileRoute("/union")({
+export const Route = createFileRoute("/_authenticated/union")({
   head: () => ({
     meta: [
       { title: "دليل الاتحاد | تطبيق خدمات الطلاب" },
@@ -17,6 +17,7 @@ export const Route = createFileRoute("/union")({
 });
 
 function Union() {
+  const student = useStudent();
   const { data: branches = [] } = useContent<any>("branches");
   return (
     <AppShell title="دليل الاتحاد">

@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import QRCode from "react-qr-code";
 import { AppShell } from "@/components/AppShell";
-import { student } from "@/lib/data";
+import { useStudent } from "@/lib/profile";
 import logo from "@/assets/union-logo.png.asset.json";
 
-export const Route = createFileRoute("/card")({
+export const Route = createFileRoute("/_authenticated/card")({
   head: () => ({
     meta: [
       { title: "بطاقتي الرقمية | تطبيق خدمات الطلاب" },
@@ -17,6 +17,7 @@ export const Route = createFileRoute("/card")({
 });
 
 function CardPage() {
+  const student = useStudent();
   return (
     <AppShell title="بطاقتي">
       <div className="bg-member rounded-3xl p-6 text-primary-foreground shadow-soft">

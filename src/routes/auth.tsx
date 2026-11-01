@@ -8,9 +8,9 @@ export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
       { title: "تسجيل الدخول | تطبيق خدمات الطلاب" },
-      { name: "description", content: "تسجيل الدخول إلى لوحة إدارة تطبيق خدمات الطلاب." },
+      { name: "description", content: "سجّل دخولك إلى تطبيق خدمات الطلاب." },
       { property: "og:title", content: "تسجيل الدخول" },
-      { property: "og:description", content: "الدخول إلى لوحة الإدارة." },
+      { property: "og:description", content: "سجّل دخولك إلى تطبيق خدمات الطلاب." },
     ],
   }),
   component: AuthPage,
@@ -31,9 +31,9 @@ function AuthPage() {
     if (mode === "in") {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) setMsg("البريد أو كلمة المرور غير صحيحة");
-      else navigate({ to: "/admin" });
+      else navigate({ to: "/" });
     } else {
-      const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${window.location.origin}/admin` } });
+      const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin } });
       setMsg(error ? error.message : "تم إنشاء الحساب. تحقق من بريدك لتأكيد الحساب ثم سجّل الدخول.");
     }
     setBusy(false);
@@ -43,7 +43,7 @@ function AuthPage() {
     const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
     if (r.error) return setMsg("تعذّر الدخول عبر Google");
     if (r.redirected) return;
-    navigate({ to: "/admin" });
+    navigate({ to: "/" });
   };
 
   return (

@@ -4,7 +4,7 @@ import { ShoppingBag } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { useContent } from "@/lib/content";
 
-export const Route = createFileRoute("/market")({
+export const Route = createFileRoute("/_authenticated/market")({
   head: () => ({
     meta: [
       { title: "سوق الطالب | تطبيق خدمات الطلاب" },
