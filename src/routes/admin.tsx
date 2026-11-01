@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Pencil, Trash2, Plus, LogOut, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { sections, useContent, type ContentTable } from "@/lib/content";
+import { UsersManager } from "@/components/UsersManager";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/admin")({
