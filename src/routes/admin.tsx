@@ -136,13 +136,13 @@ function SectionManager({ table }: { table: ContentTable }) {
       <div className="overflow-x-auto rounded-2xl bg-card shadow-soft">
         <table className="w-full text-sm">
           <thead className="bg-secondary text-right">
-            <tr>{fields.map((f) => <th key={f.key} className="px-4 py-3 font-bold">{f.label}</th>)}<th className="w-24" /></tr>
+            <tr>{fields.filter((f) => !f.hideInTable).map((f) => <th key={f.key} className="px-4 py-3 font-bold">{f.label}</th>)}<th className="w-24" /></tr>
           </thead>
           <tbody>
             {isLoading && <tr><td className="p-4" colSpan={fields.length + 1}>جارٍ التحميل...</td></tr>}
             {data.map((row: any) => (
               <tr key={row["id"]} className="border-t">
-                {fields.map((f) => <td key={f.key} className="px-4 py-3">{row[f.key]}</td>)}
+                {fields.filter((f) => !f.hideInTable).map((f) => <td key={f.key} className="px-4 py-3">{row[f.key]}</td>)}
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     <button aria-label="تعديل" onClick={() => setEditing(row)} className="text-primary"><Pencil className="h-4 w-4" /></button>
@@ -171,6 +171,9 @@ function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row:
         {sections[table].fields.map((f, i) => (
           <label key={f.key} className="block text-sm">
             {f.label}
+            {f.type === "long" ? (
+              <textarea rows={4} value={form[f.key] ?? ""} onChange={(e) => setForm({ ...form, [f.key]: e.target.value })} className="mt-1 w-full rounded-xl border bg-background px-3 py-2" />
+            ) : (
             <input
               required={i === 0}
               type={f.type === "number" ? "number" : "text"}
