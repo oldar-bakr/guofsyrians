@@ -5,7 +5,7 @@ import { AppShell } from "@/components/AppShell";
 import { useContent } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
-export const Route = createFileRoute("/_authenticated/courses")({
+export const Route = createFileRoute("/_authenticated/courses/")({
   head: () => ({
     meta: [
       { title: "الدورات التعليمية | تطبيق خدمات الطلاب" },

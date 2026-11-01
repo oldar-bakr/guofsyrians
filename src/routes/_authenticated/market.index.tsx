@@ -5,7 +5,7 @@ import { AppShell } from "@/components/AppShell";
 import { useContent } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
-export const Route = createFileRoute("/_authenticated/market")({
+export const Route = createFileRoute("/_authenticated/market/")({
   head: () => ({
     meta: [
       { title: "سوق الطالب | تطبيق خدمات الطلاب" },

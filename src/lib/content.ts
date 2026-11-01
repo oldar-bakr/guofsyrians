@@ -26,3 +26,23 @@ export function useContent<T = Record<string, any>>(table: ContentTable) {
     },
   });
 }
+
+export function useItem<T = Record<string, any>>(table: ContentTable, id: string) {
+  return useQuery({
+    queryKey: ["content", table, id],
+    queryFn: async () => {
+      const { data, error } = await supabase.from(table).select("*").eq("id", id).maybeSingle();
+      if (error) throw error;
+      return data as T | null;
+    },
+  });
+}
+
+// Turns a YouTube/Vimeo link into an embeddable player URL; returns null for other links.
+export function toEmbedUrl(url: string): string | null {
+  const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{6,})/);
+  if (yt) return `https://www.youtube.com/embed/${yt[1]}`;
+  const vm = url.match(/vimeo\.com\/(\d+)/);
+  if (vm) return `https://player.vimeo.com/video/${vm[1]}`;
+  return null;
+}
