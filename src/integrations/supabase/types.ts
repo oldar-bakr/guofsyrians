@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      assistant_messages: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          question: string
+          user_id: string
+        }
+        Insert: {
+          answer?: string
+          created_at?: string
+          id?: string
+          question: string
+          user_id: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          question?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       branches: {
         Row: {
           city: string
@@ -41,29 +65,96 @@ export type Database = {
         }
         Relationships: []
       }
+      course_enrollments: {
+        Row: {
+          completed_lessons: number
+          course_id: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          completed_lessons?: number
+          course_id: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          completed_lessons?: number
+          course_id?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_enrollments_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       courses: {
         Row: {
           category: string
           created_at: string
+          description: string
           id: string
           lessons: number
           title: string
+          video_url: string
         }
         Insert: {
           category?: string
           created_at?: string
+          description?: string
           id?: string
           lessons?: number
           title: string
+          video_url?: string
         }
         Update: {
           category?: string
           created_at?: string
+          description?: string
           id?: string
           lessons?: number
           title?: string
+          video_url?: string
         }
         Relationships: []
+      }
+      deal_redemptions: {
+        Row: {
+          created_at: string
+          deal_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          deal_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          deal_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deal_redemptions_deal_id_fkey"
+            columns: ["deal_id"]
+            isOneToOne: false
+            referencedRelation: "deals"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       deals: {
         Row: {
@@ -95,10 +186,40 @@ export type Database = {
         }
         Relationships: []
       }
+      event_registrations: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_registrations_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       events: {
         Row: {
           created_at: string
           date: string
+          description: string
           id: string
           org: string
           place: string
@@ -108,6 +229,7 @@ export type Database = {
         Insert: {
           created_at?: string
           date?: string
+          description?: string
           id?: string
           org?: string
           place?: string
@@ -117,6 +239,7 @@ export type Database = {
         Update: {
           created_at?: string
           date?: string
+          description?: string
           id?: string
           org?: string
           place?: string
@@ -125,24 +248,75 @@ export type Database = {
         }
         Relationships: []
       }
+      faqs: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          question: string
+        }
+        Insert: {
+          answer?: string
+          created_at?: string
+          id?: string
+          question: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          question?: string
+        }
+        Relationships: []
+      }
       news: {
         Row: {
+          body: string
           created_at: string
           date: string
           id: string
           title: string
         }
         Insert: {
+          body?: string
           created_at?: string
           date?: string
           id?: string
           title: string
         }
         Update: {
+          body?: string
           created_at?: string
           date?: string
           id?: string
           title?: string
+        }
+        Relationships: []
+      }
+      orders: {
+        Row: {
+          created_at: string
+          id: string
+          items: Json
+          note: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          items?: Json
+          note?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          items?: Json
+          note?: string
+          status?: string
+          user_id?: string
         }
         Relationships: []
       }
