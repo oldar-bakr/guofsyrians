@@ -193,6 +193,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_edit_content: { Args: { _user_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
