@@ -23,22 +23,27 @@ export const Route = createFileRoute("/admin")({
 function Admin() {
   const navigate = useNavigate();
   const qc = useQueryClient();
-  const [state, setState] = useState<"loading" | "admin" | "denied">("loading");
+  const [state, setState] = useState<"loading" | "admin" | "editor" | "denied">("loading");
   const [email, setEmail] = useState("");
-  const [tab, setTab] = useState<ContentTable>("news");
+  const [myId, setMyId] = useState("");
+  const [tab, setTab] = useState<ContentTable | "users">("news");
 
   useEffect(() => {
     (async () => {
       const { data } = await supabase.auth.getUser();
       if (!data.user) return navigate({ to: "/auth", replace: true });
       setEmail(data.user.email ?? "");
+      setMyId(data.user.id);
       const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: data.user.id, _role: "admin" });
-      setState(isAdmin ? "admin" : "denied");
+      if (isAdmin) return setState("admin");
+      const { data: isEditor } = await supabase.rpc("has_role", { _user_id: data.user.id, _role: "editor" });
+      setState(isEditor ? "editor" : "denied");
     })();
   }, [navigate]);
 
   const signOut = async () => {
     await qc.cancelQueries();
+    qc.clear();
     await supabase.auth.signOut();
     navigate({ to: "/auth", replace: true });
   };
@@ -48,12 +53,20 @@ function Admin() {
     return (
       <div className="grid min-h-screen place-items-center px-4 text-center">
         <div>
-          <p className="font-display text-xl font-bold">ليست لديك صلاحية الإدارة</p>
+          <p className="font-display text-xl font-bold">ليست لديك صلاحية الدخول إلى لوحة الإدارة</p>
           <p className="mt-2 text-sm text-muted-foreground">{email}</p>
-          <button onClick={signOut} className="mt-4 rounded-xl bg-primary px-4 py-2 text-primary-foreground">تسجيل الخروج</button>
+          <div className="mt-4 flex justify-center gap-2">
+            <Link to="/" className="rounded-xl border px-4 py-2">العودة للتطبيق</Link>
+            <button onClick={signOut} className="rounded-xl bg-primary px-4 py-2 text-primary-foreground">تسجيل الخروج</button>
+          </div>
         </div>
       </div>
     );
+
+  const tabs: { key: ContentTable | "users"; label: string }[] = [
+    ...(Object.keys(sections) as ContentTable[]).map((t) => ({ key: t, label: sections[t].label })),
+    ...(state === "admin" ? [{ key: "users" as const, label: "المستخدمون والصلاحيات" }] : []),
+  ];
 
   return (
     <div className="min-h-screen bg-muted">
@@ -61,7 +74,10 @@ function Admin() {
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
           <div className="flex items-center gap-3">
             <img src={logo.url} alt="" className="h-10 w-10 rounded-full bg-card object-contain p-1" />
-            <h1 className="font-display text-xl font-bold">لوحة الإدارة</h1>
+            <div>
+              <h1 className="font-display text-xl font-bold">لوحة الإدارة</h1>
+              <p className="text-xs opacity-80">{email} · {state === "admin" ? "مدير" : "محرر"}</p>
+            </div>
           </div>
           <div className="flex items-center gap-3 text-sm">
             <Link to="/" className="underline">عرض التطبيق</Link>
@@ -69,13 +85,13 @@ function Admin() {
           </div>
         </div>
         <nav className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5">
-          {(Object.keys(sections) as ContentTable[]).map((t) => (
-            <button key={t} onClick={() => setTab(t)} className={`shrink-0 rounded-t-xl px-4 py-2 text-sm ${t === tab ? "bg-muted font-bold text-foreground" : "opacity-80"}`}>{sections[t].label}</button>
+          {tabs.map((t) => (
+            <button key={t.key} onClick={() => setTab(t.key)} className={`shrink-0 rounded-t-xl px-4 py-2 text-sm ${t.key === tab ? "bg-muted font-bold text-foreground" : "opacity-80"}`}>{t.label}</button>
           ))}
         </nav>
       </header>
       <main className="mx-auto max-w-5xl p-5">
-        <SectionManager key={tab} table={tab} />
+        {tab === "users" ? <UsersManager myId={myId} /> : <SectionManager key={tab} table={tab} />}
       </main>
     </div>
   );
