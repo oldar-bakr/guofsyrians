@@ -181,6 +181,7 @@ function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row:
               onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
               className="mt-1 w-full rounded-xl border bg-background px-3 py-2"
             />
+            )}
           </label>
         ))}
         <button className="w-full rounded-xl bg-primary py-2 font-bold text-primary-foreground">حفظ</button>
