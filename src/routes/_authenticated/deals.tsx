@@ -4,7 +4,7 @@ import { MapPin } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { useContent } from "@/lib/content";
 
-export const Route = createFileRoute("/deals")({
+export const Route = createFileRoute("/_authenticated/deals")({
   head: () => ({
     meta: [
       { title: "دليل التخفيضات | تطبيق خدمات الطلاب" },
