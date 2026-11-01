@@ -1,4 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import QRCode from "react-qr-code";
 import { AppShell } from "@/components/AppShell";
 import { useStudent } from "@/lib/profile";
@@ -18,6 +20,14 @@ export const Route = createFileRoute("/_authenticated/card")({
 
 function CardPage() {
   const student = useStudent();
+  const navigate = useNavigate();
+  const qc = useQueryClient();
+  const signOut = async () => {
+    await qc.cancelQueries();
+    qc.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  };
   return (
     <AppShell title="بطاقتي">
       <div className="bg-member rounded-3xl p-6 text-primary-foreground shadow-soft">
@@ -43,6 +53,7 @@ function CardPage() {
         <p className="mt-4 text-center text-sm text-muted-foreground">اعرض هذا الرمز لدى الشريك المعتمد للاستفادة من التخفيض</p>
         <span className="mt-3 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary">● الاشتراك فعّال</span>
       </div>
+      <button onClick={signOut} className="mt-6 w-full rounded-xl border py-2 text-sm">تسجيل الخروج</button>
     </AppShell>
   );
 }
