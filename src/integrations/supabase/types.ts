@@ -170,6 +170,45 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          city: string
+          created_at: string
+          faculty: string
+          full_name: string
+          id: string
+          member_code: string
+          phone: string
+          student_number: string
+          university: string
+          updated_at: string
+        }
+        Insert: {
+          city?: string
+          created_at?: string
+          faculty?: string
+          full_name: string
+          id: string
+          member_code?: string
+          phone?: string
+          student_number?: string
+          university?: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          faculty?: string
+          full_name?: string
+          id?: string
+          member_code?: string
+          phone?: string
+          student_number?: string
+          university?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
