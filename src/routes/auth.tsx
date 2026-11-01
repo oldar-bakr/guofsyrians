@@ -50,11 +50,12 @@ function AuthPage() {
     <div className="grid min-h-screen place-items-center bg-muted px-4">
       <form onSubmit={submit} className="w-full max-w-sm space-y-4 rounded-3xl bg-card p-8 shadow-soft">
         <img src={logo.url} alt="شعار الاتحاد" className="mx-auto h-20" />
-        <h1 className="text-center font-display text-2xl font-bold">{mode === "in" ? "دخول الإدارة" : "إنشاء حساب"}</h1>
+        <h1 className="text-center font-display text-2xl font-bold">{mode === "in" ? "تسجيل الدخول" : "إنشاء حساب"}</h1>
+        <button type="button" onClick={google} className="w-full rounded-xl bg-primary py-3 font-bold text-primary-foreground">الدخول عبر Google</button>
+        <p className="text-center text-xs text-muted-foreground">أو باستخدام البريد الإلكتروني</p>
         <input type="email" required placeholder="البريد الإلكتروني" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-xl border bg-background px-4 py-2" />
         <input type="password" required minLength={6} placeholder="كلمة المرور" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-xl border bg-background px-4 py-2" />
-        <button disabled={busy} className="w-full rounded-xl bg-primary py-2 font-bold text-primary-foreground disabled:opacity-60">{mode === "in" ? "دخول" : "إنشاء الحساب"}</button>
-        <button type="button" onClick={google} className="w-full rounded-xl border py-2 font-medium">المتابعة عبر Google</button>
+        <button disabled={busy} className="w-full rounded-xl border py-2 font-bold disabled:opacity-60">{mode === "in" ? "دخول" : "إنشاء الحساب"}</button>
         {msg && <p className="text-center text-sm text-muted-foreground">{msg}</p>}
         <button type="button" onClick={() => setMode(mode === "in" ? "up" : "in")} className="w-full text-sm text-primary">
           {mode === "in" ? "ليس لديك حساب؟ أنشئ حساباً" : "لديك حساب؟ سجّل الدخول"}
