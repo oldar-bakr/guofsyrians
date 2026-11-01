@@ -16,11 +16,16 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedAssistantRouteImport } from './routes/_authenticated/assistant'
 import { Route as AuthenticatedCardRouteImport } from './routes/_authenticated/card'
-import { Route as AuthenticatedCoursesRouteImport } from './routes/_authenticated/courses'
 import { Route as AuthenticatedDealsRouteImport } from './routes/_authenticated/deals'
-import { Route as AuthenticatedEventsRouteImport } from './routes/_authenticated/events'
-import { Route as AuthenticatedMarketRouteImport } from './routes/_authenticated/market'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedUnionRouteImport } from './routes/_authenticated/union'
+import { Route as AuthenticatedCoursesIndexRouteImport } from './routes/_authenticated/courses.index'
+import { Route as AuthenticatedCoursesIdRouteImport } from './routes/_authenticated/courses.$id'
+import { Route as AuthenticatedEventsIndexRouteImport } from './routes/_authenticated/events.index'
+import { Route as AuthenticatedEventsIdRouteImport } from './routes/_authenticated/events.$id'
+import { Route as AuthenticatedMarketIndexRouteImport } from './routes/_authenticated/market.index'
+import { Route as AuthenticatedNewsIndexRouteImport } from './routes/_authenticated/news.index'
+import { Route as AuthenticatedNewsIdRouteImport } from './routes/_authenticated/news.$id'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -56,29 +61,57 @@ const AuthenticatedCardRoute = AuthenticatedCardRouteImport.update({
   path: '/card',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCoursesRoute = AuthenticatedCoursesRouteImport.update({
-  id: '/courses',
-  path: '/courses',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedDealsRoute = AuthenticatedDealsRouteImport.update({
   id: '/deals',
   path: '/deals',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedEventsRoute = AuthenticatedEventsRouteImport.update({
-  id: '/events',
-  path: '/events',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedMarketRoute = AuthenticatedMarketRouteImport.update({
-  id: '/market',
-  path: '/market',
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedUnionRoute = AuthenticatedUnionRouteImport.update({
   id: '/union',
   path: '/union',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCoursesIndexRoute =
+  AuthenticatedCoursesIndexRouteImport.update({
+    id: '/courses/',
+    path: '/courses/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCoursesIdRoute = AuthenticatedCoursesIdRouteImport.update({
+  id: '/courses/$id',
+  path: '/courses/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEventsIndexRoute =
+  AuthenticatedEventsIndexRouteImport.update({
+    id: '/events/',
+    path: '/events/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedEventsIdRoute = AuthenticatedEventsIdRouteImport.update({
+  id: '/events/$id',
+  path: '/events/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMarketIndexRoute =
+  AuthenticatedMarketIndexRouteImport.update({
+    id: '/market/',
+    path: '/market/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedNewsIndexRoute = AuthenticatedNewsIndexRouteImport.update({
+  id: '/news/',
+  path: '/news/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedNewsIdRoute = AuthenticatedNewsIdRouteImport.update({
+  id: '/news/$id',
+  path: '/news/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
@@ -89,11 +122,16 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/assistant': typeof AuthenticatedAssistantRoute
   '/card': typeof AuthenticatedCardRoute
-  '/courses': typeof AuthenticatedCoursesRoute
   '/deals': typeof AuthenticatedDealsRoute
-  '/events': typeof AuthenticatedEventsRoute
-  '/market': typeof AuthenticatedMarketRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/union': typeof AuthenticatedUnionRoute
+  '/courses/$id': typeof AuthenticatedCoursesIdRoute
+  '/events/$id': typeof AuthenticatedEventsIdRoute
+  '/news/$id': typeof AuthenticatedNewsIdRoute
+  '/courses/': typeof AuthenticatedCoursesIndexRoute
+  '/events/': typeof AuthenticatedEventsIndexRoute
+  '/market/': typeof AuthenticatedMarketIndexRoute
+  '/news/': typeof AuthenticatedNewsIndexRoute
 }
 export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
@@ -101,12 +139,17 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/assistant': typeof AuthenticatedAssistantRoute
   '/card': typeof AuthenticatedCardRoute
-  '/courses': typeof AuthenticatedCoursesRoute
   '/deals': typeof AuthenticatedDealsRoute
-  '/events': typeof AuthenticatedEventsRoute
-  '/market': typeof AuthenticatedMarketRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/union': typeof AuthenticatedUnionRoute
   '/': typeof AuthenticatedIndexRoute
+  '/courses/$id': typeof AuthenticatedCoursesIdRoute
+  '/events/$id': typeof AuthenticatedEventsIdRoute
+  '/news/$id': typeof AuthenticatedNewsIdRoute
+  '/courses': typeof AuthenticatedCoursesIndexRoute
+  '/events': typeof AuthenticatedEventsIndexRoute
+  '/market': typeof AuthenticatedMarketIndexRoute
+  '/news': typeof AuthenticatedNewsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,12 +159,17 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/_authenticated/assistant': typeof AuthenticatedAssistantRoute
   '/_authenticated/card': typeof AuthenticatedCardRoute
-  '/_authenticated/courses': typeof AuthenticatedCoursesRoute
   '/_authenticated/deals': typeof AuthenticatedDealsRoute
-  '/_authenticated/events': typeof AuthenticatedEventsRoute
-  '/_authenticated/market': typeof AuthenticatedMarketRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/union': typeof AuthenticatedUnionRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/courses/$id': typeof AuthenticatedCoursesIdRoute
+  '/_authenticated/events/$id': typeof AuthenticatedEventsIdRoute
+  '/_authenticated/news/$id': typeof AuthenticatedNewsIdRoute
+  '/_authenticated/courses/': typeof AuthenticatedCoursesIndexRoute
+  '/_authenticated/events/': typeof AuthenticatedEventsIndexRoute
+  '/_authenticated/market/': typeof AuthenticatedMarketIndexRoute
+  '/_authenticated/news/': typeof AuthenticatedNewsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -132,11 +180,16 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/assistant'
     | '/card'
-    | '/courses'
     | '/deals'
-    | '/events'
-    | '/market'
+    | '/profile'
     | '/union'
+    | '/courses/$id'
+    | '/events/$id'
+    | '/news/$id'
+    | '/courses/'
+    | '/events/'
+    | '/market/'
+    | '/news/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/admin'
@@ -144,12 +197,17 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/assistant'
     | '/card'
-    | '/courses'
     | '/deals'
-    | '/events'
-    | '/market'
+    | '/profile'
     | '/union'
     | '/'
+    | '/courses/$id'
+    | '/events/$id'
+    | '/news/$id'
+    | '/courses'
+    | '/events'
+    | '/market'
+    | '/news'
   id:
     | '__root__'
     | '/_authenticated'
@@ -158,12 +216,17 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/_authenticated/assistant'
     | '/_authenticated/card'
-    | '/_authenticated/courses'
     | '/_authenticated/deals'
-    | '/_authenticated/events'
-    | '/_authenticated/market'
+    | '/_authenticated/profile'
     | '/_authenticated/union'
     | '/_authenticated/'
+    | '/_authenticated/courses/$id'
+    | '/_authenticated/events/$id'
+    | '/_authenticated/news/$id'
+    | '/_authenticated/courses/'
+    | '/_authenticated/events/'
+    | '/_authenticated/market/'
+    | '/_authenticated/news/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -224,13 +287,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/courses': {
-      id: '/_authenticated/courses'
-      path: '/courses'
-      fullPath: '/courses'
-      preLoaderRoute: typeof AuthenticatedCoursesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/deals': {
       id: '/_authenticated/deals'
       path: '/deals'
@@ -238,18 +294,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDealsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/events': {
-      id: '/_authenticated/events'
-      path: '/events'
-      fullPath: '/events'
-      preLoaderRoute: typeof AuthenticatedEventsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/market': {
-      id: '/_authenticated/market'
-      path: '/market'
-      fullPath: '/market'
-      preLoaderRoute: typeof AuthenticatedMarketRouteImport
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/union': {
@@ -259,29 +308,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUnionRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/courses/': {
+      id: '/_authenticated/courses/'
+      path: '/courses'
+      fullPath: '/courses/'
+      preLoaderRoute: typeof AuthenticatedCoursesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/courses/$id': {
+      id: '/_authenticated/courses/$id'
+      path: '/courses/$id'
+      fullPath: '/courses/$id'
+      preLoaderRoute: typeof AuthenticatedCoursesIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/events/': {
+      id: '/_authenticated/events/'
+      path: '/events'
+      fullPath: '/events/'
+      preLoaderRoute: typeof AuthenticatedEventsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/events/$id': {
+      id: '/_authenticated/events/$id'
+      path: '/events/$id'
+      fullPath: '/events/$id'
+      preLoaderRoute: typeof AuthenticatedEventsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/market/': {
+      id: '/_authenticated/market/'
+      path: '/market'
+      fullPath: '/market/'
+      preLoaderRoute: typeof AuthenticatedMarketIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/news/': {
+      id: '/_authenticated/news/'
+      path: '/news'
+      fullPath: '/news/'
+      preLoaderRoute: typeof AuthenticatedNewsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/news/$id': {
+      id: '/_authenticated/news/$id'
+      path: '/news/$id'
+      fullPath: '/news/$id'
+      preLoaderRoute: typeof AuthenticatedNewsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAssistantRoute: typeof AuthenticatedAssistantRoute
   AuthenticatedCardRoute: typeof AuthenticatedCardRoute
-  AuthenticatedCoursesRoute: typeof AuthenticatedCoursesRoute
   AuthenticatedDealsRoute: typeof AuthenticatedDealsRoute
-  AuthenticatedEventsRoute: typeof AuthenticatedEventsRoute
-  AuthenticatedMarketRoute: typeof AuthenticatedMarketRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedUnionRoute: typeof AuthenticatedUnionRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedCoursesIdRoute: typeof AuthenticatedCoursesIdRoute
+  AuthenticatedEventsIdRoute: typeof AuthenticatedEventsIdRoute
+  AuthenticatedNewsIdRoute: typeof AuthenticatedNewsIdRoute
+  AuthenticatedCoursesIndexRoute: typeof AuthenticatedCoursesIndexRoute
+  AuthenticatedEventsIndexRoute: typeof AuthenticatedEventsIndexRoute
+  AuthenticatedMarketIndexRoute: typeof AuthenticatedMarketIndexRoute
+  AuthenticatedNewsIndexRoute: typeof AuthenticatedNewsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAssistantRoute: AuthenticatedAssistantRoute,
   AuthenticatedCardRoute: AuthenticatedCardRoute,
-  AuthenticatedCoursesRoute: AuthenticatedCoursesRoute,
   AuthenticatedDealsRoute: AuthenticatedDealsRoute,
-  AuthenticatedEventsRoute: AuthenticatedEventsRoute,
-  AuthenticatedMarketRoute: AuthenticatedMarketRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedUnionRoute: AuthenticatedUnionRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedCoursesIdRoute: AuthenticatedCoursesIdRoute,
+  AuthenticatedEventsIdRoute: AuthenticatedEventsIdRoute,
+  AuthenticatedNewsIdRoute: AuthenticatedNewsIdRoute,
+  AuthenticatedCoursesIndexRoute: AuthenticatedCoursesIndexRoute,
+  AuthenticatedEventsIndexRoute: AuthenticatedEventsIndexRoute,
+  AuthenticatedMarketIndexRoute: AuthenticatedMarketIndexRoute,
+  AuthenticatedNewsIndexRoute: AuthenticatedNewsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

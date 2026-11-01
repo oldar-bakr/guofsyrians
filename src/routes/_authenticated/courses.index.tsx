@@ -1,11 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PlayCircle, ChevronDown } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { useContent } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
-export const Route = createFileRoute("/_authenticated/courses")({
+export const Route = createFileRoute("/_authenticated/courses/")({
   head: () => ({
     meta: [
       { title: "الدورات التعليمية | تطبيق خدمات الطلاب" },
@@ -52,6 +52,7 @@ function Courses() {
               </button>
               {isOpen && (
                 <div className="mt-3 space-y-3 text-sm">
+                  <Link to="/courses/$id" params={{ id: c.id }} className="block rounded-xl bg-secondary py-2 text-center font-bold text-primary">صفحة الدورة والدروس</Link>
                   {c.description && <p className="text-muted-foreground">{c.description}</p>}
                   {e && c.video_url && (
                     <a href={c.video_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 rounded-xl bg-secondary py-2 font-bold text-primary">

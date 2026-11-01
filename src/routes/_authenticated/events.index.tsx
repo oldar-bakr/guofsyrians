@@ -1,9 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { useContent } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
-export const Route = createFileRoute("/_authenticated/events")({
+export const Route = createFileRoute("/_authenticated/events/")({
   head: () => ({
     meta: [
       { title: "الفعاليات | تطبيق خدمات الطلاب" },
@@ -28,10 +28,10 @@ function Events() {
             <article key={e.id} className="flex gap-4 rounded-2xl bg-card p-4 shadow-soft">
               <div className="grid w-16 shrink-0 place-items-center rounded-xl bg-hero p-2 text-center text-xs text-primary-foreground">{e.date}</div>
               <div className="flex-1">
-                <h3 className="font-bold">{e.title}</h3>
+                <Link to="/events/$id" params={{ id: e.id }} className="font-bold hover:text-primary">{e.title}</Link>
                 <p className="text-xs text-muted-foreground">{e.time} · {e.place}</p>
                 <p className="text-xs text-muted-foreground">تنظيم: {e.org}</p>
-                {e.description && <p className="mt-2 text-sm">{e.description}</p>}
+                {e.description && <p className="mt-2 line-clamp-2 text-sm">{e.description}</p>}
                 <button
                   onClick={() => (reg ? actions.remove(reg.id) : actions.add({ event_id: e.id }))}
                   className={`mt-2 rounded-full px-4 py-1 text-xs font-bold ${reg ? "bg-secondary text-primary" : "bg-primary text-primary-foreground"}`}
