@@ -48,7 +48,7 @@ function ProfilePage() {
     e.preventDefault();
     if (!p) return;
     if (fields.some((f) => !form[f.key]?.trim())) return setMsg("يرجى تعبئة جميع الحقول");
-    const { error } = await supabase.from("profiles").update(form).eq("id", p.id);
+    const { error } = await supabase.from("profiles").update(form as never).eq("id", p.id);
     setMsg(error ? "تعذّر الحفظ، حاول مجدداً" : "تم حفظ بياناتك");
     qc.invalidateQueries({ queryKey: ["my-profile"] });
   };

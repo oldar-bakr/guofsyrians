@@ -54,7 +54,7 @@ function CardPage() {
         <span className="mt-3 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary">● الاشتراك فعّال</span>
       </div>
       <Link to="/profile" className="mt-6 block w-full rounded-xl bg-primary py-2 text-center text-sm font-bold text-primary-foreground">ملفي وتعديل بياناتي</Link>
-      <button onClick={signOut} className="mt-6 w-full rounded-xl border py-2 text-sm">تسجيل الخروج</button>
+      <button onClick={signOut} className="mt-3 w-full rounded-xl border py-2 text-sm">تسجيل الخروج</button>
     </AppShell>
   );
 }
