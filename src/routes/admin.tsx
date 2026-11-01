@@ -66,6 +66,7 @@ function Admin() {
     );
 
   const tabs: { key: ContentTable | "users" | "activity"; label: string }[] = [
+    { key: "activity", label: "نشاط الطلاب" },
     ...(Object.keys(sections) as ContentTable[]).map((t) => ({ key: t, label: sections[t].label })),
     ...(state === "admin" ? [{ key: "users" as const, label: "المستخدمون والصلاحيات" }] : []),
   ];
