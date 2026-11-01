@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarDays, ShoppingBag, Building2, GraduationCap, Tag, Sparkles } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
@@ -29,7 +28,6 @@ const services = [
 function Index() {
   const student = useStudent();
   const { data: news = [] } = useContent<any>("news");
-  const [open, setOpen] = useState<string | null>(null);
   return (
     <AppShell>
       <section className="bg-hero rounded-3xl p-6 text-primary-foreground shadow-soft">
@@ -51,15 +49,14 @@ function Index() {
         ))}
       </div>
 
-      <h3 className="mb-3 mt-7 font-display text-lg font-bold">آخر الأخبار</h3>
+      <div className="mb-3 mt-7 flex items-center justify-between"><h3 className="font-display text-lg font-bold">آخر الأخبار</h3><Link to="/news" className="text-sm text-primary">عرض الكل</Link></div>
       <ul className="space-y-3">
         {news.map((n: any) => (
           <li key={n.id} className="rounded-2xl border-r-4 border-accent bg-card p-4">
-            <button onClick={() => setOpen(open === n.id ? null : n.id)} className="w-full text-right">
+            <Link to="/news/$id" params={{ id: n.id }} className="block w-full text-right">
               <p className="font-medium">{n.title}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{n.date}{n.body && " · اضغط للتفاصيل"}</p>
-            </button>
-            {open === n.id && n.body && <p className="mt-3 whitespace-pre-wrap text-sm">{n.body}</p>}
+              <p className="mt-1 text-xs text-muted-foreground">{n.date} · اقرأ المزيد</p>
+            </Link>
           </li>
         ))}
       </ul>

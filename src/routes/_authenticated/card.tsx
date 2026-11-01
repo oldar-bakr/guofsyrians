@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import QRCode from "react-qr-code";
@@ -53,6 +53,7 @@ function CardPage() {
         <p className="mt-4 text-center text-sm text-muted-foreground">اعرض هذا الرمز لدى الشريك المعتمد للاستفادة من التخفيض</p>
         <span className="mt-3 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary">● الاشتراك فعّال</span>
       </div>
+      <Link to="/profile" className="mt-6 block w-full rounded-xl bg-primary py-2 text-center text-sm font-bold text-primary-foreground">ملفي وتعديل بياناتي</Link>
       <button onClick={signOut} className="mt-6 w-full rounded-xl border py-2 text-sm">تسجيل الخروج</button>
     </AppShell>
   );
