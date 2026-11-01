@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Pencil, Trash2, Plus, LogOut, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { sections, useContent, type ContentTable } from "@/lib/content";
+import { ActivityManager } from "@/components/ActivityManager";
 import { UsersManager } from "@/components/UsersManager";
 import logo from "@/assets/union-logo.png.asset.json";
 
@@ -27,7 +28,7 @@ function Admin() {
   const [state, setState] = useState<"loading" | "admin" | "editor" | "denied">("loading");
   const [email, setEmail] = useState("");
   const [myId, setMyId] = useState("");
-  const [tab, setTab] = useState<ContentTable | "users">("news");
+  const [tab, setTab] = useState<ContentTable | "users" | "activity">("news");
 
   useEffect(() => {
     (async () => {
@@ -64,7 +65,7 @@ function Admin() {
       </div>
     );
 
-  const tabs: { key: ContentTable | "users"; label: string }[] = [
+  const tabs: { key: ContentTable | "users" | "activity"; label: string }[] = [
     ...(Object.keys(sections) as ContentTable[]).map((t) => ({ key: t, label: sections[t].label })),
     ...(state === "admin" ? [{ key: "users" as const, label: "المستخدمون والصلاحيات" }] : []),
   ];
@@ -92,7 +93,7 @@ function Admin() {
         </nav>
       </header>
       <main className="mx-auto max-w-5xl p-5">
-        {tab === "users" ? <UsersManager myId={myId} /> : <SectionManager key={tab} table={tab} />}
+        {tab === "users" ? <UsersManager myId={myId} /> : tab === "activity" ? <ActivityManager /> : <SectionManager key={tab} table={tab} />}
       </main>
     </div>
   );
