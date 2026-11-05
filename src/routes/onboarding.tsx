@@ -18,7 +18,7 @@ export const Route = createFileRoute("/onboarding")({
     const { data } = await supabase.auth.getUser();
     if (!data.user) throw redirect({ to: "/auth" });
     const { data: p } = await supabase.from("profiles").select("id").eq("id", data.user.id).maybeSingle();
-    if (p) throw redirect({ to: "/" });
+    if (p) throw redirect({ to: "/home" });
     return { fullName: (data.user.user_metadata?.["full_name"] as string) ?? "" };
   },
   component: Onboarding,
@@ -59,7 +59,7 @@ function Onboarding() {
     setBusy(false);
     if (error) return setError("تعذّر حفظ البيانات، حاول مرة أخرى");
     await qc.invalidateQueries({ queryKey: ["my-profile"] });
-    navigate({ to: "/" });
+    navigate({ to: "/home" });
   };
 
   return (

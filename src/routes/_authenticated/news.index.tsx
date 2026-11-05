@@ -20,7 +20,7 @@ function NewsList() {
   const { data: news = [] } = useContent<any>("news");
   return (
     <AppShell title="الأخبار">
-      <ul className="space-y-3">
+      <ul className="grid gap-3 md:grid-cols-2">
         {news.map((n: any) => (
           <li key={n.id}>
             <Link to="/news/$id" params={{ id: n.id }} className="block rounded-2xl border-r-4 border-accent bg-card p-4">

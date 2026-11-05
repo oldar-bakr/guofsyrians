@@ -38,7 +38,7 @@ function Market() {
 
   return (
     <AppShell title="السوق">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {products.map((p: any) => (
           <article key={p.id} className="rounded-2xl bg-card p-3 shadow-soft">
             <div className="mb-3 grid aspect-square place-items-center rounded-xl bg-muted text-primary"><ShoppingBag className="h-8 w-8" /></div>

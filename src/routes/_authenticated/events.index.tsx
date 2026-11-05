@@ -21,7 +21,7 @@ function Events() {
   const actions = useActivityActions("event_registrations");
   return (
     <AppShell title="الفعاليات">
-      <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-2">
         {events.map((e: any) => {
           const reg = mine.find((m: any) => m.event_id === e.id);
           return (

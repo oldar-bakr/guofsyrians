@@ -4,7 +4,7 @@ import { AppShell } from "@/components/AppShell";
 import { useStudent } from "@/lib/profile";
 import { useContent } from "@/lib/content";
 
-export const Route = createFileRoute("/_authenticated/")({
+export const Route = createFileRoute("/_authenticated/home")({
   head: () => ({
     meta: [
       { title: "الرئيسية | تطبيق خدمات الطلاب" },
@@ -40,7 +40,7 @@ function Index() {
       </section>
 
       <h3 className="mb-3 mt-7 font-display text-lg font-bold">الخدمات</h3>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
         {services.map(({ to, label, icon: Icon }) => (
           <Link key={to} to={to} className="flex flex-col items-center gap-2 rounded-2xl bg-card p-4 text-center text-sm shadow-soft">
             <span className="grid h-11 w-11 place-items-center rounded-full bg-secondary text-primary"><Icon className="h-5 w-5" /></span>
@@ -50,7 +50,7 @@ function Index() {
       </div>
 
       <div className="mb-3 mt-7 flex items-center justify-between"><h3 className="font-display text-lg font-bold">آخر الأخبار</h3><Link to="/news" className="text-sm text-primary">عرض الكل</Link></div>
-      <ul className="space-y-3">
+      <ul className="grid gap-3 md:grid-cols-2">
         {news.map((n: any) => (
           <li key={n.id} className="rounded-2xl border-r-4 border-accent bg-card p-4">
             <Link to="/news/$id" params={{ id: n.id }} className="block w-full text-right">

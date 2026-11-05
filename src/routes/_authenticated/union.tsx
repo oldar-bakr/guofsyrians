@@ -26,7 +26,7 @@ function Union() {
         <p className="mt-2 text-sm opacity-90">مظلة تجمع الطلاب السوريين وتمثلهم، وتقدم لهم الخدمات والفرص التعليمية والاجتماعية.</p>
       </section>
       <h3 className="mb-3 mt-6 font-display text-lg font-bold">الفروع</h3>
-      <div className="space-y-3">
+      <div className="grid gap-3 md:grid-cols-2">
         {branches.map((b) => (
           <article key={b.city} className={`rounded-2xl bg-card p-4 shadow-soft ${b.university === student.university ? "ring-2 ring-accent" : ""}`}>
             {b.university === student.university && <span className="text-xs font-bold text-primary">فرع جامعتك</span>}

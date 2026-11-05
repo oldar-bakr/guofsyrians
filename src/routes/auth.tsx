@@ -31,7 +31,7 @@ function AuthPage() {
     if (mode === "in") {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) setMsg("البريد أو كلمة المرور غير صحيحة");
-      else navigate({ to: "/" });
+      else navigate({ to: "/home" });
     } else {
       const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin } });
       setMsg(error ? error.message : "تم إنشاء الحساب. تحقق من بريدك لتأكيد الحساب ثم سجّل الدخول.");
@@ -43,7 +43,7 @@ function AuthPage() {
     const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
     if (r.error) return setMsg("تعذّر الدخول عبر Google");
     if (r.redirected) return;
-    navigate({ to: "/" });
+    navigate({ to: "/home" });
   };
 
   return (

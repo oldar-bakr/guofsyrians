@@ -40,7 +40,7 @@ function Deals() {
           <button key={c} onClick={() => setCity(c)} className={`shrink-0 rounded-full px-4 py-1.5 text-sm ${c === city ? "bg-primary text-primary-foreground" : "bg-card"}`}>{c}</button>
         ))}
       </div>
-      <div className="space-y-3">
+      <div className="grid gap-3 md:grid-cols-2">
         {list.map((d: any) => (
           <article key={d.id} className="flex items-center gap-4 rounded-2xl bg-card p-4 shadow-soft">
             <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-accent font-display text-xl font-bold text-accent-foreground">{d.discount}</span>
