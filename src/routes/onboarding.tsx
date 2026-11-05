@@ -59,7 +59,7 @@ function Onboarding() {
     setBusy(false);
     if (error) return setError("تعذّر حفظ البيانات، حاول مرة أخرى");
     await qc.invalidateQueries({ queryKey: ["my-profile"] });
-    navigate({ to: "/" });
+    navigate({ to: "/home" });
   };
 
   return (

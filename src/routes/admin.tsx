@@ -58,7 +58,7 @@ function Admin() {
           <p className="font-display text-xl font-bold">ليست لديك صلاحية الدخول إلى لوحة الإدارة</p>
           <p className="mt-2 text-sm text-muted-foreground">{email}</p>
           <div className="mt-4 flex justify-center gap-2">
-            <Link to="/" className="rounded-xl border px-4 py-2">العودة للتطبيق</Link>
+            <Link to="/home" className="rounded-xl border px-4 py-2">العودة للتطبيق</Link>
             <button onClick={signOut} className="rounded-xl bg-primary px-4 py-2 text-primary-foreground">تسجيل الخروج</button>
           </div>
         </div>
@@ -83,7 +83,7 @@ function Admin() {
             </div>
           </div>
           <div className="flex items-center gap-3 text-sm">
-            <Link to="/" className="underline">عرض التطبيق</Link>
+            <Link to="/home" className="underline">عرض التطبيق</Link>
             <button onClick={signOut} className="flex items-center gap-1 rounded-full bg-accent px-3 py-1 font-bold text-accent-foreground"><LogOut className="h-4 w-4" />خروج</button>
           </div>
         </div>
