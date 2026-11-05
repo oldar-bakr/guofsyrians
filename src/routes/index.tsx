@@ -114,10 +114,21 @@ function Landing() {
         <div className="flex flex-col items-center gap-4 rounded-3xl border-2 border-primary bg-card p-8 text-center shadow-soft md:flex-row md:text-right">
           <GraduationCap className="h-12 w-12 shrink-0 text-primary" />
           <div className="flex-1">
-            <h2 className="font-display text-2xl font-bold">قدّم دورتك أو منتجك</h2>
-            <p className="mt-1 text-sm text-muted-foreground">لديك مهارة تعلّمها أو منتج تبيعه؟ قدّمه لطلاب الاتحاد، وننشره بعد مراجعة الإدارة.</p>
+            <h2 className="font-display text-2xl font-bold">قدّم دوراتك</h2>
+            <p className="mt-1 text-sm text-muted-foreground">لديك مهارة تعلّمها؟ قدّم دورتك لطلاب الاتحاد، وننشرها بعد مراجعة الإدارة.</p>
           </div>
-          <Link to="/auth" className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground shadow-soft">سجّل وقدّم الآن</Link>
+          <Link to="/auth" className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground shadow-soft">سجّل وقدّم دورة</Link>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pt-6">
+        <div className="flex flex-col items-center gap-4 rounded-3xl border-2 border-accent bg-card p-8 text-center shadow-soft md:flex-row md:text-right">
+          <ShoppingBag className="h-12 w-12 shrink-0 text-primary" />
+          <div className="flex-1">
+            <h2 className="font-display text-2xl font-bold">قدّم منتجاتك</h2>
+            <p className="mt-1 text-sm text-muted-foreground">تبيع منتجاً؟ اعرضه في سوق الطلاب، ويُنشر بعد موافقة الإدارة.</p>
+          </div>
+          <Link to="/auth" className="rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground shadow-soft">سجّل وقدّم منتج</Link>
         </div>
       </section>
 
