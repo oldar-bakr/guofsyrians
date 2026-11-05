@@ -197,7 +197,7 @@ function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row:
   const [form, setForm] = useState(row);
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/40 p-4">
-      <form onSubmit={(e) => { e.preventDefault(); onSave(form); }} className="w-full max-w-md space-y-3 rounded-3xl bg-card p-6 shadow-soft">
+      <form onSubmit={(e) => { e.preventDefault(); onSave(form); }} className="max-h-[90vh] w-full max-w-md space-y-3 overflow-y-auto rounded-3xl bg-card p-6 shadow-soft">
         <div className="flex items-center justify-between">
           <h3 className="font-display text-lg font-bold">{row["id"] ? "تعديل" : "إضافة"} — {sections[table].label}</h3>
           <button type="button" onClick={onClose} aria-label="إغلاق"><X className="h-5 w-5" /></button>
