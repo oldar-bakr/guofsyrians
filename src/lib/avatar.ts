@@ -45,9 +45,18 @@ export async function uploadAvatarFile(userId: string, file: File): Promise<stri
   return path;
 }
 
-export async function saveAvatarPath(userId: string, path: string | null) {
-  const { error } = await supabase.from("profiles").update({ avatar_url: path }).eq("id", userId);
-  if (error) throw new Error("تعذّر حفظ الصورة");
+/**
+ * Writes the stored path to the profile. Calls are queued so a quick
+ * "choose photo" then "remove" can never land out of order in the database.
+ */
+let saveQueue: Promise<unknown> = Promise.resolve();
+export function saveAvatarPath(userId: string, path: string | null) {
+  const run = saveQueue.then(async () => {
+    const { error } = await supabase.from("profiles").update({ avatar_url: path }).eq("id", userId);
+    if (error) throw new Error("تعذّر حفظ الصورة");
+  });
+  saveQueue = run.catch(() => undefined);
+  return run;
 }
 
 export async function removeAvatar(userId: string) {
