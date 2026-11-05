@@ -151,6 +151,12 @@ export function parseEventDate(date: string, time = ""): ParsedEvent | null {
   return { start: new Date(y, mo - 1, d), hasTime: false };
 }
 
+/** Month names as students write them (Levantine), so the badge matches the admin text. */
+export const AR_MONTH_LABELS = [
+  "كانون الثاني", "شباط", "آذار", "نيسان", "أيار", "حزيران",
+  "تموز", "آب", "أيلول", "تشرين الأول", "تشرين الثاني", "كانون الأول",
+];
+
 /** Day / month / weekday parts for the square date badge, in Arabic. */
 export function eventDayBadge(date: Date): { day: string; month: string; weekday: string } {
   const fmt = (opts: Intl.DateTimeFormatOptions) => {
@@ -162,7 +168,7 @@ export function eventDayBadge(date: Date): { day: string; month: string; weekday
   };
   return {
     day: fmt({ day: "2-digit" }),
-    month: fmt({ month: "long" }),
+    month: AR_MONTH_LABELS[date.getMonth()],
     weekday: fmt({ weekday: "long" }),
   };
 }

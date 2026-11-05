@@ -78,8 +78,13 @@ describe("eventDayBadge", () => {
   it("returns a zero-padded day plus month and weekday text", () => {
     const badge = eventDayBadge(new Date(2026, 10, 5));
     expect(badge.day).toBe("05");
-    expect(badge.month.length).toBeGreaterThan(0);
+    expect(badge.month).toBe("تشرين الثاني");
     expect(badge.weekday.length).toBeGreaterThan(0);
+  });
+
+  it("names January كانون الثاني and December كانون الأول", () => {
+    expect(eventDayBadge(new Date(2027, 0, 2)).month).toBe("كانون الثاني");
+    expect(eventDayBadge(new Date(2027, 11, 2)).month).toBe("كانون الأول");
   });
 });
 
