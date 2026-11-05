@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PlayCircle, ChevronDown } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { useContent } from "@/lib/content";
+import { useContent, approvedOnly } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
 export const Route = createFileRoute("/_authenticated/courses/")({
@@ -18,7 +18,8 @@ export const Route = createFileRoute("/_authenticated/courses/")({
 });
 
 function Courses() {
-  const { data: courses = [] } = useContent<any>("courses");
+  const { data: allcourses = [] } = useContent<any>("courses");
+  const courses = approvedOnly(allcourses);
   const { data: mine = [] } = useMine<any>("course_enrollments");
   const actions = useActivityActions("course_enrollments");
   const [open, setOpen] = useState<string | null>(null);

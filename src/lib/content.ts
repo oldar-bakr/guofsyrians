@@ -3,15 +3,15 @@ import { supabase } from "@/integrations/supabase/client";
 
 export type ContentTable = "news" | "courses" | "deals" | "events" | "products" | "branches" | "faqs";
 
-export type Field = { key: string; label: string; type?: "number" | "long"; hideInTable?: boolean };
+export type Field = { key: string; label: string; type?: "number" | "long" | "status"; hideInTable?: boolean };
 
 // Editable fields per section, shared by the app pages and the admin dashboard.
 export const sections: Record<ContentTable, { label: string; fields: Field[] }> = {
   news: { label: "الأخبار", fields: [{ key: "title", label: "العنوان" }, { key: "date", label: "التاريخ" }, { key: "body", label: "تفاصيل الخبر", type: "long", hideInTable: true }] },
-  courses: { label: "الدورات", fields: [{ key: "title", label: "اسم الدورة" }, { key: "category", label: "التصنيف" }, { key: "lessons", label: "عدد الدروس", type: "number" }, { key: "description", label: "الوصف", type: "long", hideInTable: true }, { key: "video_url", label: "رابط الفيديو", hideInTable: true }] },
+  courses: { label: "الدورات", fields: [{ key: "title", label: "اسم الدورة" }, { key: "category", label: "التصنيف" }, { key: "lessons", label: "عدد الدروس", type: "number" }, { key: "description", label: "الوصف", type: "long", hideInTable: true }, { key: "video_url", label: "رابط الفيديو", hideInTable: true }, { key: "instructor", label: "المدرّب" }, { key: "contact", label: "التواصل", hideInTable: true }, { key: "status", label: "الحالة", type: "status" }] },
   deals: { label: "التخفيضات", fields: [{ key: "partner", label: "الشريك" }, { key: "category", label: "التصنيف" }, { key: "discount", label: "الخصم" }, { key: "city", label: "المدينة" }, { key: "terms", label: "الشروط" }] },
   events: { label: "الفعاليات", fields: [{ key: "title", label: "العنوان" }, { key: "date", label: "التاريخ" }, { key: "time", label: "الوقت" }, { key: "place", label: "المكان" }, { key: "org", label: "الجهة المنظمة" }, { key: "description", label: "الوصف", type: "long", hideInTable: true }] },
-  products: { label: "المنتجات", fields: [{ key: "name", label: "المنتج" }, { key: "price", label: "السعر" }, { key: "seller", label: "البائع" }] },
+  products: { label: "المنتجات", fields: [{ key: "name", label: "المنتج" }, { key: "price", label: "السعر" }, { key: "seller", label: "البائع" }, { key: "description", label: "الوصف", type: "long", hideInTable: true }, { key: "contact", label: "التواصل", hideInTable: true }, { key: "status", label: "الحالة", type: "status" }] },
   branches: { label: "الفروع", fields: [{ key: "city", label: "المدينة" }, { key: "university", label: "الجامعة" }, { key: "head", label: "المسؤول" }, { key: "contact", label: "رقم الاتصال" }, { key: "email", label: "البريد الإلكتروني" }] },
   faqs: { label: "معرفة المساعد", fields: [{ key: "question", label: "السؤال" }, { key: "answer", label: "الإجابة المعتمدة", type: "long" }] },
 };
@@ -46,3 +46,7 @@ export function toEmbedUrl(url: string): string | null {
   if (vm) return `https://player.vimeo.com/video/${vm[1]}`;
   return null;
 }
+
+export const statusLabels: Record<string, string> = { pending: "بانتظار الموافقة", approved: "منشور", rejected: "مرفوض" };
+// Student-submitted rows stay hidden from listings until staff approve them.
+export const approvedOnly = <T extends { status?: string }>(rows: T[]) => rows.filter((r) => !r.status || r.status === "approved");

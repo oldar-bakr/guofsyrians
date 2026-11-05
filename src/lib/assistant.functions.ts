@@ -20,7 +20,7 @@ export const askAssistant = createServerFn({ method: "POST" })
       supabase.from("branches").select("city, university, head, contact"),
       supabase.from("deals").select("partner, category, discount, city, terms"),
       supabase.from("events").select("title, date, time, place, org, description"),
-      supabase.from("courses").select("title, category, lessons, description"),
+      supabase.from("courses").select("title, category, lessons, description").eq("status", "approved"),
       supabase.from("news").select("title, date, body").order("created_at", { ascending: false }).limit(10),
       supabase.from("profiles").select("full_name, city, university, faculty").eq("id", userId).maybeSingle(),
     ]);

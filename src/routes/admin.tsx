@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Pencil, Trash2, Plus, LogOut, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { sections, useContent, type ContentTable } from "@/lib/content";
+import { sections, statusLabels, useContent, type ContentTable } from "@/lib/content";
 import { ActivityManager } from "@/components/ActivityManager";
 import { UsersManager } from "@/components/UsersManager";
 import { BusinessesManager } from "@/components/BusinessesManager";
@@ -115,7 +115,7 @@ function SectionManager({ table }: { table: ContentTable }) {
   const save = async (row: Record<string, any>) => {
     setError("");
     const payload: Record<string, any> = {};
-    fields.forEach((f) => (payload[f.key] = f.type === "number" ? Number(row[f.key] || 0) : row[f.key] ?? ""));
+    fields.forEach((f) => (payload[f.key] = f.type === "number" ? Number(row[f.key] || 0) : f.type === "status" ? row[f.key] || "approved" : row[f.key] ?? ""));
     const { error } = row["id"]
       ? await supabase.from(table).update(payload as never).eq("id", row["id"])
       : await supabase.from(table).insert(payload as never);
@@ -147,7 +147,7 @@ function SectionManager({ table }: { table: ContentTable }) {
             {isLoading && <tr><td className="p-4" colSpan={fields.length + 1}>جارٍ التحميل...</td></tr>}
             {data.map((row: any) => (
               <tr key={row["id"]} className="border-t">
-                {fields.filter((f) => !f.hideInTable).map((f) => <td key={f.key} className="px-4 py-3">{row[f.key]}</td>)}
+                {fields.filter((f) => !f.hideInTable).map((f) => <td key={f.key} className="px-4 py-3">{f.type === "status" ? <span className={`rounded-full px-2 py-0.5 text-xs ${row[f.key] === "pending" ? "bg-accent text-accent-foreground" : row[f.key] === "rejected" ? "bg-destructive/10 text-destructive" : "bg-secondary text-primary"}`}>{statusLabels[row[f.key]] ?? row[f.key]}{row["submitted_by"] ? " · من طالب" : ""}</span> : row[f.key]}</td>)}
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     <button aria-label="تعديل" onClick={() => setEditing(row)} className="text-primary"><Pencil className="h-4 w-4" /></button>
@@ -179,7 +179,11 @@ function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row:
         {sections[table].fields.filter((f) => table !== "branches" || !["city", "university"].includes(f.key)).map((f, i) => (
           <label key={f.key} className="block text-sm">
             {f.label}
-            {f.type === "long" ? (
+            {f.type === "status" ? (
+              <select value={form[f.key] || "approved"} onChange={(e) => setForm({ ...form, [f.key]: e.target.value })} className="mt-1 w-full rounded-xl border bg-background px-3 py-2">
+                {Object.entries(statusLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+              </select>
+            ) : f.type === "long" ? (
               <textarea rows={4} value={form[f.key] ?? ""} onChange={(e) => setForm({ ...form, [f.key]: e.target.value })} className="mt-1 w-full rounded-xl border bg-background px-3 py-2" />
             ) : (
             <input
