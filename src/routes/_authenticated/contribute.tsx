@@ -8,7 +8,7 @@ import { statusLabels } from "@/lib/content";
 
 export const Route = createFileRoute("/_authenticated/contribute")({
   validateSearch: (s: Record<string, unknown>): { kind: Kind } => ({
-    kind: s.kind === "products" ? "products" : "courses",
+    kind: s["kind"] === "products" ? "products" : "courses",
   }),
   head: () => ({
     meta: [
