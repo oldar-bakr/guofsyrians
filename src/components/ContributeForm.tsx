@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Pencil, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { statusLabels } from "@/lib/content";
+import { useMyProfile } from "@/lib/profile";
 
 export type ContributeKind = "courses" | "products";
 
