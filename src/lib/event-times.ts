@@ -28,7 +28,60 @@ export function normalizeDigits(input: string): string {
   return out;
 }
 
-function timeToMinutes(time: string): { hour: number; minute: number } | null {  const t = normalizeDigits(time || "").toLowerCase();
+/** Month names staff may type instead of a number (Arabic, English, Turkish). */
+const MONTH_NAMES: [string, number][] = [
+  ["كانون الثاني", 1], ["كانون الاول", 1], ["كانون الأول", 1], ["يناير", 1], ["كانون2", 1], ["january", 1], ["jan", 1], ["ocak", 1],
+  ["شباط", 2], ["فبراير", 2], ["شباط2", 2], ["february", 2], ["feb", 2], ["subat", 2], ["şubat", 2],
+  ["آذار", 3], ["اذار", 3], ["مارس", 3], ["mart", 3], ["march", 3], ["mar", 3],
+  ["نيسان", 4], ["ابريل", 4], ["أبريل", 4], ["nisan", 4], ["april", 4], ["apr", 4],
+  ["ايار", 5], ["أيار", 5], ["مايو", 5], ["mayis", 5], ["mayıs", 5], ["may", 5],
+  ["حزيران", 6], ["يونيو", 6], ["haziran", 6], ["june", 6], ["jun", 6],
+  ["تموز", 7], ["يوليو", 7], ["temmuz", 7], ["july", 7], ["jul", 7],
+  ["اب", 8], ["أب", 8], ["اغسطس", 8], ["أغسطس", 8], ["آب", 8], ["agustos", 8], ["ağustos", 8], ["august", 8], ["aug", 8],
+  ["ايلول", 9], ["أيلول", 9], ["سبتمبر", 9], ["eylul", 9], ["eylül", 9], ["september", 9], ["sep", 9],
+  ["تشرين الاول", 10], ["تشرين الأول", 10], ["اكتوبر", 10], ["أكتوبر", 10], ["ekim", 10], ["october", 10], ["oct", 10],
+  ["تشرين الثاني", 11], ["نوفمبر", 11], ["kasim", 11], ["kasım", 11], ["november", 11], ["nov", 11],
+  ["كانون الاول2", 12], ["كانون الأول", 12], ["كانون2", 12], ["ديسمبر", 12], ["aralik", 12], ["aralık", 12], ["december", 12], ["dec", 12],
+];
+
+/**
+ * Reads "8 تشرين الثاني", "5 نوفمبر 2027", "10 Nov" and the like.
+ * Returns null when the text carries no month name or no day number.
+ */
+function parseMonthNameDate(raw: string): { y: number; mo: number; d: number } | null {
+  const t = normalizeDigits(raw)
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!t) return null;
+
+  let month: number | null = null;
+  let rest = t;
+  for (const [name, m] of MONTH_NAMES) {
+    if (rest.includes(name)) {
+      month = m;
+      rest = rest.replace(name, " ");
+      break;
+    }
+  }
+  if (!month) return null;
+
+  const nums = (rest.match(/\d{1,4}/g) || []).map(Number).filter((n) => n > 0);
+  const year = nums.find((n) => n >= 1000) ?? null;
+  const day = nums.find((n) => n < 1000 && n <= 31) ?? null;
+  if (!day) return null;
+
+  const now = new Date();
+  const y = year ?? now.getFullYear();
+  const candidate = new Date(y, month - 1, day);
+  // A bare "8 تشرين الثاني" that already passed means next year's edition.
+  if (!year && candidate.getTime() < now.getTime() - 86400000) return { y: y + 1, mo: month, d: day };
+  return { y, mo: month, d: day };
+}
+
+function timeToMinutes(time: string): { hour: number; minute: number } | null {
+  const t = normalizeDigits(time || "").toLowerCase();
   const m = t.match(/(\d{1,2})[:.](\d{2})/);
   if (!m) return null;
   let hour = Number(m[1]);
