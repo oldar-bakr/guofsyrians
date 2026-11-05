@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarDays, ShoppingBag, Building2, GraduationCap, Tag, Sparkles } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { useStudent } from "@/lib/profile";
+import { Avatar } from "@/components/Avatar";
 import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/_authenticated/home")({
@@ -31,8 +32,13 @@ function Index() {
   return (
     <AppShell>
       <section className="bg-hero rounded-3xl p-6 text-primary-foreground shadow-soft">
-        <p className="text-sm opacity-80">مرحباً،</p>
-        <h2 className="font-display text-2xl font-bold">{student.name}</h2>
+        <div className="flex items-center gap-3">
+          <Avatar path={student.avatar} name={student.name} className="h-12 w-12" />
+          <div className="min-w-0">
+            <p className="text-sm opacity-80">مرحباً،</p>
+            <h2 className="font-display text-2xl font-bold">{student.name}</h2>
+          </div>
+        </div>
         <p className="mt-1 text-sm opacity-80">{student.university} · {student.city}</p>
         <Link to="/card" className="mt-4 inline-block rounded-full bg-accent px-4 py-2 text-sm font-bold text-accent-foreground">
           عرض بطاقتي الرقمية

@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import QRCode from "react-qr-code";
 import { AppShell } from "@/components/AppShell";
 import { useStudent } from "@/lib/profile";
+import { Avatar } from "@/components/Avatar";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/_authenticated/card")({
@@ -38,8 +39,13 @@ function CardPage() {
           </div>
           <img src={logo.url} alt="" className="h-12 w-12 rounded-full bg-card object-contain p-1" />
         </div>
-        <p className="mt-8 font-display text-2xl font-bold">{student.name}</p>
-        <p className="text-sm opacity-90">{student.university}</p>
+        <div className="mt-8 flex items-center gap-3">
+          <Avatar path={student.avatar} name={student.name} className="h-14 w-14" textClass="text-lg" />
+          <div className="min-w-0">
+            <p className="font-display text-2xl font-bold">{student.name}</p>
+            <p className="text-sm opacity-90">{student.university}</p>
+          </div>
+        </div>
         <div className="mt-4 flex justify-between text-xs opacity-90">
           <span>رقم العضوية: {student.id}</span>
           <span>صالحة حتى {student.validUntil}</span>
