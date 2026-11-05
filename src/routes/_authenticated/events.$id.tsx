@@ -206,7 +206,7 @@ function EventDetail() {
               className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border py-2 text-sm"
             >
               {copied ? <Check className="h-4 w-4 text-primary" /> : <Share2 className="h-4 w-4" />}
-              {copied ? "انسخ الرابط" : "مشاركة الفعالية"}
+              {copied ? "تم نسخ الرابط" : "مشاركة الفعالية"}
             </button>
           </div>
 
