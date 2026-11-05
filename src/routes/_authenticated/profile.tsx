@@ -5,6 +5,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
 import { useMyProfile } from "@/lib/profile";
 import { CityUniversitySelect } from "@/components/CityUniversitySelect";
+import { AvatarUpload } from "@/components/AvatarUpload";
+import { Avatar } from "@/components/Avatar";
+import { removeAvatar, saveAvatarPath } from "@/lib/avatar";
 import { useMine } from "@/lib/activity";
 
 export const Route = createFileRoute("/_authenticated/profile")({
@@ -62,6 +65,18 @@ function ProfilePage() {
     navigate({ to: "/auth" });
   };
 
+  const setAvatar = async (path: string | null) => {
+    if (!p) return;
+    try {
+      if (path) await saveAvatarPath(p.id, path);
+      else await removeAvatar(p.id);
+      qc.invalidateQueries({ queryKey: ["my-profile"] });
+      qc.invalidateQueries({ queryKey: ["avatar-url"] });
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : "تعذّر حفظ الصورة");
+    }
+  };
+
   const stats = [
     { label: "دوراتي", n: courses.length, to: "/courses" as const },
     { label: "فعالياتي", n: events.length, to: "/events" as const },
@@ -72,8 +87,13 @@ function ProfilePage() {
   return (
     <AppShell title="ملفي">
       <div className="rounded-2xl bg-hero p-5 text-primary-foreground shadow-soft">
-        <h2 className="font-display text-xl font-bold">{p?.full_name}</h2>
-        <p className="text-sm opacity-80">{p?.member_code}</p>
+        <div className="flex items-center gap-4">
+          <Avatar path={p?.avatar_url} name={p?.full_name} className="h-16 w-16" textClass="text-lg" />
+          <div className="min-w-0">
+            <h2 className="font-display text-xl font-bold">{p?.full_name}</h2>
+            <p className="text-sm opacity-80">{p?.member_code}</p>
+          </div>
+        </div>
       </div>
       <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3">
         {stats.map((s) => (
@@ -85,6 +105,7 @@ function ProfilePage() {
       </div>
       <form onSubmit={save} className="mt-4 space-y-3 rounded-2xl bg-card p-4">
         <h3 className="font-bold">بياناتي الطلابية</h3>
+        {p && <AvatarUpload userId={p.id} value={p.avatar_url} name={p.full_name} onChange={setAvatar} />}
         {fields.filter((f) => !["city", "university", "faculty", "department"].includes(f.key)).map((f) => (
           <label key={f.key} className="block text-sm">
             <span className="mb-1 block text-muted-foreground">{f.label}</span>
