@@ -26,6 +26,8 @@ export const askAssistant = createServerFn({ method: "POST" })
     ]);
 
     const knowledge = `
+بيانات التواصل الرسمية مع الاتحاد: ${CONTACT_SUMMARY}
+
 معلومات الطالب: ${profile.data ? `${profile.data.full_name}، ${profile.data.university} (${profile.data.faculty})، ${profile.data.city}` : "غير متوفرة"}
 
 الأسئلة والإجابات المعتمدة:
