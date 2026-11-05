@@ -74,7 +74,7 @@ function CourseDetail() {
             {Array.from({ length: lessons }, (_, i) => {
               const isDone = i < done;
               return (
-                <li key={i}>
+                <li key={i} className="flex items-center gap-2">
                   <button
                     disabled={!e}
                     onClick={() => e && actions.update(e.id, { completed_lessons: isDone ? i : i + 1 })}
@@ -83,6 +83,9 @@ function CourseDetail() {
                     {isDone ? <CheckCircle2 className="h-5 w-5 text-primary" /> : <Circle className="h-5 w-5 text-muted-foreground" />}
                     الدرس {i + 1}
                   </button>
+                  {(c.lesson_videos ?? [])[i] && (
+                    <a href={(c.lesson_videos ?? [])[i]} target="_blank" rel="noreferrer" aria-label={`فيديو الدرس ${i + 1}`} className="flex shrink-0 items-center gap-1 rounded-xl bg-secondary px-3 py-3 text-xs font-bold text-primary"><PlayCircle className="h-4 w-4" />شاهد</a>
+                  )}
                 </li>
               );
             })}
