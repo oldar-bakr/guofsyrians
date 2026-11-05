@@ -27,6 +27,7 @@ const fields = [
   { key: "city", label: "المدينة" },
   { key: "university", label: "الجامعة" },
   { key: "faculty", label: "الكلية" },
+  { key: "department", label: "القسم / التخصص" },
   { key: "student_number", label: "الرقم الجامعي" },
   { key: "uni_email", label: "البريد الجامعي" },
 ] as const;
@@ -84,13 +85,13 @@ function ProfilePage() {
       </div>
       <form onSubmit={save} className="mt-4 space-y-3 rounded-2xl bg-card p-4">
         <h3 className="font-bold">بياناتي الطلابية</h3>
-        {fields.filter((f) => f.key !== "city" && f.key !== "university").map((f) => (
+        {fields.filter((f) => !["city", "university", "faculty", "department"].includes(f.key)).map((f) => (
           <label key={f.key} className="block text-sm">
             <span className="mb-1 block text-muted-foreground">{f.label}</span>
             <input value={form[f.key] ?? ""} onChange={(e) => setForm({ ...form, [f.key]: e.target.value })} className="w-full rounded-xl border bg-background px-3 py-2" />
           </label>
         ))}
-        <CityUniversitySelect city={form["city"] ?? ""} university={form["university"] ?? ""} onChange={(v) => setForm({ ...form, ...v })} labelClassName="mb-1 block text-muted-foreground" className="w-full rounded-xl border bg-background px-3 py-2 disabled:opacity-60" />
+        <CityUniversitySelect city={form["city"] ?? ""} university={form["university"] ?? ""} faculty={form["faculty"] ?? ""} department={form["department"] ?? ""} onChange={(v) => setForm({ ...form, ...v })} labelClassName="mb-1 block text-muted-foreground" className="w-full rounded-xl border bg-background px-3 py-2 disabled:opacity-60" />
         {msg && <p className="text-sm text-primary">{msg}</p>}
         <button className="w-full rounded-xl bg-primary py-2 font-bold text-primary-foreground">حفظ التعديلات</button>
       </form>

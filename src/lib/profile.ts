@@ -8,6 +8,7 @@ export type Profile = {
   city: string;
   university: string;
   faculty: string;
+  department: string | null;
   student_number: string;
   uni_email: string;
   member_code: string;

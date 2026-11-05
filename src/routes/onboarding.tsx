@@ -28,7 +28,6 @@ export const Route = createFileRoute("/onboarding")({
 const fields = [
   { key: "full_name", label: "الاسم الكامل", required: true },
   { key: "phone", label: "رقم الهاتف", required: true, type: "tel" },
-  { key: "faculty", label: "الكلية / التخصص", required: true },
   { key: "student_number", label: "الرقم الجامعي", required: false },
   { key: "uni_email", label: "البريد الجامعي", required: false, type: "email" },
 ] as const;
@@ -54,6 +53,7 @@ function Onboarding() {
       city: (form["city"] ?? "").trim(),
       university: (form["university"] ?? "").trim(),
       faculty: (form["faculty"] ?? "").trim(),
+      department: (form["department"] ?? "").trim(),
       student_number: (form["student_number"] ?? "").trim(),
       uni_email: (form["uni_email"] ?? "").trim(),
     });
@@ -71,7 +71,7 @@ function Onboarding() {
           <h1 className="font-display text-2xl font-bold">أهلاً بك! أكمل بياناتك</h1>
           <p className="mt-1 text-sm text-muted-foreground">نحتاج بياناتك الطلابية الحقيقية لإصدار بطاقة العضوية</p>
         </div>
-        <CityUniversitySelect required city={form["city"] ?? ""} university={form["university"] ?? ""} onChange={(v) => setForm({ ...form, ...v })} className="mt-1 w-full rounded-xl border bg-background px-4 py-2 disabled:opacity-60" />
+        <CityUniversitySelect required city={form["city"] ?? ""} university={form["university"] ?? ""} faculty={form["faculty"] ?? ""} department={form["department"] ?? ""} onChange={(v) => setForm({ ...form, ...v })} className="mt-1 w-full rounded-xl border bg-background px-4 py-2 disabled:opacity-60" />
         {fields.map((f) => (
           <label key={f.key} className="block text-sm">
             {f.label}{f.required && <span className="text-destructive"> *</span>}
