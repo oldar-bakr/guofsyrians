@@ -39,6 +39,30 @@ describe("parseEventDate", () => {
     expect(p?.start.getHours()).toBe(0);
   });
 
+  it("reads an Arabic month name", () => {
+    const p = parseEventDate("8 تشرين الثاني", "18:00");
+    expect(p?.start.getMonth()).toBe(10);
+    expect(p?.start.getDate()).toBe(8);
+    expect(p?.start.getHours()).toBe(18);
+  });
+
+  it("reads a month name with an explicit year", () => {
+    const p = parseEventDate("5 نوفمبر 2027", "");
+    expect(p?.start.getFullYear()).toBe(2027);
+    expect(p?.start.getMonth()).toBe(10);
+    expect(p?.start.getDate()).toBe(5);
+  });
+
+  it("reads English and Turkish month names", () => {
+    expect(parseEventDate("10 Nov")?.start.getMonth()).toBe(10);
+    expect(parseEventDate("3 Ocak 2027")?.start.getMonth()).toBe(0);
+  });
+
+  it("keeps the two Kanun months apart", () => {
+    expect(parseEventDate("2 كانون الأول 2027")?.start.getMonth()).toBe(11);
+    expect(parseEventDate("2 كانون الثاني 2027")?.start.getMonth()).toBe(0);
+  });
+
   it("returns null for text that carries no date", () => {
     expect(parseEventDate("قريباً", "")).toBeNull();
     expect(parseEventDate("", "18:00")).toBeNull();
