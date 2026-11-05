@@ -18,12 +18,13 @@ type Props = StudyValue & {
   className?: string;
   labelClassName?: string;
   required?: boolean;
+  universityOnly?: boolean;
 };
 
 const sortTr = (a: string[]) => [...a].sort((x, y) => x.localeCompare(y, "tr"));
 const withCurrent = (list: string[], v: string) => (v && !list.includes(v) ? [v, ...list] : list);
 
-export function CityUniversitySelect({ city, university, faculty, department, onChange, className, labelClassName, required }: Props) {
+export function CityUniversitySelect({ city, university, faculty, department, onChange, className, labelClassName, required, universityOnly }: Props) {
   const detect = useServerFn(detectCity);
   const [tree, setTree] = useState<Tree | null>(cache);
   const [locating, setLocating] = useState(false);
@@ -93,6 +94,7 @@ export function CityUniversitySelect({ city, university, faculty, department, on
           {uniList.map((u) => <option key={u} value={u}>{u}</option>)}
         </select>
       </label>
+      {!universityOnly && <>
       <label className="block text-sm">
         <span className={labelClassName}>الكلية{star}</span>
         <select required={required} disabled={!university} value={faculty} onChange={(e) => onChange({ city, university, faculty: e.target.value, department: "" })} className={className}>
@@ -107,6 +109,7 @@ export function CityUniversitySelect({ city, university, faculty, department, on
           {depList.map((d) => <option key={d} value={d}>{d}</option>)}
         </select>
       </label>
+      </>}
     </>
   );
 }

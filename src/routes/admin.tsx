@@ -1,3 +1,4 @@
+import { CityUniversitySelect } from "@/components/CityUniversitySelect";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -170,15 +171,19 @@ function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row:
           <h3 className="font-display text-lg font-bold">{row["id"] ? "تعديل" : "إضافة"} — {sections[table].label}</h3>
           <button type="button" onClick={onClose} aria-label="إغلاق"><X className="h-5 w-5" /></button>
         </div>
-        {sections[table].fields.map((f, i) => (
+        {table === "branches" && (
+          <CityUniversitySelect universityOnly required city={form["city"] ?? ""} university={form["university"] ?? ""} faculty="" department="" onChange={(v) => setForm({ ...form, city: v.city, university: v.university })} labelClassName="mb-1 block" className="mt-1 w-full rounded-xl border bg-background px-3 py-2 disabled:opacity-60" />
+        )}
+        {sections[table].fields.filter((f) => table !== "branches" || !["city", "university"].includes(f.key)).map((f, i) => (
           <label key={f.key} className="block text-sm">
             {f.label}
             {f.type === "long" ? (
               <textarea rows={4} value={form[f.key] ?? ""} onChange={(e) => setForm({ ...form, [f.key]: e.target.value })} className="mt-1 w-full rounded-xl border bg-background px-3 py-2" />
             ) : (
             <input
-              required={i === 0}
-              type={f.type === "number" ? "number" : "text"}
+              required={i === 0 && table !== "branches"}
+              type={f.type === "number" ? "number" : f.key === "email" ? "email" : f.key === "contact" && table === "branches" ? "tel" : "text"}
+              dir={f.key === "email" || (f.key === "contact" && table === "branches") ? "ltr" : undefined}
               value={form[f.key] ?? ""}
               onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
               className="mt-1 w-full rounded-xl border bg-background px-3 py-2"

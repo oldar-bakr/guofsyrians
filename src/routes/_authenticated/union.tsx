@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, User } from "lucide-react";
+import { Mail, Phone, User } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { useStudent } from "@/lib/profile";
 import { useContent } from "@/lib/content";
@@ -33,7 +33,8 @@ function Union() {
             <h4 className="font-bold">فرع {b.city}</h4>
             <p className="text-xs text-muted-foreground">{b.university}</p>
             <p className="mt-2 flex items-center gap-1 text-sm"><User className="h-4 w-4 text-primary" />{b.head}</p>
-            <p className="flex items-center gap-1 text-sm"><Mail className="h-4 w-4 text-primary" />{b.contact}</p>
+            {b.contact && <a href={`tel:${b.contact.replace(/\s/g, "")}`} dir="ltr" className="flex items-center gap-1 text-sm text-primary"><Phone className="h-4 w-4" />{b.contact}</a>}
+            {b.email && <a href={`mailto:${b.email}`} dir="ltr" className="flex items-center gap-1 text-sm text-primary"><Mail className="h-4 w-4" />{b.email}</a>}
           </article>
         ))}
       </div>
