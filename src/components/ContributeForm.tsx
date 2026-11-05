@@ -105,7 +105,8 @@ export function ContributeForm({ kind }: { kind: ContributeKind }) {
             {form["id"] ? "تعديل" : "إضافة"} {def.label}
           </h3>
           <p className="text-xs text-muted-foreground">
-            تراجع الإدارة كل {def.label} قبل نشره. أي تعديل يعيده للمراجعة.
+            تراجع الإدارة كل {def.label} قبل نشره. أي تعديل يعيده للمراجعة. اسمك وبيانات تواصلك
+            تُملأ تلقائيًا من ملفك ويمكنك تعديلها.
           </p>
           {def.fields.map((f) => (
             <label key={f.key} className="block text-sm">
