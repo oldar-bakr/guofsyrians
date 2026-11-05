@@ -4,7 +4,9 @@ import { MapPin, X } from "lucide-react";
 import QRCode from "react-qr-code";
 import { AppShell } from "@/components/AppShell";
 import { useContent } from "@/lib/content";
-import { useActivityActions } from "@/lib/activity";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { BusinessLogo } from "@/lib/business";
 import { useStudent } from "@/lib/profile";
 import { sameCity } from "@/lib/city-match";
 
@@ -21,8 +23,10 @@ export const Route = createFileRoute("/_authenticated/deals")({
 });
 
 function Deals() {
-  const { data: deals = [] } = useContent<any>("deals");
-  const actions = useActivityActions("deal_redemptions");
+  const { data: all = [] } = useContent<any>("deals");
+  const deals = all.filter((d: any) => d.active !== false);
+  const { data: shops = [] } = useQuery({ queryKey: ["shops"], queryFn: async () => (await supabase.from("businesses").select("id, name, logo_url, address, phone").eq("status", "approved")).data ?? [] });
+  const shop = (d: any) => shops.find((b: any) => b.id === d.business_id);
   const student = useStudent();
   const [picked, setPicked] = useState<string | null>(null);
   const [active, setActive] = useState<any | null>(null);
@@ -33,10 +37,7 @@ function Deals() {
   const setCity = setPicked;
   const list = deals.filter((d: any) => city === "الكل" || d.city === city);
 
-  const use = async (d: any) => {
-    setActive(d);
-    await actions.add({ deal_id: d.id });
-  };
+  const use = (d: any) => setActive(d);
 
   return (
     <AppShell title="التخفيضات">
@@ -48,11 +49,11 @@ function Deals() {
       <div className="grid gap-3 md:grid-cols-2">
         {list.map((d: any) => (
           <article key={d.id} className="flex items-center gap-4 rounded-2xl bg-card p-4 shadow-soft">
-            <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-accent font-display text-xl font-bold text-accent-foreground">{d.discount}</span>
+            {shop(d) ? <BusinessLogo path={shop(d).logo_url} name={d.partner} className="h-16 w-16" /> : <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-accent font-display text-xl font-bold text-accent-foreground">{d.discount}</span>}
             <div className="flex-1">
-              <h3 className="font-bold">{d.partner}</h3>
+              <h3 className="font-bold">{d.partner}{shop(d) && <span className="mr-2 rounded-full bg-accent px-2 py-0.5 text-xs text-accent-foreground">{d.discount}</span>}</h3>
               <p className="text-xs text-muted-foreground">{d.category} · {d.terms}</p>
-              <p className="mt-1 flex items-center gap-1 text-xs text-primary"><MapPin className="h-3 w-3" />{d.city}</p>
+              <p className="mt-1 flex items-center gap-1 text-xs text-primary"><MapPin className="h-3 w-3" />{d.city}{shop(d)?.address && ` · ${shop(d).address}`}</p>
             </div>
             <button onClick={() => use(d)} className="rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground">استخدم العرض</button>
           </article>

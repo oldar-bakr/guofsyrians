@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { GraduationCap, IdCard, Tag, CalendarDays, ShoppingBag, Sparkles, Building2 } from "lucide-react";
+import { GraduationCap, IdCard, Tag, CalendarDays, ShoppingBag, Sparkles, Building2, Store } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/union-logo.png.asset.json";
 
