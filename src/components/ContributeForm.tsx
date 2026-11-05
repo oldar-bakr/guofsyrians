@@ -83,7 +83,7 @@ export function ContributeForm({ kind }: { kind: ContributeKind }) {
       ? await supabase.from(kind).update(payload as never).eq("id", form["id"])
       : await supabase.from(kind).insert({ ...payload, submitted_by: u.user!.id } as never);
     if (error) return setMsg("تعذّر الإرسال: " + error.message);
-    setForm({});
+    setForm(profileDefaults());
     setMsg("تم الإرسال، وسيظهر للطلاب بعد موافقة الإدارة.");
     qc.invalidateQueries({ queryKey: ["my-submissions", kind] });
     qc.invalidateQueries({ queryKey: ["content", kind] });
@@ -134,7 +134,7 @@ export function ContributeForm({ kind }: { kind: ContributeKind }) {
               إرسال للمراجعة
             </button>
             {form["id"] && (
-              <button type="button" onClick={() => setForm({})} className="rounded-xl border px-4">
+              <button type="button" onClick={() => setForm(profileDefaults())} className="rounded-xl border px-4">
                 إلغاء
               </button>
             )}
