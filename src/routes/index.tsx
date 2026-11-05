@@ -31,8 +31,12 @@ function Landing() {
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
-      if (data.user) navigate({ to: "/home", replace: true });
-      else setChecking(false);
+      if (!data.user) return setChecking(false);
+      // Business owners without a student profile go to their own dashboard.
+      Promise.all([
+        supabase.from("profiles").select("id").eq("id", data.user.id).maybeSingle(),
+        supabase.from("businesses").select("id").eq("owner_id", data.user.id).maybeSingle(),
+      ]).then(([p, b]) => navigate({ to: !p.data && b.data ? "/business" : "/home", replace: true }));
     });
   }, [navigate]);
 
@@ -102,6 +106,17 @@ function Landing() {
           <Link to="/auth" className="mt-2 rounded-full bg-accent px-8 py-3 font-bold text-accent-foreground shadow-soft">
             تسجيل الدخول / إنشاء حساب
           </Link>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-14">
+        <div className="flex flex-col items-center gap-4 rounded-3xl border-2 border-accent bg-card p-8 text-center shadow-soft md:flex-row md:text-right">
+          <Store className="h-12 w-12 shrink-0 text-primary" />
+          <div className="flex-1">
+            <h2 className="font-display text-2xl font-bold">هل لديك مطعم أو مقهى أو متجر؟</h2>
+            <p className="mt-1 text-sm text-muted-foreground">سجّل نشاطك التجاري، انشر تخفيضاتك لطلاب الاتحاد، وامسح رموزهم للتحقق من عضويتهم.</p>
+          </div>
+          <Link to="/auth" search={{ as: "business" }} className="rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground shadow-soft">دخول أصحاب الأعمال</Link>
         </div>
       </section>
 
