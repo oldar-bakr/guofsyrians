@@ -9,6 +9,7 @@ export type Profile = {
   university: string;
   faculty: string;
   student_number: string;
+  uni_email: string;
   member_code: string;
   created_at: string;
 };
