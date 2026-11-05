@@ -40,7 +40,7 @@ function CardPage() {
           <img src={logo.url} alt="" className="h-12 w-12 rounded-full bg-card object-contain p-1" />
         </div>
         <div className="mt-8 flex items-center gap-3">
-          <Avatar path={student.avatar} name={student.name} className="h-14 w-14" textClass="text-lg" />
+          <Avatar path={student.avatar} name={student.name} university={student.university} className="h-14 w-14" textClass="text-lg" />
           <div className="min-w-0">
             <p className="font-display text-2xl font-bold">{student.name}</p>
             <p className="text-sm opacity-90">{student.university}</p>

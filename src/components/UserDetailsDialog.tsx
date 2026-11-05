@@ -60,7 +60,7 @@ export function UserDetailsDialog({ user, onClose, onSaved }: { user: ManagedUse
       <div role="dialog" aria-label="بيانات المستخدم" className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-card p-6 shadow-soft" onClick={(e) => e.stopPropagation()}>
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Avatar path={user.avatarUrl} name={user.fullName} className="h-14 w-14" />
+            <Avatar path={user.avatarUrl} name={user.fullName} university={user.university} className="h-14 w-14" />
             <div>
               <h3 className="font-display text-xl font-bold">{user.fullName || "— لم يكمل بياناته —"}</h3>
               <p className="text-xs text-muted-foreground">{roleLabels[user.role]} · {user.banned ? "موقوف" : "فعّال"} · {user.provider === "google" ? "Google" : "البريد"}</p>
