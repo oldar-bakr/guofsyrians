@@ -61,16 +61,15 @@ export function ContributeForm({ kind }: { kind: ContributeKind }) {
   const titleKey = def.fields[0]!.key;
   const nameKey = kind === "courses" ? "instructor" : "seller";
 
+  const profileDefaults = () => ({
+    [nameKey]: profile?.full_name ?? "",
+    contact: profile?.phone || profile?.uni_email || "",
+  });
+
   // Prefill name + contact from the student's profile for new submissions.
   useEffect(() => {
     if (!profile || form["id"]) return;
-    setForm((f) => {
-      if (Object.keys(f).length > 0) return f;
-      return {
-        [nameKey]: profile.full_name ?? "",
-        contact: profile.phone || profile.uni_email || "",
-      };
-    });
+    setForm((f) => (Object.keys(f).length > 0 ? f : profileDefaults()));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile]);
 
