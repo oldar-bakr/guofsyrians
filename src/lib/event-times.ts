@@ -35,8 +35,9 @@ function timeToMinutes(time: string): { hour: number; minute: number } | null {
   let hour = Number(m[1]);
   const minute = Number(m[2]);
   if (hour > 23 || minute > 59) return null;
-  const pm = /(pm|p\.m|مساء|م\b|عصر)/.test(t);
-  const am = /(am|a\.m|صباح|ص\b)/.test(t);
+  // Arabic letters are not "word" characters, so \b never matches around م / ص.
+  const pm = /(pm|p\.m|مساء|عصر)/.test(t) || /م\s*$/.test(t.trim());
+  const am = /(am|a\.m|صباح)/.test(t) || /ص\s*$/.test(t.trim());
   if (pm && hour < 12) hour += 12;
   if (am && hour === 12) hour = 0;
   return { hour, minute };

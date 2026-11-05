@@ -100,8 +100,8 @@ describe("buildEventIcs", () => {
   });
 
   it("escapes commas and semicolons so the file stays valid", () => {
-    const ics = buildEventIcs({ id: "y", title: "أ، ب؛ ج", date: "2026-11-05", time: "" }, new Date(2026, 10, 1));
-    expect(ics).toContain("SUMMARY:أ\\, ب\\; ج");
+    const ics = buildEventIcs({ id: "y", title: "A, B; C", date: "2026-11-05", time: "" }, new Date(2026, 10, 1));
+    expect(ics).toContain("SUMMARY:A\\, B\\; C");
   });
 
   it("wraps very long lines", () => {
