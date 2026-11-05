@@ -34,6 +34,37 @@ export async function toAvatarBlob(file: File): Promise<Blob> {
   return blob;
 }
 
+/**
+ * Put a logo inside a square canvas and re-encode it as PNG, so a transparent
+ * background stays transparent (JPEG would flatten it onto solid black).
+ */
+export async function toLogoBlob(file: File): Promise<Blob> {
+  let bitmap: ImageBitmap;
+  try {
+    bitmap = await createImageBitmap(file);
+  } catch {
+    throw new Error("هذه الصورة غير مدعومة، جرّب JPG أو PNG");
+  }
+  const longest = Math.max(bitmap.width, bitmap.height);
+  const out = Math.min(MAX_SIDE, longest);
+  const scale = Math.min(1, out / longest);
+  const w = Math.max(1, Math.round(bitmap.width * scale));
+  const h = Math.max(1, Math.round(bitmap.height * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = out;
+  canvas.height = out;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    bitmap.close();
+    throw new Error("تعذّر تجهيز الصورة");
+  }
+  ctx.drawImage(bitmap, (out - w) / 2, (out - h) / 2, w, h);
+  bitmap.close();
+  const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"));
+  if (!blob) throw new Error("تعذّر تجهيز الصورة");
+  return blob;
+}
+
 /** Put the picture in the student's own folder and return its path. */
 export async function uploadAvatarFile(userId: string, file: File): Promise<string> {
   const blob = await toAvatarBlob(file);

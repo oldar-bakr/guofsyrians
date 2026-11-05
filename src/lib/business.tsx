@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { toAvatarBlob } from "@/lib/avatar";
+import { toLogoBlob } from "@/lib/avatar";
 
 export const LOGO_BUCKET = "business-logos";
 export const businessCategories = ["مطعم", "مقهى", "متجر", "خدمات", "تعليم", "صحة وجمال", "أخرى"];
@@ -19,9 +19,9 @@ export async function fetchMyBusiness(): Promise<Business | null> {
 }
 
 export async function uploadLogo(userId: string, file: File): Promise<string> {
-  const blob = await toAvatarBlob(file);
-  const path = `${userId}/logo-${Date.now()}.jpg`;
-  const { error } = await supabase.storage.from(LOGO_BUCKET).upload(path, blob, { contentType: "image/jpeg", upsert: true });
+  const blob = await toLogoBlob(file);
+  const path = `${userId}/logo-${Date.now()}.png`;
+  const { error } = await supabase.storage.from(LOGO_BUCKET).upload(path, blob, { contentType: "image/png", upsert: true });
   if (error) throw new Error("تعذّر رفع الشعار");
   return path;
 }
@@ -41,7 +41,7 @@ export function useLogoUrl(path: string | null | undefined) {
 export function BusinessLogo({ path, name, className = "h-14 w-14" }: { path: string | null | undefined; name: string; className?: string }) {
   const { data: url } = useLogoUrl(path);
   return url ? (
-    <img src={url} alt={name} className={`${className} shrink-0 rounded-2xl bg-card object-cover`} />
+    <img src={url} alt={name} className={`${className} shrink-0 rounded-2xl bg-card object-contain p-1`} />
   ) : (
     <span className={`${className} grid shrink-0 place-items-center rounded-2xl bg-secondary font-display font-bold text-primary`}>{name.slice(0, 1)}</span>
   );
