@@ -27,6 +27,26 @@ export function useMyProfile() {
   return useQuery({ queryKey: ["my-profile"], queryFn: fetchMyProfile });
 }
 
+export type AppRole = "admin" | "editor";
+
+// The signed-in user's own staff roles (RLS only ever returns their own rows).
+export async function fetchMyRoles(): Promise<AppRole[]> {
+  const { data: u } = await supabase.auth.getUser();
+  if (!u.user) return [];
+  const { data } = await supabase.from("user_roles").select("role").eq("user_id", u.user.id);
+  return (data as { role: AppRole }[] | null ?? []).map((r) => r.role);
+}
+
+export function useMyRoles() {
+  return useQuery({ queryKey: ["my-roles"], queryFn: fetchMyRoles, staleTime: 60_000 });
+}
+
+/** True only for admins and editors — the people who may open the admin panel. */
+export function useIsStaff() {
+  const { data } = useMyRoles();
+  return !!data && (data.includes("admin") || data.includes("editor"));
+}
+
 // Display shape used by the student-facing pages.
 export function useStudent() {
   const { data } = useMyProfile();
