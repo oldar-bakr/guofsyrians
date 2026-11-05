@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Pencil, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { statusLabels } from "@/lib/content";
+import { useMyProfile } from "@/lib/profile";
 
 export type ContributeKind = "courses" | "products";
 
@@ -53,10 +54,24 @@ function useMySubmissions(kind: ContributeKind) {
 export function ContributeForm({ kind }: { kind: ContributeKind }) {
   const qc = useQueryClient();
   const { data: mine = [] } = useMySubmissions(kind);
+  const { data: profile } = useMyProfile();
   const [form, setForm] = useState<Record<string, any>>({});
   const [msg, setMsg] = useState("");
   const def = defs[kind];
   const titleKey = def.fields[0]!.key;
+  const nameKey = kind === "courses" ? "instructor" : "seller";
+
+  const profileDefaults = () => ({
+    [nameKey]: profile?.full_name ?? "",
+    contact: profile?.phone || profile?.uni_email || "",
+  });
+
+  // Prefill name + contact from the student's profile for new submissions.
+  useEffect(() => {
+    if (!profile || form["id"]) return;
+    setForm((f) => (Object.keys(f).length > 0 ? f : profileDefaults()));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profile]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,7 +83,7 @@ export function ContributeForm({ kind }: { kind: ContributeKind }) {
       ? await supabase.from(kind).update(payload as never).eq("id", form["id"])
       : await supabase.from(kind).insert({ ...payload, submitted_by: u.user!.id } as never);
     if (error) return setMsg("تعذّر الإرسال: " + error.message);
-    setForm({});
+    setForm(profileDefaults());
     setMsg("تم الإرسال، وسيظهر للطلاب بعد موافقة الإدارة.");
     qc.invalidateQueries({ queryKey: ["my-submissions", kind] });
     qc.invalidateQueries({ queryKey: ["content", kind] });
@@ -89,7 +104,8 @@ export function ContributeForm({ kind }: { kind: ContributeKind }) {
             {form["id"] ? "تعديل" : "إضافة"} {def.label}
           </h3>
           <p className="text-xs text-muted-foreground">
-            تراجع الإدارة كل {def.label} قبل نشره. أي تعديل يعيده للمراجعة.
+            تراجع الإدارة كل {def.label} قبل نشره. أي تعديل يعيده للمراجعة. اسمك وبيانات تواصلك
+            تُملأ تلقائيًا من ملفك ويمكنك تعديلها.
           </p>
           {def.fields.map((f) => (
             <label key={f.key} className="block text-sm">
@@ -118,7 +134,7 @@ export function ContributeForm({ kind }: { kind: ContributeKind }) {
               إرسال للمراجعة
             </button>
             {form["id"] && (
-              <button type="button" onClick={() => setForm({})} className="rounded-xl border px-4">
+              <button type="button" onClick={() => setForm(profileDefaults())} className="rounded-xl border px-4">
                 إلغاء
               </button>
             )}
