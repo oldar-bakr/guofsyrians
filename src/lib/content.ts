@@ -12,7 +12,7 @@ export const sections: Record<ContentTable, { label: string; fields: Field[] }> 
   deals: { label: "التخفيضات", fields: [{ key: "partner", label: "الشريك" }, { key: "category", label: "التصنيف" }, { key: "discount", label: "الخصم" }, { key: "city", label: "المدينة" }, { key: "terms", label: "الشروط" }] },
   events: { label: "الفعاليات", fields: [{ key: "title", label: "العنوان" }, { key: "date", label: "التاريخ" }, { key: "time", label: "الوقت" }, { key: "place", label: "المكان" }, { key: "org", label: "الجهة المنظمة" }, { key: "description", label: "الوصف", type: "long", hideInTable: true }] },
   products: { label: "المنتجات", fields: [{ key: "name", label: "المنتج" }, { key: "price", label: "السعر" }, { key: "seller", label: "البائع" }] },
-  branches: { label: "الفروع", fields: [{ key: "city", label: "المدينة" }, { key: "university", label: "الجامعة" }, { key: "head", label: "المسؤول" }, { key: "contact", label: "التواصل" }] },
+  branches: { label: "الفروع", fields: [{ key: "city", label: "المدينة" }, { key: "university", label: "الجامعة" }, { key: "head", label: "المسؤول" }, { key: "contact", label: "رقم الاتصال" }, { key: "email", label: "البريد الإلكتروني" }] },
   faqs: { label: "معرفة المساعد", fields: [{ key: "question", label: "السؤال" }, { key: "answer", label: "الإجابة المعتمدة", type: "long" }] },
 };
 

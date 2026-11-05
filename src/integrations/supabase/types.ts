@@ -43,6 +43,7 @@ export type Database = {
           city: string
           contact: string
           created_at: string
+          email: string
           head: string
           id: string
           university: string
@@ -51,6 +52,7 @@ export type Database = {
           city: string
           contact?: string
           created_at?: string
+          email?: string
           head?: string
           id?: string
           university?: string
@@ -59,6 +61,7 @@ export type Database = {
           city?: string
           contact?: string
           created_at?: string
+          email?: string
           head?: string
           id?: string
           university?: string

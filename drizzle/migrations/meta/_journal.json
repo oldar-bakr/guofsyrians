@@ -57,6 +57,13 @@
       "when": 1793865571132,
       "tag": "0007_add_avatar_to_profiles_and_storage_policies",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793866320510,
+      "tag": "0008_branch_email",
+      "breakpoints": true
     }
   ]
 }
