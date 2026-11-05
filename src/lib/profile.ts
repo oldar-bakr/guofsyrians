@@ -12,6 +12,7 @@ export type Profile = {
   student_number: string;
   uni_email: string;
   member_code: string;
+  avatar_url: string | null;
   created_at: string;
 };
 
@@ -37,6 +38,7 @@ export function useStudent() {
     university: data?.university ?? "",
     city: data?.city ?? "",
     id: data?.member_code ?? "",
+    avatar: data?.avatar_url ?? null,
     validUntil: valid.toLocaleDateString("en-GB"),
   };
 }
