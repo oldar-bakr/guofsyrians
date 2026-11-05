@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { ContactLinks } from "@/components/ContactLinks";
-import { useItem } from "@/lib/content";
+import { useContent, useItem } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 import {
   buildEventIcs,
@@ -42,7 +42,6 @@ function EventDetail() {
   const { id } = Route.useParams();
   const { data: ev, isLoading } = useItem<any>("events", id);
   const { data: mine = [] } = useMine<any>("event_registrations");
-  const { data: allEvents = [] } = useItem<any>("events", id) && useAllEvents();
   const actions = useActivityActions("event_registrations");
   const reg = mine.find((m: any) => m.event_id === id);
 
@@ -218,10 +217,33 @@ function EventDetail() {
   );
 }
 
-function useAllEvents() {
-  return useItem<any>("events", "");
-}
-
 function OtherEvents({ currentId }: { currentId: string }) {
-  return null;
+  const { data: events = [] } = useContent<any>("events");
+  const others = events.filter((e: any) => e.id !== currentId).slice(0, 4);
+  if (!others.length) return null;
+  return (
+    <section className="rounded-2xl bg-card p-4">
+      <h3 className="mb-3 font-bold">فعاليات أخرى</h3>
+      <ul className="space-y-2">
+        {others.map((e: any) => (
+          <li key={e.id}>
+            <Link
+              to="/events/$id"
+              params={{ id: e.id }}
+              className="block rounded-xl bg-muted/50 p-3 text-sm transition-colors hover:bg-secondary"
+            >
+              <span className="block font-medium">{e.title}</span>
+              <span className="mt-1 block text-xs text-muted-foreground">
+                {e.date}
+                {e.time ? ` · ${e.time}` : ""}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <Link to="/events" className="mt-3 block text-center text-sm text-primary">
+        كل الفعاليات
+      </Link>
+    </section>
+  );
 }
