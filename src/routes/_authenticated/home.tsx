@@ -50,7 +50,7 @@ function Index() {
       </div>
 
       <div className="mb-3 mt-7 flex items-center justify-between"><h3 className="font-display text-lg font-bold">آخر الأخبار</h3><Link to="/news" className="text-sm text-primary">عرض الكل</Link></div>
-      <ul className="space-y-3">
+      <ul className="grid gap-3 md:grid-cols-2">
         {news.map((n: any) => (
           <li key={n.id} className="rounded-2xl border-r-4 border-accent bg-card p-4">
             <Link to="/news/$id" params={{ id: n.id }} className="block w-full text-right">

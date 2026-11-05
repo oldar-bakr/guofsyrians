@@ -35,7 +35,7 @@ function Courses() {
           </button>
         ))}
       </div>
-      <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {list.map((c: any) => {
           const e = mine.find((m: any) => m.course_id === c.id);
           const pct = e && c.lessons ? Math.round((e.completed_lessons / c.lessons) * 100) : 0;
