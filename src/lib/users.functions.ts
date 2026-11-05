@@ -104,3 +104,44 @@ export const deleteUser = createServerFn({ method: "POST" })
     if (error) throw new Error("تعذّر حذف المستخدم");
     return { ok: true };
   });
+
+export type UserDetails = {
+  email: string;
+  profile: Record<string, string | null> | null;
+};
+
+export const getUserDetails = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: { userId: string }) => d)
+  .handler(async ({ data, context }): Promise<UserDetails> => {
+    await assertAdmin(context.supabase, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: u } = await supabaseAdmin.auth.admin.getUserById(data.userId);
+    const { data: p } = await supabaseAdmin.from("profiles").select("*").eq("id", data.userId).maybeSingle();
+    return { email: u?.user?.email ?? "", profile: (p as any) ?? null };
+  });
+
+const PROFILE_KEYS = ["full_name", "phone", "city", "university", "faculty", "department", "student_number", "uni_email", "member_code"] as const;
+
+export const updateUserDetails = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: { userId: string; email: string; profile: Record<string, string> }) => d)
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.supabase, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: u } = await supabaseAdmin.auth.admin.getUserById(data.userId);
+    const current = u?.user?.email ?? "";
+    const email = data.email.trim().toLowerCase();
+    if (email && email !== current.toLowerCase()) {
+      if (current.toLowerCase() === OWNER_EMAIL) throw new Error("لا يمكن تغيير بريد مالك التطبيق");
+      const { error } = await supabaseAdmin.auth.admin.updateUserById(data.userId, { email, email_confirm: true });
+      if (error) throw new Error("تعذّر تغيير البريد: " + error.message);
+    }
+    const row: Record<string, string> = { id: data.userId };
+    for (const k of PROFILE_KEYS) row[k] = (data.profile[k] ?? "").toString().trim();
+    if (!row["full_name"]) throw new Error("الاسم مطلوب");
+    if (!row["member_code"]) delete row["member_code"];
+    const { error } = await supabaseAdmin.from("profiles").upsert({ ...row, updated_at: new Date().toISOString() } as never);
+    if (error) throw new Error("تعذّر حفظ البيانات: " + error.message);
+    return { ok: true };
+  });

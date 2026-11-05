@@ -3,7 +3,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { Ban, CheckCircle2, Trash2 } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
-import { listUsers, setUserRole, setUserBlocked, deleteUser, type ManagedRole } from "@/lib/users.functions";
+import { UserDetailsDialog } from "@/components/UserDetailsDialog";
+import { listUsers, setUserRole, setUserBlocked, deleteUser, type ManagedRole, type ManagedUser } from "@/lib/users.functions";
 
 const roleLabels: Record<ManagedRole, string> = { admin: "مدير", editor: "محرر", user: "طالب" };
 const roleHelp = [
@@ -20,6 +21,7 @@ export function UsersManager({ myId }: { myId: string }) {
   const remove = useServerFn(deleteUser);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
+  const [open, setOpen] = useState<ManagedUser | null>(null);
   const { data = [], isLoading } = useQuery({ queryKey: ["admin-users"], queryFn: () => list() });
 
   const run = async (fn: () => Promise<unknown>) => {
@@ -73,13 +75,13 @@ export function UsersManager({ myId }: { myId: string }) {
               return (
                 <tr key={u.id} className="border-t">
                   <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
+                    <button type="button" onClick={() => setOpen(u)} title="عرض وتعديل البيانات" className="flex items-center gap-2 text-right hover:opacity-80">
                       <Avatar path={u.avatarUrl} name={u.fullName} className="h-9 w-9" textClass="text-xs" />
                       <div className="min-w-0">
-                        <p className="font-bold">{u.fullName || "— لم يكمل بياناته —"}{me && <span className="mr-2 text-xs text-primary">(أنت)</span>}{u.isOwner && <span className="mr-2 rounded-full bg-accent px-2 text-xs text-accent-foreground">المالك</span>}</p>
+                        <p className="font-bold underline-offset-2 hover:underline">{u.fullName || "— لم يكمل بياناته —"}{me && <span className="mr-2 text-xs text-primary">(أنت)</span>}{u.isOwner && <span className="mr-2 rounded-full bg-accent px-2 text-xs text-accent-foreground">المالك</span>}</p>
                         <p className="text-xs text-muted-foreground">{u.email}{u.phone && ` · ${u.phone}`}</p>
                       </div>
-                    </div>
+                    </button>
                   </td>
                   <td className="px-4 py-3">{u.university}{u.city && <span className="block text-xs text-muted-foreground">{u.city}</span>}</td>
                   <td className="px-4 py-3">{u.provider === "google" ? "Google" : "البريد"}</td>
@@ -125,6 +127,7 @@ export function UsersManager({ myId }: { myId: string }) {
           </tbody>
         </table>
       </div>
+      {open && <UserDetailsDialog user={open} onClose={() => setOpen(null)} onSaved={() => qc.invalidateQueries({ queryKey: ["admin-users"] })} />}
     </section>
   );
 }
