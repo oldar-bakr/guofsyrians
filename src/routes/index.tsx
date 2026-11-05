@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { GraduationCap, IdCard, Tag, CalendarDays, ShoppingBag, Sparkles, Building2, Store } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { ContactLinks } from "@/components/ContactLinks";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -120,8 +121,27 @@ function Landing() {
         </div>
       </section>
 
-      <footer className="border-t py-6 text-center text-xs text-muted-foreground">
-        الاتحاد العام لطلبة سوريا — تطبيق خدمات الطلاب
+      <section id="contact" className="mx-auto max-w-6xl px-5 py-14">
+        <div className="rounded-3xl border bg-card p-6 shadow-soft md:p-8">
+          <h2 className="font-display text-2xl font-bold">تواصل مع الاتحاد</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            للاستفسار عن العضوية أو التعاون أو تسجيل نشاطك التجاري، استخدم إحدى وسائل التواصل التالية.
+          </p>
+          <div className="mt-5">
+            <ContactLinks />
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t py-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-5 text-center">
+          <div className="flex items-center gap-2">
+            <img src={logo.url} alt="شعار الاتحاد" className="h-9 w-9 object-contain" />
+            <p className="font-display text-sm font-bold text-primary">الاتحاد العام لطلبة سوريا</p>
+          </div>
+          <ContactLinks showAddress={false} />
+          <p className="text-xs text-muted-foreground">تطبيق خدمات الطلاب — الاتحاد العام لطلبة سوريا</p>
+        </div>
       </footer>
     </div>
   );

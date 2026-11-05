@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, Phone, User } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
+import { ContactLinks } from "@/components/ContactLinks";
 import { useStudent } from "@/lib/profile";
 import { useContent } from "@/lib/content";
 
@@ -38,6 +39,13 @@ function Union() {
           </article>
         ))}
       </div>
+      <section className="mt-6 rounded-2xl bg-card p-5 shadow-soft">
+        <h3 className="font-display text-lg font-bold">تواصل مع الإدارة</h3>
+        <p className="mt-1 text-xs text-muted-foreground">لأي استفسار عام، يمكنك التواصل مع إدارة الاتحاد مباشرة.</p>
+        <div className="mt-4">
+          <ContactLinks />
+        </div>
+      </section>
     </AppShell>
   );
 }
