@@ -30,6 +30,7 @@ const fields = [
   { key: "phone", label: "رقم الهاتف", required: true, type: "tel" },
   { key: "faculty", label: "الكلية / التخصص", required: true },
   { key: "student_number", label: "الرقم الجامعي", required: false },
+  { key: "uni_email", label: "البريد الجامعي", required: false, type: "email" },
 ] as const;
 
 function Onboarding() {
@@ -54,6 +55,7 @@ function Onboarding() {
       university: (form["university"] ?? "").trim(),
       faculty: (form["faculty"] ?? "").trim(),
       student_number: (form["student_number"] ?? "").trim(),
+      uni_email: (form["uni_email"] ?? "").trim(),
     });
     setBusy(false);
     if (error) return setError("تعذّر حفظ البيانات، حاول مرة أخرى");
