@@ -354,6 +354,7 @@ export type Database = {
           member_code: string
           phone: string
           student_number: string
+          uni_email: string | null
           university: string
           updated_at: string
         }
@@ -366,6 +367,7 @@ export type Database = {
           member_code?: string
           phone?: string
           student_number?: string
+          uni_email?: string | null
           university?: string
           updated_at?: string
         }
@@ -378,6 +380,7 @@ export type Database = {
           member_code?: string
           phone?: string
           student_number?: string
+          uni_email?: string | null
           university?: string
           updated_at?: string
         }
