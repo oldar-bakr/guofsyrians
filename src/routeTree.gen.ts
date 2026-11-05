@@ -22,6 +22,9 @@ import { Route as AuthenticatedDealsRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedUnionRouteImport } from './routes/_authenticated/union'
+import { Route as AuthenticatedContributeIndexRouteImport } from './routes/_authenticated/contribute.index'
+import { Route as AuthenticatedContributeCoursesRouteImport } from './routes/_authenticated/contribute.courses'
+import { Route as AuthenticatedContributeProductsRouteImport } from './routes/_authenticated/contribute.products'
 import { Route as AuthenticatedCoursesIndexRouteImport } from './routes/_authenticated/courses.index'
 import { Route as AuthenticatedCoursesIdRouteImport } from './routes/_authenticated/courses.$id'
 import { Route as AuthenticatedEventsIndexRouteImport } from './routes/_authenticated/events.index'
@@ -94,6 +97,24 @@ const AuthenticatedUnionRoute = AuthenticatedUnionRouteImport.update({
   path: '/union',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedContributeIndexRoute =
+  AuthenticatedContributeIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedContributeRoute,
+  } as any)
+const AuthenticatedContributeCoursesRoute =
+  AuthenticatedContributeCoursesRouteImport.update({
+    id: '/courses',
+    path: '/courses',
+    getParentRoute: () => AuthenticatedContributeRoute,
+  } as any)
+const AuthenticatedContributeProductsRoute =
+  AuthenticatedContributeProductsRouteImport.update({
+    id: '/products',
+    path: '/products',
+    getParentRoute: () => AuthenticatedContributeRoute,
+  } as any)
 const AuthenticatedCoursesIndexRoute =
   AuthenticatedCoursesIndexRouteImport.update({
     id: '/courses/',
@@ -141,14 +162,17 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/assistant': typeof AuthenticatedAssistantRoute
   '/card': typeof AuthenticatedCardRoute
-  '/contribute': typeof AuthenticatedContributeRoute
+  '/contribute': typeof AuthenticatedContributeRouteWithChildren
   '/deals': typeof AuthenticatedDealsRoute
   '/home': typeof AuthenticatedHomeRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/union': typeof AuthenticatedUnionRoute
+  '/contribute/courses': typeof AuthenticatedContributeCoursesRoute
+  '/contribute/products': typeof AuthenticatedContributeProductsRoute
   '/courses/$id': typeof AuthenticatedCoursesIdRoute
   '/events/$id': typeof AuthenticatedEventsIdRoute
   '/news/$id': typeof AuthenticatedNewsIdRoute
+  '/contribute/': typeof AuthenticatedContributeIndexRoute
   '/courses/': typeof AuthenticatedCoursesIndexRoute
   '/events/': typeof AuthenticatedEventsIndexRoute
   '/market/': typeof AuthenticatedMarketIndexRoute
@@ -162,14 +186,16 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/assistant': typeof AuthenticatedAssistantRoute
   '/card': typeof AuthenticatedCardRoute
-  '/contribute': typeof AuthenticatedContributeRoute
   '/deals': typeof AuthenticatedDealsRoute
   '/home': typeof AuthenticatedHomeRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/union': typeof AuthenticatedUnionRoute
+  '/contribute/courses': typeof AuthenticatedContributeCoursesRoute
+  '/contribute/products': typeof AuthenticatedContributeProductsRoute
   '/courses/$id': typeof AuthenticatedCoursesIdRoute
   '/events/$id': typeof AuthenticatedEventsIdRoute
   '/news/$id': typeof AuthenticatedNewsIdRoute
+  '/contribute': typeof AuthenticatedContributeIndexRoute
   '/courses': typeof AuthenticatedCoursesIndexRoute
   '/events': typeof AuthenticatedEventsIndexRoute
   '/market': typeof AuthenticatedMarketIndexRoute
@@ -185,14 +211,17 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/_authenticated/assistant': typeof AuthenticatedAssistantRoute
   '/_authenticated/card': typeof AuthenticatedCardRoute
-  '/_authenticated/contribute': typeof AuthenticatedContributeRoute
+  '/_authenticated/contribute': typeof AuthenticatedContributeRouteWithChildren
   '/_authenticated/deals': typeof AuthenticatedDealsRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/union': typeof AuthenticatedUnionRoute
+  '/_authenticated/contribute/courses': typeof AuthenticatedContributeCoursesRoute
+  '/_authenticated/contribute/products': typeof AuthenticatedContributeProductsRoute
   '/_authenticated/courses/$id': typeof AuthenticatedCoursesIdRoute
   '/_authenticated/events/$id': typeof AuthenticatedEventsIdRoute
   '/_authenticated/news/$id': typeof AuthenticatedNewsIdRoute
+  '/_authenticated/contribute/': typeof AuthenticatedContributeIndexRoute
   '/_authenticated/courses/': typeof AuthenticatedCoursesIndexRoute
   '/_authenticated/events/': typeof AuthenticatedEventsIndexRoute
   '/_authenticated/market/': typeof AuthenticatedMarketIndexRoute
@@ -213,9 +242,12 @@ export interface FileRouteTypes {
     | '/home'
     | '/profile'
     | '/union'
+    | '/contribute/courses'
+    | '/contribute/products'
     | '/courses/$id'
     | '/events/$id'
     | '/news/$id'
+    | '/contribute/'
     | '/courses/'
     | '/events/'
     | '/market/'
@@ -229,14 +261,16 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/assistant'
     | '/card'
-    | '/contribute'
     | '/deals'
     | '/home'
     | '/profile'
     | '/union'
+    | '/contribute/courses'
+    | '/contribute/products'
     | '/courses/$id'
     | '/events/$id'
     | '/news/$id'
+    | '/contribute'
     | '/courses'
     | '/events'
     | '/market'
@@ -256,9 +290,12 @@ export interface FileRouteTypes {
     | '/_authenticated/home'
     | '/_authenticated/profile'
     | '/_authenticated/union'
+    | '/_authenticated/contribute/courses'
+    | '/_authenticated/contribute/products'
     | '/_authenticated/courses/$id'
     | '/_authenticated/events/$id'
     | '/_authenticated/news/$id'
+    | '/_authenticated/contribute/'
     | '/_authenticated/courses/'
     | '/_authenticated/events/'
     | '/_authenticated/market/'
@@ -367,6 +404,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUnionRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/contribute/': {
+      id: '/_authenticated/contribute/'
+      path: '/'
+      fullPath: '/contribute/'
+      preLoaderRoute: typeof AuthenticatedContributeIndexRouteImport
+      parentRoute: typeof AuthenticatedContributeRoute
+    }
+    '/_authenticated/contribute/courses': {
+      id: '/_authenticated/contribute/courses'
+      path: '/courses'
+      fullPath: '/contribute/courses'
+      preLoaderRoute: typeof AuthenticatedContributeCoursesRouteImport
+      parentRoute: typeof AuthenticatedContributeRoute
+    }
+    '/_authenticated/contribute/products': {
+      id: '/_authenticated/contribute/products'
+      path: '/products'
+      fullPath: '/contribute/products'
+      preLoaderRoute: typeof AuthenticatedContributeProductsRouteImport
+      parentRoute: typeof AuthenticatedContributeRoute
+    }
     '/_authenticated/courses/': {
       id: '/_authenticated/courses/'
       path: '/courses'
@@ -419,10 +477,28 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedContributeRouteChildren {
+  AuthenticatedContributeCoursesRoute: typeof AuthenticatedContributeCoursesRoute
+  AuthenticatedContributeProductsRoute: typeof AuthenticatedContributeProductsRoute
+  AuthenticatedContributeIndexRoute: typeof AuthenticatedContributeIndexRoute
+}
+
+const AuthenticatedContributeRouteChildren: AuthenticatedContributeRouteChildren =
+  {
+    AuthenticatedContributeCoursesRoute: AuthenticatedContributeCoursesRoute,
+    AuthenticatedContributeProductsRoute: AuthenticatedContributeProductsRoute,
+    AuthenticatedContributeIndexRoute: AuthenticatedContributeIndexRoute,
+  }
+
+const AuthenticatedContributeRouteWithChildren =
+  AuthenticatedContributeRoute._addFileChildren(
+    AuthenticatedContributeRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAssistantRoute: typeof AuthenticatedAssistantRoute
   AuthenticatedCardRoute: typeof AuthenticatedCardRoute
-  AuthenticatedContributeRoute: typeof AuthenticatedContributeRoute
+  AuthenticatedContributeRoute: typeof AuthenticatedContributeRouteWithChildren
   AuthenticatedDealsRoute: typeof AuthenticatedDealsRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
@@ -439,7 +515,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAssistantRoute: AuthenticatedAssistantRoute,
   AuthenticatedCardRoute: AuthenticatedCardRoute,
-  AuthenticatedContributeRoute: AuthenticatedContributeRoute,
+  AuthenticatedContributeRoute: AuthenticatedContributeRouteWithChildren,
   AuthenticatedDealsRoute: AuthenticatedDealsRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,

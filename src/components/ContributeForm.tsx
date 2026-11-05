@@ -169,7 +169,7 @@ export function ContributeForm({ kind }: { kind: ContributeKind }) {
       <p className="mt-6 text-center text-sm text-muted-foreground">
         {kind === "courses" ? (
           <>
-            عندك منتج instead؟{" "}
+            عندك منتج تبي تبيّعه؟{" "}
             <Link to="/contribute/products" className="font-bold text-primary">
               انشر منتجاتك
             </Link>
