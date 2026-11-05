@@ -64,6 +64,13 @@
       "when": 1793866320510,
       "tag": "0008_branch_email",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793869694519,
+      "tag": "0009_businesses_and_membership",
+      "breakpoints": true
     }
   ]
 }

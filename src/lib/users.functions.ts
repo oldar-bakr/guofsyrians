@@ -16,6 +16,8 @@ export type ManagedUser = {
   university: string;
   city: string;
   avatarUrl: string | null;
+  membershipActive: boolean;
+  membershipExpires: string | null;
 };
 
 // The app owner's account can never be demoted, blocked or deleted.
@@ -38,7 +40,7 @@ export const listUsers = createServerFn({ method: "POST" })
     const { data, error } = await supabaseAdmin.auth.admin.listUsers({ perPage: 1000 });
     if (error) throw new Error("تعذّر تحميل المستخدمين");
     const { data: roles } = await supabaseAdmin.from("user_roles").select("user_id, role");
-    const { data: profiles } = await supabaseAdmin.from("profiles").select("id, full_name, phone, university, city, avatar_url");
+    const { data: profiles } = await supabaseAdmin.from("profiles").select("id, full_name, phone, university, city, avatar_url, membership_active, membership_expires");
     const rank = { admin: 3, editor: 2, user: 1 } as const;
     return data.users.map((u) => {
       const mine = (roles ?? []).filter((r) => r.user_id === u.id).map((r) => r.role as ManagedRole);
@@ -58,6 +60,8 @@ export const listUsers = createServerFn({ method: "POST" })
         university: p?.university ?? "",
         city: p?.city ?? "",
         avatarUrl: p?.avatar_url ?? null,
+        membershipActive: p?.membership_active ?? false,
+        membershipExpires: p?.membership_expires ?? null,
       };
     });
   });
@@ -143,5 +147,19 @@ export const updateUserDetails = createServerFn({ method: "POST" })
     if (!row["member_code"]) delete row["member_code"];
     const { error } = await supabaseAdmin.from("profiles").upsert({ ...row, updated_at: new Date().toISOString() } as never);
     if (error) throw new Error("تعذّر حفظ البيانات: " + error.message);
+    return { ok: true };
+  });
+
+export const setMembership = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: { userId: string; active: boolean; expires: string | null }) => {
+    if (d.expires && !/^\d{4}-\d{2}-\d{2}$/.test(d.expires)) throw new Error("Invalid date");
+    return d;
+  })
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.supabase, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { error } = await supabaseAdmin.from("profiles").update({ membership_active: data.active, membership_expires: data.expires || null }).eq("id", data.userId);
+    if (error) throw new Error("تعذّر تحديث العضوية");
     return { ok: true };
   });

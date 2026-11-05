@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Ban, CheckCircle2, Trash2 } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
 import { UserDetailsDialog } from "@/components/UserDetailsDialog";
-import { listUsers, setUserRole, setUserBlocked, deleteUser, type ManagedRole, type ManagedUser } from "@/lib/users.functions";
+import { listUsers, setUserRole, setUserBlocked, deleteUser, setMembership, type ManagedRole, type ManagedUser } from "@/lib/users.functions";
 
 const roleLabels: Record<ManagedRole, string> = { admin: "مدير", editor: "محرر", user: "طالب" };
 const roleHelp = [
@@ -19,6 +19,7 @@ export function UsersManager({ myId }: { myId: string }) {
   const changeRole = useServerFn(setUserRole);
   const block = useServerFn(setUserBlocked);
   const remove = useServerFn(deleteUser);
+  const membership = useServerFn(setMembership);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState<ManagedUser | null>(null);
@@ -65,11 +66,12 @@ export function UsersManager({ myId }: { myId: string }) {
               <th className="px-4 py-3">آخر دخول</th>
               <th className="px-4 py-3">الصلاحية</th>
               <th className="px-4 py-3">الحالة</th>
+              <th className="px-4 py-3">العضوية</th>
               <th className="w-24" />
             </tr>
           </thead>
           <tbody>
-            {isLoading && <tr><td className="p-4" colSpan={7}>جارٍ التحميل...</td></tr>}
+            {isLoading && <tr><td className="p-4" colSpan={8}>جارٍ التحميل...</td></tr>}
             {users.map((u) => {
               const me = u.id === myId;
               return (
@@ -98,6 +100,15 @@ export function UsersManager({ myId }: { myId: string }) {
                   </td>
                   <td className="px-4 py-3">
                     {u.banned ? <span className="font-bold text-destructive">موقوف</span> : <span className="text-primary">فعّال</span>}
+                  </td>
+                  <td className="px-4 py-3">
+                    <label className="flex items-center gap-1 text-xs">
+                      <input type="checkbox" checked={u.membershipActive} onChange={(e) => run(() => membership({ data: { userId: u.id, active: e.target.checked, expires: u.membershipExpires } }))} />
+                      {u.membershipActive ? "مدفوعة" : "غير مفعّلة"}
+                    </label>
+                    {u.membershipActive && (
+                      <input type="date" title="تنتهي في" defaultValue={u.membershipExpires ?? ""} onBlur={(e) => e.target.value !== (u.membershipExpires ?? "") && run(() => membership({ data: { userId: u.id, active: true, expires: e.target.value || null } }))} className="mt-1 rounded border bg-background px-1 text-xs" />
+                    )}
                   </td>
                   <td className="px-4 py-3">
                     {!me && !u.isOwner && (

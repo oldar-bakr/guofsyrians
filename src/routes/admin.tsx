@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { sections, useContent, type ContentTable } from "@/lib/content";
 import { ActivityManager } from "@/components/ActivityManager";
 import { UsersManager } from "@/components/UsersManager";
+import { BusinessesManager } from "@/components/BusinessesManager";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/admin")({
@@ -29,7 +30,7 @@ function Admin() {
   const [state, setState] = useState<"loading" | "admin" | "editor" | "denied">("loading");
   const [email, setEmail] = useState("");
   const [myId, setMyId] = useState("");
-  const [tab, setTab] = useState<ContentTable | "users" | "activity">("news");
+  const [tab, setTab] = useState<ContentTable | "users" | "activity" | "businesses">("news");
 
   useEffect(() => {
     (async () => {
@@ -66,8 +67,9 @@ function Admin() {
       </div>
     );
 
-  const tabs: { key: ContentTable | "users" | "activity"; label: string }[] = [
+  const tabs: { key: ContentTable | "users" | "activity" | "businesses"; label: string }[] = [
     { key: "activity", label: "نشاط الطلاب" },
+    { key: "businesses", label: "المتاجر والعروض" },
     ...(Object.keys(sections) as ContentTable[]).map((t) => ({ key: t, label: sections[t].label })),
     ...(state === "admin" ? [{ key: "users" as const, label: "المستخدمون والصلاحيات" }] : []),
   ];
@@ -95,7 +97,7 @@ function Admin() {
         </nav>
       </header>
       <main className="mx-auto max-w-5xl p-5">
-        {tab === "users" ? <UsersManager myId={myId} /> : tab === "activity" ? <ActivityManager /> : <SectionManager key={tab} table={tab} />}
+        {tab === "users" ? <UsersManager myId={myId} /> : tab === "activity" ? <ActivityManager /> : tab === "businesses" ? <BusinessesManager /> : <SectionManager key={tab} table={tab} />}
       </main>
     </div>
   );

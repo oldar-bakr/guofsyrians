@@ -68,6 +68,51 @@ export type Database = {
         }
         Relationships: []
       }
+      businesses: {
+        Row: {
+          address: string
+          category: string
+          city: string
+          created_at: string
+          description: string
+          email: string
+          id: string
+          logo_url: string | null
+          name: string
+          owner_id: string
+          phone: string
+          status: string
+        }
+        Insert: {
+          address?: string
+          category?: string
+          city?: string
+          created_at?: string
+          description?: string
+          email?: string
+          id?: string
+          logo_url?: string | null
+          name: string
+          owner_id: string
+          phone?: string
+          status?: string
+        }
+        Update: {
+          address?: string
+          category?: string
+          city?: string
+          created_at?: string
+          description?: string
+          email?: string
+          id?: string
+          logo_url?: string | null
+          name?: string
+          owner_id?: string
+          phone?: string
+          status?: string
+        }
+        Relationships: []
+      }
       course_enrollments: {
         Row: {
           completed_lessons: number
@@ -132,24 +177,34 @@ export type Database = {
       }
       deal_redemptions: {
         Row: {
+          business_id: string | null
           created_at: string
           deal_id: string
           id: string
           user_id: string
         }
         Insert: {
+          business_id?: string | null
           created_at?: string
           deal_id: string
           id?: string
           user_id: string
         }
         Update: {
+          business_id?: string | null
           created_at?: string
           deal_id?: string
           id?: string
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "deal_redemptions_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "deal_redemptions_deal_id_fkey"
             columns: ["deal_id"]
@@ -161,6 +216,8 @@ export type Database = {
       }
       deals: {
         Row: {
+          active: boolean
+          business_id: string | null
           category: string
           city: string
           created_at: string
@@ -170,6 +227,8 @@ export type Database = {
           terms: string
         }
         Insert: {
+          active?: boolean
+          business_id?: string | null
           category?: string
           city?: string
           created_at?: string
@@ -179,6 +238,8 @@ export type Database = {
           terms?: string
         }
         Update: {
+          active?: boolean
+          business_id?: string | null
           category?: string
           city?: string
           created_at?: string
@@ -187,7 +248,15 @@ export type Database = {
           partner?: string
           terms?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "deals_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       event_registrations: {
         Row: {
@@ -357,6 +426,8 @@ export type Database = {
           full_name: string
           id: string
           member_code: string
+          membership_active: boolean
+          membership_expires: string | null
           phone: string
           student_number: string
           uni_email: string | null
@@ -372,6 +443,8 @@ export type Database = {
           full_name: string
           id: string
           member_code?: string
+          membership_active?: boolean
+          membership_expires?: string | null
           phone?: string
           student_number?: string
           uni_email?: string | null
@@ -387,6 +460,8 @@ export type Database = {
           full_name?: string
           id?: string
           member_code?: string
+          membership_active?: boolean
+          membership_expires?: string | null
           phone?: string
           student_number?: string
           uni_email?: string | null
@@ -418,12 +493,17 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      business_is_approved: { Args: { _business_id: string }; Returns: boolean }
       can_edit_content: { Args: { _user_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      owns_approved_business: {
+        Args: { _business_id: string; _user_id: string }
         Returns: boolean
       }
     }
