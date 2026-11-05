@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GraduationCap, ShoppingBag, Trash2, Pencil } from "lucide-react";
@@ -7,6 +7,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { statusLabels } from "@/lib/content";
 
 export const Route = createFileRoute("/_authenticated/contribute")({
+  validateSearch: (s: Record<string, unknown>): { kind: Kind } => ({
+    kind: s.kind === "products" ? "products" : "courses",
+  }),
   head: () => ({
     meta: [
       { title: "قدّم دورتك أو منتجك | تطبيق خدمات الطلاب" },
@@ -46,7 +49,9 @@ function useMySubmissions(kind: Kind) {
 }
 
 function Contribute() {
-  const [kind, setKind] = useState<Kind>("courses");
+  const { kind: initialKind } = Route.useSearch();
+  const [kind, setKind] = useState<Kind>(initialKind);
+  const navigate = useNavigate();
   const qc = useQueryClient();
   const { data: mine = [] } = useMySubmissions(kind);
   const [form, setForm] = useState<Record<string, any>>({});
@@ -81,7 +86,7 @@ function Contribute() {
     <AppShell title="قدّم دورتك أو منتجك">
       <div className="mb-4 flex gap-2">
         {(["courses", "products"] as Kind[]).map((k) => (
-          <button key={k} onClick={() => { setKind(k); setForm({}); setMsg(""); }} className={`flex flex-1 items-center justify-center gap-2 rounded-2xl py-3 font-bold ${kind === k ? "bg-primary text-primary-foreground" : "bg-card"}`}>
+          <button key={k} onClick={() => { setKind(k); setForm({}); setMsg(""); navigate({ to: "/contribute", search: { kind: k }, replace: true }); }} className={`flex flex-1 items-center justify-center gap-2 rounded-2xl py-3 font-bold ${kind === k ? "bg-primary text-primary-foreground" : "bg-card"}`}>
             {k === "courses" ? <GraduationCap className="h-5 w-5" /> : <ShoppingBag className="h-5 w-5" />}
             {k === "courses" ? "قدّم دورة" : "انشر منتجاً"}
           </button>
