@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Home, IdCard, GraduationCap, Tag, Sparkles } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
 import { UniversityLogo } from "@/components/UniversityLogo";
-import { useStudent } from "@/lib/profile";
+import { useIsStaff, useStudent } from "@/lib/profile";
 import logo from "@/assets/union-logo.png.asset.json";
 
 const tabs = [
@@ -16,6 +16,7 @@ const tabs = [
 
 export function AppShell({ title, children }: { title?: string; children: ReactNode }) {
   const student = useStudent();
+  const isStaff = useIsStaff();
   return (
     <div className="min-h-screen bg-muted">
       <header className="sticky top-0 z-20 border-b bg-background/90 backdrop-blur">
@@ -39,7 +40,7 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
           </nav>
           <div className="flex shrink-0 items-center gap-3">
             {title && <h1 className="font-display text-lg font-bold md:hidden">{title}</h1>}
-            <Link to="/admin" className="rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary">الإدارة</Link>
+            {isStaff && <Link to="/admin" className="rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary">الإدارة</Link>}
             <Link to="/profile" aria-label="ملفي الشخصي" title="ملفي الشخصي" className="relative shrink-0">
               <Avatar path={student.avatar} name={student.name} className="h-10 w-10" textClass="text-xs" />
               <UniversityLogo university={student.university} className="absolute -bottom-1 -left-1 h-5 w-5" />
