@@ -13,7 +13,7 @@ let centroids: Centroids | null = null;
 
 async function loadOutlines(): Promise<ProvinceOutlines> {
   if (!outlines) {
-    outlines = (await import("@/data/turkey-provinces.json")).default as ProvinceOutlines;
+    outlines = (await import("@/data/turkey-provinces.json")).default as unknown as ProvinceOutlines;
   }
   return outlines;
 }
@@ -28,9 +28,10 @@ async function loadCentroids(): Promise<Centroids> {
       let n = 0;
       for (const poly of polys) {
         for (const ring of poly) {
-          for (const [x, y] of ring) {
-            lng += x;
-            lat += y;
+          for (const pt of ring) {
+            if (!pt) continue;
+            lng += pt[1];
+            lat += pt[0];
             n++;
           }
         }
@@ -45,8 +46,13 @@ async function loadCentroids(): Promise<Centroids> {
 function inRing(lng: number, lat: number, ring: Array<[number, number]>) {
   let inside = false;
   for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const [xi, yi] = ring[i];
-    const [xj, yj] = ring[j];
+    const cur = ring[i];
+    const prev = ring[j];
+    if (!cur || !prev) continue;
+    const xi = cur[0];
+    const yi = cur[1];
+    const xj = prev[0];
+    const yj = prev[1];
     if (yi > lat !== yj > lat && lng < ((xj - xi) * (lat - yi)) / (yj - yi) + xi) {
       inside = !inside;
     }
