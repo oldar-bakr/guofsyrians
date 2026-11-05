@@ -136,7 +136,7 @@ describe("buildEventIcs", () => {
   it("wraps very long lines", () => {
     const ics = buildEventIcs({ id: "z", title: "T", description: "س".repeat(200), date: "2026-11-05", time: "" }, new Date(2026, 10, 1));
     const long = ics.split("\r\n").filter((l) => l.startsWith("DESCRIPTION"));
-    expect(long[0].length).toBeLessThanOrEqual(72);
+    expect((long[0] ?? "").length).toBeLessThanOrEqual(72);
     expect(ics).toContain("\r\n س");
   });
 });

@@ -168,7 +168,7 @@ export function eventDayBadge(date: Date): { day: string; month: string; weekday
   };
   return {
     day: fmt({ day: "2-digit" }),
-    month: AR_MONTH_LABELS[date.getMonth()],
+    month: AR_MONTH_LABELS[date.getMonth()] ?? fmt({ month: "long" }),
     weekday: fmt({ weekday: "long" }),
   };
 }
