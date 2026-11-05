@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { GraduationCap, IdCard, Tag, CalendarDays, ShoppingBag, Sparkles, Building2, Store } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { ContactLinks } from "@/components/ContactLinks";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({

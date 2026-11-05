@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, Phone, User } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
+import { ContactLinks } from "@/components/ContactLinks";
 import { useStudent } from "@/lib/profile";
 import { useContent } from "@/lib/content";
 

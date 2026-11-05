@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { CONTACT_SUMMARY } from "@/lib/contact";
 
 function lines(rows: any[] | null, fmt: (r: any) => string) {
   return (rows ?? []).map(fmt).join("\n");
