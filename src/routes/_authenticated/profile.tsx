@@ -88,7 +88,7 @@ function ProfilePage() {
     <AppShell title="ملفي">
       <div className="rounded-2xl bg-hero p-5 text-primary-foreground shadow-soft">
         <div className="flex items-center gap-4">
-          <Avatar path={p?.avatar_url} name={p?.full_name} className="h-16 w-16" textClass="text-lg" />
+          <Avatar path={p?.avatar_url} name={p?.full_name} university={p?.university} className="h-16 w-16" textClass="text-lg" />
           <div className="min-w-0">
             <h2 className="font-display text-xl font-bold">{p?.full_name}</h2>
             <p className="text-sm opacity-80">{p?.member_code}</p>

@@ -9,6 +9,7 @@ import { businessCategories, fetchMyBusiness, uploadLogo, BusinessLogo, statusLa
 import { lookupStudent, confirmDiscount, myRedemptions, type ScannedStudent } from "@/lib/business.functions";
 import { parseStudentQr } from "@/lib/membership";
 import { QrScanner } from "@/components/QrScanner";
+import { UniversityLogo } from "@/components/UniversityLogo";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/business")({
@@ -230,7 +231,7 @@ function ScanTab({ deals }: { deals: any[] }) {
         <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/40 p-4">
           <div className="w-full max-w-sm space-y-4 rounded-3xl bg-card p-6 text-center shadow-soft">
             <button onClick={() => setStudent(null)} aria-label="إغلاق" className="float-left"><X className="h-5 w-5" /></button>
-            {student.avatarUrl ? <img src={student.avatarUrl} alt={student.name} className="mx-auto h-24 w-24 rounded-full object-cover" /> : <span className="mx-auto grid h-24 w-24 place-items-center rounded-full bg-secondary font-display text-3xl font-bold text-primary">{student.name.slice(0, 1)}</span>}
+            <div className="relative mx-auto w-fit">{student.avatarUrl ? <img src={student.avatarUrl} alt={student.name} className="h-24 w-24 rounded-full object-cover" /> : <span className="grid h-24 w-24 place-items-center rounded-full bg-secondary font-display text-3xl font-bold text-primary">{student.name.slice(0, 1)}</span>}<UniversityLogo university={student.university} className="absolute -bottom-1 -left-1 h-9 w-9" /></div>
             <div>
               <p className="font-display text-xl font-bold">{student.name}</p>
               <p className="text-sm text-muted-foreground">{student.university}{student.faculty && ` · ${student.faculty}`}</p>

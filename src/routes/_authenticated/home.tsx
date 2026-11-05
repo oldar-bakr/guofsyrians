@@ -33,7 +33,7 @@ function Index() {
     <AppShell>
       <section className="bg-hero rounded-3xl p-6 text-primary-foreground shadow-soft">
         <div className="flex items-center gap-3">
-          <Avatar path={student.avatar} name={student.name} className="h-12 w-12" />
+          <Avatar path={student.avatar} name={student.name} university={student.university} className="h-12 w-12" />
           <div className="min-w-0">
             <p className="text-sm opacity-80">مرحباً،</p>
             <h2 className="font-display text-2xl font-bold">{student.name}</h2>

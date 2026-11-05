@@ -78,7 +78,7 @@ export function UsersManager({ myId }: { myId: string }) {
                 <tr key={u.id} className="border-t">
                   <td className="px-4 py-3">
                     <button type="button" onClick={() => setOpen(u)} title="عرض وتعديل البيانات" className="flex items-center gap-2 text-right hover:opacity-80">
-                      <Avatar path={u.avatarUrl} name={u.fullName} className="h-9 w-9" textClass="text-xs" />
+                      <Avatar path={u.avatarUrl} name={u.fullName} university={u.university} className="h-9 w-9" textClass="text-xs" />
                       <div className="min-w-0">
                         <p className="font-bold underline-offset-2 hover:underline">{u.fullName || "— لم يكمل بياناته —"}{me && <span className="mr-2 text-xs text-primary">(أنت)</span>}{u.isOwner && <span className="mr-2 rounded-full bg-accent px-2 text-xs text-accent-foreground">المالك</span>}</p>
                         <p className="text-xs text-muted-foreground">{u.email}{u.phone && ` · ${u.phone}`}</p>
