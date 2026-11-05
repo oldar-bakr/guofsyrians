@@ -4,7 +4,7 @@ import { AppShell } from "@/components/AppShell";
 import { useStudent } from "@/lib/profile";
 import { useContent } from "@/lib/content";
 
-export const Route = createFileRoute("/_authenticated/")({
+export const Route = createFileRoute("/_authenticated/home")({
   head: () => ({
     meta: [
       { title: "الرئيسية | تطبيق خدمات الطلاب" },
