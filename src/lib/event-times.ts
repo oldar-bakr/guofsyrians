@@ -127,12 +127,19 @@ export function parseEventDate(date: string, time = ""): ParsedEvent | null {
     // "5/11" already passed this year -> the student means next year.
     if (mo < 1 || mo > 12 || d < 1 || d > 31 || new Date(y, mo - 1, d).getTime() < now.getTime() - 86400000) y += 1;
   } else {
-    const parsed = new Date(raw);
-    if (!Number.isNaN(parsed.getTime())) {
-      const t = timeToMinutes(time);
-      return { start: t ? new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate(), t.hour, t.minute) : parsed, hasTime: !!t };
+    const named = parseMonthNameDate(raw);
+    if (named) {
+      y = named.y;
+      mo = named.mo;
+      d = named.d;
+    } else {
+      const parsed = new Date(raw);
+      if (!Number.isNaN(parsed.getTime())) {
+        const t = timeToMinutes(time);
+        return { start: t ? new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate(), t.hour, t.minute) : parsed, hasTime: !!t };
+      }
+      return null;
     }
-    return null;
   }
 
   if (!y || !mo || !d || mo < 1 || mo > 12 || d < 1 || d > 31) return null;
