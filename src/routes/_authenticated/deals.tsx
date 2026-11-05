@@ -49,11 +49,11 @@ function Deals() {
       <div className="grid gap-3 md:grid-cols-2">
         {list.map((d: any) => (
           <article key={d.id} className="flex items-center gap-4 rounded-2xl bg-card p-4 shadow-soft">
-            {shop(d) ? <BusinessLogo path={shop(d).logo_url} name={d.partner} className="h-16 w-16" /> : <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-accent font-display text-xl font-bold text-accent-foreground">{d.discount}</span>}
+            {shop(d) ? <BusinessLogo path={shop(d)?.logo_url} name={d.partner} className="h-16 w-16" /> : <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-accent font-display text-xl font-bold text-accent-foreground">{d.discount}</span>}
             <div className="flex-1">
               <h3 className="font-bold">{d.partner}{shop(d) && <span className="mr-2 rounded-full bg-accent px-2 py-0.5 text-xs text-accent-foreground">{d.discount}</span>}</h3>
               <p className="text-xs text-muted-foreground">{d.category} · {d.terms}</p>
-              <p className="mt-1 flex items-center gap-1 text-xs text-primary"><MapPin className="h-3 w-3" />{d.city}{shop(d)?.address && ` · ${shop(d).address}`}</p>
+              <p className="mt-1 flex items-center gap-1 text-xs text-primary"><MapPin className="h-3 w-3" />{d.city}{shop(d)?.address && ` · ${shop(d)?.address}`}</p>
             </div>
             <button onClick={() => use(d)} className="rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground">استخدم العرض</button>
           </article>
