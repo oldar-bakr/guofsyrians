@@ -71,6 +71,13 @@
       "when": 1793869694519,
       "tag": "0009_businesses_and_membership",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1793875245968,
+      "tag": "0010_student_submissions",
+      "breakpoints": true
     }
   ]
 }
