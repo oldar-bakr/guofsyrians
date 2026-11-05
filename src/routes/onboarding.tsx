@@ -1,8 +1,9 @@
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { CityUniversitySelect } from "@/components/CityUniversitySelect";
+import { AvatarUpload } from "@/components/AvatarUpload";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/onboarding")({
@@ -39,6 +40,11 @@ function Onboarding() {
   const [form, setForm] = useState<Record<string, string>>({ full_name: fullName });
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [uid, setUid] = useState("");
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUid(data.user?.id ?? ""));
+  }, []);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,6 +62,7 @@ function Onboarding() {
       department: (form["department"] ?? "").trim(),
       student_number: (form["student_number"] ?? "").trim(),
       uni_email: (form["uni_email"] ?? "").trim(),
+      avatar_url: (form["avatar_url"] ?? "").trim() || null,
     });
     setBusy(false);
     if (error) return setError("تعذّر حفظ البيانات، حاول مرة أخرى");
@@ -72,6 +79,11 @@ function Onboarding() {
           <p className="mt-1 text-sm text-muted-foreground">نحتاج بياناتك الطلابية الحقيقية لإصدار بطاقة العضوية</p>
         </div>
         <CityUniversitySelect required city={form["city"] ?? ""} university={form["university"] ?? ""} faculty={form["faculty"] ?? ""} department={form["department"] ?? ""} onChange={(v) => setForm({ ...form, ...v })} className="mt-1 w-full rounded-xl border bg-background px-4 py-2 disabled:opacity-60" />
+        {uid && (
+          <div className="rounded-2xl border bg-background/60 p-3">
+            <AvatarUpload userId={uid} value={form["avatar_url"]} name={form["full_name"]} onChange={(path) => setForm((f) => ({ ...f, avatar_url: path ?? "" }))} />
+          </div>
+        )}
         {fields.map((f) => (
           <label key={f.key} className="block text-sm">
             {f.label}{f.required && <span className="text-destructive"> *</span>}

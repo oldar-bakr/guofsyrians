@@ -50,6 +50,13 @@
       "when": 1793865256402,
       "tag": "0006_add_department_to_profiles",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793865571132,
+      "tag": "0007_add_avatar_to_profiles_and_storage_policies",
+      "breakpoints": true
     }
   ]
 }

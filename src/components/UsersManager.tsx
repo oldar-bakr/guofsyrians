@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { Ban, CheckCircle2, Trash2 } from "lucide-react";
+import { Avatar } from "@/components/Avatar";
 import { listUsers, setUserRole, setUserBlocked, deleteUser, type ManagedRole } from "@/lib/users.functions";
 
 const roleLabels: Record<ManagedRole, string> = { admin: "مدير", editor: "محرر", user: "طالب" };
@@ -72,8 +73,13 @@ export function UsersManager({ myId }: { myId: string }) {
               return (
                 <tr key={u.id} className="border-t">
                   <td className="px-4 py-3">
-                    <p className="font-bold">{u.fullName || "— لم يكمل بياناته —"}{me && <span className="mr-2 text-xs text-primary">(أنت)</span>}{u.isOwner && <span className="mr-2 rounded-full bg-accent px-2 text-xs text-accent-foreground">المالك</span>}</p>
-                    <p className="text-xs text-muted-foreground">{u.email}{u.phone && ` · ${u.phone}`}</p>
+                    <div className="flex items-center gap-2">
+                      <Avatar path={u.avatarUrl} name={u.fullName} className="h-9 w-9" textClass="text-xs" />
+                      <div className="min-w-0">
+                        <p className="font-bold">{u.fullName || "— لم يكمل بياناته —"}{me && <span className="mr-2 text-xs text-primary">(أنت)</span>}{u.isOwner && <span className="mr-2 rounded-full bg-accent px-2 text-xs text-accent-foreground">المالك</span>}</p>
+                        <p className="text-xs text-muted-foreground">{u.email}{u.phone && ` · ${u.phone}`}</p>
+                      </div>
+                    </div>
                   </td>
                   <td className="px-4 py-3">{u.university}{u.city && <span className="block text-xs text-muted-foreground">{u.city}</span>}</td>
                   <td className="px-4 py-3">{u.provider === "google" ? "Google" : "البريد"}</td>

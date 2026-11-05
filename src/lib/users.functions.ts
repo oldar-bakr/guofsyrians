@@ -15,6 +15,7 @@ export type ManagedUser = {
   phone: string;
   university: string;
   city: string;
+  avatarUrl: string | null;
 };
 
 // The app owner's account can never be demoted, blocked or deleted.
@@ -37,7 +38,7 @@ export const listUsers = createServerFn({ method: "POST" })
     const { data, error } = await supabaseAdmin.auth.admin.listUsers({ perPage: 1000 });
     if (error) throw new Error("تعذّر تحميل المستخدمين");
     const { data: roles } = await supabaseAdmin.from("user_roles").select("user_id, role");
-    const { data: profiles } = await supabaseAdmin.from("profiles").select("id, full_name, phone, university, city");
+    const { data: profiles } = await supabaseAdmin.from("profiles").select("id, full_name, phone, university, city, avatar_url");
     const rank = { admin: 3, editor: 2, user: 1 } as const;
     return data.users.map((u) => {
       const mine = (roles ?? []).filter((r) => r.user_id === u.id).map((r) => r.role as ManagedRole);
@@ -56,6 +57,7 @@ export const listUsers = createServerFn({ method: "POST" })
         phone: p?.phone ?? "",
         university: p?.university ?? "",
         city: p?.city ?? "",
+        avatarUrl: p?.avatar_url ?? null,
       };
     });
   });
