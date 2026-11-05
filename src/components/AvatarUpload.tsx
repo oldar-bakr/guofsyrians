@@ -5,8 +5,8 @@ import { uploadAvatarFile } from "@/lib/avatar";
 
 type Props = {
   userId: string;
-  value?: string | null;
-  name?: string | null;
+  value?: string | null | undefined;
+  name?: string | null | undefined;
   onChange: (path: string | null) => void;
   label?: string;
   hint?: string;

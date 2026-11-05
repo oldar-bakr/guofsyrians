@@ -2,8 +2,8 @@ import { User } from "lucide-react";
 import { useAvatarUrl } from "@/lib/avatar";
 
 type Props = {
-  path?: string | null;
-  name?: string | null;
+  path?: string | null | undefined;
+  name?: string | null | undefined;
   className?: string;
   textClass?: string;
 };
