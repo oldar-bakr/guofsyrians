@@ -1,0 +1,1 @@
+ALTER TABLE public.courses ADD COLUMN IF NOT EXISTS lesson_videos text[] NOT NULL DEFAULT '{}';

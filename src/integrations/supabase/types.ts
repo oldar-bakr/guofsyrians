@@ -153,6 +153,7 @@ export type Database = {
           description: string
           id: string
           instructor: string
+          lesson_videos: string[]
           lessons: number
           status: string
           submitted_by: string | null
@@ -166,6 +167,7 @@ export type Database = {
           description?: string
           id?: string
           instructor?: string
+          lesson_videos?: string[]
           lessons?: number
           status?: string
           submitted_by?: string | null
@@ -179,6 +181,7 @@ export type Database = {
           description?: string
           id?: string
           instructor?: string
+          lesson_videos?: string[]
           lessons?: number
           status?: string
           submitted_by?: string | null
