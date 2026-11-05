@@ -78,6 +78,13 @@
       "when": 1793875245968,
       "tag": "0010_student_submissions",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1793877118921,
+      "tag": "0011_course_lesson_videos",
+      "breakpoints": true
     }
   ]
 }
