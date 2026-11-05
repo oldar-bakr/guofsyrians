@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Pencil, Trash2, Plus, LogOut, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { LessonVideosInput } from "@/components/ContributeForm";
 import { sections, statusLabels, useContent, type ContentTable } from "@/lib/content";
 import { ActivityManager } from "@/components/ActivityManager";
 import { UsersManager } from "@/components/UsersManager";
@@ -109,6 +110,9 @@ function SectionManager({ table }: { table: ContentTable }) {
   const { data = [], isLoading } = useContent(table);
   const [editing, setEditing] = useState<Record<string, any> | null>(null);
   const [error, setError] = useState("");
+  const hasReview = table === "courses" || table === "products";
+  const pending = hasReview ? data.filter((r: any) => r["status"] === "pending") : [];
+  const rows = hasReview ? data.filter((r: any) => r["status"] !== "pending") : data;
 
   const refresh = () => qc.invalidateQueries({ queryKey: ["content", table] });
 
@@ -116,6 +120,10 @@ function SectionManager({ table }: { table: ContentTable }) {
     setError("");
     const payload: Record<string, any> = {};
     fields.forEach((f) => (payload[f.key] = f.type === "number" ? Number(row[f.key] || 0) : f.type === "status" ? row[f.key] || "approved" : row[f.key] ?? ""));
+    if (table === "courses") {
+      const n = Math.max(0, Math.min(100, Math.floor(payload["lessons"] || 0)));
+      payload["lesson_videos"] = Array.from({ length: n }, (_, i) => (row["lesson_videos"] ?? [])[i]?.trim() ?? "");
+    }
     const { error } = row["id"]
       ? await supabase.from(table).update(payload as never).eq("id", row["id"])
       : await supabase.from(table).insert(payload as never);
@@ -138,6 +146,27 @@ function SectionManager({ table }: { table: ContentTable }) {
         <button onClick={() => setEditing({})} className="flex items-center gap-1 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-primary-foreground"><Plus className="h-4 w-4" />إضافة</button>
       </div>
       {error && <p className="mb-3 rounded-xl bg-destructive/10 p-3 text-sm text-destructive">{error}</p>}
+      {(table === "courses" || table === "products") && pending.length > 0 && (
+        <div className="mb-6 rounded-2xl border-2 border-accent bg-accent/10 p-4">
+          <h3 className="mb-3 font-display text-lg font-bold">بحاجة إلى موافقة <span className="text-sm text-muted-foreground">({pending.length})</span></h3>
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {pending.map((row: any) => (
+              <div key={row["id"]} className="flex flex-col gap-2 rounded-2xl bg-card p-4 shadow-soft">
+                <p className="font-bold">{row[fields[0]!.key]}</p>
+                <p className="text-xs text-muted-foreground">
+                  {table === "courses" ? `${row["category"] || "بدون تصنيف"} · ${row["lessons"] ?? 0} دروس · ${row["instructor"] || ""}` : `${row["price"] || ""} · ${row["seller"] || ""}`}
+                </p>
+                {row["description"] && <p className="line-clamp-3 text-sm">{row["description"]}</p>}
+                <div className="mt-auto flex gap-2 pt-2">
+                  <button onClick={() => save({ ...row, status: "approved" })} className="flex-1 rounded-xl bg-primary py-1.5 text-sm font-bold text-primary-foreground">موافقة</button>
+                  <button onClick={() => save({ ...row, status: "rejected" })} className="flex-1 rounded-xl border border-destructive py-1.5 text-sm text-destructive">رفض</button>
+                  <button aria-label="تعديل" onClick={() => setEditing(row)} className="rounded-xl border px-3 text-primary"><Pencil className="h-4 w-4" /></button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="overflow-x-auto rounded-2xl bg-card shadow-soft">
         <table className="w-full text-sm">
           <thead className="bg-secondary text-right">
@@ -145,7 +174,7 @@ function SectionManager({ table }: { table: ContentTable }) {
           </thead>
           <tbody>
             {isLoading && <tr><td className="p-4" colSpan={fields.length + 1}>جارٍ التحميل...</td></tr>}
-            {data.map((row: any) => (
+            {rows.map((row: any) => (
               <tr key={row["id"]} className="border-t">
                 {fields.filter((f) => !f.hideInTable).map((f) => <td key={f.key} className="px-4 py-3">{f.type === "status" ? <span className={`rounded-full px-2 py-0.5 text-xs ${row[f.key] === "pending" ? "bg-accent text-accent-foreground" : row[f.key] === "rejected" ? "bg-destructive/10 text-destructive" : "bg-secondary text-primary"}`}>{statusLabels[row[f.key]] ?? row[f.key]}{row["submitted_by"] ? " · من طالب" : ""}</span> : row[f.key]}</td>)}
                 <td className="px-4 py-3">
@@ -197,6 +226,9 @@ function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row:
             )}
           </label>
         ))}
+        {table === "courses" && (
+          <LessonVideosInput count={Number(form["lessons"]) || 0} value={form["lesson_videos"] ?? []} onChange={(v) => setForm({ ...form, lesson_videos: v })} />
+        )}
         <button className="w-full rounded-xl bg-primary py-2 font-bold text-primary-foreground">حفظ</button>
       </form>
     </div>
