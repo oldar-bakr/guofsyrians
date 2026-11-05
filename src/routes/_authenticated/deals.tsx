@@ -6,6 +6,7 @@ import { AppShell } from "@/components/AppShell";
 import { useContent } from "@/lib/content";
 import { useActivityActions } from "@/lib/activity";
 import { useStudent } from "@/lib/profile";
+import { sameCity } from "@/lib/city-match";
 
 export const Route = createFileRoute("/_authenticated/deals")({
   head: () => ({
@@ -23,9 +24,13 @@ function Deals() {
   const { data: deals = [] } = useContent<any>("deals");
   const actions = useActivityActions("deal_redemptions");
   const student = useStudent();
-  const [city, setCity] = useState("الكل");
+  const [picked, setPicked] = useState<string | null>(null);
   const [active, setActive] = useState<any | null>(null);
   const cities = ["الكل", ...Array.from(new Set(deals.map((d: any) => d.city).filter(Boolean)))] as string[];
+  // Default to the student's own city when deals exist there.
+  const mine = cities.find((c) => c !== "الكل" && sameCity(c, student.city));
+  const city = picked ?? mine ?? "الكل";
+  const setCity = setPicked;
   const list = deals.filter((d: any) => city === "الكل" || d.city === city);
 
   const use = async (d: any) => {
