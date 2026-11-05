@@ -31,8 +31,8 @@ export const detectCity = createServerFn({ method: "POST" })
     return d;
   })
   .handler(async ({ data }) => {
-    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
-    const lovableKey = process.env.LOVABLE_API_KEY;
+    const apiKey = process.env["GOOGLE_MAPS_API_KEY"];
+    const lovableKey = process.env["LOVABLE_API_KEY"];
     if (!apiKey || !lovableKey) throw new Error("خدمة تحديد الموقع غير مهيأة");
 
     const url = `${GATEWAY_URL}/maps/api/geocode/json?latlng=${data.lat},${data.lng}&language=tr&result_type=administrative_area_level_1|locality`;
