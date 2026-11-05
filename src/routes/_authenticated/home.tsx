@@ -40,7 +40,7 @@ function Index() {
       </section>
 
       <h3 className="mb-3 mt-7 font-display text-lg font-bold">الخدمات</h3>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
         {services.map(({ to, label, icon: Icon }) => (
           <Link key={to} to={to} className="flex flex-col items-center gap-2 rounded-2xl bg-card p-4 text-center text-sm shadow-soft">
             <span className="grid h-11 w-11 place-items-center rounded-full bg-secondary text-primary"><Icon className="h-5 w-5" /></span>

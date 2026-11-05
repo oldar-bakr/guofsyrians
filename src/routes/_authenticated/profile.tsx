@@ -72,7 +72,7 @@ function ProfilePage() {
         <h2 className="font-display text-xl font-bold">{p?.full_name}</h2>
         <p className="text-sm opacity-80">{p?.member_code}</p>
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-3">
+      <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3">
         {stats.map((s) => (
           <Link key={s.label} to={s.to} className="rounded-2xl bg-card p-3 text-center shadow-soft">
             <p className="font-display text-2xl font-bold text-primary">{s.n}</p>
