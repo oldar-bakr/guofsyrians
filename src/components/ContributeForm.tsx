@@ -54,10 +54,25 @@ function useMySubmissions(kind: ContributeKind) {
 export function ContributeForm({ kind }: { kind: ContributeKind }) {
   const qc = useQueryClient();
   const { data: mine = [] } = useMySubmissions(kind);
+  const { data: profile } = useMyProfile();
   const [form, setForm] = useState<Record<string, any>>({});
   const [msg, setMsg] = useState("");
   const def = defs[kind];
   const titleKey = def.fields[0]!.key;
+  const nameKey = kind === "courses" ? "instructor" : "seller";
+
+  // Prefill name + contact from the student's profile for new submissions.
+  useEffect(() => {
+    if (!profile || form["id"]) return;
+    setForm((f) => {
+      if (Object.keys(f).length > 0) return f;
+      return {
+        [nameKey]: profile.full_name ?? "",
+        contact: profile.phone || profile.uni_email || "",
+      };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profile]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
