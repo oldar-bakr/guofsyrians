@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
 import { useMyProfile } from "@/lib/profile";
+import { CityUniversitySelect } from "@/components/CityUniversitySelect";
 import { useMine } from "@/lib/activity";
 
 export const Route = createFileRoute("/_authenticated/profile")({
@@ -82,12 +83,13 @@ function ProfilePage() {
       </div>
       <form onSubmit={save} className="mt-4 space-y-3 rounded-2xl bg-card p-4">
         <h3 className="font-bold">بياناتي الطلابية</h3>
-        {fields.map((f) => (
+        {fields.filter((f) => f.key !== "city" && f.key !== "university").map((f) => (
           <label key={f.key} className="block text-sm">
             <span className="mb-1 block text-muted-foreground">{f.label}</span>
             <input value={form[f.key] ?? ""} onChange={(e) => setForm({ ...form, [f.key]: e.target.value })} className="w-full rounded-xl border bg-background px-3 py-2" />
           </label>
         ))}
+        <CityUniversitySelect city={form["city"] ?? ""} university={form["university"] ?? ""} onChange={(v) => setForm({ ...form, ...v })} labelClassName="mb-1 block text-muted-foreground" className="w-full rounded-xl border bg-background px-3 py-2 disabled:opacity-60" />
         {msg && <p className="text-sm text-primary">{msg}</p>}
         <button className="w-full rounded-xl bg-primary py-2 font-bold text-primary-foreground">حفظ التعديلات</button>
       </form>
