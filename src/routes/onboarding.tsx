@@ -2,6 +2,7 @@ import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { CityUniversitySelect } from "@/components/CityUniversitySelect";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/onboarding")({
@@ -27,8 +28,6 @@ export const Route = createFileRoute("/onboarding")({
 const fields = [
   { key: "full_name", label: "الاسم الكامل", required: true },
   { key: "phone", label: "رقم الهاتف", required: true, type: "tel" },
-  { key: "city", label: "المدينة", required: true },
-  { key: "university", label: "الجامعة", required: true },
   { key: "faculty", label: "الكلية / التخصص", required: true },
   { key: "student_number", label: "الرقم الجامعي", required: false },
 ] as const;
@@ -70,6 +69,7 @@ function Onboarding() {
           <h1 className="font-display text-2xl font-bold">أهلاً بك! أكمل بياناتك</h1>
           <p className="mt-1 text-sm text-muted-foreground">نحتاج بياناتك الطلابية الحقيقية لإصدار بطاقة العضوية</p>
         </div>
+        <CityUniversitySelect required city={form["city"] ?? ""} university={form["university"] ?? ""} onChange={(v) => setForm({ ...form, ...v })} className="mt-1 w-full rounded-xl border bg-background px-4 py-2 disabled:opacity-60" />
         {fields.map((f) => (
           <label key={f.key} className="block text-sm">
             {f.label}{f.required && <span className="text-destructive"> *</span>}
