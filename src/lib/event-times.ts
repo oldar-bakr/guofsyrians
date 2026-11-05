@@ -28,8 +28,7 @@ export function normalizeDigits(input: string): string {
   return out;
 }
 
-function timeToMinutes(time: string): { hour: number; minute: number } | null {
-  const t = normalizeDigits(time || "").toLowerCase();
+function timeToMinutes(time: string): { hour: number; minute: number } | null {  const t = normalizeDigits(time || "").toLowerCase();
   const m = t.match(/(\d{1,2})[:.](\d{2})/);
   if (!m) return null;
   let hour = Number(m[1]);
