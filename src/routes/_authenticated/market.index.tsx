@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ShoppingBag, Minus, Plus } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { useContent } from "@/lib/content";
+import { useContent, approvedOnly } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
 export const Route = createFileRoute("/_authenticated/market/")({
@@ -18,7 +18,8 @@ export const Route = createFileRoute("/_authenticated/market/")({
 });
 
 function Market() {
-  const { data: products = [] } = useContent<any>("products");
+  const { data: allproducts = [] } = useContent<any>("products");
+  const products = approvedOnly(allproducts);
   const { data: orders = [] } = useMine<any>("orders");
   const actions = useActivityActions("orders");
   const [cart, setCart] = useState<Record<string, number>>({});

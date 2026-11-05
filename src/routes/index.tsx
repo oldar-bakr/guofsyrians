@@ -110,6 +110,17 @@ function Landing() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-6xl px-5 pt-14">
+        <div className="flex flex-col items-center gap-4 rounded-3xl border-2 border-primary bg-card p-8 text-center shadow-soft md:flex-row md:text-right">
+          <GraduationCap className="h-12 w-12 shrink-0 text-primary" />
+          <div className="flex-1">
+            <h2 className="font-display text-2xl font-bold">قدّم دورتك أو منتجك</h2>
+            <p className="mt-1 text-sm text-muted-foreground">لديك مهارة تعلّمها أو منتج تبيعه؟ قدّمه لطلاب الاتحاد، وننشره بعد مراجعة الإدارة.</p>
+          </div>
+          <Link to="/auth" className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground shadow-soft">سجّل وقدّم الآن</Link>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-6xl px-5 py-14">
         <div className="flex flex-col items-center gap-4 rounded-3xl border-2 border-accent bg-card p-8 text-center shadow-soft md:flex-row md:text-right">
           <Store className="h-12 w-12 shrink-0 text-primary" />
