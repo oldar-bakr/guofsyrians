@@ -1,12 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowUpLeft, Check, Copy, GraduationCap, MapPin, Plus, RotateCcw, Send, Sparkles, Tag, CalendarDays } from "lucide-react";
+import { Check, Copy, Plus, RotateCcw, ArrowUp, Sparkles } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { Avatar } from "@/components/Avatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useContent } from "@/lib/content";
 import { askAssistant } from "@/lib/assistant.functions";
 import { useStudent } from "@/lib/profile";
 import logo from "@/assets/union-logo.png.asset.json";
@@ -30,7 +29,6 @@ type Msg = { from: "me" | "bot"; text: string; error?: boolean; question?: strin
 function Assistant() {
   const ask = useServerFn(askAssistant);
   const student = useStudent();
-  const { data: faqs = [] } = useContent<{ id: string; question: string }>("faqs");
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
@@ -46,13 +44,6 @@ function Assistant() {
   }, [msgs, busy]);
 
   useEffect(() => () => { if (copyTimer.current) clearTimeout(copyTimer.current); }, []);
-
-  const suggestions = [
-    { title: "دورة جديدة، مهارة جديدة", label: "الدورات", icon: GraduationCap, question: "ما الدورات المتاحة حالياً؟" },
-    { title: "تخفيضات في مدينتك", label: "التخفيضات", icon: Tag, question: `ما التخفيضات المتاحة${student.city ? ` في ${student.city}` : ""}؟` },
-    { title: "ما الفعالية القادمة؟", label: "الفعاليات", icon: CalendarDays, question: "ما الفعاليات القادمة ومواعيدها؟" },
-    { title: "تواصل مع فرع الاتحاد", label: "الفروع", icon: MapPin, question: `كيف أتواصل مع فرع الاتحاد${student.university ? ` في ${student.university}` : ""}؟` },
-  ];
 
   const send = async (q: string) => {
     const question = q.trim();
@@ -86,34 +77,19 @@ function Assistant() {
 
   return (
     <AppShell title="المساعد الذكي">
-      <section className="flex h-[calc(100dvh-11rem)] min-h-[440px] flex-col md:h-[calc(100dvh-8rem)]" aria-label="المساعد الذكي">
-        <div className="flex shrink-0 items-center justify-between gap-3 border-b pb-4">
-          <div className="flex min-w-0 items-center gap-3">
-            <div className="grid size-10 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground"><Sparkles className="size-5" /></div>
-            <div><h1 className="font-display text-lg font-bold">المساعد الذكي</h1><p className="text-xs text-muted-foreground">الاتحاد العام لطلبة سوريا</p></div>
-          </div>
-          <Button variant="ghost" size="sm" disabled={busy || msgs.length === 0} onClick={() => { setMsgs([]); setCopied(null); setCopyError(false); input.current?.focus(); }} title="محادثة جديدة" aria-label="محادثة جديدة" className="shrink-0 text-muted-foreground"><Plus /><span className="hidden sm:inline">محادثة جديدة</span></Button>
+      <section className="mx-auto flex h-[calc(100dvh-11rem)] min-h-[320px] max-w-3xl flex-col md:h-[calc(100dvh-8rem)]" aria-label="المساعد الذكي">
+        <div className="flex h-10 shrink-0 items-center justify-between gap-3">
+          <h1 className="hidden text-sm font-medium text-muted-foreground md:block">المساعد الذكي</h1>
+          {msgs.length > 0 && <Button variant="ghost" size="icon" disabled={busy} onClick={() => { setMsgs([]); setCopied(null); setCopyError(false); input.current?.focus(); }} title="محادثة جديدة" aria-label="محادثة جديدة" className="ms-auto text-muted-foreground"><Plus /></Button>}
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-6" role="log" aria-label="المحادثة" aria-live="polite" aria-relevant="additions" aria-busy={busy}>
           {msgs.length === 0 ? (
-            <div className="mx-auto flex min-h-full max-w-2xl flex-col justify-center px-1 py-3">
-              <div className="mb-7 text-center">
-                <img src={logo.url} alt="شعار الاتحاد" className="mx-auto mb-5 size-20 object-contain" />
-                <p className="mb-2 text-sm text-muted-foreground">أهلاً{student.name ? `، ${student.name.split(" ")[0]}` : " بك"}</p>
-                <h2 className="font-display text-2xl font-bold text-primary sm:text-3xl">كيف أقدر أساعدك اليوم؟</h2>
+            <div className="flex min-h-full flex-col items-center justify-center px-2 pb-12 text-center">
+              <Sparkles className="mb-5 size-7 text-primary" strokeWidth={1.5} />
+              <h2 className="font-display text-2xl font-bold text-primary">كيف أقدر أساعدك اليوم؟</h2>
+              <p className="mt-3 text-sm text-muted-foreground">أهلاً{student.name ? `، ${student.name.split(" ")[0]}` : " بك"}</p>
               </div>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {suggestions.map(({ title, label, icon: Icon, question }, i) => (
-                  <Button key={label} variant="outline" onClick={() => void send(question)} className="group h-auto min-h-24 justify-start gap-3 whitespace-normal rounded-lg bg-card p-4 text-start shadow-none hover:bg-secondary">
-                    <span className={`grid size-10 shrink-0 place-items-center rounded-lg ${i % 2 === 0 ? "bg-secondary text-primary" : "bg-accent/20 text-accent-foreground"}`}><Icon className="size-5" /></span>
-                    <span className="min-w-0 flex-1"><span className="mb-1 block text-xs text-muted-foreground">{label}</span><span className="block text-sm font-bold">{title}</span></span>
-                    <ArrowUpLeft className="text-muted-foreground transition-transform group-hover:-translate-x-0.5 motion-reduce:transform-none" />
-                  </Button>
-                ))}
-              </div>
-              {faqs.length > 0 && <div className="mt-6"><p className="mb-2 text-center text-xs text-muted-foreground">أسئلة شائعة</p><div className="flex flex-wrap justify-center gap-2">{faqs.slice(0, 3).map((f) => <Button key={f.id} variant="ghost" size="sm" onClick={() => void send(f.question)} className="h-auto max-w-full whitespace-normal border py-2 text-start text-xs text-muted-foreground">{f.question}</Button>)}</div></div>}
-            </div>
           ) : (
             <div className="mx-auto max-w-3xl space-y-6 px-1">
               {msgs.map((m, i) => (
@@ -121,7 +97,7 @@ function Assistant() {
                   {m.from === "me" ? <Avatar path={student.avatar} name={student.name} university={student.university} className="size-8" textClass="text-xs" /> : <img src={logo.url} alt="المساعد" className="size-8 shrink-0 object-contain" />}
                   <div className={`min-w-0 max-w-[85%] ${m.from === "me" ? "text-end" : ""}`}>
                     <p className="mb-1.5 text-xs text-muted-foreground">{m.from === "me" ? "أنت" : "مساعد الاتحاد"}</p>
-                    <div className={`whitespace-pre-wrap break-words rounded-lg px-4 py-3 text-start text-sm leading-7 ${m.from === "me" ? "bg-primary text-primary-foreground" : m.error ? "border border-destructive/25 bg-destructive/5 text-destructive" : "bg-card"}`}>{m.text}</div>
+                    <div className={`whitespace-pre-wrap break-words rounded-lg text-start text-sm leading-7 ${m.from === "me" ? "bg-secondary px-4 py-3 text-secondary-foreground" : m.error ? "text-destructive" : "text-foreground"}`}>{m.text}</div>
                     {m.from === "bot" && <div className="mt-1 flex items-center gap-1">{m.error ? <Button size="sm" variant="ghost" disabled={busy} onClick={() => { if (m.question) void send(m.question); }} className="text-xs text-muted-foreground"><RotateCcw />حاول مجدداً</Button> : <Button variant="ghost" size="icon" aria-label={copied === i ? "تم نسخ الإجابة" : "نسخ الإجابة"} title={copied === i ? "تم نسخ الإجابة" : "نسخ الإجابة"} onClick={() => void copy(m.text, i)} className="size-8 text-muted-foreground">{copied === i ? <Check /> : <Copy />}</Button>}</div>}
                   </div>
                 </div>
@@ -133,11 +109,11 @@ function Assistant() {
         </div>
 
         <div className="shrink-0 pt-3">
-          <form onSubmit={(e) => { e.preventDefault(); void send(text); }} className="mx-auto flex max-w-3xl items-end gap-3 rounded-lg border bg-card p-2 shadow-soft focus-within:border-ring focus-within:ring-1 focus-within:ring-ring">
-            <Textarea ref={input} value={text} onChange={(e) => setText(e.target.value)} maxLength={1000} rows={2} aria-label="سؤالك للمساعد" placeholder="اكتب سؤالك هنا..." onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); void send(text); } }} className="max-h-36 min-h-14 resize-none border-0 bg-transparent shadow-none focus-visible:ring-0" />
-            <Button type="submit" size="icon" disabled={busy || !text.trim()} aria-label="إرسال" title="إرسال" className="mb-1 size-10 shrink-0 rounded-lg"><Send className="-scale-x-100" /></Button>
+          <form onSubmit={(e) => { e.preventDefault(); void send(text); }} className="flex items-end gap-2 rounded-2xl border bg-card p-2 focus-within:border-ring">
+            <Textarea ref={input} value={text} onChange={(e) => setText(e.target.value)} maxLength={1000} rows={1} aria-label="سؤالك للمساعد" placeholder="اكتب سؤالك..." onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); void send(text); } }} className="max-h-36 min-h-10 resize-none border-0 bg-transparent shadow-none focus-visible:ring-0" />
+            <Button type="submit" size="icon" disabled={busy || !text.trim()} aria-label="إرسال" title="إرسال" className="size-10 shrink-0 rounded-full"><ArrowUp /></Button>
           </form>
-          <p className="mt-2 text-center text-xs text-muted-foreground" role={copyError ? "alert" : undefined}>{copyError ? "تعذّر النسخ. يمكنك تحديد نص الإجابة ونسخه." : "مساعد الاتحاد · معك في رحلتك الجامعية"}</p>
+          {copyError && <p className="mt-2 text-center text-xs text-muted-foreground" role="alert">تعذّر النسخ. يمكنك تحديد نص الإجابة ونسخه.</p>}
         </div>
       </section>
     </AppShell>
