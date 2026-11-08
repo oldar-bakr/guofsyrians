@@ -9,6 +9,8 @@ import { AvatarUpload } from "@/components/AvatarUpload";
 import { Avatar } from "@/components/Avatar";
 import { removeAvatar, saveAvatarPath } from "@/lib/avatar";
 import { useMine } from "@/lib/activity";
+import { Button } from "@/components/ui/button";
+import { CreditCard } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
@@ -103,6 +105,10 @@ function ProfilePage() {
           </Link>
         ))}
       </div>
+      <section className="mt-4 flex flex-wrap items-center justify-between gap-3 border-y py-4">
+        <div><h3 className="font-bold">الاشتراك الشهري</h3><p className="text-sm text-muted-foreground">100 ليرة تركية / شهر — تجربة دون دفع حقيقي</p></div>
+        <Button asChild variant="outline"><Link to="/subscription"><CreditCard />تجربة الاشتراك</Link></Button>
+      </section>
       <form onSubmit={save} className="mt-4 space-y-3 rounded-2xl bg-card p-4">
         <h3 className="font-bold">بياناتي الطلابية</h3>
         {p && <AvatarUpload userId={p.id} value={p.avatar_url} name={p.full_name} onChange={setAvatar} />}
