@@ -41,8 +41,13 @@ function AuthPage() {
       if (error) setMsg("البريد أو كلمة المرور غير صحيحة");
       else navigate({ to: target });
     } else {
-      const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: isBiz ? `${window.location.origin}/auth?as=business` : window.location.origin } });
-      setMsg(error ? error.message : "تم إنشاء الحساب. تحقق من بريدك لتأكيد الحساب ثم سجّل الدخول.");
+      const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: isBiz ? `${window.location.origin}/auth?as=business` : window.location.origin } });
+      if (error) setMsg(error.message);
+      else if (data.session) navigate({ to: target });
+      else {
+        const r = await supabase.auth.signInWithPassword({ email, password });
+        if (r.error) setMsg(r.error.message); else navigate({ to: target });
+      }
     }
     setBusy(false);
   };
