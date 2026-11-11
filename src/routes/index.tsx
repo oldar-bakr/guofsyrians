@@ -2,6 +2,8 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { GraduationCap, IdCard, Tag, CalendarDays, ShoppingBag, Sparkles, Building2, Store } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable/index";
+import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 import { ContactLinks } from "@/components/ContactLinks";
 import logo from "@/assets/union-logo.png.asset.json";
 
@@ -29,6 +31,21 @@ const features = [
 function Landing() {
   const navigate = useNavigate();
   const [checking, setChecking] = useState(true);
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState("");
+
+  const google = async () => {
+    setBusy(true);
+    setMsg("");
+    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
+    if (r.error) {
+      setMsg("تعذّر الدخول عبر Google، جرّب مرة أخرى");
+      setBusy(false);
+      return;
+    }
+    if (r.redirected) return;
+    navigate({ to: "/home" });
+  };
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -78,6 +95,11 @@ function Landing() {
               <Link to="/auth" className="rounded-full border border-primary-foreground/40 px-6 py-3 font-bold">
                 لدي حساب — دخول
               </Link>
+            </div>
+            <div className="mt-6 max-w-xs space-y-2">
+              <p className="text-xs opacity-80">أو تابع ببريد Google مباشرةً</p>
+              <GoogleSignInButton onClick={google} disabled={busy} />
+              {msg && <p className="text-sm opacity-90">{msg}</p>}
             </div>
           </div>
           <div className="mx-auto w-full max-w-xs rounded-3xl bg-card/10 p-6 text-center backdrop-blur">

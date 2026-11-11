@@ -62,6 +62,10 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-google-surface: var(--google-surface);
+  --color-google-hover: var(--google-hover);
+  --color-google-border: var(--google-border);
+  --color-google-text: var(--google-text);
 }
 
 :root {
@@ -101,6 +105,11 @@
   --gradient-hero: linear-gradient(150deg, oklch(0.32 0.06 160), oklch(0.42 0.07 155));
   --gradient-card: linear-gradient(135deg, oklch(0.3 0.06 160), oklch(0.4 0.07 150) 60%, oklch(0.6 0.1 95));
   --shadow-soft: 0 12px 30px -14px oklch(0.3 0.06 160 / 0.35);
+  /* Google sign-in button theme (light) — fixed by Google's branding rules. */
+  --google-surface: #ffffff;
+  --google-hover: #f2f2f2;
+  --google-border: #747775;
+  --google-text: #1f1f1f;
 }
 
 @layer base {

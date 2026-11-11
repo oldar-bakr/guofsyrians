@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
+import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/auth")({
@@ -69,7 +70,7 @@ function AuthPage() {
           <button type="button" onClick={() => navigate({ to: "/auth", search: { as: "business" } })} className={`rounded-lg py-2 ${isBiz ? "bg-card font-bold shadow-soft" : ""}`}>صاحب عمل</button>
         </div>
         {isBiz && <p className="text-center text-xs text-muted-foreground">للمطاعم والمقاهي والمتاجر وشركات الخدمات التي تقدّم تخفيضات للطلاب</p>}
-        <button type="button" onClick={google} className="w-full rounded-xl bg-primary py-3 font-bold text-primary-foreground">الدخول عبر Google</button>
+        <GoogleSignInButton onClick={google} disabled={busy} />
         <p className="text-center text-xs text-muted-foreground">أو باستخدام البريد الإلكتروني</p>
         <input type="email" required placeholder="البريد الإلكتروني" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-xl border bg-background px-4 py-2" />
         <input type="password" required minLength={6} placeholder="كلمة المرور" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-xl border bg-background px-4 py-2" />
