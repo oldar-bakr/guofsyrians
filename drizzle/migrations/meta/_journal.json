@@ -85,6 +85,13 @@
       "when": 1793877118921,
       "tag": "0011_course_lesson_videos",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1794431447043,
+      "tag": "0012_restrict_business_logo_reads",
+      "breakpoints": true
     }
   ]
 }
