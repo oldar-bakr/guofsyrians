@@ -92,6 +92,13 @@
       "when": 1794431447043,
       "tag": "0012_restrict_business_logo_reads",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1794476612650,
+      "tag": "0013_fix_business_logo_read_binding",
+      "breakpoints": true
     }
   ]
 }
