@@ -13,9 +13,13 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "تطبيق خدمات الطلاب | الاتحاد العام لطلبة سوريا" },
       { name: "description", content: "منصة واحدة لخدمات الطالب: بطاقة رقمية، دورات، تخفيضات، فعاليات، سوق ومساعد ذكي." },
-      { property: "og:title", content: "تطبيق خدمات الطلاب" },
-      { property: "og:description", content: "منصة واحدة لخدمات الطالب من الاتحاد العام لطلبة سوريا." },
+      { property: "og:title", content: "تطبيق خدمات الطلاب | الاتحاد العام لطلبة سوريا" },
+      { property: "og:description", content: "منصة واحدة لخدمات الطالب من الاتحاد العام لطلبة سوريا: بطاقة عضوية رقمية، دورات، تخفيضات، فعاليات، سوق ومساعد ذكي." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://guofsyrians.lovable.app/" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://guofsyrians.lovable.app/" }],
   }),
   component: Landing,
 });
