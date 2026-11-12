@@ -15,6 +15,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BusinessRouteImport } from './routes/business'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAssistantRouteImport } from './routes/_authenticated/assistant'
 import { Route as AuthenticatedCardRouteImport } from './routes/_authenticated/card'
 import { Route as AuthenticatedContributeRouteImport } from './routes/_authenticated/contribute'
@@ -62,6 +63,11 @@ const BusinessRoute = BusinessRouteImport.update({
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAssistantRoute = AuthenticatedAssistantRouteImport.update({
@@ -174,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/business': typeof BusinessRoute
   '/onboarding': typeof OnboardingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/assistant': typeof AuthenticatedAssistantRoute
   '/card': typeof AuthenticatedCardRoute
   '/contribute': typeof AuthenticatedContributeRouteWithChildren
@@ -200,6 +207,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/business': typeof BusinessRoute
   '/onboarding': typeof OnboardingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/assistant': typeof AuthenticatedAssistantRoute
   '/card': typeof AuthenticatedCardRoute
   '/deals': typeof AuthenticatedDealsRoute
@@ -227,6 +235,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/business': typeof BusinessRoute
   '/onboarding': typeof OnboardingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/assistant': typeof AuthenticatedAssistantRoute
   '/_authenticated/card': typeof AuthenticatedCardRoute
   '/_authenticated/contribute': typeof AuthenticatedContributeRouteWithChildren
@@ -255,6 +264,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/business'
     | '/onboarding'
+    | '/sitemap.xml'
     | '/assistant'
     | '/card'
     | '/contribute'
@@ -281,6 +291,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/business'
     | '/onboarding'
+    | '/sitemap.xml'
     | '/assistant'
     | '/card'
     | '/deals'
@@ -307,6 +318,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/business'
     | '/onboarding'
+    | '/sitemap.xml'
     | '/_authenticated/assistant'
     | '/_authenticated/card'
     | '/_authenticated/contribute'
@@ -335,6 +347,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BusinessRoute: typeof BusinessRoute
   OnboardingRoute: typeof OnboardingRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
@@ -380,6 +393,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/assistant': {
@@ -582,6 +602,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BusinessRoute: BusinessRoute,
   OnboardingRoute: OnboardingRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport

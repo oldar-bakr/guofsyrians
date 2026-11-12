@@ -8,6 +8,7 @@ import { useMyProfile } from "@/lib/profile";
 import { DEMO_PLAN, simulateSubscription, type DemoOutcome } from "@/lib/subscription-demo";
 
 export const Route = createFileRoute("/_authenticated/subscription")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [
     { title: "الاشتراك الشهري التجريبي | اتحاد الطلبة" },
     { name: "description", content: "تجربة الاشتراك الشهري بقيمة 100 ليرة تركية دون دفع حقيقي." },

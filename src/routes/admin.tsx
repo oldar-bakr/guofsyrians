@@ -12,6 +12,7 @@ import { BusinessesManager } from "@/components/BusinessesManager";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/admin")({
+  staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [

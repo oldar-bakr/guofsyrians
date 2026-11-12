@@ -8,6 +8,7 @@ import { ContactLinks } from "@/components/ContactLinks";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "تطبيق خدمات الطلاب | الاتحاد العام لطلبة سوريا" },

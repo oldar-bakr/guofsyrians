@@ -8,6 +8,7 @@ import { Avatar } from "@/components/Avatar";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/_authenticated/card")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "بطاقتي الرقمية | تطبيق خدمات الطلاب" },

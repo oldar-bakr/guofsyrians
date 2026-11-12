@@ -6,6 +6,7 @@ import { Avatar } from "@/components/Avatar";
 import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/_authenticated/home")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "الرئيسية | تطبيق خدمات الطلاب" },

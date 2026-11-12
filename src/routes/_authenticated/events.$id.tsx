@@ -25,6 +25,7 @@ import {
 } from "@/lib/event-times";
 
 export const Route = createFileRoute("/_authenticated/events/$id")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "تفاصيل الفعالية | تطبيق خدمات الطلاب" },

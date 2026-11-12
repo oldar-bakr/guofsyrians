@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 // Every student page requires sign-in and a completed student profile.
 export const Route = createFileRoute("/_authenticated")({
+  staticData: { sitemap: "exclude-subtree" },
   ssr: false,
   beforeLoad: async () => {
     const { data } = await supabase.auth.getUser();

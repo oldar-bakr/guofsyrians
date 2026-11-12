@@ -6,6 +6,7 @@ import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/auth")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "تسجيل الدخول | تطبيق خدمات الطلاب" },

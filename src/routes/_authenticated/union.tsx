@@ -6,6 +6,7 @@ import { useStudent } from "@/lib/profile";
 import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/_authenticated/union")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "دليل الاتحاد | تطبيق خدمات الطلاب" },

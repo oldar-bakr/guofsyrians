@@ -3,6 +3,7 @@ import { AppShell } from "@/components/AppShell";
 import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/_authenticated/news/")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "الأخبار | تطبيق خدمات الطلاب" },

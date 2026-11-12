@@ -4,6 +4,7 @@ import { AppShell } from "@/components/AppShell";
 import { useItem } from "@/lib/content";
 
 export const Route = createFileRoute("/_authenticated/news/$id")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "الخبر | تطبيق خدمات الطلاب" },

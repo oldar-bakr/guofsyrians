@@ -7,6 +7,7 @@ import { AvatarUpload } from "@/components/AvatarUpload";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/onboarding")({
+  staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [

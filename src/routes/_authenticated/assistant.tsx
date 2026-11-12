@@ -11,6 +11,7 @@ import { useStudent } from "@/lib/profile";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/_authenticated/assistant")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "المساعد الذكي | تطبيق خدمات الطلاب" },

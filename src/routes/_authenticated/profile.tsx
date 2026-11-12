@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { CreditCard } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/profile")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "ملفي الشخصي | تطبيق خدمات الطلاب" },

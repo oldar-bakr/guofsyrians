@@ -74,9 +74,11 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
+      { name: "google-site-verification", content: "An7y2PkHfpsDUaU5lGaEJrj8ShMz6-mLqZWo3RjcLsw" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "تطبيق خدمات الطلاب" },
       { name: "description", content: "نموذج أولي لتطبيق خدمات الاتحاد العام لطلبة سوريا" },

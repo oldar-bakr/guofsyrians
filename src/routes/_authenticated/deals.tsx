@@ -11,6 +11,7 @@ import { useStudent } from "@/lib/profile";
 import { sameCity } from "@/lib/city-match";
 
 export const Route = createFileRoute("/_authenticated/deals")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "دليل التخفيضات | تطبيق خدمات الطلاب" },

@@ -13,6 +13,7 @@ import { UniversityLogo } from "@/components/UniversityLogo";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/business")({
+  staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [

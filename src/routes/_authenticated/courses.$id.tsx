@@ -5,6 +5,7 @@ import { useItem, toEmbedUrl } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
 export const Route = createFileRoute("/_authenticated/courses/$id")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "تفاصيل الدورة | تطبيق خدمات الطلاب" },

@@ -6,6 +6,7 @@ import { useContent, approvedOnly } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
 export const Route = createFileRoute("/_authenticated/market/")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "سوق الطالب | تطبيق خدمات الطلاب" },

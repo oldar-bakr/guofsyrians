@@ -4,6 +4,7 @@ import { AppShell } from "@/components/AppShell";
 import { ContributeForm } from "@/components/ContributeForm";
 
 export const Route = createFileRoute("/_authenticated/contribute/products")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "قدّم منتجاتك | تطبيق خدمات الطلاب" },

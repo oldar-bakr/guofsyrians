@@ -4,6 +4,7 @@ import { useContent } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
 export const Route = createFileRoute("/_authenticated/events/")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "الفعاليات | تطبيق خدمات الطلاب" },
