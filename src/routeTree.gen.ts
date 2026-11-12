@@ -33,6 +33,7 @@ import { Route as AuthenticatedEventsIdRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedMarketIndexRouteImport } from './routes/_authenticated/market.index'
 import { Route as AuthenticatedNewsIndexRouteImport } from './routes/_authenticated/news.index'
 import { Route as AuthenticatedNewsIdRouteImport } from './routes/_authenticated/news.$id'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -160,6 +161,12 @@ const AuthenticatedNewsIdRoute = AuthenticatedNewsIdRouteImport.update({
   path: '/news/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -185,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/events/': typeof AuthenticatedEventsIndexRoute
   '/market/': typeof AuthenticatedMarketIndexRoute
   '/news/': typeof AuthenticatedNewsIndexRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -209,6 +217,7 @@ export interface FileRoutesByTo {
   '/events': typeof AuthenticatedEventsIndexRoute
   '/market': typeof AuthenticatedMarketIndexRoute
   '/news': typeof AuthenticatedNewsIndexRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -236,6 +245,7 @@ export interface FileRoutesById {
   '/_authenticated/events/': typeof AuthenticatedEventsIndexRoute
   '/_authenticated/market/': typeof AuthenticatedMarketIndexRoute
   '/_authenticated/news/': typeof AuthenticatedNewsIndexRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -263,6 +273,7 @@ export interface FileRouteTypes {
     | '/events/'
     | '/market/'
     | '/news/'
+    | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -287,6 +298,7 @@ export interface FileRouteTypes {
     | '/events'
     | '/market'
     | '/news'
+    | '/lovable/email/transactional/preview'
   id:
     | '__root__'
     | '/'
@@ -313,6 +325,7 @@ export interface FileRouteTypes {
     | '/_authenticated/events/'
     | '/_authenticated/market/'
     | '/_authenticated/news/'
+    | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -322,6 +335,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BusinessRoute: typeof BusinessRoute
   OnboardingRoute: typeof OnboardingRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -494,6 +508,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedNewsIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -561,6 +582,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BusinessRoute: BusinessRoute,
   OnboardingRoute: OnboardingRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
