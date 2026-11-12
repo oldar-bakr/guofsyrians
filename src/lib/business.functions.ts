@@ -82,3 +82,20 @@ export const myRedemptions = createServerFn({ method: "POST" })
       return { id: r.id, createdAt: r.created_at, student: p?.full_name ?? "—", memberCode: p?.member_code ?? "", university: p?.university ?? "", discount: d?.discount ?? "" };
     });
   });
+
+// Signed link for an approved store's logo. Storage reads are limited to the
+// owner and staff, so other users get logos only through this check.
+export const getApprovedLogoUrl = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: { path: string }) => {
+    if (typeof d?.path !== "string" || d.path.length > 300 || d.path.includes("..")) throw new Error("bad path");
+    return d;
+  })
+  .handler(async ({ data, context }) => {
+    const { data: b } = await context.supabase
+      .from("businesses").select("id").eq("logo_url", data.path).eq("status", "approved").maybeSingle();
+    if (!b) return { url: null as string | null };
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: s } = await supabaseAdmin.storage.from("business-logos").createSignedUrl(data.path, 60 * 60 * 12);
+    return { url: s?.signedUrl ?? null };
+  });

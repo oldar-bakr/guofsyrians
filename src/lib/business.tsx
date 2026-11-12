@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toLogoBlob } from "@/lib/avatar";
+import { getApprovedLogoUrl } from "@/lib/business.functions";
 
 export const LOGO_BUCKET = "business-logos";
 export const businessCategories = ["مطعم", "مقهى", "متجر", "خدمات", "تعليم", "صحة وجمال", "أخرى"];
@@ -33,7 +34,9 @@ export function useLogoUrl(path: string | null | undefined) {
     staleTime: 1000 * 60 * 60,
     queryFn: async () => {
       const { data } = await supabase.storage.from(LOGO_BUCKET).createSignedUrl(path!, 60 * 60 * 12);
-      return data?.signedUrl ?? null;
+      if (data?.signedUrl) return data.signedUrl;
+      const res = await getApprovedLogoUrl({ data: { path: path! } });
+      return res.url;
     },
   });
 }

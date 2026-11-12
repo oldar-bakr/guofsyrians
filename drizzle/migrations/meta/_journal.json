@@ -99,6 +99,13 @@
       "when": 1794476612650,
       "tag": "0013_fix_business_logo_read_binding",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1794476811334,
+      "tag": "0014_logos_read_owner_staff_only",
+      "breakpoints": true
     }
   ]
 }
