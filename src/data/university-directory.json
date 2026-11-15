@@ -1,0 +1,1955 @@
+[
+  {
+    "name": "Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi",
+    "city": "Adana",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://atu.edu.tr",
+    "logoKey": "Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi",
+    "email": "rektorluk@atu.edu.tr",
+    "emailSource": "https://www.atu.edu.tr/"
+  },
+  {
+    "name": "Başkent Üniversitesi (Ankara)",
+    "city": "Adana",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://baskent.edu.tr",
+    "logoKey": "Başkent Üniversitesi (Ankara)",
+    "email": "webmaster@baskent.edu.tr",
+    "emailSource": "https://www.baskent.edu.tr/tr/icerik/yonetim/baskent-universitesi-rektoru-prof-dr-hakan-ozkardes/37"
+  },
+  {
+    "name": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "city": "Adana",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://sbu.edu.tr",
+    "logoKey": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "email": "info@sbu.edu.tr",
+    "emailSource": "https://sbu.edu.tr/iletisim/iletisim/"
+  },
+  {
+    "name": "Çukurova Üniversitesi (Adana)",
+    "city": "Adana",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://cu.edu.tr",
+    "logoKey": "Çukurova Üniversitesi (Adana)",
+    "email": "ozelkalem@cu.edu.tr",
+    "emailSource": "https://cu.edu.tr/institutional/administration/rectorate/rektor/"
+  },
+  {
+    "name": "Adıyaman Üniversitesi",
+    "city": "Adıyaman",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://adiyaman.edu.tr",
+    "logoKey": "Adıyaman Üniversitesi",
+    "email": "rektor@adiyaman.edu.tr",
+    "emailSource": "https://adiyaman.edu.tr/tr/iletisim/birimler-listesi"
+  },
+  {
+    "name": "Afyon Kocatepe Üniversitesi (Afyonkarahisar)",
+    "city": "Afyonkarahisar",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://aku.edu.tr",
+    "logoKey": "Afyon Kocatepe Üniversitesi (Afyonkarahisar)",
+    "email": "bilgi@aku.edu.tr",
+    "emailSource": "https://aku.edu.tr/iletisim/"
+  },
+  {
+    "name": "Afyonkarahisar Sağlık Bilimleri Üniversitesi",
+    "city": "Afyonkarahisar",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://afsu.edu.tr",
+    "logoKey": "Afyonkarahisar Sağlık Bilimleri Üniversitesi",
+    "email": "bilgi@afsu.edu.tr",
+    "emailSource": "https://afsu.edu.tr/iletisim/"
+  },
+  {
+    "name": "Aksaray Üniversitesi",
+    "city": "Aksaray",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://aksaray.edu.tr",
+    "logoKey": "Aksaray Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Amasya Üniversitesi",
+    "city": "Amasya",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://amasya.edu.tr",
+    "logoKey": "Amasya Üniversitesi",
+    "email": "genelsekreterlik@amasya.edu.tr",
+    "emailSource": "https://www.amasya.edu.tr/iletisim/"
+  },
+  {
+    "name": "Ankara Bilim Üniversitesi",
+    "city": "Ankara",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://ankarabilim.edu.tr",
+    "logoKey": "Ankara Bilim Üniversitesi",
+    "email": "info@ankarabilim.edu.tr",
+    "emailSource": "https://ankarabilim.edu.tr/iletisim"
+  },
+  {
+    "name": "Ankara Hacı Bayram Veli Üniversitesi",
+    "city": "Ankara",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://hacibayram.edu.tr",
+    "logoKey": "Ankara Hacı Bayram Veli Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Ankara Medipol Üniversitesi",
+    "city": "Ankara",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://ankaramedipol.edu.tr",
+    "logoKey": "Ankara Medipol Üniversitesi",
+    "email": "ogrenciisleri@ankaramedipol.edu.tr",
+    "emailSource": "https://www.ankaramedipol.edu.tr/iletisim-0"
+  },
+  {
+    "name": "Ankara Müzik ve Güzel Sanatlar Üniversitesi",
+    "city": "Ankara",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://mgu.edu.tr",
+    "logoKey": "Ankara Müzik ve Güzel Sanatlar Üniversitesi",
+    "email": "iletisim@mgu.edu.tr",
+    "emailSource": "https://www.mgu.edu.tr/mgu-iletisim/"
+  },
+  {
+    "name": "Ankara Sosyal Bilimler Üniversitesi",
+    "city": "Ankara",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://asbu.edu.tr",
+    "logoKey": "Ankara Sosyal Bilimler Üniversitesi",
+    "email": "bilgi@asbu.edu.tr",
+    "emailSource": "https://www.asbu.edu.tr/tr/iletisim-bilgileri-1"
+  },
+  {
+    "name": "Ankara Yıldırım Beyazıt Üniversitesi",
+    "city": "Ankara",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Ankara Yıldırım Beyazıt Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Ankara Üniversitesi",
+    "city": "Ankara",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://ankara.edu.tr",
+    "logoKey": "Ankara Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Atılım Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Atılım Üniversitesi (Ankara)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Başkent Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://baskent.edu.tr",
+    "logoKey": "Başkent Üniversitesi (Ankara)",
+    "email": "webmaster@baskent.edu.tr",
+    "emailSource": "https://www.baskent.edu.tr/tr/icerik/yonetim/baskent-universitesi-rektoru-prof-dr-hakan-ozkardes/37"
+  },
+  {
+    "name": "Gazi Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://gazi.edu.tr",
+    "logoKey": "Gazi Üniversitesi (Ankara)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Hacettepe Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://hacettepe.edu.tr",
+    "logoKey": "Hacettepe Üniversitesi (Ankara)",
+    "email": "rektorluk@hacettepe.edu.tr",
+    "emailSource": "https://hacettepe.edu.tr/hakkinda/iletisim"
+  },
+  {
+    "name": "Lokman Hekim Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Lokman Hekim Üniversitesi (Ankara)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Orta Doğu Teknik Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://metu.edu.tr",
+    "logoKey": "Orta Doğu Teknik Üniversitesi (Ankara)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Ostim Teknik Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://ostimteknik.edu.tr",
+    "logoKey": "Ostim Teknik Üniversitesi (Ankara)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "city": "Ankara",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://sbu.edu.tr",
+    "logoKey": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "email": "info@sbu.edu.tr",
+    "emailSource": "https://sbu.edu.tr/iletisim/iletisim/"
+  },
+  {
+    "name": "Ted Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://tedu.edu.tr",
+    "logoKey": "Ted Üniversitesi (Ankara)",
+    "email": "rektorluk@tedu.edu.tr",
+    "emailSource": "https://www.tedu.edu.tr/rektorluk"
+  },
+  {
+    "name": "Tobb Ekonomi ve Teknoloji Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://etu.edu.tr",
+    "logoKey": "Tobb Ekonomi ve Teknoloji Üniversitesi (Ankara)",
+    "email": "rektorluk@etu.edu.tr",
+    "emailSource": "https://www.etu.edu.tr/tr/kurumsal/rektorluk"
+  },
+  {
+    "name": "Türk Hava Kurumu Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://thk.edu.tr",
+    "logoKey": "Türk Hava Kurumu Üniversitesi (Ankara)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Türk-japon Bilim ve Teknoloji Üniversitesi",
+    "city": "Ankara",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Türk-japon Bilim ve Teknoloji Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Ufuk Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://ufuk.edu.tr",
+    "logoKey": "Ufuk Üniversitesi (Ankara)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Yüksek İhtisas Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://yuksekihtisasuniversitesi.edu.tr",
+    "logoKey": "Yüksek İhtisas Üniversitesi (Ankara)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Çankaya Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://cankaya.edu.tr",
+    "logoKey": "Çankaya Üniversitesi (Ankara)",
+    "email": "rektorluk@cankaya.edu.tr",
+    "emailSource": "https://www.cankaya.edu.tr/universite/yonetimiletisim.php"
+  },
+  {
+    "name": "İhsan Doğramacı Bilkent Üniversitesi (Ankara)",
+    "city": "Ankara",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "İhsan Doğramacı Bilkent Üniversitesi (Ankara)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Akdeniz Üniversitesi (Antalya)",
+    "city": "Antalya",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://akdeniz.edu.tr",
+    "logoKey": "Akdeniz Üniversitesi (Antalya)",
+    "email": "info@akdeniz.edu.tr",
+    "emailSource": "https://akdeniz.edu.tr/tr/akdeniz_universitesi_iletisim_bilgileri-1122"
+  },
+  {
+    "name": "Alanya Alaaddin Keykubat Üniversitesi (Antalya)",
+    "city": "Antalya",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://alanya.edu.tr",
+    "logoKey": "Alanya Alaaddin Keykubat Üniversitesi (Antalya)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Alanya Üniversitesi (Antalya)",
+    "city": "Antalya",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://alanyauniversity.edu.tr",
+    "logoKey": "Alanya Üniversitesi (Antalya)",
+    "email": "info@alanyauniversity.edu.tr",
+    "emailSource": "https://www.alanyauniversity.edu.tr/tr/rektor"
+  },
+  {
+    "name": "Antalya Belek Üniversitesi",
+    "city": "Antalya",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://akev.edu.tr",
+    "logoKey": "Antalya Belek Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Antalya Bilim Üniversitesi",
+    "city": "Antalya",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://antalya.edu.tr",
+    "logoKey": "Antalya Bilim Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Ardahan Üniversitesi",
+    "city": "Ardahan",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://ardahan.edu.tr",
+    "logoKey": "Ardahan Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Artvin Çoruh Üniversitesi",
+    "city": "Artvin",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://artvin.edu.tr",
+    "logoKey": "Artvin Çoruh Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Aydın Adnan Menderes Üniversitesi",
+    "city": "Aydın",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://adu.edu.tr",
+    "logoKey": "Aydın Adnan Menderes Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Ağrı İbrahim Çeçen Üniversitesi",
+    "city": "Ağrı",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://agri.edu.tr",
+    "logoKey": "Ağrı İbrahim Çeçen Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Balıkesir Üniversitesi",
+    "city": "Balıkesir",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://balikesir.edu.tr",
+    "logoKey": "Balıkesir Üniversitesi",
+    "email": "info@balikesir.edu.tr",
+    "emailSource": "https://balikesir.edu.tr/iletisim"
+  },
+  {
+    "name": "Bandırma Onyedi Eylül Üniversitesi (Balıkesir)",
+    "city": "Balıkesir",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://bandirma.edu.tr",
+    "logoKey": "Bandırma Onyedi Eylül Üniversitesi (Balıkesir)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Bartın Üniversitesi",
+    "city": "Bartın",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://bartin.edu.tr",
+    "logoKey": "Bartın Üniversitesi",
+    "email": "info@bartin.edu.tr",
+    "emailSource": "https://www.bartin.edu.tr/iletisim/iletisim.html"
+  },
+  {
+    "name": "Batman Üniversitesi",
+    "city": "Batman",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://batman.edu.tr",
+    "logoKey": "Batman Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Bayburt Üniversitesi",
+    "city": "Bayburt",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://bayburt.edu.tr",
+    "logoKey": "Bayburt Üniversitesi",
+    "email": "iletisim@bayburt.edu.tr",
+    "emailSource": "https://bayburt.edu.tr/tr/bize-yazin"
+  },
+  {
+    "name": "Bilecik Şeyh Edebali Üniversitesi",
+    "city": "Bilecik",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://bilecik.edu.tr",
+    "logoKey": "Bilecik Şeyh Edebali Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Bingöl Üniversitesi",
+    "city": "Bingöl",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://bingol.edu.tr",
+    "logoKey": "Bingöl Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Bitlis Eren Üniversitesi",
+    "city": "Bitlis",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://bitliseren.edu.tr",
+    "logoKey": "Bitlis Eren Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Bolu Abant İzzet Baysal Üniversitesi",
+    "city": "Bolu",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Bolu Abant İzzet Baysal Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Burdur Mehmet Akif Ersoy Üniversitesi",
+    "city": "Burdur",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://mehmetakif.edu.tr",
+    "logoKey": "Burdur Mehmet Akif Ersoy Üniversitesi",
+    "email": "rektorluk@mehmetakif.edu.tr",
+    "emailSource": "https://mehmetakif.edu.tr/tr/content/8128/1/iletisim"
+  },
+  {
+    "name": "Bursa Teknik Üniversitesi",
+    "city": "Bursa",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://btu.edu.tr",
+    "logoKey": "Bursa Teknik Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Bursa Uludağ Üniversitesi",
+    "city": "Bursa",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://uludag.edu.tr",
+    "logoKey": "Bursa Uludağ Üniversitesi",
+    "email": "iletisim@uludag.edu.tr",
+    "emailSource": "https://www.uludag.edu.tr/sorumluluk/rektorluk"
+  },
+  {
+    "name": "Mudanya Üniversitesi (Bursa)",
+    "city": "Bursa",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Mudanya Üniversitesi (Bursa)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "city": "Bursa",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://sbu.edu.tr",
+    "logoKey": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "email": "info@sbu.edu.tr",
+    "emailSource": "https://sbu.edu.tr/iletisim/iletisim/"
+  },
+  {
+    "name": "Pamukkale Üniversitesi (Denizli)",
+    "city": "Denizli",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://pau.edu.tr",
+    "logoKey": "Pamukkale Üniversitesi (Denizli)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Dicle Üniversitesi (Diyarbakır)",
+    "city": "Diyarbakır",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://dicle.edu.tr",
+    "logoKey": "Dicle Üniversitesi (Diyarbakır)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Düzce Üniversitesi",
+    "city": "Düzce",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://duzce.edu.tr",
+    "logoKey": "Düzce Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Trakya Üniversitesi (Edirne)",
+    "city": "Edirne",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://trakya.edu.tr",
+    "logoKey": "Trakya Üniversitesi (Edirne)",
+    "email": "genelsekreterlik@trakya.edu.tr",
+    "emailSource": "https://www.trakya.edu.tr/rektor"
+  },
+  {
+    "name": "Fırat Üniversitesi (Elazığ)",
+    "city": "Elazığ",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://firat.edu.tr",
+    "logoKey": "Fırat Üniversitesi (Elazığ)",
+    "email": "rektor@firat.edu.tr",
+    "emailSource": "https://www.firat.edu.tr/tr/administration"
+  },
+  {
+    "name": "Erzincan Binali Yıldırım Üniversitesi",
+    "city": "Erzincan",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://ebyu.edu.tr",
+    "logoKey": "Erzincan Binali Yıldırım Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Atatürk Üniversitesi (Erzurum)",
+    "city": "Erzurum",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://atauni.edu.tr",
+    "logoKey": "Atatürk Üniversitesi (Erzurum)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Erzurum Teknik Üniversitesi",
+    "city": "Erzurum",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://erzurum.edu.tr",
+    "logoKey": "Erzurum Teknik Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "city": "Erzurum",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://sbu.edu.tr",
+    "logoKey": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "email": "info@sbu.edu.tr",
+    "emailSource": "https://sbu.edu.tr/iletisim/iletisim/"
+  },
+  {
+    "name": "Anadolu Üniversitesi (Eskişehir)",
+    "city": "Eskişehir",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://anadolu.edu.tr",
+    "logoKey": "Anadolu Üniversitesi (Eskişehir)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Eskişehir Osmangazi Üniversitesi",
+    "city": "Eskişehir",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://ogu.edu.tr",
+    "logoKey": "Eskişehir Osmangazi Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Eskişehir Teknik Üniversitesi",
+    "city": "Eskişehir",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://eskisehir.edu.tr",
+    "logoKey": "Eskişehir Teknik Üniversitesi",
+    "email": "rektor@eskisehir.edu.tr",
+    "emailSource": "https://www.eskisehir.edu.tr/tr/Icerik/Detay/ust-yonetim-ve-senato-ve-yonetim-kurulu"
+  },
+  {
+    "name": "Gaziantep Üniversitesi",
+    "city": "Gaziantep",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://gaziantep.edu.tr",
+    "logoKey": "Gaziantep Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Gaziantep İslam Bilim ve Teknoloji Üniversitesi",
+    "city": "Gaziantep",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://gibtu.net",
+    "logoKey": "Gaziantep İslam Bilim ve Teknoloji Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Hasan Kalyoncu Üniversitesi (Gaziantep)",
+    "city": "Gaziantep",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://hku.edu.tr",
+    "logoKey": "Hasan Kalyoncu Üniversitesi (Gaziantep)",
+    "email": "info@hku.edu.tr",
+    "emailSource": "https://www.hku.edu.tr/yonetim/rektorluk/"
+  },
+  {
+    "name": "Sanko Üniversitesi (Gaziantep)",
+    "city": "Gaziantep",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://sanko.edu.tr",
+    "logoKey": "Sanko Üniversitesi (Gaziantep)",
+    "email": "info@sanko.edu.tr",
+    "emailSource": "https://www.sanko.edu.tr/yonetim/rektorun-ozgecmisi/"
+  },
+  {
+    "name": "Giresun Üniversitesi",
+    "city": "Giresun",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://giresun.edu.tr",
+    "logoKey": "Giresun Üniversitesi",
+    "email": "basin.koordinatorlugu@giresun.edu.tr",
+    "emailSource": "https://www.giresun.edu.tr/tr/contact"
+  },
+  {
+    "name": "Gümüşhane Üniversitesi",
+    "city": "Gümüşhane",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://gumushane.edu.tr",
+    "logoKey": "Gümüşhane Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Hakkari Üniversitesi",
+    "city": "Hakkari",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://en.hu.edu.tr",
+    "logoKey": "Hakkari Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Hatay Mustafa Kemal Üniversitesi",
+    "city": "Hatay",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://mku.edu.tr",
+    "logoKey": "Hatay Mustafa Kemal Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İskenderun Teknik Üniversitesi (Hatay)",
+    "city": "Hatay",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://iste.edu.tr",
+    "logoKey": "İskenderun Teknik Üniversitesi (Hatay)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Isparta Uygulamalı Bilimler Üniversitesi",
+    "city": "Isparta",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://isparta.edu.tr",
+    "logoKey": "Isparta Uygulamalı Bilimler Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Süleyman Demirel Üniversitesi (Isparta)",
+    "city": "Isparta",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://sdu.edu.tr",
+    "logoKey": "Süleyman Demirel Üniversitesi (Isparta)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Iğdır Üniversitesi",
+    "city": "Iğdır",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://igdir.edu.tr",
+    "logoKey": "Iğdır Üniversitesi",
+    "email": "info@igdir.edu.tr",
+    "emailSource": "https://www.igdir.edu.tr/iletisim"
+  },
+  {
+    "name": "Kahramanmaraş Sütçü İmam Üniversitesi",
+    "city": "Kahramanmaraş",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://ksu.edu.tr",
+    "logoKey": "Kahramanmaraş Sütçü İmam Üniversitesi",
+    "email": "genelsekreterlik@ksu.edu.tr",
+    "emailSource": "https://www.ksu.edu.tr/TelefonRehberi?sayfa=3"
+  },
+  {
+    "name": "Kahramanmaraş İstiklal Üniversitesi",
+    "city": "Kahramanmaraş",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://istiklal.edu.tr",
+    "logoKey": "Kahramanmaraş İstiklal Üniversitesi",
+    "email": "genelsekreterlik@istiklal.edu.tr",
+    "emailSource": "https://istiklal.edu.tr/api/files/file?id=473001e7-d132-4763-9c6b-abe9cfdb6285"
+  },
+  {
+    "name": "Karabük Üniversitesi",
+    "city": "Karabük",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://karabuk.edu.tr",
+    "logoKey": "Karabük Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Karamanoğlu Mehmetbey Üniversitesi (Karaman)",
+    "city": "Karaman",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://kmu.edu.tr",
+    "logoKey": "Karamanoğlu Mehmetbey Üniversitesi (Karaman)",
+    "email": "iletisim@kmu.edu.tr",
+    "emailSource": "https://www.kmu.edu.tr/sayfa/16044/iletisim/tr"
+  },
+  {
+    "name": "Kafkas Üniversitesi (Kars)",
+    "city": "Kars",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://kafkas.edu.tr",
+    "logoKey": "Kafkas Üniversitesi (Kars)",
+    "email": "iletisim@kafkas.edu.tr",
+    "emailSource": "https://www.kafkas.edu.tr/kik/tr/sayfa5416"
+  },
+  {
+    "name": "Kastamonu Üniversitesi",
+    "city": "Kastamonu",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://kastamonu.edu.tr",
+    "logoKey": "Kastamonu Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Abdullah Gül Üniversitesi (Kayseri)",
+    "city": "Kayseri",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://agu.edu.tr",
+    "logoKey": "Abdullah Gül Üniversitesi (Kayseri)",
+    "email": "ozelkalem@agu.edu.tr",
+    "emailSource": "https://www.agu.edu.tr/rektorluk-ofisi"
+  },
+  {
+    "name": "Erciyes Üniversitesi (Kayseri)",
+    "city": "Kayseri",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://erciyes.edu.tr",
+    "logoKey": "Erciyes Üniversitesi (Kayseri)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Kayseri Üniversitesi",
+    "city": "Kayseri",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://kayseri.edu.tr",
+    "logoKey": "Kayseri Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Nuh Naci Yazgan Üniversitesi (Kayseri)",
+    "city": "Kayseri",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://nny.edu.tr",
+    "logoKey": "Nuh Naci Yazgan Üniversitesi (Kayseri)",
+    "email": "info@nny.edu.tr",
+    "emailSource": "https://www.nny.edu.tr/elektrik-elektronik-muhendisligi-mimarlik-ve-psikoloji-bolumlerine-ogretim-uyesi-ihtiyaci-n-173?id=277&p=content"
+  },
+  {
+    "name": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "city": "Kayseri",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://sbu.edu.tr",
+    "logoKey": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "email": "info@sbu.edu.tr",
+    "emailSource": "https://sbu.edu.tr/iletisim/iletisim/"
+  },
+  {
+    "name": "Kilis 7 Aralık Üniversitesi",
+    "city": "Kilis",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://kilis.edu.tr",
+    "logoKey": "Kilis 7 Aralık Üniversitesi",
+    "email": "rimer@kilis.edu.tr",
+    "emailSource": "https://www.kilis.edu.tr/tr/sayfa/iletisim-IpiYR"
+  },
+  {
+    "name": "Gebze Teknik Üniversitesi",
+    "city": "Kocaeli",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://gtu.edu.tr",
+    "logoKey": "Gebze Teknik Üniversitesi",
+    "email": "iletisim@gtu.edu.tr",
+    "emailSource": "https://www.gtu.edu.tr/kategori/1651/0/display.aspx"
+  },
+  {
+    "name": "Kocaeli Sağlık ve Teknoloji Üniversitesi",
+    "city": "Kocaeli",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://kocaelisaglik.edu.tr",
+    "logoKey": "Kocaeli Sağlık ve Teknoloji Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Kocaeli Üniversitesi",
+    "city": "Kocaeli",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://kocaeli.edu.tr",
+    "logoKey": "Kocaeli Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Başkent Üniversitesi (Ankara)",
+    "city": "Konya",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://baskent.edu.tr",
+    "logoKey": "Başkent Üniversitesi (Ankara)",
+    "email": "webmaster@baskent.edu.tr",
+    "emailSource": "https://www.baskent.edu.tr/tr/icerik/yonetim/baskent-universitesi-rektoru-prof-dr-hakan-ozkardes/37"
+  },
+  {
+    "name": "Konya Gıda ve Tarım Üniversitesi",
+    "city": "Konya",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://gidatarim.edu.tr",
+    "logoKey": "Konya Gıda ve Tarım Üniversitesi",
+    "email": "info@gidatarim.edu.tr",
+    "emailSource": "https://www.gidatarim.edu.tr/tr/iletisim"
+  },
+  {
+    "name": "Konya Teknik Üniversitesi",
+    "city": "Konya",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://ktun.edu.tr",
+    "logoKey": "Konya Teknik Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Kto Karatay Üniversitesi (Konya)",
+    "city": "Konya",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://karatay.edu.tr",
+    "logoKey": "Kto Karatay Üniversitesi (Konya)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Necmettin Erbakan Üniversitesi (Konya)",
+    "city": "Konya",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://konya.edu.tr",
+    "logoKey": "Necmettin Erbakan Üniversitesi (Konya)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Selçuk Üniversitesi (Konya)",
+    "city": "Konya",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://selcuk.edu.tr",
+    "logoKey": "Selçuk Üniversitesi (Konya)",
+    "email": "iletisim@selcuk.edu.tr",
+    "emailSource": "https://selcuk.edu.tr/birim/sayfa/5472/iletisim-1276"
+  },
+  {
+    "name": "Kütahya Dumlupınar Üniversitesi",
+    "city": "Kütahya",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Kütahya Dumlupınar Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Kütahya Sağlık Bilimleri Üniversitesi",
+    "city": "Kütahya",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://ksbu.edu.tr",
+    "logoKey": "Kütahya Sağlık Bilimleri Üniversitesi",
+    "email": "bilgi@ksbu.edu.tr",
+    "emailSource": "https://www.ksbu.edu.tr/defaultx/sayfa/10266/santral"
+  },
+  {
+    "name": "Kırklareli Üniversitesi",
+    "city": "Kırklareli",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://kirklareli.edu.tr",
+    "logoKey": "Kırklareli Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Kırıkkale Üniversitesi",
+    "city": "Kırıkkale",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://kku.edu.tr",
+    "logoKey": "Kırıkkale Üniversitesi",
+    "email": "rektorluk@kku.edu.tr",
+    "emailSource": "https://kku.edu.tr/Anasayfa/Sayfa/Index?Sayfa=Rekt%C3%B6r"
+  },
+  {
+    "name": "Kırşehir Ahi Evran Üniversitesi",
+    "city": "Kırşehir",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Kırşehir Ahi Evran Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Malatya Turgut Özal Üniversitesi",
+    "city": "Malatya",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://ozal.edu.tr",
+    "logoKey": "Malatya Turgut Özal Üniversitesi",
+    "email": "rektor@ozal.edu.tr",
+    "emailSource": "https://www.ozal.edu.tr/administration"
+  },
+  {
+    "name": "İnönü Üniversitesi (Malatya)",
+    "city": "Malatya",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://inonu.edu.tr",
+    "logoKey": "İnönü Üniversitesi (Malatya)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Manisa Celâl Bayar Üniversitesi",
+    "city": "Manisa",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://cbu.edu.tr",
+    "logoKey": "Manisa Celâl Bayar Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Mardin Artuklu Üniversitesi",
+    "city": "Mardin",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://artuklu.edu.tr",
+    "logoKey": "Mardin Artuklu Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Mersin Üniversitesi",
+    "city": "Mersin",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://mersin.edu.tr",
+    "logoKey": "Mersin Üniversitesi",
+    "email": "info@mersin.edu.tr",
+    "emailSource": "https://www.mersin.edu.tr/en/management/contact/"
+  },
+  {
+    "name": "Selçuk Üniversitesi (Konya)",
+    "city": "Mersin",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://selcuk.edu.tr",
+    "logoKey": "Selçuk Üniversitesi (Konya)",
+    "email": "iletisim@selcuk.edu.tr",
+    "emailSource": "https://selcuk.edu.tr/birim/sayfa/5472/iletisim-1276"
+  },
+  {
+    "name": "Tarsus Üniversitesi (Mersin)",
+    "city": "Mersin",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://tarsus.edu.tr",
+    "logoKey": "Tarsus Üniversitesi (Mersin)",
+    "email": "bilgi@tarsus.edu.tr",
+    "emailSource": "https://www.tarsus.edu.tr/website/9/1/iletisim?LangID=1"
+  },
+  {
+    "name": "Toros Üniversitesi (Mersin)",
+    "city": "Mersin",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://toros.edu.tr",
+    "logoKey": "Toros Üniversitesi (Mersin)",
+    "email": "info@toros.edu.tr",
+    "emailSource": "https://toros.edu.tr/sayfalar/rektorluk-iletisim"
+  },
+  {
+    "name": "Çağ Üniversitesi (Mersin)",
+    "city": "Mersin",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://cag.edu.tr",
+    "logoKey": "Çağ Üniversitesi (Mersin)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Muğla Sıtkı Koçman Üniversitesi",
+    "city": "Muğla",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://mu.edu.tr",
+    "logoKey": "Muğla Sıtkı Koçman Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Muş Alparslan Üniversitesi",
+    "city": "Muş",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://alparslan.edu.tr",
+    "logoKey": "Muş Alparslan Üniversitesi",
+    "email": "rektor@alparslan.edu.tr",
+    "emailSource": "https://www.alparslan.edu.tr/tr/administration?appellation_id=5"
+  },
+  {
+    "name": "Kapadokya Üniversitesi (Nevşehir)",
+    "city": "Nevşehir",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://kapadokya.edu.tr",
+    "logoKey": "Kapadokya Üniversitesi (Nevşehir)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Nevşehir Hacı Bektaş Veli Üniversitesi",
+    "city": "Nevşehir",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Nevşehir Hacı Bektaş Veli Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Niğde Ömer Halisdemir Üniversitesi",
+    "city": "Niğde",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://nigde.edu.tr",
+    "logoKey": "Niğde Ömer Halisdemir Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Ordu Üniversitesi",
+    "city": "Ordu",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://odu.edu.tr",
+    "logoKey": "Ordu Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Osmaniye Korkut Ata Üniversitesi",
+    "city": "Osmaniye",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://osmaniye.edu.tr",
+    "logoKey": "Osmaniye Korkut Ata Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Recep Tayyip Erdoğan Üniversitesi (Rize)",
+    "city": "Rize",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://erdogan.edu.tr",
+    "logoKey": "Recep Tayyip Erdoğan Üniversitesi (Rize)",
+    "email": "bilgiedinme@erdogan.edu.tr",
+    "emailSource": "https://www.erdogan.edu.tr/Website/Contents.aspx?LangID=1&PageID=362"
+  },
+  {
+    "name": "Sakarya Uygulamalı Bilimler Üniversitesi",
+    "city": "Sakarya",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://subu.edu.tr",
+    "logoKey": "Sakarya Uygulamalı Bilimler Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Sakarya Üniversitesi",
+    "city": "Sakarya",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://sakarya.edu.tr",
+    "logoKey": "Sakarya Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Ondokuz Mayıs Üniversitesi (Samsun)",
+    "city": "Samsun",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://omu.edu.tr",
+    "logoKey": "Ondokuz Mayıs Üniversitesi (Samsun)",
+    "email": "iletisim@omu.edu.tr",
+    "emailSource": "https://www.omu.edu.tr/tr/hakkimizda/iletisim"
+  },
+  {
+    "name": "Samsun Üniversitesi",
+    "city": "Samsun",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://samsun.edu.tr",
+    "logoKey": "Samsun Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Siirt Üniversitesi",
+    "city": "Siirt",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://siirt.edu.tr",
+    "logoKey": "Siirt Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Sinop Üniversitesi",
+    "city": "Sinop",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://sinop.edu.tr",
+    "logoKey": "Sinop Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Sivas Bilim ve Teknoloji Üniversitesi",
+    "city": "Sivas",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://sivas.edu.tr",
+    "logoKey": "Sivas Bilim ve Teknoloji Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Sivas Cumhuriyet Üniversitesi",
+    "city": "Sivas",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://cumhuriyet.edu.tr",
+    "logoKey": "Sivas Cumhuriyet Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Tekirdağ Namık Kemal Üniversitesi",
+    "city": "Tekirdağ",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Tekirdağ Namık Kemal Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Tokat Gaziosmanpaşa Üniversitesi",
+    "city": "Tokat",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://gop.edu.tr",
+    "logoKey": "Tokat Gaziosmanpaşa Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Avrasya Üniversitesi (Trabzon)",
+    "city": "Trabzon",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://avrasya.edu.tr",
+    "logoKey": "Avrasya Üniversitesi (Trabzon)",
+    "email": "iletisim@avrasya.edu.tr",
+    "emailSource": "https://avrasya.edu.tr/idari-ve-mali-isler-daire-baskanligi/"
+  },
+  {
+    "name": "Karadeniz Teknik Üniversitesi (Trabzon)",
+    "city": "Trabzon",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://ktu.edu.tr",
+    "logoKey": "Karadeniz Teknik Üniversitesi (Trabzon)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Trabzon Üniversitesi",
+    "city": "Trabzon",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://trabzon.edu.tr",
+    "logoKey": "Trabzon Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Munzur Üniversitesi (Tunceli)",
+    "city": "Tunceli",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://munzur.edu.tr",
+    "logoKey": "Munzur Üniversitesi (Tunceli)",
+    "email": "universite@munzur.edu.tr",
+    "emailSource": "https://www.munzur.edu.tr/rektor"
+  },
+  {
+    "name": "Uşak Üniversitesi",
+    "city": "Uşak",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://usak.edu.tr",
+    "logoKey": "Uşak Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Siirt Üniversitesi",
+    "city": "Van",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://siirt.edu.tr",
+    "logoKey": "Siirt Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Van Yüzüncü Yıl Üniversitesi",
+    "city": "Van",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Van Yüzüncü Yıl Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Yalova Üniversitesi",
+    "city": "Yalova",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://yalova.edu.tr",
+    "logoKey": "Yalova Üniversitesi",
+    "email": "bilgi@yalova.edu.tr",
+    "emailSource": "https://www.yalova.edu.tr/tr/iletisim"
+  },
+  {
+    "name": "Yozgat Bozok Üniversitesi",
+    "city": "Yozgat",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://bozok.edu.tr",
+    "logoKey": "Yozgat Bozok Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Zonguldak Bülent Ecevit Üniversitesi",
+    "city": "Zonguldak",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://beun.edu.tr",
+    "logoKey": "Zonguldak Bülent Ecevit Üniversitesi",
+    "email": "info@beun.edu.tr",
+    "emailSource": "https://beun.edu.tr/tr/page/birimler"
+  },
+  {
+    "name": "Çanakkale Onsekiz Mart Üniversitesi",
+    "city": "Çanakkale",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://comu.edu.tr",
+    "logoKey": "Çanakkale Onsekiz Mart Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Çankırı Karatekin Üniversitesi",
+    "city": "Çankırı",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://karatekin.edu.tr",
+    "logoKey": "Çankırı Karatekin Üniversitesi",
+    "email": "basinyayin@karatekin.edu.tr",
+    "emailSource": "https://www.karatekin.edu.tr/rektor-9-sayfasi-karatekin"
+  },
+  {
+    "name": "Hitit Üniversitesi (Çorum)",
+    "city": "Çorum",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://hitit.edu.tr",
+    "logoKey": "Hitit Üniversitesi (Çorum)",
+    "email": "basin@hitit.edu.tr",
+    "emailSource": "https://hitit.edu.tr/tr/iletisim/iletisim-bilgileri"
+  },
+  {
+    "name": "Acıbadem Mehmet Ali Aydınlar Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://acibadem.edu.tr",
+    "logoKey": "Acıbadem Mehmet Ali Aydınlar Üniversitesi (İstanbul)",
+    "email": "info@acibadem.edu.tr",
+    "emailSource": "https://www.acibadem.edu.tr/universite/ogretim-elemani-el-kitabi/universite-yapisi-ve-yonetimi/universite-yonetimi"
+  },
+  {
+    "name": "Altınbaş Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://altinbas.edu.tr",
+    "logoKey": "Altınbaş Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Ataşehir Adıgüzel Meslek Yüksekokulu (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "Ataşehir Adıgüzel Meslek Yüksekokulu (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Bahçeşehir Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://bahcesehir.edu.tr",
+    "logoKey": "Bahçeşehir Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Beykoz Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://beykoz.edu.tr",
+    "logoKey": "Beykoz Üniversitesi (İstanbul)",
+    "email": "bilgi@beykoz.edu.tr",
+    "emailSource": "https://www.beykoz.edu.tr/icerik/2383-rektorluk"
+  },
+  {
+    "name": "Bezm-i Âlem Vakıf Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://bezmialem.edu.tr",
+    "logoKey": "Bezm-i Âlem Vakıf Üniversitesi (İstanbul)",
+    "email": "rektorluk@bezmialem.edu.tr",
+    "emailSource": "https://bezmialem.edu.tr/tr/Sayfalar/uzaktan-erisim/yonetim/Rektorluk.aspx"
+  },
+  {
+    "name": "Biruni Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://biruni.edu.tr",
+    "logoKey": "Biruni Üniversitesi (İstanbul)",
+    "email": "info@biruni.edu.tr",
+    "emailSource": "https://www.biruni.edu.tr/iletisimm"
+  },
+  {
+    "name": "Boğaziçi Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://bogazici.edu.tr",
+    "logoKey": "Boğaziçi Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Demiroğlu Bilim Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://istanbulbilim.edu.tr",
+    "logoKey": "Demiroğlu Bilim Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Doğuş Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://dogus.edu.tr",
+    "logoKey": "Doğuş Üniversitesi (İstanbul)",
+    "email": "info@dogus.edu.tr",
+    "emailSource": "https://www.dogus.edu.tr/iletisim"
+  },
+  {
+    "name": "Fatih Sultan Mehmet Vakıf Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://fsm.edu.tr",
+    "logoKey": "Fatih Sultan Mehmet Vakıf Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Fenerbahçe Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://fbu.edu.tr",
+    "logoKey": "Fenerbahçe Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Galatasaray Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://gsu.edu.tr",
+    "logoKey": "Galatasaray Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Haliç Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://halic.edu.tr",
+    "logoKey": "Haliç Üniversitesi (İstanbul)",
+    "email": "info@halic.edu.tr",
+    "emailSource": "https://halic.edu.tr/tr/universitemiz/rektorluk-ofisi/iletisim"
+  },
+  {
+    "name": "Işık Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://isikun.edu.tr",
+    "logoKey": "Işık Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Kadir Has Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://khas.edu.tr",
+    "logoKey": "Kadir Has Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Koç Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://kocuniversity.cn",
+    "logoKey": "Koç Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Maltepe Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://maltepe.edu.tr",
+    "logoKey": "Maltepe Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Marmara Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://marmara.edu.tr",
+    "logoKey": "Marmara Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Mef Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://mef.edu.tr",
+    "logoKey": "Mef Üniversitesi (İstanbul)",
+    "email": "ozelkalem@mef.edu.tr",
+    "emailSource": "https://www.mef.edu.tr/en/rektorluk/ozel-kalem"
+  },
+  {
+    "name": "Mimar Sinan Güzel Sanatlar Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://msgsu.edu.tr",
+    "logoKey": "Mimar Sinan Güzel Sanatlar Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Piri Reis Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://pirireis.edu.tr",
+    "logoKey": "Piri Reis Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Sabancı Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://sabanciuniv.edu",
+    "logoKey": "Sabancı Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://sbu.edu.tr",
+    "logoKey": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "email": "info@sbu.edu.tr",
+    "emailSource": "https://sbu.edu.tr/iletisim/iletisim/"
+  },
+  {
+    "name": "Türk-alman Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://tau.edu.tr",
+    "logoKey": "Türk-alman Üniversitesi (İstanbul)",
+    "email": "info@tau.edu.tr",
+    "emailSource": "https://www.tau.edu.tr/iletisim-ana"
+  },
+  {
+    "name": "Yeditepe Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://yeditepe.edu.tr",
+    "logoKey": "Yeditepe Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Yıldız Teknik Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://yildiz.edu.tr",
+    "logoKey": "Yıldız Teknik Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Özyeğin Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://ozyegin.edu.tr",
+    "logoKey": "Özyeğin Üniversitesi (İstanbul)",
+    "email": "info@ozyegin.edu.tr",
+    "emailSource": "https://www.ozyegin.edu.tr/tr/hakkimizda/yonetim/akademik-yonetim/rektor"
+  },
+  {
+    "name": "Üsküdar Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://uskudar.edu.tr",
+    "logoKey": "Üsküdar Üniversitesi (İstanbul)",
+    "email": "rektorozelkalem@uskudar.edu.tr",
+    "emailSource": "https://uskudar.edu.tr/rektorluk-ofisi-iletisim"
+  },
+  {
+    "name": "İbn Haldun Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://ibnhaldun.edu.tr",
+    "logoKey": "İbn Haldun Üniversitesi (İstanbul)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul 29 Mayıs Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://29mayis.edu.tr",
+    "logoKey": "İstanbul 29 Mayıs Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Arel Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://arel.edu.tr",
+    "logoKey": "İstanbul Arel Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Atlas Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "İstanbul Atlas Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Aydın Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://aydin.edu.tr",
+    "logoKey": "İstanbul Aydın Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Beykent Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://beykent.edu.tr",
+    "logoKey": "İstanbul Beykent Üniversitesi",
+    "email": "info@beykent.edu.tr",
+    "emailSource": "https://www.beykent.edu.tr/iletisim"
+  },
+  {
+    "name": "İstanbul Bilgi Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://bilgi.edu.tr",
+    "logoKey": "İstanbul Bilgi Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Esenyurt Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://esenyurt.edu.tr",
+    "logoKey": "İstanbul Esenyurt Üniversitesi",
+    "email": "tanitim@esenyurt.edu.tr",
+    "emailSource": "https://www.esenyurt.edu.tr/kadro/rektorluk"
+  },
+  {
+    "name": "İstanbul Galata Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "İstanbul Galata Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Gedik Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "İstanbul Gedik Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Gelişim Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://gelisim.edu.tr",
+    "logoKey": "İstanbul Gelişim Üniversitesi",
+    "email": "rektorluk@gelisim.edu.tr",
+    "emailSource": "https://www.gelisim.edu.tr/tr/gelisim-iletisim"
+  },
+  {
+    "name": "İstanbul Kent Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://kent.edu.tr",
+    "logoKey": "İstanbul Kent Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Kültür Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://iku.edu.tr",
+    "logoKey": "İstanbul Kültür Üniversitesi",
+    "email": "rektorluk@iku.edu.tr",
+    "emailSource": "https://www.iku.edu.tr/tr/istanbul-kultur-universitesi-hakkinda"
+  },
+  {
+    "name": "İstanbul Medeniyet Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://medeniyet.edu.tr",
+    "logoKey": "İstanbul Medeniyet Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Medipol Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://medipol.edu.tr",
+    "logoKey": "İstanbul Medipol Üniversitesi",
+    "email": "rektorluk@medipol.edu.tr",
+    "emailSource": "https://www.medipol.edu.tr/universite/ulasim-ve-iletisim"
+  },
+  {
+    "name": "İstanbul Nişantaşı Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://nisantasi.edu.tr",
+    "logoKey": "İstanbul Nişantaşı Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Okan Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "İstanbul Okan Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Rumeli Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "İstanbul Rumeli Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Sabahattin Zaim Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://izu.edu.tr",
+    "logoKey": "İstanbul Sabahattin Zaim Üniversitesi",
+    "email": "bilgi@izu.edu.tr",
+    "emailSource": "https://www.izu.edu.tr/iletisim"
+  },
+  {
+    "name": "İstanbul Sağlık ve Sosyal Bilimler Meslek Yüksekokulu",
+    "city": "İstanbul",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "",
+    "logoKey": "İstanbul Sağlık ve Sosyal Bilimler Meslek Yüksekokulu",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Sağlık ve Teknoloji Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://istun.edu.tr",
+    "logoKey": "İstanbul Sağlık ve Teknoloji Üniversitesi",
+    "email": "info@istun.edu.tr",
+    "emailSource": "https://www.istun.edu.tr/tr/iletisim"
+  },
+  {
+    "name": "İstanbul Teknik Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://itu.edu.tr",
+    "logoKey": "İstanbul Teknik Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Ticaret Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://ticaret.edu.tr",
+    "logoKey": "İstanbul Ticaret Üniversitesi",
+    "email": "bilgi@ticaret.edu.tr",
+    "emailSource": "https://ticaret.edu.tr/iletisim8/"
+  },
+  {
+    "name": "İstanbul Topkapı Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://topkapi.edu.tr",
+    "logoKey": "İstanbul Topkapı Üniversitesi",
+    "email": "info@topkapi.edu.tr",
+    "emailSource": "https://www.topkapi.edu.tr/tr-TR/iletisim/48290"
+  },
+  {
+    "name": "İstanbul Yeni Yüzyıl Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://yeniyuzyil.edu.tr",
+    "logoKey": "İstanbul Yeni Yüzyıl Üniversitesi",
+    "email": "rektorluk@yeniyuzyil.edu.tr",
+    "emailSource": "https://www.yeniyuzyil.edu.tr/iletisim"
+  },
+  {
+    "name": "İstanbul Üniversitesi",
+    "city": "İstanbul",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://istanbul.edu.tr",
+    "logoKey": "İstanbul Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İstanbul Üniversitesi-cerrahpaşa",
+    "city": "İstanbul",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://iuc.edu.tr",
+    "logoKey": "İstanbul Üniversitesi-cerrahpaşa",
+    "email": "bilgi@iuc.edu.tr",
+    "emailSource": "https://www.iuc.edu.tr/tr/content/yonetim/rektor"
+  },
+  {
+    "name": "İstanbul Şişli Meslek Yüksekokulu",
+    "city": "İstanbul",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://sisli.edu.tr",
+    "logoKey": "İstanbul Şişli Meslek Yüksekokulu",
+    "email": "info@sisli.edu.tr",
+    "emailSource": "https://www.sisli.edu.tr/iletisim/"
+  },
+  {
+    "name": "İstinye Üniversitesi (İstanbul)",
+    "city": "İstanbul",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://istinye.edu.tr",
+    "logoKey": "İstinye Üniversitesi (İstanbul)",
+    "email": "info@istinye.edu.tr",
+    "emailSource": "https://www.istinye.edu.tr/tr/universite/rektorluk"
+  },
+  {
+    "name": "Dokuz Eylül Üniversitesi (İzmir)",
+    "city": "İzmir",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://deu.edu.tr",
+    "logoKey": "Dokuz Eylül Üniversitesi (İzmir)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Ege Üniversitesi (İzmir)",
+    "city": "İzmir",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://ege.edu.tr",
+    "logoKey": "Ege Üniversitesi (İzmir)",
+    "email": "webadmin@ege.edu.tr",
+    "emailSource": "https://www.ege.edu.tr/a-712/.html"
+  },
+  {
+    "name": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "city": "İzmir",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://sbu.edu.tr",
+    "logoKey": "Sağlık Bilimleri Üniversitesi (İstanbul)",
+    "email": "info@sbu.edu.tr",
+    "emailSource": "https://sbu.edu.tr/iletisim/iletisim/"
+  },
+  {
+    "name": "Türk Hava Kurumu Üniversitesi (Ankara)",
+    "city": "İzmir",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://thk.edu.tr",
+    "logoKey": "Türk Hava Kurumu Üniversitesi (Ankara)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Yaşar Üniversitesi (İzmir)",
+    "city": "İzmir",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://yasar.edu.tr",
+    "logoKey": "Yaşar Üniversitesi (İzmir)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İzmir Bakırçay Üniversitesi",
+    "city": "İzmir",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://bakircay.edu.tr",
+    "logoKey": "İzmir Bakırçay Üniversitesi",
+    "email": "info@bakircay.edu.tr",
+    "emailSource": "https://bakircay.edu.tr/detay-menu.aspx?id=66"
+  },
+  {
+    "name": "İzmir Demokrasi Üniversitesi",
+    "city": "İzmir",
+    "demoHead": "محمد — مسؤول تجريبي",
+    "site": "https://idu.edu.tr",
+    "logoKey": "İzmir Demokrasi Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İzmir Ekonomi Üniversitesi",
+    "city": "İzmir",
+    "demoHead": "عمر — مسؤول تجريبي",
+    "site": "https://ieu.edu.tr",
+    "logoKey": "İzmir Ekonomi Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İzmir Katip Çelebi Üniversitesi",
+    "city": "İzmir",
+    "demoHead": "يوسف — مسؤول تجريبي",
+    "site": "https://ikc.edu.tr",
+    "logoKey": "İzmir Katip Çelebi Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İzmir Konak Meslek Yüksekokulu",
+    "city": "İzmir",
+    "demoHead": "خالد — مسؤول تجريبي",
+    "site": "https://kavram.edu.tr",
+    "logoKey": "İzmir Konak Meslek Yüksekokulu",
+    "email": "info@kavram.edu.tr",
+    "emailSource": "https://www.kavram.edu.tr/iletisim"
+  },
+  {
+    "name": "İzmir Tınaztepe Üniversitesi",
+    "city": "İzmir",
+    "demoHead": "سارة — مسؤول تجريبي",
+    "site": "https://tinaztepe.edu.tr",
+    "logoKey": "İzmir Tınaztepe Üniversitesi",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "İzmir Yüksek Teknoloji Enstitüsü",
+    "city": "İzmir",
+    "demoHead": "نور — مسؤول تجريبي",
+    "site": "https://iyte.edu.tr",
+    "logoKey": "İzmir Yüksek Teknoloji Enstitüsü",
+    "email": "info@iyte.edu.tr",
+    "emailSource": "https://iyte.edu.tr/iletisim/"
+  },
+  {
+    "name": "Harran Üniversitesi (Şanlıurfa)",
+    "city": "Şanlıurfa",
+    "demoHead": "ريم — مسؤول تجريبي",
+    "site": "https://harran.edu.tr",
+    "logoKey": "Harran Üniversitesi (Şanlıurfa)",
+    "email": "",
+    "emailSource": ""
+  },
+  {
+    "name": "Şırnak Üniversitesi",
+    "city": "Şırnak",
+    "demoHead": "أحمد — مسؤول تجريبي",
+    "site": "https://sirnak.edu.tr",
+    "logoKey": "Şırnak Üniversitesi",
+    "email": "rektorluk@sirnak.edu.tr",
+    "emailSource": "https://sirnak.edu.tr/tr/iletisim/"
+  }
+]

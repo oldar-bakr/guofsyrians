@@ -1,5 +1,9 @@
 # Student subscription
 
+## University directory
+- [x] Add domestic university catalogue with compact search, city filtering, and existing university-logo lookup.
+- [x] Research institutional contact emails with source links and clearly label demo representatives.
+
 ## Course browsing and quizzes
 - [x] Add category/search/enrollment/sort filters and clickable course cards.
 - [x] Move enrollment to details and show introduction and embedded lesson videos.

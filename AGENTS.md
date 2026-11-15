@@ -22,3 +22,4 @@
 - Content images store private bucket paths with owner/staff-only direct reads; a server function checks caller-visible content through RLS before signing images for other viewers. Uploads preserve transparency; news slider covers fill the frame while detail galleries preserve full aspect ratio.
 - The home news slider uses the existing Embla carousel with RTL navigation and private signed cover images; motion pauses during interaction and respects reduced-motion preferences.
 - Course quiz answer keys are staff-only records; authenticated server functions verify enrollment and course visibility before returning sanitized questions or saving server-graded attempts, preventing client-forged scores.
+- The university directory is a bundled domestic YÖK catalogue enriched with sourced institutional office emails; staff-managed branch contacts override demo representatives, which remain explicitly labelled as fictional.
