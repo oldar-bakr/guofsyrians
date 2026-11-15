@@ -61,7 +61,6 @@ function Deals() {
   return (
     <AppShell title="التخفيضات">
       <div className="mb-5 space-y-3 border-b pb-4">
-        <h2 className="font-display text-2xl font-bold">التخفيضات</h2>
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
           <div className="relative min-w-0"><Search className="pointer-events-none absolute right-3 top-3 h-4 w-4 text-muted-foreground" /><Input aria-label="البحث في التخفيضات" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ابحث عن شركة أو عرض…" className="h-10 bg-card pr-9 pl-10" />{query && <Button variant="ghost" size="icon" className="absolute left-1 top-1 h-8 w-8" aria-label="مسح البحث" onClick={() => setQuery("")}><X className="h-4 w-4" /></Button>}</div>
           <Popover open={filtersOpen} onOpenChange={setFiltersOpen}>
