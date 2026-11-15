@@ -38,4 +38,4 @@
 - AppShell owns mobile page titles and safe-area-aware floating navigation so student screens share one consistent mobile frame without changing desktop navigation.
 - The public landing keeps its existing authentication redirects and shared contact source; visual changes must preserve separate contribution and business entry points.
 - LoadingSkeleton/TableSkeleton share initial-load placeholders with the router fallback; keep cached content visible during refreshes and retain action progress indicators.
-- Business owner navigation is responsive; shared dialogs preserve focus for offers and student verification.
+- Business mobile header holds store identity; bottom navigation floats for scanner access. Dialogs retain focus.
