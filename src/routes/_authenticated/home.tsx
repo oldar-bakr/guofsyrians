@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CalendarDays, ShoppingBag, Building2, GraduationCap, Tag, Award } from "lucide-react";
+import { CalendarDays, ShoppingBag, Landmark, GraduationCap, Tag, Award } from "lucide-react";
 import { NewsSlider } from "@/components/NewsSlider";
 import { AppShell } from "@/components/AppShell";
 import logo from "@/assets/union-logo.png.asset.json";
@@ -25,8 +25,8 @@ const services = [
   { to: "/deals", label: "التخفيضات", icon: Tag },
   { to: "/courses", label: "الدورات", icon: GraduationCap },
   { to: "/market", label: "السوق", icon: ShoppingBag },
-  { to: "/assistant", label: "المساعد الذكي", icon: Building2 },
-  { to: "/union", label: "دليل الاتحاد", icon: Building2 },
+  { to: "/assistant", label: "المساعد الذكي", icon: Landmark },
+  { to: "/union", label: "دليل الاتحاد", icon: Landmark },
 ] as const;
 
 function Index() {
