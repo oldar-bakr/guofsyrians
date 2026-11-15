@@ -20,7 +20,7 @@ function Gallery({ paths, urls, title, loading, initial = 0, expanded = false, o
       <CarouselContent className="ml-0">
         {paths.map((path, index) => <CarouselItem key={`${path}-${index}`} className="pl-0" aria-label={`الصورة ${index + 1} من ${paths.length}`}>
           <div className={`relative grid w-full place-items-center overflow-hidden rounded-lg bg-muted ${expanded ? "h-[65dvh]" : "h-[280px] sm:h-[420px]"}`}>
-            {urls[index] ? <img src={urls[index]} alt={`${title} — صورة ${index + 1}`} draggable={false} className="h-full w-full select-none object-contain" /> : loading ? <Loader2 className="animate-spin text-muted-foreground" /> : <ImageOff className="text-muted-foreground" />}
+            {urls[index] ? <img src={urls[index]} alt={`${title} — صورة ${index + 1}`} draggable={false} className={`h-full w-full select-none ${expanded ? "object-contain" : "object-cover"}`} /> : loading ? <Loader2 className="animate-spin text-muted-foreground" /> : <ImageOff className="text-muted-foreground" />}
             {onExpand && <Button variant="secondary" size="icon" disabled={!urls[index]} className="absolute bottom-3 left-3 h-8 w-8" onClick={() => onExpand(index)} aria-label={`تكبير الصورة ${index + 1}`} title="تكبير الصورة"><Maximize2 className="h-4 w-4" /></Button>}
           </div>
         </CarouselItem>)}
