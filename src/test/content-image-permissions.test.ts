@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
-const sql = readFileSync(new URL("../../drizzle/migrations/0015_scholarships_and_content_images.sql", import.meta.url), "utf8");
+const sql = readFileSync("drizzle/migrations/0015_scholarships_and_content_images.sql", "utf8");
 
 describe("content image access policies", () => {
   it("limits image uploads to staff and their own folder", () => {
