@@ -1,5 +1,9 @@
 # Student subscription
 
+## Profile presentation
+- [x] Redesign profile summary, activity shortcuts, grouped student fields, and photo editing without changing access or subscription rules.
+- [x] Verify existing real data saves and reads back, photo dialog opens, and desktop/mobile summary and university fields render correctly.
+
 ## Assistant answer presentation
 - [x] Render formatted answers with safe links, readable lists, and clickable phone/email contacts.
 - [x] Verify an actual assistant response, bold/list formatting, callable phone/email links, and phone layout; three safety tests pass.
