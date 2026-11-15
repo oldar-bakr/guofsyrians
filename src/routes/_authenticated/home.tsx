@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CalendarDays, ShoppingBag, Building2, GraduationCap, Tag, Sparkles, Award } from "lucide-react";
+import { CalendarDays, ShoppingBag, Building2, GraduationCap, Tag, Award } from "lucide-react";
 import { NewsSlider } from "@/components/NewsSlider";
 import { AppShell } from "@/components/AppShell";
+import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/_authenticated/home")({
   staticData: { sitemap: false },
@@ -22,7 +23,7 @@ const services = [
   { to: "/scholarships", label: "المنح", icon: Award },
   { to: "/courses", label: "الدورات", icon: GraduationCap },
   { to: "/market", label: "السوق", icon: ShoppingBag },
-  { to: "/assistant", label: "المساعد الذكي", icon: Sparkles },
+  { to: "/assistant", label: "المساعد الذكي", icon: Building2 },
   { to: "/deals", label: "التخفيضات", icon: Tag },
   { to: "/events", label: "الفعاليات", icon: CalendarDays },
   { to: "/union", label: "دليل الاتحاد", icon: Building2 },
@@ -37,7 +38,7 @@ function Index() {
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-7">
         {services.map(({ to, label, icon: Icon }) => (
           <Link key={to} to={to} className="flex flex-col items-center gap-2 rounded-2xl bg-card p-4 text-center text-sm shadow-soft">
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-secondary text-primary"><Icon className="h-5 w-5" /></span>
+            <span className="grid h-11 w-11 place-items-center rounded-full bg-secondary text-primary">{to === "/assistant" ? <img src={logo.url} alt="" className="h-8 w-8 object-contain" /> : <Icon className="h-5 w-5" />}</span>
             {label}
           </Link>
         ))}

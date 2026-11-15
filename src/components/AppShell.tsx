@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Home, IdCard, GraduationCap, Tag, Sparkles } from "lucide-react";
+import { Home, IdCard, GraduationCap, Tag } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
 import { UniversityLogo } from "@/components/UniversityLogo";
 import { useIsStaff, useStudent } from "@/lib/profile";
@@ -11,7 +11,7 @@ const tabs = [
   { to: "/courses", label: "الدورات", icon: GraduationCap },
   { to: "/card", label: "بطاقتي", icon: IdCard },
   { to: "/deals", label: "التخفيضات", icon: Tag },
-  { to: "/assistant", label: "المساعد", icon: Sparkles },
+  { to: "/assistant", label: "المساعد", icon: Home },
 ] as const;
 
 export function AppShell({ title, children }: { title?: string; children: ReactNode }) {
@@ -33,7 +33,7 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
                 activeOptions={{ exact: true }}
                 className="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary data-[status=active]:bg-secondary data-[status=active]:font-bold data-[status=active]:text-primary"
               >
-                <Icon className="h-4 w-4" />
+                {to === "/assistant" ? <img src={logo.url} alt="" className="h-5 w-5 shrink-0 object-contain" /> : <Icon className="h-4 w-4" />}
                 {label}
               </Link>
             ))}
@@ -57,7 +57,7 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
             activeOptions={{ exact: true }}
             className="flex flex-col items-center gap-1 py-3 text-xs text-muted-foreground data-[status=active]:font-bold data-[status=active]:text-primary"
           >
-            <Icon className="h-5 w-5" />
+            {to === "/assistant" ? <img src={logo.url} alt="" className="h-5 w-5 shrink-0 object-contain" /> : <Icon className="h-5 w-5" />}
             {label}
           </Link>
         ))}

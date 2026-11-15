@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Check, Copy, Plus, RotateCcw, ArrowUp, Sparkles } from "lucide-react";
+import { Check, Copy, Plus, RotateCcw, ArrowUp } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { Avatar } from "@/components/Avatar";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,12 @@ export const Route = createFileRoute("/_authenticated/assistant")({
 });
 
 type Msg = { from: "me" | "bot"; text: string; error?: boolean; question?: string };
+const quickQuestions = [
+  { label: "دورات للمبتدئين", question: "ما الدورات المتاحة للمبتدئين؟" },
+  { label: "تخفيضات مدينتي", question: "ما التخفيضات المتاحة في مدينتي؟" },
+  { label: "الفعاليات القادمة", question: "ما الفعاليات القادمة وكيف أسجل فيها؟" },
+  { label: "التواصل مع الاتحاد", question: "كيف أتواصل مع الاتحاد؟" },
+];
 
 function Assistant() {
   const ask = useServerFn(askAssistant);
@@ -87,9 +93,12 @@ function Assistant() {
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-6" role="log" aria-label="المحادثة" aria-live="polite" aria-relevant="additions" aria-busy={busy}>
           {msgs.length === 0 ? (
             <div className="flex min-h-full flex-col items-center justify-center px-2 pb-12 text-center">
-              <Sparkles className="mb-5 size-7 text-primary" strokeWidth={1.5} />
+              <img src={logo.url} alt="شعار الاتحاد" className="mb-5 size-16 shrink-0 object-contain" />
               <h2 className="font-display text-2xl font-bold text-primary">كيف أقدر أساعدك اليوم؟</h2>
               <p className="mt-3 text-sm text-muted-foreground">أهلاً{student.name ? `، ${student.name.split(" ")[0]}` : " بك"}</p>
+              <div className="mt-6 flex max-w-sm flex-wrap justify-center gap-x-2 gap-y-1" aria-label="أسئلة سريعة">
+                {quickQuestions.map(({ label, question }) => <Button key={label} variant="ghost" size="sm" disabled={busy} className="h-9 text-xs text-muted-foreground" onClick={() => void send(label === "تخفيضات مدينتي" && student.city ? `ما التخفيضات المتاحة في مدينة ${student.city}؟` : question)}>{label}<ArrowUp className="size-3 rotate-[-45deg]" /></Button>)}
+              </div>
               </div>
           ) : (
             <div className="mx-auto max-w-3xl space-y-6 px-1">
