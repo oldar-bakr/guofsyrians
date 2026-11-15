@@ -169,8 +169,8 @@ function Dashboard({ biz, uid }: { biz: Business; uid: string }) {
           ))}
         </nav>
       </aside>
-      <div className="min-w-0 space-y-7">
-        <div className="grid grid-cols-3 divide-x divide-x-reverse border-y py-4">
+      <div className="flex min-w-0 flex-col gap-7">
+        <div className={`grid grid-cols-3 divide-x divide-x-reverse border-y py-4 ${tab === "scan" ? "order-2" : ""}`}>
           {[{label:"إجمالي العروض",value:deals.length,icon:Tag},{label:"عروض منشورة",value:published,icon:CheckCircle2},{label:"قيد المراجعة",value:pending,icon:Clock3}].map(({label,value,icon:Icon}) => <div key={label} className="px-3 first:ps-0 sm:px-6"><div className="flex items-center gap-2 text-muted-foreground"><Icon className="hidden h-4 w-4 sm:block" /><span className="text-xs">{label}</span></div><p className="mt-2 font-display text-2xl font-bold sm:text-3xl">{value}</p></div>)}
         </div>
         {tab === "scan" && <ScanTab deals={deals} />}
@@ -186,7 +186,7 @@ function ScanTab({ deals }: { deals: any[] }) {
   const lookup = useServerFn(lookupStudent);
   const confirm = useServerFn(confirmDiscount);
   const active = deals.filter((d) => d.active);
-  const [scanning, setScanning] = useState(false);
+  const [scanning, setScanning] = useState(true);
   const [manual, setManual] = useState("");
   const [code, setCode] = useState("");
   const [student, setStudent] = useState<ScannedStudent | null>(null);
@@ -230,8 +230,8 @@ function ScanTab({ deals }: { deals: any[] }) {
       <div><h2 className="font-display text-2xl font-bold">التحقق من عضوية الطالب</h2><p className="mt-2 text-sm text-muted-foreground">تقديم التخفيض للطلاب أصحاب العضوية الفعّالة</p></div>
       {active.length === 0 && <p className="rounded-lg border border-accent bg-accent/10 p-3 text-sm">أضف عرضاً من تبويب «عروضي» أولاً.</p>}
       <div className="grid gap-6 border-y py-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:gap-8">
-        <div className="flex min-h-64 flex-col items-center justify-center gap-5 rounded-lg border bg-card p-6 text-center">
-          {scanning ? <><QrScanner onResult={open} /><Button variant="outline" onClick={() => setScanning(false)}>إلغاء المسح</Button></> : <><div className="relative grid h-24 w-24 place-items-center rounded-lg border-2 border-primary/30 bg-secondary/40"><QrCode className="h-14 w-14 text-primary" /></div><Button disabled={busy} onClick={() => setScanning(true)} className="h-11 w-full max-w-64"><Camera />امسح رمز الطالب</Button></>}
+        <div className="flex min-h-64 flex-col items-center justify-center gap-3 rounded-lg border bg-card p-3 text-center sm:p-4">
+          {scanning ? <><QrScanner onResult={open} /><Button variant="ghost" onClick={() => setScanning(false)}>إيقاف الكاميرا</Button></> : <><div className="relative grid h-24 w-24 place-items-center rounded-lg border-2 border-primary/30 bg-secondary/40"><QrCode className="h-14 w-14 text-primary" /></div><Button disabled={busy} onClick={() => { setMsg(""); setScanning(true); }} className="h-11 w-full max-w-64"><Camera />{msg ? "مسح الطالب التالي" : "امسح رمز الطالب"}</Button></>}
         </div>
         <div className="flex flex-col justify-center"><div className="mb-3 flex items-center gap-2 text-sm font-bold"><Search className="h-4 w-4 text-primary" />البحث برقم العضوية</div><form onSubmit={(e) => { e.preventDefault(); open(manual); }} className="space-y-3"><label className="text-sm text-muted-foreground" htmlFor="member-code">رقم الطالب</label><input id="member-code" value={manual} onChange={(e) => setManual(e.target.value)} dir="ltr" placeholder="GUSS-2026-00000" className={input} /><Button variant="outline" disabled={busy || !manual.trim()} className="h-11 w-full">{busy ? <Loader2 className="animate-spin" /> : <ArrowLeft />}التحقق من العضوية</Button></form></div>
       </div>
