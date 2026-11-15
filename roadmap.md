@@ -1,5 +1,10 @@
 # Student subscription
 
+## Mobile navigation
+- [x] Move the mobile page title beside the union logo, replacing the brand label only on mobile.
+- [x] Float the five existing navigation buttons above the screen edge with active states and safe-area spacing.
+- [x] Verify authenticated events and scholarships, course navigation and active state, 320px/390px phones, and unchanged desktop navigation.
+
 ## Student market examples
 - [x] Replace existing products with exactly three detailed, clearly labelled student resale examples, preserving previous orders.
 - [x] Upload book, laptop, and study-supply illustrations through the existing private image flow.
