@@ -23,3 +23,4 @@
 - The home news slider uses the existing Embla carousel with RTL navigation and private signed cover images; motion pauses during interaction and respects reduced-motion preferences.
 - Course quiz answer keys are staff-only records; authenticated server functions verify enrollment and course visibility before returning sanitized questions or saving server-graded attempts, preventing client-forged scores.
 - The university directory is a bundled domestic YÖK catalogue enriched with sourced institutional office emails; staff-managed branch contacts override demo representatives, which remain explicitly labelled as fictional.
+- Deal cards link to student-facing partner profiles; the shared redemption dialog preserves the same QR payload and is separate from card navigation, including legacy staff-created offers without a business row.

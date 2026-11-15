@@ -1,5 +1,9 @@
 # Student subscription
 
+## Partner profiles
+- [x] Open partner information and all available offers from deal cards, keeping the redemption popup separate.
+- [x] Verify card navigation and redemption from both pages on actual offers, including phone layout.
+
 ## University directory
 - [x] Add domestic university catalogue with compact search, city filtering, and existing university-logo lookup.
 - [x] Research institutional contact emails with source links and clearly label demo representatives.

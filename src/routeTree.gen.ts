@@ -35,6 +35,7 @@ import { Route as AuthenticatedEventsIdRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedMarketIndexRouteImport } from './routes/_authenticated/market.index'
 import { Route as AuthenticatedNewsIndexRouteImport } from './routes/_authenticated/news.index'
 import { Route as AuthenticatedNewsIdRouteImport } from './routes/_authenticated/news.$id'
+import { Route as AuthenticatedPartnersIdRouteImport } from './routes/_authenticated/partners.$id'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -176,6 +177,11 @@ const AuthenticatedNewsIdRoute = AuthenticatedNewsIdRouteImport.update({
   path: '/news/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPartnersIdRoute = AuthenticatedPartnersIdRouteImport.update({
+  id: '/partners/$id',
+  path: '/partners/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   id: '/lovable/email/auth/preview',
   path: '/lovable/email/auth/preview',
@@ -214,6 +220,7 @@ export interface FileRoutesByFullPath {
   '/courses/$id': typeof AuthenticatedCoursesIdRoute
   '/events/$id': typeof AuthenticatedEventsIdRoute
   '/news/$id': typeof AuthenticatedNewsIdRoute
+  '/partners/$id': typeof AuthenticatedPartnersIdRoute
   '/contribute/': typeof AuthenticatedContributeIndexRoute
   '/courses/': typeof AuthenticatedCoursesIndexRoute
   '/events/': typeof AuthenticatedEventsIndexRoute
@@ -243,6 +250,7 @@ export interface FileRoutesByTo {
   '/courses/$id': typeof AuthenticatedCoursesIdRoute
   '/events/$id': typeof AuthenticatedEventsIdRoute
   '/news/$id': typeof AuthenticatedNewsIdRoute
+  '/partners/$id': typeof AuthenticatedPartnersIdRoute
   '/contribute': typeof AuthenticatedContributeIndexRoute
   '/courses': typeof AuthenticatedCoursesIndexRoute
   '/events': typeof AuthenticatedEventsIndexRoute
@@ -275,6 +283,7 @@ export interface FileRoutesById {
   '/_authenticated/courses/$id': typeof AuthenticatedCoursesIdRoute
   '/_authenticated/events/$id': typeof AuthenticatedEventsIdRoute
   '/_authenticated/news/$id': typeof AuthenticatedNewsIdRoute
+  '/_authenticated/partners/$id': typeof AuthenticatedPartnersIdRoute
   '/_authenticated/contribute/': typeof AuthenticatedContributeIndexRoute
   '/_authenticated/courses/': typeof AuthenticatedCoursesIndexRoute
   '/_authenticated/events/': typeof AuthenticatedEventsIndexRoute
@@ -307,6 +316,7 @@ export interface FileRouteTypes {
     | '/courses/$id'
     | '/events/$id'
     | '/news/$id'
+    | '/partners/$id'
     | '/contribute/'
     | '/courses/'
     | '/events/'
@@ -336,6 +346,7 @@ export interface FileRouteTypes {
     | '/courses/$id'
     | '/events/$id'
     | '/news/$id'
+    | '/partners/$id'
     | '/contribute'
     | '/courses'
     | '/events'
@@ -367,6 +378,7 @@ export interface FileRouteTypes {
     | '/_authenticated/courses/$id'
     | '/_authenticated/events/$id'
     | '/_authenticated/news/$id'
+    | '/_authenticated/partners/$id'
     | '/_authenticated/contribute/'
     | '/_authenticated/courses/'
     | '/_authenticated/events/'
@@ -574,6 +586,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedNewsIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/partners/$id': {
+      id: '/_authenticated/partners/$id'
+      path: '/partners/$id'
+      fullPath: '/partners/$id'
+      preLoaderRoute: typeof AuthenticatedPartnersIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/lovable/email/auth/preview': {
       id: '/lovable/email/auth/preview'
       path: '/lovable/email/auth/preview'
@@ -629,6 +648,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCoursesIdRoute: typeof AuthenticatedCoursesIdRoute
   AuthenticatedEventsIdRoute: typeof AuthenticatedEventsIdRoute
   AuthenticatedNewsIdRoute: typeof AuthenticatedNewsIdRoute
+  AuthenticatedPartnersIdRoute: typeof AuthenticatedPartnersIdRoute
   AuthenticatedCoursesIndexRoute: typeof AuthenticatedCoursesIndexRoute
   AuthenticatedEventsIndexRoute: typeof AuthenticatedEventsIndexRoute
   AuthenticatedMarketIndexRoute: typeof AuthenticatedMarketIndexRoute
@@ -648,6 +668,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCoursesIdRoute: AuthenticatedCoursesIdRoute,
   AuthenticatedEventsIdRoute: AuthenticatedEventsIdRoute,
   AuthenticatedNewsIdRoute: AuthenticatedNewsIdRoute,
+  AuthenticatedPartnersIdRoute: AuthenticatedPartnersIdRoute,
   AuthenticatedCoursesIndexRoute: AuthenticatedCoursesIndexRoute,
   AuthenticatedEventsIndexRoute: AuthenticatedEventsIndexRoute,
   AuthenticatedMarketIndexRoute: AuthenticatedMarketIndexRoute,
