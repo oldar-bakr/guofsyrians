@@ -21,10 +21,10 @@ function NewsSlide({ news }: { news: News }) {
   });
   return <Link to="/news/$id" params={{ id: news.id }} className="relative block h-[260px] overflow-hidden bg-secondary sm:h-[360px]" aria-label={`اقرأ الخبر: ${news.title}`}>
     {urls[0] ? <img src={urls[0]} alt={news.title} className="h-full w-full object-cover" /> : <div className="grid h-full place-items-center pb-24"><img src={logo.url} alt="الاتحاد العام لطلبة سوريا" className="h-28 w-28 object-contain sm:h-36 sm:w-36" /></div>}
-    <div className="absolute inset-x-0 bottom-0 bg-primary/95 px-5 py-4 text-primary-foreground sm:px-7 sm:py-5">
-      <div className="mb-1 flex items-center gap-2 text-xs"><span className="font-bold text-accent">أخبار الاتحاد</span>{news.date && <><span aria-hidden="true">·</span><span>{news.date}</span></>}</div>
-      <h2 className="line-clamp-2 break-words font-display text-xl font-bold leading-relaxed sm:text-2xl">{news.title}</h2>
-      <span className="mt-1 inline-flex items-center gap-2 text-xs text-accent">اقرأ الخبر<ArrowLeft className="h-3.5 w-3.5" /></span>
+    <div className="absolute inset-x-0 bottom-0 flex h-1/3 flex-col justify-center gap-0.5 bg-primary/95 px-4 py-2 text-primary-foreground sm:gap-1 sm:px-7 sm:py-3">
+      <div className="flex items-center gap-2 text-[10px] leading-3 sm:text-xs sm:leading-4"><span className="font-bold text-accent">أخبار الاتحاد</span>{news.date && <><span aria-hidden="true">·</span><span>{news.date}</span></>}</div>
+      <h2 className="line-clamp-2 break-words font-display text-base font-bold leading-5 sm:text-xl sm:leading-6">{news.title}</h2>
+      <span className="inline-flex items-center gap-2 text-[10px] leading-3 text-accent sm:text-xs sm:leading-4">اقرأ الخبر<ArrowLeft className="h-3 w-3" /></span>
     </div>
   </Link>;
 }
