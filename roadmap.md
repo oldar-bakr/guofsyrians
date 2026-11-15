@@ -1,5 +1,10 @@
 # Student subscription
 
+## Dashboard side navigation
+- [x] Replace horizontal tabs with grouped RTL side navigation, desktop collapse and a phone drawer.
+- [x] Keep management actions and permissions intact; preserve selected section on refresh and browser navigation.
+- [x] Verify all 12 navigation links, real product data, collapse, refresh/back, add dialog, phone menu selection/close and desktop/mobile screenshots; routing and complaint tests pass.
+
 ## Profile account and complaints
 - [x] Add student summary, account/legal links, password change form, logout and union contacts; password form renders, but the owner's actual password was not changed during testing.
 - [x] Add private complaints with optional anonymous identity and a 3 MB attachment limit, visible to staff in the dashboard.

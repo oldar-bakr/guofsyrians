@@ -13,11 +13,15 @@ import { ActivityManager } from "@/components/ActivityManager";
 import { UsersManager } from "@/components/UsersManager";
 import { BusinessesManager } from "@/components/BusinessesManager";
 import { ComplaintsManager } from "@/components/ComplaintsManager";
-import logo from "@/assets/union-logo.png.asset.json";
+import { AdminLayout, adminSectionKeys, type AdminSection } from "@/components/AdminLayout";
 
 export const Route = createFileRoute("/admin")({
   staticData: { sitemap: false },
   ssr: false,
+  validateSearch: (search: Record<string, unknown>): { section?: AdminSection } => {
+    const section = search["section"];
+    return typeof section === "string" && adminSectionKeys.includes(section) ? { section: section as AdminSection } : {};
+  },
   head: () => ({
     meta: [
       { title: "لوحة الإدارة | تطبيق خدمات الطلاب" },
@@ -38,7 +42,8 @@ function Admin() {
   const [state, setState] = useState<"loading" | "admin" | "editor" | "denied">("loading");
   const [email, setEmail] = useState("");
   const [myId, setMyId] = useState("");
-  const [tab, setTab] = useState<ContentTable | "users" | "activity" | "businesses" | "complaints">("news");
+  const { section } = Route.useSearch();
+  const tab = section === "users" && state !== "admin" ? "news" : section ?? "news";
 
   useEffect(() => {
     (async () => {
@@ -75,40 +80,10 @@ function Admin() {
       </div>
     );
 
-  const tabs: { key: ContentTable | "users" | "activity" | "businesses" | "complaints"; label: string }[] = [
-    { key: "complaints", label: "الشكاوى والملاحظات" },
-    { key: "activity", label: "نشاط الطلاب" },
-    { key: "businesses", label: "المتاجر والعروض" },
-    ...(Object.keys(sections) as ContentTable[]).map((t) => ({ key: t, label: sections[t].label })),
-    ...(state === "admin" ? [{ key: "users" as const, label: "المستخدمون والصلاحيات" }] : []),
-  ];
-
   return (
-    <div className="min-h-screen bg-muted">
-      <header className="bg-hero text-primary-foreground">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
-          <div className="flex items-center gap-3">
-            <img src={logo.url} alt="" className="h-10 w-10 rounded-full bg-card object-contain p-1" />
-            <div>
-              <h1 className="font-display text-xl font-bold">لوحة الإدارة</h1>
-              <p className="text-xs opacity-80">{email} · {state === "admin" ? "مدير" : "محرر"}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <Link to="/home" className="underline">عرض التطبيق</Link>
-            <button onClick={signOut} className="flex items-center gap-1 rounded-full bg-accent px-3 py-1 font-bold text-accent-foreground"><LogOut className="h-4 w-4" />خروج</button>
-          </div>
-        </div>
-        <nav className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5">
-          {tabs.map((t) => (
-            <button key={t.key} onClick={() => setTab(t.key)} className={`shrink-0 rounded-t-xl px-4 py-2 text-sm ${t.key === tab ? "bg-muted font-bold text-foreground" : "opacity-80"}`}>{t.label}</button>
-          ))}
-        </nav>
-      </header>
-      <main className="mx-auto max-w-5xl p-5">
+    <AdminLayout section={tab} role={state} email={email} onSignOut={signOut}>
         {tab === "complaints" ? <ComplaintsManager /> : tab === "users" ? <UsersManager myId={myId} /> : tab === "activity" ? <ActivityManager /> : tab === "businesses" ? <BusinessesManager /> : <SectionManager key={tab} table={tab} />}
-      </main>
-    </div>
+    </AdminLayout>
   );
 }
 
@@ -151,9 +126,9 @@ function SectionManager({ table }: { table: ContentTable }) {
 
   return (
     <section>
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <h2 className="font-display text-2xl font-bold">{label} <span className="text-base text-muted-foreground">({data.length})</span></h2>
-        <button onClick={() => setEditing({})} className="flex items-center gap-1 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-primary-foreground"><Plus className="h-4 w-4" />إضافة</button>
+        <Button onClick={() => setEditing({})}><Plus className="h-4 w-4" />إضافة</Button>
       </div>
       {error && <p className="mb-3 rounded-xl bg-destructive/10 p-3 text-sm text-destructive">{error}</p>}
       {(table === "courses" || table === "products") && pending.length > 0 && (
@@ -178,21 +153,22 @@ function SectionManager({ table }: { table: ContentTable }) {
           </div>
         </div>
       )}
-      <div className="overflow-x-auto rounded-2xl bg-card shadow-soft">
+      <div className="overflow-x-auto rounded-lg border bg-card">
         <table className="w-full text-sm">
-          <thead className="bg-secondary text-right">
+          <thead className="bg-muted/50 text-right text-xs text-muted-foreground">
             <tr>{fields.filter((f) => !f.hideInTable).map((f) => <th key={f.key} className="px-4 py-3 font-bold">{f.label}</th>)}<th className="w-24" /></tr>
           </thead>
           <tbody>
             {isLoading && <tr><td className="p-4" colSpan={fields.length + 1}>جارٍ التحميل...</td></tr>}
+            {!isLoading && rows.length === 0 && <tr><td className="py-14 text-center text-muted-foreground" colSpan={fields.length + 1}>لا توجد سجلات في هذا القسم</td></tr>}
             {rows.map((row: any) => (
-              <tr key={row["id"]} className="border-t">
+              <tr key={row["id"]} className="border-t transition-colors hover:bg-muted/40">
                 {fields.filter((f) => !f.hideInTable).map((f) => <td key={f.key} className="px-4 py-3">{f.type === "status" ? <span className={`rounded-full px-2 py-0.5 text-xs ${row[f.key] === "pending" ? "bg-accent text-accent-foreground" : row[f.key] === "rejected" ? "bg-destructive/10 text-destructive" : "bg-secondary text-primary"}`}>{statusLabels[row[f.key]] ?? row[f.key]}{row["submitted_by"] ? " · من طالب" : ""}</span> : row[f.key]}</td>)}
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     {table === "courses" && <Button size="sm" variant="outline" onClick={() => setQuizCourse(row)}>الاختبار</Button>}
-                    <button aria-label="تعديل" onClick={() => setEditing(row)} className="text-primary"><Pencil className="h-4 w-4" /></button>
-                    <button aria-label="حذف" onClick={() => remove(row["id"])} className="text-destructive"><Trash2 className="h-4 w-4" /></button>
+                    <Button size="icon" variant="ghost" aria-label="تعديل" title="تعديل" onClick={() => setEditing(row)} className="h-8 w-8 text-primary"><Pencil className="h-4 w-4" /></Button>
+                    <Button size="icon" variant="ghost" aria-label="حذف" title="حذف" onClick={() => remove(row["id"])} className="h-8 w-8 text-destructive"><Trash2 className="h-4 w-4" /></Button>
                   </div>
                 </td>
               </tr>
