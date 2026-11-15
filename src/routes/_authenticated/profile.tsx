@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -43,7 +44,7 @@ const fields = [
 ] as const;
 
 function ProfilePage() {
-  const { data: p } = useMyProfile();
+  const { data: p, isLoading } = useMyProfile();
   const qc = useQueryClient();
   const navigate = useNavigate();
   const [form, setForm] = useState<Record<string, string>>({});
@@ -104,6 +105,7 @@ function ProfilePage() {
   ];
   const changed = Boolean(p && fields.some((f) => (form[f.key] ?? "") !== (p[f.key] ?? "")));
   const personalFields = fields.filter((f) => ["full_name", "phone", "student_number", "uni_email"].includes(f.key));
+  if (isLoading) return <AppShell title="ملفي"><LoadingSkeleton variant="profile" /></AppShell>;
   const membershipActive = p ? isMembershipActive(p) : false;
   const membershipExpired = Boolean(p?.membership_expires && p.membership_expires < new Date().toISOString().slice(0, 10));
   const membershipDate = p?.membership_expires ? new Date(`${p.membership_expires}T12:00:00Z`).toLocaleDateString("ar", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }) : null;

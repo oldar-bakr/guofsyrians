@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { GraduationCap, IdCard, Tag, CalendarDays, ShoppingBag, Award, ArrowLeft, Store } from "lucide-react";
@@ -66,7 +67,7 @@ function Landing() {
   }, [navigate]);
 
   if (checking) {
-    return <div className="grid min-h-screen place-items-center bg-muted"><img src={logo.url} alt="شعار الاتحاد" className="h-20 animate-pulse" /></div>;
+    return <LoadingSkeleton variant="page" />;
   }
 
   return (

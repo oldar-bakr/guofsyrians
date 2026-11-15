@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, Phone, User, Search, ExternalLink } from "lucide-react";
 import { useState } from "react";
@@ -27,7 +28,7 @@ export const Route = createFileRoute("/_authenticated/union")({
 
 function Union() {
   const student = useStudent();
-  const { data: branches = [] } = useContent<any>("branches");
+  const { data: branches = [], isLoading } = useContent<any>("branches");
   const [query, setQuery] = useState("");
   const [city, setCity] = useState("all");
   const [limit, setLimit] = useState(24);
@@ -40,6 +41,7 @@ function Union() {
         <p className="mt-2 text-sm opacity-90">مظلة تجمع الطلاب السوريين وتمثلهم، وتقدم لهم الخدمات والفرص التعليمية والاجتماعية.</p>
       </section>
       <h3 className="mb-3 mt-6 font-display text-lg font-bold">الفروع</h3>
+      {isLoading && <LoadingSkeleton count={2} />}
       <div className="grid gap-3 md:grid-cols-2">
         {branches.map((b) => (
           <article key={b.city} className={`rounded-2xl bg-card p-4 shadow-soft ${b.university === student.university ? "ring-2 ring-accent" : ""}`}>

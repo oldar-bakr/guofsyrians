@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Search, SlidersHorizontal, PlayCircle, ArrowLeft, RotateCcw } from "lucide-react";
@@ -56,6 +57,6 @@ function Courses() {
         <div className="flex flex-1 flex-col gap-2 p-4"><p className="text-xs font-bold text-primary">{c.category || "بدون تصنيف"} · {c.lessons} دروس</p><h3 className="font-display text-lg font-bold group-hover:text-primary">{c.title}</h3>{c.instructor && <p className="text-xs text-muted-foreground">{c.instructor}</p>}{c.description && <p className="line-clamp-2 text-sm text-muted-foreground">{c.description}</p>}<span className="mt-auto flex items-center justify-between pt-2 text-sm font-bold text-primary">{mine.some((e) => e.course_id === c.id) ? "متابعة التعلم" : "تفاصيل الدورة"}<ArrowLeft className="h-4 w-4" /></span></div>
       </Link>)}
     </div>
-    {isLoading && <p>جارٍ تحميل الدورات…</p>}{!isLoading && !list.length && <p className="py-12 text-center text-muted-foreground">لا توجد دورات مطابقة للفلاتر</p>}
+    {isLoading && <LoadingSkeleton />}{!isLoading && !list.length && <p className="py-12 text-center text-muted-foreground">لا توجد دورات مطابقة للفلاتر</p>}
   </AppShell>;
 }

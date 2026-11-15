@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PlayCircle, CheckCircle2, ArrowRight, ExternalLink } from "lucide-react";
@@ -33,7 +34,7 @@ function CourseDetail() {
  const [busy, setBusy] = useState(false);
  const [error, setError] = useState("");
  const run = async (action: () => Promise<void>) => { setBusy(true); setError(""); try { await action(); } catch { setError("تعذّر الحفظ، حاول مجدداً"); } finally { setBusy(false); } };
- if (isLoading) return <AppShell title="الدورة"><p>جارٍ التحميل…</p></AppShell>;
+ if (isLoading) return <AppShell title="الدورة"><LoadingSkeleton variant="detail" /></AppShell>;
  if (!c) return <AppShell title="الدورة"><p>الدورة غير موجودة</p><Link to="/courses">العودة للدورات</Link></AppShell>;
  const lessons = Math.max(0, Math.min(100, Number(c.lessons) || 0));
  const done = Math.min(lessons, e?.completed_lessons ?? 0);

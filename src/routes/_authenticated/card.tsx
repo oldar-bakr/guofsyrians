@@ -1,9 +1,10 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import QRCode from "react-qr-code";
 import { AppShell } from "@/components/AppShell";
-import { useStudent } from "@/lib/profile";
+import { useStudent, useMyProfile } from "@/lib/profile";
 import { Avatar } from "@/components/Avatar";
 import logo from "@/assets/union-logo.png.asset.json";
 
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/_authenticated/card")({
 
 function CardPage() {
   const student = useStudent();
+  const { isLoading } = useMyProfile();
   const navigate = useNavigate();
   const qc = useQueryClient();
   const signOut = async () => {
@@ -30,6 +32,7 @@ function CardPage() {
     await supabase.auth.signOut();
     navigate({ to: "/auth", replace: true });
   };
+  if (isLoading) return <AppShell title="بطاقتي"><LoadingSkeleton variant="profile" /></AppShell>;
   return (
     <AppShell title="بطاقتي">
       <div className="bg-member rounded-3xl p-6 text-primary-foreground shadow-soft">

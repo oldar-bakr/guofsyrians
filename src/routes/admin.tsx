@@ -1,3 +1,4 @@
+import { LoadingSkeleton,TableSkeleton } from "@/components/LoadingSkeleton";
 import { CityUniversitySelect } from "@/components/CityUniversitySelect";
 import { CourseQuizManager } from "@/components/CourseQuiz";
 import { ContentImages, ContentImageUpload } from "@/components/ContentImages";
@@ -70,7 +71,7 @@ function Admin() {
     navigate({ to: "/auth", replace: true });
   };
 
-  if (state === "loading") return <div className="grid min-h-screen place-items-center">جارٍ التحميل...</div>;
+  if (state === "loading") return <LoadingSkeleton variant="page" />;
   if (state === "denied")
     return (
       <div className="grid min-h-screen place-items-center px-4 text-center">
@@ -175,7 +176,7 @@ function SectionManager({ table }: { table: ContentTable }) {
             <tr>{hasImages && <th className="px-4 py-3">الصورة</th>}{fields.filter((f) => !f.hideInTable).map((f) => <th key={f.key} className="px-4 py-3 font-bold">{f.label}</th>)}<th className="px-4 py-3">التفعيل</th><th className="w-24" /></tr>
           </thead>
           <tbody>
-            {isLoading && <tr><td className="p-4" colSpan={fields.length + 3}>جارٍ التحميل...</td></tr>}
+            {isLoading && <TableSkeleton columns={fields.filter((f) => !f.hideInTable).length + 2 + Number(hasImages)} />}
             {!isLoading && rows.length === 0 && <tr><td className="py-14 text-center text-muted-foreground" colSpan={fields.length + 3}>لا توجد سجلات في هذا القسم</td></tr>}
             {rows.map((row: any) => (
               <tr key={row["id"]} className="border-t transition-colors hover:bg-muted/40">

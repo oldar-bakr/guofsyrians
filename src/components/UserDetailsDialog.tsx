@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { X } from "lucide-react";
@@ -75,7 +76,7 @@ export function UserDetailsDialog({ user, onClose, onSaved }: { user: ManagedUse
           <p>آخر تعديل للبيانات: <b>{fmt(meta?.["updated_at"])}</b></p>
         </div>
 
-        {loading ? <p>جارٍ التحميل...</p> : (
+        {loading ? <LoadingSkeleton variant="form" /> : (
           <form onSubmit={submit} className="grid gap-3 text-sm sm:grid-cols-2">
             <label className="block sm:col-span-2">
               <span className="mb-1 block text-muted-foreground">البريد الإلكتروني (للدخول)</span>

@@ -1,3 +1,4 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import { User } from "lucide-react";
 import { useAvatarUrl } from "@/lib/avatar";
 import { UniversityLogo } from "@/components/UniversityLogo";
@@ -23,7 +24,7 @@ export function Avatar({ university, ...rest }: Props) {
 }
 
 function Photo({ path, name, className = "h-10 w-10", textClass = "text-sm" }: Omit<Props, "university">) {
-  const { data: url } = useAvatarUrl(path);
+  const { data: url, isLoading } = useAvatarUrl(path);
   const initials = (name ?? "")
     .trim()
     .split(/\s+/)
@@ -31,6 +32,7 @@ function Photo({ path, name, className = "h-10 w-10", textClass = "text-sm" }: O
     .map((w) => w[0] ?? "")
     .join("");
 
+  if (path && isLoading) return <Skeleton className={`${className} shrink-0 rounded-full`} />;
   if (url) return <img src={url} alt={name || "الصورة الشخصية"} className={`${className} shrink-0 rounded-full object-cover`} />;
 
   return (

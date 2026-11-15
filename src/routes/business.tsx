@@ -1,3 +1,4 @@
+import { LoadingSkeleton,TableSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -50,7 +51,7 @@ function BusinessPage() {
     navigate({ to: "/auth", search: { as: "business" }, replace: true });
   };
 
-  if (!uid || isLoading) return <div className="grid min-h-screen place-items-center">جارٍ التحميل...</div>;
+  if (!uid || isLoading) return <LoadingSkeleton variant="page" />;
 
   return (
     <div className="min-h-screen bg-muted">
@@ -323,7 +324,7 @@ function HistoryTab() {
         <table className="w-full text-sm">
           <thead className="bg-secondary text-right"><tr><th className="px-4 py-3">الطالب</th><th className="px-4 py-3">الجامعة</th><th className="px-4 py-3">الخصم</th><th className="px-4 py-3">التاريخ</th></tr></thead>
           <tbody>
-            {isLoading && <tr><td colSpan={4} className="p-4">جارٍ التحميل...</td></tr>}
+            {isLoading && <TableSkeleton columns={4} />}
             {!isLoading && data.length === 0 && <tr><td colSpan={4} className="p-4 text-muted-foreground">لا يوجد سجل بعد</td></tr>}
             {data.map((r) => (
               <tr key={r.id} className="border-t">

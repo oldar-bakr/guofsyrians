@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -36,7 +37,7 @@ function Partner() {
   const name = business?.name ?? legacy?.partner;
   return <AppShell title="ملف الشركة">
     <Link to="/deals" className="mb-5 inline-flex items-center gap-2 text-sm text-primary"><ArrowRight className="h-4 w-4" />التخفيضات</Link>
-    {isLoading || dealsLoading ? <div role="status" aria-label="تحميل الشركة" className="grid min-h-48 place-items-center"><Loader2 className="animate-spin" /></div> : !name ? <p className="py-10 text-center text-muted-foreground">{isError ? "تعذّر تحميل الشركة" : "الشركة غير متاحة"}</p> : <>
+    {isLoading || dealsLoading ? <LoadingSkeleton variant="detail" /> : !name ? <p className="py-10 text-center text-muted-foreground">{isError ? "تعذّر تحميل الشركة" : "الشركة غير متاحة"}</p> : <>
       <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b pb-5"><div className="min-w-0"><p className="text-sm text-muted-foreground">{business?.category ?? legacy?.category}</p><h2 className="mt-1 break-words font-display text-2xl font-bold">{name}</h2><p className="mt-2 flex items-start gap-1 text-sm text-muted-foreground"><MapPin className="h-4 w-4 shrink-0" /><span>{business?.city ?? legacy?.city}{business?.address && ` · ${business.address}`}</span></p></div><BusinessLogo name={name} path={business?.logo_url} className="h-20 w-20" /></header>
       {business?.description && <p className="mt-5 whitespace-pre-line break-words text-sm leading-7">{business.description}</p>}
       <div className="my-5 flex flex-wrap gap-3">{business?.phone && <Button asChild variant="outline"><a href={`tel:${business.phone.replace(/\s/g, "")}`}><Phone /><span dir="ltr">{business.phone}</span></a></Button>}{business?.email && <Button asChild variant="outline" className="h-auto min-h-9 max-w-full py-2"><a href={`mailto:${business.email}`}><Mail className="shrink-0" /><span dir="ltr" className="min-w-0 break-all whitespace-normal">{business.email}</span></a></Button>}</div>

@@ -1,3 +1,4 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import { useId, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ImagePlus, ImageOff, Loader2, X } from "lucide-react";
@@ -26,12 +27,12 @@ export function ContentImages({ paths = [], title, cover = false, coverFit = "co
         {display.map((path, i) => (
           cover ? (
             <div key={path} className="grid aspect-[4/3] w-full place-items-center overflow-hidden rounded-lg bg-muted">
-              {urls[i] ? <img src={urls[i]} alt={title} loading="lazy" className={`h-full w-full ${coverFit === "cover" ? "object-cover" : "object-contain"}`} /> : isPending ? <Loader2 className="animate-spin text-muted-foreground" /> : <ImageOff className="text-muted-foreground" />}
+              {urls[i] ? <img src={urls[i]} alt={title} loading="lazy" className={`h-full w-full ${coverFit === "cover" ? "object-cover" : "object-contain"}`} /> : isPending ? <Skeleton className="h-full w-full" /> : <ImageOff className="text-muted-foreground" />}
             </div>
           ) : (
             <Button key={path} variant="ghost" className="h-auto w-full overflow-hidden p-0" disabled={!urls[i]} onClick={() => setSelected(i)} aria-label={`عرض صورة ${i + 1} — ${title}`}>
               <span className="grid aspect-[4/3] w-full place-items-center bg-muted">
-                {urls[i] ? <img src={urls[i]} alt={`${title} — صورة ${i + 1}`} loading="lazy" className="h-full w-full object-contain" /> : <ImageOff className="text-muted-foreground" />}
+                {urls[i] ? <img src={urls[i]} alt={`${title} — صورة ${i + 1}`} loading="lazy" className="h-full w-full object-contain" /> : isPending ? <Skeleton className="h-full w-full" /> : <ImageOff className="text-muted-foreground" />}
               </span>
             </Button>
           )
@@ -68,7 +69,7 @@ export function ContentImageUpload({ value, onChange, onBusyChange }: { value: s
       <p className="text-sm font-medium">الصور</p>
       <div className="grid grid-cols-3 gap-2">
         {value.map((path, i) => <div key={path} className="relative grid aspect-square place-items-center overflow-hidden rounded-lg border bg-muted">
-          {urls[i] && <img src={urls[i]} alt={`الصورة ${i + 1}`} className="h-full w-full object-contain" />}
+          {urls[i] ? <img src={urls[i]} alt={`الصورة ${i + 1}`} className="h-full w-full object-contain" /> : <Skeleton className="h-full w-full" />}
           <Button type="button" variant="secondary" size="icon" className="absolute left-1 top-1 h-7 w-7" title="إزالة الصورة" aria-label={`إزالة الصورة ${i + 1}`} disabled={busy} onClick={() => onChange(value.filter((p) => p !== path))}><X /></Button>
           {i === 0 && <span className="absolute bottom-0 inset-x-0 bg-card/90 text-center text-xs">صورة الغلاف</span>}
         </div>)}

@@ -43,7 +43,8 @@ export function useLogoUrl(path: string | null | undefined) {
 }
 
 export function BusinessLogo({ path, name, className = "h-14 w-14" }: { path: string | null | undefined; name: string; className?: string }) {
-  const { data: url } = useLogoUrl(path);
+  const { data: url, isLoading } = useLogoUrl(path);
+  if (path && isLoading) return <span aria-hidden="true" className={`${className} shrink-0 animate-pulse rounded-lg bg-muted-foreground/15 motion-reduce:animate-none`} />;
   return url ? (
     <img src={url} alt={name} className={`${className} shrink-0 rounded-2xl bg-card object-contain p-1`} />
   ) : (

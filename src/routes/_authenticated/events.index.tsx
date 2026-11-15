@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, CalendarDays, CheckCircle2, Clock, Loader2, MapPin, Search, Users, X } from "lucide-react";
@@ -60,7 +61,7 @@ function Events() {
       </div>
       <p className="mb-5 text-xs text-muted-foreground" aria-live="polite">{visible.length} نتيجة{scope === "registered" ? " · فعالياتي" : ""}</p>
       {error && <p role="alert" className="mb-4 text-sm text-destructive">{error}</p>}
-      {isLoading ? <div className="flex min-h-48 items-center justify-center gap-2 text-muted-foreground" role="status"><Loader2 className="h-5 w-5 animate-spin" />جارٍ تحميل الفعاليات…</div> : isError ? <div className="py-12 text-center"><p className="mb-3 text-sm text-destructive" role="alert">تعذّر تحميل الفعاليات</p><Button variant="outline" onClick={() => refetch()}>إعادة المحاولة</Button></div> : <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {isLoading ? <LoadingSkeleton /> : isError ? <div className="py-12 text-center"><p className="mb-3 text-sm text-destructive" role="alert">تعذّر تحميل الفعاليات</p><Button variant="outline" onClick={() => refetch()}>إعادة المحاولة</Button></div> : <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {visible.map((e) => {
           const reg = mine.find((m) => m.event_id === e.id);
           const parsed = parseEventDate(e.date, e.time);

@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
@@ -20,7 +21,7 @@ export function ComplaintsManager() {
   }
   return <section>
     <h2 className="mb-5 flex items-center gap-2 font-display text-2xl font-bold"><MessageSquare />الشكاوى والملاحظات <span className="text-sm text-muted-foreground">{data.length}</span></h2>
-    {isPending && <Loader2 className="animate-spin" />}
+    {isPending && <LoadingSkeleton count={2} />}
     {error && <div role="alert">تعذّر تحميل الشكاوى <Button variant="outline" onClick={() => refetch()}>إعادة المحاولة</Button></div>}
     {message && <p role="alert" className="text-destructive">{message}</p>}
     {!isPending && !error && !data.length && <p className="py-10 text-center text-muted-foreground">لا توجد رسائل حتى الآن</p>}

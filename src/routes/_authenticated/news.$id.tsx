@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
@@ -26,7 +27,7 @@ function NewsDetail() {
     <AppShell title="الخبر">
       <Link to="/news" className="mb-3 inline-flex items-center gap-1 text-sm text-primary"><ArrowRight className="h-4 w-4" />كل الأخبار</Link>
       {isLoading ? (
-        <p className="text-center text-sm text-muted-foreground">جارٍ التحميل…</p>
+        <LoadingSkeleton variant="detail" />
       ) : !n ? (
         <p className="text-center">الخبر غير موجود</p>
       ) : (

@@ -1,3 +1,5 @@
+import { Skeleton } from "@/components/ui/skeleton";
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -13,14 +15,14 @@ type News = Database["public"]["Tables"]["news"]["Row"];
 
 function NewsSlide({ news }: { news: News }) {
   const paths = news.images.slice(0, 1);
-  const { data: urls = [] } = useQuery({
+  const { data: urls = [], isLoading: imageLoading } = useQuery({
     queryKey: ["content-images", paths],
     queryFn: () => resolveContentImages(paths),
     enabled: paths.length > 0,
     staleTime: 30 * 60 * 1000,
   });
   return <Link to="/news/$id" params={{ id: news.id }} className="relative block h-[260px] overflow-hidden bg-secondary sm:h-[360px]" aria-label={`اقرأ الخبر: ${news.title}`}>
-    {urls[0] ? <img src={urls[0]} alt={news.title} className="h-full w-full object-cover" /> : <div className="grid h-full place-items-center pb-24"><img src={logo.url} alt="الاتحاد العام لطلبة سوريا" className="h-28 w-28 object-contain sm:h-36 sm:w-36" /></div>}
+    {urls[0] ? <img src={urls[0]} alt={news.title} className="h-full w-full object-cover" /> : imageLoading ? <Skeleton className="h-full w-full" /> : <div className="grid h-full place-items-center pb-24"><img src={logo.url} alt="الاتحاد العام لطلبة سوريا" className="h-28 w-28 object-contain sm:h-36 sm:w-36" /></div>}
     <div className="absolute inset-x-0 bottom-0 flex h-1/3 flex-col justify-center gap-0.5 bg-primary/95 px-4 py-2 text-primary-foreground sm:gap-1 sm:px-7 sm:py-3">
       <div className="flex items-center gap-2 text-[10px] leading-3 sm:text-xs sm:leading-4"><span className="font-bold text-accent">أخبار الاتحاد</span>{news.date && <><span aria-hidden="true">·</span><span>{news.date}</span></>}</div>
       <h2 className="line-clamp-2 break-words font-display text-base font-bold leading-5 sm:text-xl sm:leading-6">{news.title}</h2>
@@ -47,7 +49,7 @@ export function NewsSlider() {
     const timer = window.setInterval(() => { if (!document.hidden) api.scrollNext(); }, 6000);
     return () => window.clearInterval(timer);
   }, [api, slides.length, paused, interacting]);
-  if (isLoading) return <div className="grid h-[260px] place-items-center rounded-lg bg-secondary sm:h-[360px]" aria-label="تحميل الأخبار"><Loader2 className="animate-spin text-primary" /></div>;
+  if (isLoading) return <LoadingSkeleton variant="news" />;
   if (!slides.length) return <section className="flex min-h-48 flex-col items-center justify-center gap-3 bg-secondary py-8 text-center"><img src={logo.url} alt="الاتحاد العام لطلبة سوريا" className="h-16 w-16" /><h2 className="font-display text-xl font-bold">أخبار الاتحاد</h2><p className="text-sm text-muted-foreground">{isError ? "تعذّر تحميل الأخبار حالياً" : "لا توجد أخبار منشورة حالياً"}</p></section>;
   return <section aria-label="آخر أخبار الاتحاد" onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)} onFocusCapture={() => setInteracting(true)} onBlurCapture={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setInteracting(false); }}>
     <Carousel opts={{ direction: "rtl", loop: slides.length > 1 }} setApi={setApi} aria-label="أخبار الاتحاد" className="overflow-hidden rounded-lg">

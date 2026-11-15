@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { ContentImages } from "@/components/ContentImages";
@@ -19,9 +20,10 @@ export const Route = createFileRoute("/_authenticated/news/")({
 });
 
 function NewsList() {
-  const { data: news = [] } = useContent<any>("news");
+  const { data: news = [], isLoading } = useContent<any>("news");
   return (
     <AppShell title="الأخبار">
+      {isLoading && <LoadingSkeleton count={2} />}
       <ul className="grid gap-3 md:grid-cols-2">
         {news.map((n: any) => (
           <li key={n.id}>
@@ -33,7 +35,7 @@ function NewsList() {
             </Link>
           </li>
         ))}
-        {news.length === 0 && <p className="text-center text-sm text-muted-foreground">لا توجد أخبار بعد</p>}
+        {!isLoading && news.length === 0 && <p className="text-center text-sm text-muted-foreground">لا توجد أخبار بعد</p>}
       </ul>
     </AppShell>
   );

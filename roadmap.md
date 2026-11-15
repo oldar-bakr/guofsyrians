@@ -1,5 +1,10 @@
 # Student subscription
 
+## Site-wide skeleton loading
+- [x] Add accessible, reduced-motion-aware placeholders for page transitions, lists, detail pages, account screens, images and dashboard tables.
+- [x] Preserve existing data fetching, permissions, empty/error states and action progress indicators.
+- [x] Verify delayed real event, product, news and dashboard content loading on desktop/mobile; placeholders clear after data arrives and respect reduced motion. Eleven visibility/membership regressions pass.
+
 ## Toggle consistency
 - [x] Sweep every dashboard content/approval switch, store and nested offer switch, business draft switch, membership control and anonymous-complaint switch. Add owner-view cache refresh and independent pending locks for membership controls; keep permissions and settled records unchanged.
 - [x] Fix RTL thumb placement and consistent active/inactive contrast across shared switches.

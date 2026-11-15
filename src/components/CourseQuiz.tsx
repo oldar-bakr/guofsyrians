@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -19,7 +20,7 @@ export function CourseQuiz({ courseId, enrolled }: { courseId: string; enrolled:
   if (!enrolled || (!isLoading && !isError && !quiz)) return null;
   return <section className="mt-6 border-t pt-5">
     <h3 className="mb-4 flex items-center gap-2 font-display text-xl font-bold"><ClipboardCheck className="h-5 w-5 text-primary" />{quiz?.title ?? "اختبار الدورة"}</h3>
-    {isLoading ? <p>جارٍ تحميل الاختبار…</p> : isError ? <p className="text-destructive">تعذّر تحميل الاختبار</p> : quiz && <>
+    {isLoading ? <LoadingSkeleton variant="form" /> : isError ? <p className="text-destructive">تعذّر تحميل الاختبار</p> : quiz && <>
       {result ? <div className="space-y-3 rounded-lg bg-secondary p-4"><p role="status" className="font-bold">نتيجتك: {result.score} من {result.total} ({Math.round(result.score / result.total * 100)}%)</p><Button variant="outline" onClick={() => { setResult(null); setAnswers({}); }}>إعادة المحاولة</Button></div> : <form className="space-y-5" onSubmit={async (e) => { e.preventDefault(); setBusy(true); setError(""); try { const value = await submit({ data: { courseId, quizId: quiz.id, answers: quiz.questions.map((_, i) => answers[i] ?? -1) } }); setResult(value); await qc.invalidateQueries({ queryKey: ["course-quiz", courseId] }); } catch (err) { setError(err instanceof Error ? err.message : "تعذّر إرسال الاختبار"); } finally { setBusy(false); } }}>
         {quiz.questions.map((q, i) => <fieldset key={i} disabled={busy} className="space-y-2"><legend className="mb-2 font-bold">{i + 1}. {q.prompt}</legend>{q.options.map((option, j) => <label key={j} className={`flex cursor-pointer items-center gap-3 rounded-lg border p-3 text-sm ${answers[i] === j ? "border-primary bg-secondary" : "bg-card"}`}><input required type="radio" name={`question-${i}`} value={j} checked={answers[i] === j} onChange={() => setAnswers({ ...answers, [i]: j })} />{option}</label>)}</fieldset>)}
         <Button disabled={busy || Object.keys(answers).length !== quiz.questions.length}>{busy ? "جارٍ التصحيح…" : "إرسال الإجابات"}</Button>
@@ -33,7 +34,7 @@ export function CourseQuiz({ courseId, enrolled }: { courseId: string; enrolled:
 export function CourseQuizManager({ courseId }: { courseId: string }) {
   const qc = useQueryClient();
   const { data: quiz, isLoading, isError } = useQuery({ queryKey: ["admin-course-quiz", courseId], queryFn: async () => { const { data, error } = await supabase.from("course_quizzes").select("*").eq("course_id", courseId).maybeSingle(); if (error) throw error; return data; } });
-  if (isLoading) return <p>جارٍ تحميل الاختبار…</p>;
+  if (isLoading) return <LoadingSkeleton variant="form" />;
   if (isError) return <p className="text-destructive">تعذّر تحميل الاختبار</p>;
   return <QuizEditor key={JSON.stringify(quiz)} courseId={courseId} initial={quiz} onSaved={() => { qc.invalidateQueries({ queryKey: ["admin-course-quiz", courseId] }); qc.invalidateQueries({ queryKey: ["course-quiz", courseId] }); }} />;
 }

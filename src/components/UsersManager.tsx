@@ -1,3 +1,4 @@
+import { TableSkeleton } from "@/components/LoadingSkeleton";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
@@ -73,7 +74,7 @@ export function UsersManager({ myId }: { myId: string }) {
             </tr>
           </thead>
           <tbody>
-            {isLoading && <tr><td className="p-4" colSpan={8}>جارٍ التحميل...</td></tr>}
+            {isLoading && <TableSkeleton columns={8} />}
             {users.map((u) => {
               const me = u.id === myId;
               return (

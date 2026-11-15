@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Pencil, Trash2, X, ChevronDown } from "lucide-react";
@@ -29,7 +30,7 @@ export function BusinessesManager() {
   const [err, setErr] = useState("");
   const refresh = () => qc.invalidateQueries({ queryKey: ["admin-businesses"] });
 
-  if (isLoading || !data) return <p>جارٍ التحميل...</p>;
+  if (isLoading || !data) return <LoadingSkeleton />;
   const { businesses, deals, uses, students } = data;
   const bizUses = uses.filter((u) => u.business_id);
   const stats = [

@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -202,7 +203,7 @@ function SubmissionCard({ kind, row, titleKey }: { kind: ContributeKind; row: an
 
 export function ContributeForm({ kind }: { kind: ContributeKind }) {
   const qc = useQueryClient();
-  const { data: mine = [] } = useMySubmissions(kind);
+  const { data: mine = [], isLoading } = useMySubmissions(kind);
   const { data: profile } = useMyProfile();
   const [form, setForm] = useState<Record<string, any>>({});
   const [msg, setMsg] = useState("");
@@ -251,7 +252,8 @@ export function ContributeForm({ kind }: { kind: ContributeKind }) {
 
         <section>
           <h3 className="mb-2 font-display text-lg font-bold">{kind === "courses" ? "دوراتي" : "منتجاتي"}</h3>
-          {mine.length === 0 && (
+          {isLoading && <LoadingSkeleton count={2} />}
+          {!isLoading && mine.length === 0 && (
             <p className="text-sm text-muted-foreground">{kind === "courses" ? "لم تقدّم أي دورة بعد." : "لم تنشر أي منتج بعد."}</p>
           )}
           <p className="mb-2 text-xs text-muted-foreground">{mine.length > 0 && "اضغط على البطاقة لفتحها وتعديلها."}</p>

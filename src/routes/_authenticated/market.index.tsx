@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ShoppingBag, Minus, Plus } from "lucide-react";
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/_authenticated/market/")({
 });
 
 function Market() {
-  const { data: allproducts = [] } = useContent<any>("products");
+  const { data: allproducts = [], isLoading } = useContent<any>("products");
   const products = approvedOnly(allproducts);
   const { data: orders = [] } = useMine<any>("orders");
   const actions = useActivityActions("orders");
@@ -43,6 +44,7 @@ function Market() {
 
   return (
     <AppShell title="السوق">
+      {isLoading && <LoadingSkeleton count={4} />}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {products.map((p: any) => (
           <article key={p.id} className="rounded-2xl bg-card p-3 shadow-soft">

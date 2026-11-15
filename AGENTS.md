@@ -37,3 +37,4 @@
 - Product detail pages expose only contact information published on the product record, never private seller profile data; market image/title links open details separately from cart controls.
 - AppShell owns mobile page titles and safe-area-aware floating navigation so student screens share one consistent mobile frame without changing desktop navigation.
 - The public landing keeps its existing authentication redirects and shared contact source; visual changes must preserve separate contribution and business entry points.
+- LoadingSkeleton/TableSkeleton share initial-load placeholders with the router fallback; keep cached content visible during refreshes and retain action progress indicators.

@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { MapPin, ArrowLeft, TicketPercent, Loader2, Search, SlidersHorizontal, RotateCcw, X } from "lucide-react";
@@ -93,7 +94,7 @@ function Deals() {
           </article>
         ))}
       </div>
-      {isLoading && <div className="grid min-h-40 place-items-center" role="status" aria-label="تحميل التخفيضات"><Loader2 className="h-6 w-6 animate-spin text-muted-foreground" /></div>}
+      {isLoading && <LoadingSkeleton />}
       {!isLoading && !list.length && <div className="py-12 text-center"><TicketPercent className="mx-auto mb-3 h-8 w-8 text-muted-foreground" /><p className="text-sm text-muted-foreground">{isError ? "تعذّر تحميل التخفيضات" : "لا توجد عروض مطابقة للبحث والفلاتر"}</p>{!isError && (query || activeFilters > 0) && <Button variant="outline" className="mt-4" onClick={clearAll}><RotateCcw />عرض كل التخفيضات</Button>}</div>}
       <DealRedemptionDialog deal={active} logoPath={active ? shop(active)?.logo_url : null} onClose={() => setActive(null)} />
     </AppShell>

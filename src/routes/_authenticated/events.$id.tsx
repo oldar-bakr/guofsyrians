@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
@@ -57,7 +58,7 @@ function EventDetail() {
   if (isLoading)
     return (
       <AppShell title="الفعالية">
-        <p className="text-center text-sm text-muted-foreground">جارٍ التحميل…</p>
+        <LoadingSkeleton variant="detail" />
       </AppShell>
     );
   if (!ev)

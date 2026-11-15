@@ -1,3 +1,4 @@
+import { TableSkeleton } from "@/components/LoadingSkeleton";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
@@ -73,7 +74,7 @@ export function ActivityManager() {
             <tr><th className="px-4 py-3">الطالب</th><th className="px-4 py-3">التفاصيل</th><th className="px-4 py-3">التاريخ</th>{tab === "orders" && <th className="px-4 py-3">الحالة</th>}<th className="w-12" /></tr>
           </thead>
           <tbody>
-            {isLoading && <tr><td className="p-4" colSpan={5}>جارٍ التحميل...</td></tr>}
+            {isLoading && <TableSkeleton columns={5} />}
             {!isLoading && rows.length === 0 && <tr><td className="p-4 text-muted-foreground" colSpan={5}>لا توجد سجلات بعد</td></tr>}
             {rows.map((r) => {
               const p = who(r.user_id);

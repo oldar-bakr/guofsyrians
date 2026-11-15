@@ -1,3 +1,4 @@
+import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Loader2, Mail, Phone, ShoppingBag, UserRound } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
@@ -26,7 +27,7 @@ function ProductPage() {
   const contacts = productContacts(product?.contact ?? "");
   return <AppShell title="المنتج">
     <Button asChild variant="link" className="mb-4 px-0"><Link to="/market"><ArrowRight />سوق الطالب</Link></Button>
-    {isLoading ? <div role="status" className="flex min-h-48 items-center justify-center gap-2 text-muted-foreground"><Loader2 className="h-5 w-5 animate-spin" />جارٍ تحميل المنتج…</div> : isError ? <div className="py-12 text-center"><p role="alert" className="mb-3 text-destructive">تعذّر تحميل المنتج</p><Button variant="outline" onClick={() => refetch()}>إعادة المحاولة</Button></div> : !product || product.status !== "approved" ? <p className="py-12 text-center text-muted-foreground">المنتج غير متاح</p> : <article className="grid min-w-0 gap-6 lg:grid-cols-2 lg:gap-8">
+    {isLoading ? <LoadingSkeleton variant="detail" /> : isError ? <div className="py-12 text-center"><p role="alert" className="mb-3 text-destructive">تعذّر تحميل المنتج</p><Button variant="outline" onClick={() => refetch()}>إعادة المحاولة</Button></div> : !product || product.status !== "approved" ? <p className="py-12 text-center text-muted-foreground">المنتج غير متاح</p> : <article className="grid min-w-0 gap-6 lg:grid-cols-2 lg:gap-8">
       <div className="min-w-0">{product.images.length ? <ContentImages paths={product.images} title={product.name} /> : <div className="grid aspect-square place-items-center rounded-lg bg-secondary"><ShoppingBag className="h-16 w-16 text-primary" /></div>}</div>
       <div className="min-w-0">
         <h1 className="break-words font-display text-2xl font-bold sm:text-3xl">{product.name}</h1>
