@@ -70,6 +70,7 @@ function Deals() {
       {!isLoading && !list.length && <div className="py-12 text-center"><TicketPercent className="mx-auto mb-3 h-8 w-8 text-muted-foreground" /><p className="text-sm text-muted-foreground">{isError ? "تعذّر تحميل التخفيضات" : "لا توجد عروض متاحة في هذه المدينة"}</p></div>}
       <Dialog open={Boolean(active)} onOpenChange={(open) => { if (!open) setActive(null); }}>
         {active && <DialogContent dir="rtl" className="max-w-sm rounded-lg">
+            <div className="mx-auto"><BusinessLogo path={shop(active)?.logo_url} name={active.partner} className="h-20 w-20" /></div>
             <DialogHeader><DialogTitle className="break-words font-display text-xl">{active.partner}</DialogTitle><DialogDescription className="break-words">خصم {active.discount} · {active.terms}</DialogDescription></DialogHeader>
             <div className="mx-auto my-2 w-fit rounded-lg bg-card p-3">
               <QRCode value={`guss:${student.id}:deal:${active.id}`} size={170} fgColor="var(--primary)" />
