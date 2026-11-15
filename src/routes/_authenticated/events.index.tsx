@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
+import { ContentImages } from "@/components/ContentImages";
 import { useContent } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
@@ -11,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/events/")({
       { name: "description", content: "فعاليات وأنشطة الطلاب في مدينتك مع التسجيل." },
       { property: "og:title", content: "الفعاليات والأنشطة" },
       { property: "og:description", content: "فعاليات الاتحاد في مدينتك." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Events,
@@ -27,6 +30,7 @@ function Events() {
           const reg = mine.find((m: any) => m.event_id === e.id);
           return (
             <article key={e.id} className="flex flex-col gap-3 rounded-2xl bg-card p-4 shadow-soft">
+              {e.images?.length > 0 && <Link to="/events/$id" params={{ id: e.id }} aria-label={`صور ${e.title}`}><ContentImages paths={e.images} title={e.title} cover /></Link>}
               <Link to="/events/$id" params={{ id: e.id }} className="group flex gap-4 text-right">
                 <div className="grid w-16 shrink-0 place-items-center rounded-xl bg-hero p-2 text-center text-xs text-primary-foreground">{e.date}</div>
                 <div className="flex-1">

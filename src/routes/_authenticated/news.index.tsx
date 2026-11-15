@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
+import { ContentImages } from "@/components/ContentImages";
 import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/_authenticated/news/")({
@@ -25,6 +26,7 @@ function NewsList() {
         {news.map((n: any) => (
           <li key={n.id}>
             <Link to="/news/$id" params={{ id: n.id }} className="block rounded-2xl border-r-4 border-accent bg-card p-4">
+              <ContentImages paths={n.images} title={n.title} cover className="mb-3" />
               <p className="font-medium">{n.title}</p>
               <p className="mt-1 text-xs text-muted-foreground">{n.date}</p>
               {n.body && <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{n.body}</p>}

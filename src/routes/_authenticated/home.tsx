@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CalendarDays, ShoppingBag, Building2, GraduationCap, Tag, Sparkles } from "lucide-react";
+import { CalendarDays, ShoppingBag, Building2, GraduationCap, Tag, Sparkles, Award } from "lucide-react";
+import { ContentImages } from "@/components/ContentImages";
 import { AppShell } from "@/components/AppShell";
 import { useStudent } from "@/lib/profile";
 import { Avatar } from "@/components/Avatar";
@@ -13,12 +14,15 @@ export const Route = createFileRoute("/_authenticated/home")({
       { name: "description", content: "منصة واحدة لخدمات الطالب: تعليم، تسوق، مساعد ذكي، تخفيضات وفعاليات." },
       { property: "og:title", content: "تطبيق خدمات الطلاب" },
       { property: "og:description", content: "منصة واحدة لخدمات الطالب من الاتحاد العام لطلبة سوريا." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Index,
 });
 
 const services = [
+  { to: "/scholarships", label: "المنح", icon: Award },
   { to: "/courses", label: "الدورات", icon: GraduationCap },
   { to: "/market", label: "السوق", icon: ShoppingBag },
   { to: "/assistant", label: "المساعد الذكي", icon: Sparkles },
@@ -47,7 +51,7 @@ function Index() {
       </section>
 
       <h3 className="mb-3 mt-7 font-display text-lg font-bold">الخدمات</h3>
-      <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+      <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-7">
         {services.map(({ to, label, icon: Icon }) => (
           <Link key={to} to={to} className="flex flex-col items-center gap-2 rounded-2xl bg-card p-4 text-center text-sm shadow-soft">
             <span className="grid h-11 w-11 place-items-center rounded-full bg-secondary text-primary"><Icon className="h-5 w-5" /></span>
@@ -79,6 +83,7 @@ function Index() {
         {news.map((n: any) => (
           <li key={n.id} className="rounded-2xl border-r-4 border-accent bg-card p-4">
             <Link to="/news/$id" params={{ id: n.id }} className="block w-full text-right">
+              <ContentImages paths={n.images} title={n.title} cover className="mb-3" />
               <p className="font-medium">{n.title}</p>
               <p className="mt-1 text-xs text-muted-foreground">{n.date} · اقرأ المزيد</p>
             </Link>

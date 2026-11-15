@@ -308,6 +308,7 @@ export type Database = {
           date: string
           description: string
           id: string
+          images: string[]
           org: string
           place: string
           time: string
@@ -318,6 +319,7 @@ export type Database = {
           date?: string
           description?: string
           id?: string
+          images?: string[]
           org?: string
           place?: string
           time?: string
@@ -328,6 +330,7 @@ export type Database = {
           date?: string
           description?: string
           id?: string
+          images?: string[]
           org?: string
           place?: string
           time?: string
@@ -362,6 +365,7 @@ export type Database = {
           created_at: string
           date: string
           id: string
+          images: string[]
           title: string
         }
         Insert: {
@@ -369,6 +373,7 @@ export type Database = {
           created_at?: string
           date?: string
           id?: string
+          images?: string[]
           title: string
         }
         Update: {
@@ -376,6 +381,7 @@ export type Database = {
           created_at?: string
           date?: string
           id?: string
+          images?: string[]
           title?: string
         }
         Relationships: []
@@ -413,6 +419,7 @@ export type Database = {
           created_at: string
           description: string
           id: string
+          images: string[]
           name: string
           price: string
           seller: string
@@ -424,6 +431,7 @@ export type Database = {
           created_at?: string
           description?: string
           id?: string
+          images?: string[]
           name: string
           price?: string
           seller?: string
@@ -435,6 +443,7 @@ export type Database = {
           created_at?: string
           description?: string
           id?: string
+          images?: string[]
           name?: string
           price?: string
           seller?: string
@@ -494,6 +503,42 @@ export type Database = {
           uni_email?: string | null
           university?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      scholarships: {
+        Row: {
+          application_url: string
+          country: string
+          created_at: string
+          deadline: string
+          description: string
+          eligibility: string
+          id: string
+          provider: string
+          title: string
+        }
+        Insert: {
+          application_url?: string
+          country?: string
+          created_at?: string
+          deadline?: string
+          description?: string
+          eligibility?: string
+          id?: string
+          provider?: string
+          title: string
+        }
+        Update: {
+          application_url?: string
+          country?: string
+          created_at?: string
+          deadline?: string
+          description?: string
+          eligibility?: string
+          id?: string
+          provider?: string
+          title?: string
         }
         Relationships: []
       }

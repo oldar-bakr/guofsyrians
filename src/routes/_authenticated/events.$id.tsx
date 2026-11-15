@@ -12,6 +12,7 @@ import {
   Users,
 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
+import { ContentImages } from "@/components/ContentImages";
 import { ContactLinks } from "@/components/ContactLinks";
 import { useContent, useItem } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
@@ -142,6 +143,7 @@ function EventDetail() {
 
       <div className="mt-4 grid gap-4 md:grid-cols-[1fr_320px]">
         <div className="space-y-4">
+          <ContentImages paths={ev.images} title={ev.title} />
           <ul className="grid gap-2 rounded-2xl bg-card p-4 text-sm sm:grid-cols-2">
             <li className="flex items-center gap-2">
               <CalendarDays className="h-4 w-4 shrink-0 text-primary" />

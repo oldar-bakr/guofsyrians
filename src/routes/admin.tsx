@@ -1,4 +1,6 @@
 import { CityUniversitySelect } from "@/components/CityUniversitySelect";
+import { ContentImages, ContentImageUpload } from "@/components/ContentImages";
+import { Button } from "@/components/ui/button";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -21,6 +23,8 @@ export const Route = createFileRoute("/admin")({
       { property: "og:title", content: "لوحة الإدارة" },
       { property: "og:description", content: "إدارة محتوى تطبيق خدمات الطلاب." },
       { name: "robots", content: "noindex" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Admin,
@@ -121,6 +125,7 @@ function SectionManager({ table }: { table: ContentTable }) {
     setError("");
     const payload: Record<string, any> = {};
     fields.forEach((f) => (payload[f.key] = f.type === "number" ? Number(row[f.key] || 0) : f.type === "status" ? row[f.key] || "approved" : row[f.key] ?? ""));
+    if (["news", "events", "products"].includes(table)) payload["images"] = row["images"] ?? [];
     if (table === "courses") {
       const n = Math.max(0, Math.min(100, Math.floor(payload["lessons"] || 0)));
       payload["lesson_videos"] = Array.from({ length: n }, (_, i) => (row["lesson_videos"] ?? [])[i]?.trim() ?? "");
@@ -153,7 +158,8 @@ function SectionManager({ table }: { table: ContentTable }) {
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {pending.map((row: any) => (
               <div key={row["id"]} className="flex flex-col gap-2 rounded-2xl bg-card p-4 shadow-soft">
-                <p className="font-bold">{row[fields[0]!.key]}</p>
+                <ContentImages paths={row["images"]} title={row[fields[0]?.key ?? "title"] ?? ""} cover />
+                <p className="font-bold">{row[fields[0]?.key ?? "title"]}</p>
                 <p className="text-xs text-muted-foreground">
                   {table === "courses" ? `${row["category"] || "بدون تصنيف"} · ${row["lessons"] ?? 0} دروس · ${row["instructor"] || ""}` : `${row["price"] || ""} · ${row["seller"] || ""}`}
                 </p>
@@ -196,12 +202,13 @@ function SectionManager({ table }: { table: ContentTable }) {
 
 function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row: Record<string, any>; onClose: () => void; onSave: (r: Record<string, any>) => void }) {
   const [form, setForm] = useState(row);
+  const [uploading, setUploading] = useState(false);
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/40 p-4">
-      <form onSubmit={(e) => { e.preventDefault(); onSave(form); }} className="max-h-[90vh] w-full max-w-md space-y-3 overflow-y-auto rounded-3xl bg-card p-6 shadow-soft">
+      <form role="dialog" aria-modal="true" aria-label={`${row["id"] ? "تعديل" : "إضافة"} — ${sections[table].label}`} onSubmit={(e) => { e.preventDefault(); if (!uploading) onSave(form); }} className="max-h-[90vh] w-full max-w-md space-y-3 overflow-y-auto rounded-3xl bg-card p-6 shadow-soft">
         <div className="flex items-center justify-between">
           <h3 className="font-display text-lg font-bold">{row["id"] ? "تعديل" : "إضافة"} — {sections[table].label}</h3>
-          <button type="button" onClick={onClose} aria-label="إغلاق"><X className="h-5 w-5" /></button>
+          <Button type="button" variant="ghost" size="icon" disabled={uploading} onClick={onClose} aria-label="إغلاق"><X className="h-5 w-5" /></Button>
         </div>
         {table === "branches" && (
           <CityUniversitySelect universityOnly required city={form["city"] ?? ""} university={form["university"] ?? ""} faculty="" department="" onChange={(v) => setForm({ ...form, city: v.city, university: v.university })} labelClassName="mb-1 block" className="mt-1 w-full rounded-xl border bg-background px-3 py-2 disabled:opacity-60" />
@@ -218,7 +225,7 @@ function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row:
             ) : (
             <input
               required={i === 0 && table !== "branches"}
-              type={f.type === "number" ? "number" : f.key === "email" ? "email" : f.key === "contact" && table === "branches" ? "tel" : "text"}
+              type={f.type === "number" ? "number" : f.key === "application_url" ? "url" : f.key === "email" ? "email" : f.key === "contact" && table === "branches" ? "tel" : "text"}
               dir={f.key === "email" || (f.key === "contact" && table === "branches") ? "ltr" : undefined}
               value={form[f.key] ?? ""}
               onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
@@ -230,7 +237,8 @@ function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row:
         {table === "courses" && (
           <LessonVideosInput count={Number(form["lessons"]) || 0} value={form["lesson_videos"] ?? []} onChange={(v) => setForm({ ...form, lesson_videos: v })} />
         )}
-        <button className="w-full rounded-xl bg-primary py-2 font-bold text-primary-foreground">حفظ</button>
+        {["news", "events", "products"].includes(table) && <ContentImageUpload value={form["images"] ?? []} onChange={(images) => setForm((current) => ({ ...current, images }))} onBusyChange={setUploading} />}
+        <Button disabled={uploading} className="w-full">حفظ</Button>
       </form>
     </div>
   );

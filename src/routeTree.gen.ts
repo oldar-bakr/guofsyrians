@@ -22,6 +22,7 @@ import { Route as AuthenticatedContributeRouteImport } from './routes/_authentic
 import { Route as AuthenticatedDealsRouteImport } from './routes/_authenticated/deals'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedScholarshipsRouteImport } from './routes/_authenticated/scholarships'
 import { Route as AuthenticatedSubscriptionRouteImport } from './routes/_authenticated/subscription'
 import { Route as AuthenticatedUnionRouteImport } from './routes/_authenticated/union'
 import { Route as AuthenticatedContributeIndexRouteImport } from './routes/_authenticated/contribute.index'
@@ -102,6 +103,12 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedScholarshipsRoute =
+  AuthenticatedScholarshipsRouteImport.update({
+    id: '/scholarships',
+    path: '/scholarships',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSubscriptionRoute =
   AuthenticatedSubscriptionRouteImport.update({
     id: '/subscription',
@@ -199,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/deals': typeof AuthenticatedDealsRoute
   '/home': typeof AuthenticatedHomeRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/scholarships': typeof AuthenticatedScholarshipsRoute
   '/subscription': typeof AuthenticatedSubscriptionRoute
   '/union': typeof AuthenticatedUnionRoute
   '/contribute/courses': typeof AuthenticatedContributeCoursesRoute
@@ -227,6 +235,7 @@ export interface FileRoutesByTo {
   '/deals': typeof AuthenticatedDealsRoute
   '/home': typeof AuthenticatedHomeRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/scholarships': typeof AuthenticatedScholarshipsRoute
   '/subscription': typeof AuthenticatedSubscriptionRoute
   '/union': typeof AuthenticatedUnionRoute
   '/contribute/courses': typeof AuthenticatedContributeCoursesRoute
@@ -258,6 +267,7 @@ export interface FileRoutesById {
   '/_authenticated/deals': typeof AuthenticatedDealsRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/scholarships': typeof AuthenticatedScholarshipsRoute
   '/_authenticated/subscription': typeof AuthenticatedSubscriptionRoute
   '/_authenticated/union': typeof AuthenticatedUnionRoute
   '/_authenticated/contribute/courses': typeof AuthenticatedContributeCoursesRoute
@@ -289,6 +299,7 @@ export interface FileRouteTypes {
     | '/deals'
     | '/home'
     | '/profile'
+    | '/scholarships'
     | '/subscription'
     | '/union'
     | '/contribute/courses'
@@ -317,6 +328,7 @@ export interface FileRouteTypes {
     | '/deals'
     | '/home'
     | '/profile'
+    | '/scholarships'
     | '/subscription'
     | '/union'
     | '/contribute/courses'
@@ -347,6 +359,7 @@ export interface FileRouteTypes {
     | '/_authenticated/deals'
     | '/_authenticated/home'
     | '/_authenticated/profile'
+    | '/_authenticated/scholarships'
     | '/_authenticated/subscription'
     | '/_authenticated/union'
     | '/_authenticated/contribute/courses'
@@ -468,6 +481,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/scholarships': {
+      id: '/_authenticated/scholarships'
+      path: '/scholarships'
+      fullPath: '/scholarships'
+      preLoaderRoute: typeof AuthenticatedScholarshipsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/subscription': {
@@ -603,6 +623,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDealsRoute: typeof AuthenticatedDealsRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedScholarshipsRoute: typeof AuthenticatedScholarshipsRoute
   AuthenticatedSubscriptionRoute: typeof AuthenticatedSubscriptionRoute
   AuthenticatedUnionRoute: typeof AuthenticatedUnionRoute
   AuthenticatedCoursesIdRoute: typeof AuthenticatedCoursesIdRoute
@@ -621,6 +642,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDealsRoute: AuthenticatedDealsRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedScholarshipsRoute: AuthenticatedScholarshipsRoute,
   AuthenticatedSubscriptionRoute: AuthenticatedSubscriptionRoute,
   AuthenticatedUnionRoute: AuthenticatedUnionRoute,
   AuthenticatedCoursesIdRoute: AuthenticatedCoursesIdRoute,

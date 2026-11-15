@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ShoppingBag, Minus, Plus } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
+import { ContentImages } from "@/components/ContentImages";
 import { useContent, approvedOnly } from "@/lib/content";
 import { useMine, useActivityActions } from "@/lib/activity";
 
@@ -13,6 +14,8 @@ export const Route = createFileRoute("/_authenticated/market/")({
       { name: "description", content: "منتجات من بائعين معتمدين للطلاب مع سلة وطلبات." },
       { property: "og:title", content: "سوق الطالب" },
       { property: "og:description", content: "تسوّق من بائعين معتمدين." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Market,
@@ -43,16 +46,16 @@ function Market() {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {products.map((p: any) => (
           <article key={p.id} className="rounded-2xl bg-card p-3 shadow-soft">
-            <div className="mb-3 grid aspect-square place-items-center rounded-xl bg-muted text-primary"><ShoppingBag className="h-8 w-8" /></div>
+            {p.images?.length > 0 ? <ContentImages paths={p.images} title={p.name} className="mb-3" /> : <div className="mb-3 grid aspect-square place-items-center rounded-xl bg-muted text-primary"><ShoppingBag className="h-8 w-8" /></div>}
             <h3 className="text-sm font-bold">{p.name}</h3>
             <p className="text-xs text-muted-foreground">{p.seller}</p>
             <div className="mt-2 flex items-center justify-between">
               <span className="font-bold text-primary">{p.price}</span>
               {cart[p.id] ? (
                 <div className="flex items-center gap-2">
-                  <button aria-label="إنقاص" onClick={() => setQty(p.id, cart[p.id]! - 1)}><Minus className="h-4 w-4" /></button>
+                  <button aria-label="إنقاص" onClick={() => setQty(p.id, (cart[p.id] ?? 0) - 1)}><Minus className="h-4 w-4" /></button>
                   <span className="text-sm font-bold">{cart[p.id]}</span>
-                  <button aria-label="زيادة" onClick={() => setQty(p.id, cart[p.id]! + 1)}><Plus className="h-4 w-4" /></button>
+                  <button aria-label="زيادة" onClick={() => setQty(p.id, (cart[p.id] ?? 0) + 1)}><Plus className="h-4 w-4" /></button>
                 </div>
               ) : (
                 <button onClick={() => { setDone(false); setQty(p.id, 1); }} className="rounded-full bg-accent px-3 py-1 text-xs font-bold text-accent-foreground">أضف</button>

@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
-export type ContentTable = "news" | "courses" | "deals" | "events" | "products" | "branches" | "faqs";
+export type ContentTable = "news" | "courses" | "deals" | "events" | "products" | "branches" | "faqs" | "scholarships";
 
 export type Field = { key: string; label: string; type?: "number" | "long" | "status"; hideInTable?: boolean };
 
 // Editable fields per section, shared by the app pages and the admin dashboard.
 export const sections: Record<ContentTable, { label: string; fields: Field[] }> = {
+  scholarships: { label: "المنح", fields: [{ key: "title", label: "اسم المنحة" }, { key: "provider", label: "الجهة المانحة" }, { key: "country", label: "الدولة" }, { key: "deadline", label: "آخر موعد للتقديم" }, { key: "application_url", label: "رابط التقديم", hideInTable: true }, { key: "eligibility", label: "شروط التقديم", type: "long", hideInTable: true }, { key: "description", label: "تفاصيل المنحة", type: "long", hideInTable: true }] },
   news: { label: "الأخبار", fields: [{ key: "title", label: "العنوان" }, { key: "date", label: "التاريخ" }, { key: "body", label: "تفاصيل الخبر", type: "long", hideInTable: true }] },
   courses: { label: "الدورات", fields: [{ key: "title", label: "اسم الدورة" }, { key: "category", label: "التصنيف" }, { key: "lessons", label: "عدد الدروس", type: "number" }, { key: "description", label: "الوصف", type: "long", hideInTable: true }, { key: "video_url", label: "رابط الفيديو", hideInTable: true }, { key: "instructor", label: "المدرّب" }, { key: "contact", label: "التواصل", hideInTable: true }, { key: "status", label: "الحالة", type: "status" }] },
   deals: { label: "التخفيضات", fields: [{ key: "partner", label: "الشريك" }, { key: "category", label: "التصنيف" }, { key: "discount", label: "الخصم" }, { key: "city", label: "المدينة" }, { key: "terms", label: "الشروط" }] },
