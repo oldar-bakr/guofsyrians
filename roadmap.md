@@ -1,10 +1,10 @@
 # Student subscription
 
 ## Content visibility and previews
-- [ ] Add first-column thumbnails and staff activation switches to content and store management.
-- [ ] Hide disabled content from student surfaces, details and assistant while preserving owner/staff access.
-- [ ] Separate course, product and deal approval queues above published records.
-- [ ] Test activation, review rules and authenticated dashboard/student readback.
+- [x] Add first-column thumbnails and staff activation switches to content and store management.
+- [x] Hide disabled content from student surfaces, details and assistant while preserving owner/staff access.
+- [x] Separate course, product and deal approval queues above published records.
+- [x] Test all content public-read restrictions, owner reads, deal trigger review and staff-suspension guard; verify thumbnails, product disable/readback and three dashboard approval queues. Clean test rows and restore activation.
 
 ## Dashboard side navigation
 - [x] Replace horizontal tabs with grouped RTL side navigation, desktop collapse and a phone drawer.

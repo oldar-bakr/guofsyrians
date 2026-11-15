@@ -157,6 +157,7 @@ function SectionManager({ table }: { table: ContentTable }) {
                   {table === "courses" ? `${row["category"] || "بدون تصنيف"} · ${row["lessons"] ?? 0} دروس · ${row["instructor"] || ""}` : table === "deals" ? `${row["discount"]} · ${row["city"]}` : `${row["price"] || ""} · ${row["seller"] || ""}`}
                 </p>
                 {row["description"] && <p className="line-clamp-3 text-sm">{row["description"]}</p>}
+                <ContentActivation table={table} id={row["id"]} title={row[fields[0]?.key ?? "title"] ?? ""} active={(table === "deals" ? row["staff_active"] : row["active"]) !== false} />
                 <div className="mt-auto flex gap-2 pt-2">
                   <Button onClick={() => save({ ...row, status: "approved" })} className="flex-1">موافقة</Button>
                   <Button variant="outline" onClick={() => save({ ...row, status: "rejected" })} className="flex-1 text-destructive">رفض</Button>
