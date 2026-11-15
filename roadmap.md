@@ -1,5 +1,10 @@
 # Student subscription
 
+## Landing page refresh
+- [x] Refresh the public landing with campus imagery, union identity, and streamlined email/Google sign-in.
+- [x] Preserve separate course/product contributions, business entry, and official contacts.
+- [x] Verify mobile/desktop layout, no mobile horizontal overflow, and public sign-in navigation.
+
 ## Mobile navigation
 - [x] Move the mobile page title beside the union logo, replacing the brand label only on mobile.
 - [x] Float the five existing navigation buttons above the screen edge with active states and safe-area spacing.

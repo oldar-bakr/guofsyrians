@@ -1,11 +1,13 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { GraduationCap, IdCard, Tag, CalendarDays, ShoppingBag, Sparkles, Building2, Store } from "lucide-react";
+import { GraduationCap, IdCard, Tag, CalendarDays, ShoppingBag, Award, ArrowLeft, Store } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 import { ContactLinks } from "@/components/ContactLinks";
 import logo from "@/assets/union-logo.png.asset.json";
+import campus from "@/assets/union-students-campus.jpg";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -25,12 +27,12 @@ export const Route = createFileRoute("/")({
 });
 
 const features = [
-  { icon: IdCard, title: "بطاقة عضوية رقمية", desc: "بطاقتك الطلابية مع رمز تحقق، دائماً معك على هاتفك" },
-  { icon: GraduationCap, title: "دورات تدريبية", desc: "سجّل في الدورات وتابع تقدمك درساً درساً" },
-  { icon: Tag, title: "تخفيضات حصرية", desc: "عروض خاصة للطلاب في مدينتك مع رمز استخدام شخصي" },
-  { icon: CalendarDays, title: "فعاليات ونشاطات", desc: "سجّل حضورك في فعاليات الاتحاد بضغطة واحدة" },
-  { icon: ShoppingBag, title: "سوق الطلاب", desc: "اطلب منتجات ومستلزمات طلابية وتابع حالة طلبك" },
-  { icon: Sparkles, title: "مساعد ذكي", desc: "اسأل عن خدمات الاتحاد وفعالياته واحصل على إجابة فورية" },
+  { icon: CalendarDays, title: "فعاليات تجمعنا", desc: "لقاءات ونشاطات طلابية، ومساحة لتكوين علاقات جديدة." },
+  { icon: Award, title: "فرص المنح", desc: "منح دراسية وشروط التقديم وروابط الجهات المانحة." },
+  { icon: Tag, title: "تخفيضات للطلاب", desc: "عروض المتاجر والمقاهي والشركاء في مدينتك." },
+  { icon: GraduationCap, title: "تعلّم وطوّر مهاراتك", desc: "دورات عربية ودروس قصيرة تناسب يومك الجامعي." },
+  { icon: ShoppingBag, title: "من طالب إلى طالب", desc: "كتب وأجهزة ومستلزمات في سوق المجتمع الطلابي." },
+  { icon: IdCard, title: "عضويتك معك", desc: "بطاقة رقمية ومعلومات عضويتك في مكان واحد." },
 ] as const;
 
 function Landing() {
@@ -69,129 +71,65 @@ function Landing() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-10 border-b bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
-          <div className="flex items-center gap-2">
-            <img src={logo.url} alt="شعار الاتحاد" className="h-10 w-10 object-contain" />
-            <div>
-              <p className="font-display text-sm font-bold text-primary">الاتحاد العام لطلبة سوريا</p>
-              <p className="text-xs text-muted-foreground">تطبيق خدمات الطلاب</p>
-            </div>
-          </div>
-          <Link to="/auth" className="rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground shadow-soft">
-            تسجيل الدخول
+      <header className="sticky top-0 z-30 border-b bg-background/95 backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+          <Link to="/" className="flex min-w-0 items-center gap-2.5" aria-label="الاتحاد العام لطلبة سوريا — الرئيسية">
+            <img src={logo.url} alt="شعار الاتحاد" width={44} height={44} className="h-11 w-11 shrink-0 object-contain" />
+            <div className="min-w-0"><p className="font-display text-xs font-bold leading-5 text-primary sm:text-base">الاتحاد العام لطلبة سوريا</p><p className="text-[10px] text-muted-foreground sm:text-xs">مجتمع طلابي · فرص مشتركة</p></div>
           </Link>
+          <nav aria-label="أقسام الصفحة" className="hidden items-center gap-6 text-sm text-muted-foreground lg:flex">
+            <a href="#services" className="hover:text-primary">خدمات الطلاب</a><a href="#contribute" className="hover:text-primary">شارك بمهارتك</a><a href="#partners" className="hover:text-primary">شركاء الاتحاد</a><a href="#contact" className="hover:text-primary">تواصل معنا</a>
+          </nav>
+          <Button asChild className="shrink-0 rounded-full px-4 sm:px-5"><Link to="/auth">تسجيل الدخول<ArrowLeft /></Link></Button>
         </div>
       </header>
 
-      <section className="bg-hero text-primary-foreground">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-16 md:grid-cols-2 md:py-24">
-          <div>
-            <h1 className="font-display text-3xl font-bold leading-snug md:text-5xl">
-              كل خدماتك الطلابية<br />في تطبيق واحد
-            </h1>
-            <p className="mt-4 max-w-md text-sm leading-relaxed opacity-90 md:text-base">
-              بطاقتك الرقمية، دوراتك، تخفيضاتك، فعالياتك وسوقك — منصة الاتحاد العام لطلبة سوريا تجمع كل ما يحتاجه الطالب في مكان واحد.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link to="/auth" className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground shadow-soft">
-                ابدأ الآن — إنشاء حساب
-              </Link>
-              <Link to="/auth" className="rounded-full border border-primary-foreground/40 px-6 py-3 font-bold">
-                لدي حساب — دخول
-              </Link>
-            </div>
-            <div className="mt-6 max-w-xs space-y-2">
-              <p className="text-xs opacity-80">أو تابع ببريد Google مباشرةً</p>
-              <GoogleSignInButton onClick={google} disabled={busy} />
-              {msg && <p className="text-sm opacity-90">{msg}</p>}
+      <main>
+        <section className="relative isolate overflow-hidden bg-primary text-primary-foreground">
+          <img src={campus} alt="طلاب يتشاركون الحديث في حرم جامعي — صورة توضيحية" width={1536} height={1024} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-left" />
+          <div className="absolute inset-0 -z-10 bg-primary/75 sm:bg-primary/65" />
+          <div className="mx-auto flex min-h-[520px] max-w-6xl items-center px-5 py-10 sm:min-h-[540px] sm:px-6 sm:py-14">
+            <div className="max-w-xl">
+              <p className="mb-5 flex items-center gap-2 text-xs font-bold text-accent"><span className="h-px w-8 bg-accent" />معًا، لحياة جامعية أغنى</p>
+              <h1 className="font-display text-3xl font-bold leading-[1.5] sm:text-5xl sm:leading-[1.45]">الاتحاد العام<br />لطلبة سوريا</h1>
+              <p className="mt-4 max-w-md text-sm leading-7 text-primary-foreground/90 sm:text-base">مجتمعك الطلابي في تركيا. تعلّم، اكتشف الفرص، وابقَ قريبًا من زملائك واتحادك.</p>
+              <div className="mt-7 flex max-w-sm flex-col gap-3">
+                <Button asChild size="lg" className="h-12 justify-between bg-accent px-5 font-bold text-accent-foreground hover:bg-accent/90"><Link to="/auth">انضمّ إلى مجتمعك<ArrowLeft /></Link></Button>
+                <GoogleSignInButton onClick={google} disabled={busy} />
+                {msg && <p role="alert" className="text-sm">{msg}</p>}
+              </div>
+              <p className="mt-4 text-xs text-primary-foreground/80">لديك حساب؟ <Link to="/auth" className="font-bold underline underline-offset-4">أهلًا بعودتك</Link></p>
             </div>
           </div>
-          <div className="mx-auto w-full max-w-xs rounded-3xl bg-card/10 p-6 text-center backdrop-blur">
-            <img src={logo.url} alt="شعار الاتحاد العام لطلبة سوريا" className="mx-auto h-40 object-contain md:h-52" />
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-14">
-        <h2 className="text-center font-display text-2xl font-bold md:text-3xl">ماذا يقدم لك التطبيق؟</h2>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="rounded-3xl bg-card p-6 shadow-soft">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-secondary text-primary"><Icon className="h-6 w-6" /></span>
-              <h3 className="mt-4 font-display text-lg font-bold">{title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+        <section id="services" className="scroll-mt-24 bg-card">
+          <div className="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-14">
+            <div className="mb-7 flex flex-wrap items-end justify-between gap-3"><div><p className="mb-2 text-xs font-bold text-primary">فرص أقرب إليك</p><h2 className="font-display text-2xl font-bold sm:text-3xl">كل ما يهمّ يومك الجامعي</h2></div><Button asChild variant="link" className="px-0"><Link to="/auth">اكتشف خدماتك<ArrowLeft /></Link></Button></div>
+            <div className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+              {features.map(({ icon: Icon, title, desc }) => <Link key={title} to="/auth" className="group flex gap-4 border-t py-6 outline-none focus-visible:ring-2 focus-visible:ring-ring"><span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-secondary text-primary transition-colors group-hover:bg-accent"><Icon className="h-5 w-5" /></span><div><h3 className="font-display text-base font-bold group-hover:text-primary">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{desc}</p></div></Link>)}
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-member text-primary-foreground">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-5 py-14 text-center">
-          <Building2 className="h-10 w-10" />
-          <h2 className="font-display text-2xl font-bold md:text-3xl">انضم إلى اتحادك اليوم</h2>
-          <p className="max-w-lg text-sm opacity-90">أنشئ حسابك، أكمل بياناتك الطلابية، واحصل على بطاقة عضويتك الرقمية فوراً.</p>
-          <Link to="/auth" className="mt-2 rounded-full bg-accent px-8 py-3 font-bold text-accent-foreground shadow-soft">
-            تسجيل الدخول / إنشاء حساب
-          </Link>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-5 pt-14">
-        <div className="flex flex-col items-center gap-4 rounded-3xl border-2 border-primary bg-card p-8 text-center shadow-soft md:flex-row md:text-right">
-          <GraduationCap className="h-12 w-12 shrink-0 text-primary" />
-          <div className="flex-1">
-            <h2 className="font-display text-2xl font-bold">قدّم دوراتك</h2>
-            <p className="mt-1 text-sm text-muted-foreground">لديك مهارة تعلّمها؟ قدّم دورتك لطلاب الاتحاد، وننشرها بعد مراجعة الإدارة.</p>
+            <div className="flex items-center justify-between gap-4 border-t py-5"><div className="flex items-center gap-3"><img src={logo.url} alt="" width={32} height={32} className="h-8 w-8" /><p className="text-sm font-medium">لديك سؤال؟ مساعد الاتحاد معك</p></div><Button asChild variant="ghost" size="icon"><Link to="/auth" aria-label="تحدث مع مساعد الاتحاد"><ArrowLeft /></Link></Button></div>
           </div>
-          <Link to="/auth" className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground shadow-soft">سجّل وقدّم دورة</Link>
-        </div>
-      </section>
+        </section>
 
-      <section className="mx-auto max-w-6xl px-5 pt-6">
-        <div className="flex flex-col items-center gap-4 rounded-3xl border-2 border-accent bg-card p-8 text-center shadow-soft md:flex-row md:text-right">
-          <ShoppingBag className="h-12 w-12 shrink-0 text-primary" />
-          <div className="flex-1">
-            <h2 className="font-display text-2xl font-bold">قدّم منتجاتك</h2>
-            <p className="mt-1 text-sm text-muted-foreground">تبيع منتجاً؟ اعرضه في سوق الطلاب، ويُنشر بعد موافقة الإدارة.</p>
+        <section id="contribute" className="scroll-mt-24 border-b">
+          <div className="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-14">
+            <p className="mb-2 text-xs font-bold text-primary">من المجتمع، للمجتمع</p><h2 className="font-display text-2xl font-bold sm:text-3xl">لديك شيء تشاركه؟</h2>
+            <div className="mt-7 divide-y border-t">
+              <section className="flex flex-col gap-4 py-7 sm:flex-row sm:items-center"><GraduationCap className="h-8 w-8 shrink-0 text-primary" /><div className="flex-1"><h3 className="font-display text-xl font-bold">قدّم دوراتك</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">شارك مهارتك بدورة لطلاب الاتحاد. تُنشر بعد مراجعة الإدارة.</p></div><Button asChild variant="outline" className="h-11 sm:w-auto"><Link to="/auth">سجّل وقدّم دورة<ArrowLeft /></Link></Button></section>
+              <section className="flex flex-col gap-4 py-7 sm:flex-row sm:items-center"><ShoppingBag className="h-8 w-8 shrink-0 text-primary" /><div className="flex-1"><h3 className="font-display text-xl font-bold">قدّم منتجاتك</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">امنح كتبك وأجهزتك فرصة جديدة في سوق الطلاب، بعد موافقة الإدارة.</p></div><Button asChild variant="outline" className="h-11 sm:w-auto"><Link to="/auth">سجّل وقدّم منتجًا<ArrowLeft /></Link></Button></section>
+            </div>
           </div>
-          <Link to="/auth" className="rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground shadow-soft">سجّل وقدّم منتج</Link>
-        </div>
-      </section>
+        </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-14">
-        <div className="flex flex-col items-center gap-4 rounded-3xl border-2 border-accent bg-card p-8 text-center shadow-soft md:flex-row md:text-right">
-          <Store className="h-12 w-12 shrink-0 text-primary" />
-          <div className="flex-1">
-            <h2 className="font-display text-2xl font-bold">هل لديك مطعم أو مقهى أو متجر؟</h2>
-            <p className="mt-1 text-sm text-muted-foreground">سجّل نشاطك التجاري، انشر تخفيضاتك لطلاب الاتحاد، وامسح رموزهم للتحقق من عضويتهم.</p>
-          </div>
-          <Link to="/auth" search={{ as: "business" }} className="rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground shadow-soft">دخول أصحاب الأعمال</Link>
-        </div>
-      </section>
+        <section id="partners" className="scroll-mt-24 bg-primary text-primary-foreground">
+          <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 sm:px-6 md:flex-row md:items-center md:py-14"><div className="flex-1"><Store className="mb-4 h-7 w-7 text-accent" /><p className="mb-2 text-xs text-accent">شركاء المجتمع الطلابي</p><h2 className="font-display text-2xl font-bold sm:text-3xl">متجرك أقرب إلى الطلاب</h2><p className="mt-3 max-w-xl text-sm leading-7 text-primary-foreground/85">لديك مطعم أو مقهى أو متجر؟ انضمّ إلى شركاء الاتحاد، وقدّم عروضك للطلاب بعد اعتماد نشاطك.</p></div><Button asChild size="lg" className="h-12 bg-accent text-accent-foreground hover:bg-accent/90"><Link to="/auth" search={{ as: "business" }}>دخول أصحاب الأعمال<ArrowLeft /></Link></Button></div>
+        </section>
 
-      <section id="contact" className="mx-auto max-w-6xl px-5 py-14">
-        <div className="rounded-3xl border bg-card p-6 shadow-soft md:p-8">
-          <h2 className="font-display text-2xl font-bold">تواصل مع الاتحاد</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            للاستفسار عن العضوية أو التعاون أو تسجيل نشاطك التجاري، استخدم إحدى وسائل التواصل التالية.
-          </p>
-          <div className="mt-5">
-            <ContactLinks />
-          </div>
-        </div>
-      </section>
-
-      <footer className="border-t py-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-5 text-center">
-          <div className="flex items-center gap-2">
-            <img src={logo.url} alt="شعار الاتحاد" className="h-9 w-9 object-contain" />
-            <p className="font-display text-sm font-bold text-primary">الاتحاد العام لطلبة سوريا</p>
-          </div>
-          <ContactLinks showAddress={false} />
-          <p className="text-xs text-muted-foreground">تطبيق خدمات الطلاب — الاتحاد العام لطلبة سوريا</p>
-        </div>
-      </footer>
+        <section id="contact" className="scroll-mt-24 bg-card"><div className="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-14"><h2 className="font-display text-2xl font-bold">لنَبقَ على تواصل</h2><p className="mb-6 mt-2 text-sm text-muted-foreground">للعضوية، الاستفسارات، والتعاون مع الاتحاد.</p><ContactLinks /></div></section>
+      </main>
+      <footer className="border-t"><div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-6 sm:px-6"><p className="font-display text-sm font-bold text-primary">الاتحاد العام لطلبة سوريا</p><p className="text-xs text-muted-foreground">معًا، نبني مجتمعنا الطلابي.</p></div></footer>
     </div>
   );
 }

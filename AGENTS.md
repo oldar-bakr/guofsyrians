@@ -29,3 +29,4 @@
 - News list covers and inline RTL Embla detail images fill their frames; expanded images and upload previews remain contained so the original can be inspected, and other content galleries retain their current layout. The shared cover fit defaults to contain to avoid cropping unrelated content.
 - Product detail pages expose only contact information published on the product record, never private seller profile data; market image/title links open details separately from cart controls.
 - AppShell owns mobile page titles and safe-area-aware floating navigation so student screens share one consistent mobile frame without changing desktop navigation.
+- The public landing keeps its existing authentication redirects and shared contact source; visual changes must preserve separate contribution and business entry points.
