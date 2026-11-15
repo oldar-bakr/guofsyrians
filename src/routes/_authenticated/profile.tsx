@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
 import { useMyProfile } from "@/lib/profile";
+import { isMembershipActive } from "@/lib/membership";
 import { CityUniversitySelect } from "@/components/CityUniversitySelect";
 import { AvatarUpload } from "@/components/AvatarUpload";
 import { Avatar } from "@/components/Avatar";
@@ -101,6 +102,9 @@ function ProfilePage() {
   ];
   const changed = Boolean(p && fields.some((f) => (form[f.key] ?? "") !== (p[f.key] ?? "")));
   const personalFields = fields.filter((f) => ["full_name", "phone", "student_number", "uni_email"].includes(f.key));
+  const membershipActive = p ? isMembershipActive(p) : false;
+  const membershipExpired = Boolean(p?.membership_expires && p.membership_expires < new Date().toISOString().slice(0, 10));
+  const membershipDate = p?.membership_expires ? new Date(`${p.membership_expires}T12:00:00Z`).toLocaleDateString("ar", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }) : null;
 
   return (
     <AppShell title="ملفي">
@@ -117,6 +121,15 @@ function ProfilePage() {
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground"><span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{p?.city}</span><span dir="ltr" className="break-all font-mono">{p?.member_code}</span></div>
         </div>
         <Button asChild variant="outline" className="max-sm:ms-auto"><Link to="/card"><CreditCard />بطاقتي<ArrowLeft /></Link></Button>
+        {p && <section aria-label="حالة العضوية" className="flex w-full flex-wrap items-center justify-between gap-3 border-t pt-4">
+          <div className="flex min-w-0 items-start gap-2">
+            {membershipActive ? <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" /> : <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" />}
+            <div><h2 className={`text-sm font-bold ${membershipActive ? "text-primary" : "text-foreground"}`}>{membershipActive ? "طالب فعّال" : "طالب غير فعّال"}</h2>
+              <p className="mt-1 text-xs text-muted-foreground">{membershipActive ? membershipDate ? `تنتهي عضويتك في ${membershipDate}` : "لا يوجد تاريخ انتهاء محدد" : membershipExpired && membershipDate ? `انتهت عضويتك في ${membershipDate}` : "عضويتك غير مفعّلة"}</p>
+            </div>
+          </div>
+          <Button asChild variant={membershipActive ? "outline" : "default"} className="max-sm:w-full"><Link to="/subscription"><CreditCard />{membershipActive || membershipExpired ? "تجديد الاشتراك" : "فعّل اشتراكك الآن"}<ArrowLeft /></Link></Button>
+        </section>}
       </header>
       <section className="py-6" aria-label="نشاطي">
       <h2 className="mb-3 text-sm font-bold">نشاطي</h2>
@@ -127,10 +140,6 @@ function ProfilePage() {
           </Link>
         ))}
       </div>
-      </section>
-      <section className="flex flex-wrap items-center justify-between gap-4 border-y py-5">
-        <div className="flex items-start gap-3"><CreditCard className="mt-1 h-5 w-5 shrink-0 text-primary" /><div><h2 className="text-sm font-bold">الاشتراك الشهري <span className="ms-2 text-xs font-normal text-muted-foreground">تجريبي</span></h2><p className="mt-1 text-sm text-muted-foreground">100 ليرة تركية / شهر — دون دفع حقيقي</p></div></div>
-        <Button asChild variant="outline"><Link to="/subscription"><CreditCard />تجربة الاشتراك</Link></Button>
       </section>
       <form onSubmit={save} className="mt-7">
         <section className="grid gap-4 border-b pb-7 lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-8">

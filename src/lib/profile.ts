@@ -13,6 +13,8 @@ export type Profile = {
   uni_email: string;
   member_code: string;
   avatar_url: string | null;
+  membership_active: boolean;
+  membership_expires: string | null;
   created_at: string;
 };
 
