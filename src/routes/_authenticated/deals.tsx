@@ -79,9 +79,16 @@ function Deals() {
             </PopoverContent>
           </Popover>
         </div>
-        <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"><span role="status" aria-live="polite">{list.length} عرض متاح</span>{city && <Button variant="secondary" size="sm" className="h-auto min-h-7 max-w-full py-1 text-xs" aria-label="إزالة فلتر المدينة" onClick={() => setCity("")}><MapPin className="h-3 w-3 shrink-0" /><span className="min-w-0 break-words whitespace-normal">{city}</span><X className="h-3 w-3 shrink-0" /></Button>}{companyName && <Button variant="secondary" size="sm" className="h-auto min-h-7 max-w-full py-1 text-xs" aria-label="إزالة فلتر الشركة" onClick={() => setCompany("")}><span className="min-w-0 break-words whitespace-normal">{companyName}</span><X className="h-3 w-3 shrink-0" /></Button>}{(query || activeFilters > 0) && <Button variant="ghost" size="sm" className="mr-auto h-7 text-xs" onClick={clearAll}><RotateCcw className="h-3 w-3" />مسح الكل</Button>}</div>
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
+          <span role="status" aria-live="polite" className="min-w-0 text-xs text-muted-foreground">{list.length} عرض متاح</span>
+          {(query || activeFilters > 0) && <Button variant="ghost" size="sm" className="h-7 shrink-0 text-xs" onClick={clearAll}><RotateCcw className="h-3 w-3" />مسح الكل</Button>}
+        </div>
+        {activeFilters > 0 && <div aria-label="الفلاتر المحددة" className="flex flex-wrap items-center gap-2">
+          {city && <Button variant="secondary" size="sm" className="h-8 max-w-full gap-1.5 rounded-lg px-2.5 text-xs" aria-label="إزالة فلتر المدينة" onClick={() => setCity("")}><MapPin className="h-3.5 w-3.5 shrink-0" /><span className="min-w-0 truncate">{city}</span><X className="h-3.5 w-3.5 shrink-0" /></Button>}
+          {companyName && <Button variant="secondary" size="sm" className="h-8 max-w-full gap-1.5 rounded-lg px-2.5 text-xs" aria-label="إزالة فلتر الشركة" onClick={() => setCompany("")}><span className="min-w-0 truncate">{companyName}</span><X className="h-3.5 w-3.5 shrink-0" /></Button>}
+          {storeType && <Button variant="secondary" size="sm" className="h-8 max-w-full gap-1.5 rounded-lg px-2.5 text-xs" aria-label="إزالة فلتر نوع المتجر" onClick={() => setType("")}><span className="min-w-0 truncate">{storeType}</span><X className="h-3.5 w-3.5 shrink-0" /></Button>}
+        </div>}
       </div>
-      {storeType && <div className="mb-4"><Button variant="secondary" size="sm" className="h-auto min-h-7 max-w-full py-1 text-xs" aria-label="إزالة فلتر نوع المتجر" onClick={() => setType("")}><span className="min-w-0 whitespace-normal break-words">{storeType}</span><X className="h-3 w-3 shrink-0" /></Button></div>}
       <div className="grid items-stretch gap-4 md:grid-cols-2 xl:grid-cols-3">
         {list.map((d) => (
           <article key={d.id} className="relative flex min-w-0 flex-col gap-4 rounded-lg border bg-card p-4 transition-colors hover:border-primary/40 sm:p-5">
