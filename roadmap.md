@@ -1,5 +1,9 @@
 # Student subscription
 
+## Business page presentation
+- [x] Refine store identity, desktop side navigation, mobile navigation, scanning, offers, history and store form without changing permissions or payment rules.
+- [x] Verify signed-in desktop/mobile navigation, offer dialog, store data and invalid-member lookup; 11 regression tests pass.
+
 ## Site-wide skeleton loading
 - [x] Add accessible, reduced-motion-aware placeholders for page transitions, lists, detail pages, account screens, images and dashboard tables.
 - [x] Preserve existing data fetching, permissions, empty/error states and action progress indicators.
