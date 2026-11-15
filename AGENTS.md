@@ -24,3 +24,4 @@
 - Course quiz answer keys are staff-only records; authenticated server functions verify enrollment and course visibility before returning sanitized questions or saving server-graded attempts, preventing client-forged scores.
 - The university directory is a bundled domestic YÖK catalogue enriched with sourced institutional office emails; staff-managed branch contacts override demo representatives, which remain explicitly labelled as fictional.
 - Deal cards link to student-facing partner profiles; the shared redemption dialog preserves the same QR payload and is separate from card navigation, including legacy staff-created offers without a business row.
+- Deal filtering uses shared pure predicates with normalized city matching and business IDs (legacy partner names only when unlinked); company options depend on the selected city to avoid unrelated selections.

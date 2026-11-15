@@ -1,5 +1,9 @@
 # Student subscription
 
+## Deal filtering
+- [x] Add compact search and combined city/company filters, preserving the student-city default.
+- [x] Verify combined filters, reset, and mobile display with real offers and five passing filtering tests.
+
 ## Partner profiles
 - [x] Open partner information and all available offers from deal cards, keeping the redemption popup separate.
 - [x] Verify card navigation and redemption from both pages on actual offers, including phone layout.
