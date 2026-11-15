@@ -145,6 +145,76 @@ export type Database = {
           },
         ]
       }
+      course_quiz_attempts: {
+        Row: {
+          answers: Json
+          created_at: string
+          id: string
+          quiz_id: string
+          score: number
+          total: number
+          user_id: string
+        }
+        Insert: {
+          answers?: Json
+          created_at?: string
+          id?: string
+          quiz_id: string
+          score?: number
+          total?: number
+          user_id: string
+        }
+        Update: {
+          answers?: Json
+          created_at?: string
+          id?: string
+          quiz_id?: string
+          score?: number
+          total?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_quiz_attempts_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "course_quizzes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      course_quizzes: {
+        Row: {
+          course_id: string
+          created_at: string
+          id: string
+          questions: Json
+          title: string
+        }
+        Insert: {
+          course_id: string
+          created_at?: string
+          id?: string
+          questions?: Json
+          title?: string
+        }
+        Update: {
+          course_id?: string
+          created_at?: string
+          id?: string
+          questions?: Json
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_quizzes_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: true
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       courses: {
         Row: {
           category: string
@@ -152,6 +222,7 @@ export type Database = {
           created_at: string
           description: string
           id: string
+          images: string[]
           instructor: string
           lesson_videos: string[]
           lessons: number
@@ -166,6 +237,7 @@ export type Database = {
           created_at?: string
           description?: string
           id?: string
+          images?: string[]
           instructor?: string
           lesson_videos?: string[]
           lessons?: number
@@ -180,6 +252,7 @@ export type Database = {
           created_at?: string
           description?: string
           id?: string
+          images?: string[]
           instructor?: string
           lesson_videos?: string[]
           lessons?: number

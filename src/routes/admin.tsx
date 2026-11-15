@@ -1,4 +1,5 @@
 import { CityUniversitySelect } from "@/components/CityUniversitySelect";
+import { CourseQuizManager } from "@/components/CourseQuiz";
 import { ContentImages, ContentImageUpload } from "@/components/ContentImages";
 import { Button } from "@/components/ui/button";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
@@ -114,6 +115,7 @@ function SectionManager({ table }: { table: ContentTable }) {
   const { fields, label } = sections[table];
   const { data = [], isLoading } = useContent(table);
   const [editing, setEditing] = useState<Record<string, any> | null>(null);
+  const [quizCourse, setQuizCourse] = useState<Record<string, any> | null>(null);
   const [error, setError] = useState("");
   const hasReview = table === "courses" || table === "products";
   const pending = hasReview ? data.filter((r: any) => r["status"] === "pending") : [];
@@ -125,7 +127,7 @@ function SectionManager({ table }: { table: ContentTable }) {
     setError("");
     const payload: Record<string, any> = {};
     fields.forEach((f) => (payload[f.key] = f.type === "number" ? Number(row[f.key] || 0) : f.type === "status" ? row[f.key] || "approved" : row[f.key] ?? ""));
-    if (["news", "events", "products"].includes(table)) payload["images"] = row["images"] ?? [];
+    if (["news", "events", "products", "courses"].includes(table)) payload["images"] = row["images"] ?? [];
     if (table === "courses") {
       const n = Math.max(0, Math.min(100, Math.floor(payload["lessons"] || 0)));
       payload["lesson_videos"] = Array.from({ length: n }, (_, i) => (row["lesson_videos"] ?? [])[i]?.trim() ?? "");
@@ -186,6 +188,7 @@ function SectionManager({ table }: { table: ContentTable }) {
                 {fields.filter((f) => !f.hideInTable).map((f) => <td key={f.key} className="px-4 py-3">{f.type === "status" ? <span className={`rounded-full px-2 py-0.5 text-xs ${row[f.key] === "pending" ? "bg-accent text-accent-foreground" : row[f.key] === "rejected" ? "bg-destructive/10 text-destructive" : "bg-secondary text-primary"}`}>{statusLabels[row[f.key]] ?? row[f.key]}{row["submitted_by"] ? " · من طالب" : ""}</span> : row[f.key]}</td>)}
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
+                    {table === "courses" && <Button size="sm" variant="outline" onClick={() => setQuizCourse(row)}>الاختبار</Button>}
                     <button aria-label="تعديل" onClick={() => setEditing(row)} className="text-primary"><Pencil className="h-4 w-4" /></button>
                     <button aria-label="حذف" onClick={() => remove(row["id"])} className="text-destructive"><Trash2 className="h-4 w-4" /></button>
                   </div>
@@ -196,6 +199,7 @@ function SectionManager({ table }: { table: ContentTable }) {
         </table>
       </div>
       {editing && <EditDialog table={table} row={editing} onClose={() => setEditing(null)} onSave={save} />}
+      {quizCourse && <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/40 p-4"><div role="dialog" aria-modal="true" aria-label="إدارة اختبار الدورة" className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-lg bg-card p-5"><div className="flex items-center justify-between gap-3"><h3 className="font-bold">{quizCourse["title"]}</h3><Button variant="ghost" size="icon" aria-label="إغلاق" onClick={() => setQuizCourse(null)}><X /></Button></div><CourseQuizManager courseId={quizCourse["id"]} /></div></div>}
     </section>
   );
 }
@@ -237,7 +241,7 @@ function EditDialog({ table, row, onClose, onSave }: { table: ContentTable; row:
         {table === "courses" && (
           <LessonVideosInput count={Number(form["lessons"]) || 0} value={form["lesson_videos"] ?? []} onChange={(v) => setForm({ ...form, lesson_videos: v })} />
         )}
-        {["news", "events", "products"].includes(table) && <ContentImageUpload value={form["images"] ?? []} onChange={(images) => setForm((current) => ({ ...current, images }))} onBusyChange={setUploading} />}
+        {["news", "events", "products", "courses"].includes(table) && <ContentImageUpload value={form["images"] ?? []} onChange={(images) => setForm((current) => ({ ...current, images }))} onBusyChange={setUploading} />}
         <Button disabled={uploading} className="w-full">حفظ</Button>
       </form>
     </div>

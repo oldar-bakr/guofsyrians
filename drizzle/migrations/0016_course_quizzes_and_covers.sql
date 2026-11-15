@@ -1,0 +1,12 @@
+ALTER TABLE public.courses ADD COLUMN images text[] NOT NULL DEFAULT '{}';
+CREATE POLICY "course images visible read" ON storage.objects FOR SELECT TO authenticated USING (bucket_id='content-images' AND EXISTS (SELECT 1 FROM public.courses c WHERE storage.objects.name=ANY(c.images) AND (c.status='approved' OR c.submitted_by=auth.uid() OR public.can_edit_content(auth.uid()))));
+CREATE TABLE public.course_quizzes (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), course_id uuid NOT NULL REFERENCES public.courses(id) ON DELETE CASCADE, title text NOT NULL DEFAULT 'اختبار الدورة', questions jsonb NOT NULL DEFAULT '[]', created_at timestamptz NOT NULL DEFAULT now(), UNIQUE(course_id));
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.course_quizzes TO authenticated;
+GRANT ALL ON public.course_quizzes TO service_role;
+ALTER TABLE public.course_quizzes ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "staff quiz management" ON public.course_quizzes FOR ALL TO authenticated USING(public.can_edit_content(auth.uid())) WITH CHECK(public.can_edit_content(auth.uid()));
+CREATE TABLE public.course_quiz_attempts (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), user_id uuid NOT NULL, quiz_id uuid NOT NULL REFERENCES public.course_quizzes(id) ON DELETE CASCADE, answers jsonb NOT NULL DEFAULT '[]', score integer NOT NULL DEFAULT 0, total integer NOT NULL DEFAULT 0, created_at timestamptz NOT NULL DEFAULT now());
+GRANT SELECT ON public.course_quiz_attempts TO authenticated;
+GRANT ALL ON public.course_quiz_attempts TO service_role;
+ALTER TABLE public.course_quiz_attempts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "own or staff quiz results" ON public.course_quiz_attempts FOR SELECT TO authenticated USING(auth.uid()=user_id OR public.can_edit_content(auth.uid()));

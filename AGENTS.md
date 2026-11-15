@@ -21,3 +21,4 @@
 - Scholarships use the shared content section registry and staff-managed Cloud records so the home service and dashboard stay in sync.
 - News, event, and product images store private content-images bucket paths; staff upload immutable files, and row-bound storage reads plus short-lived signed URLs prevent unpublished content exposure. Images preserve transparency and aspect ratio.
 - The home news slider uses the existing Embla carousel with RTL navigation and private signed cover images; motion pauses during interaction and respects reduced-motion preferences.
+- Course quiz answer keys are staff-only records; authenticated server functions verify enrollment and course visibility before returning sanitized questions or saving server-graded attempts, preventing client-forged scores.

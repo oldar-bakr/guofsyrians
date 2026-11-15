@@ -1,5 +1,11 @@
 # Student subscription
 
+## Course browsing and quizzes
+- [x] Add category/search/enrollment/sort filters and clickable course cards.
+- [x] Move enrollment to details and show introduction and embedded lesson videos.
+- [x] Add staff-managed multiple-choice quizzes with saved, server-graded attempts.
+- [x] Test course browsing, enrollment, video selection, and quiz results.
+
 ## Scholarships and content photos
 - [x] Add scholarships to home services and dashboard management.
 - [x] Upload and display news, event, and product photos in lists and details.
