@@ -12,6 +12,7 @@ import { sections, statusLabels, useContent, type ContentTable } from "@/lib/con
 import { ActivityManager } from "@/components/ActivityManager";
 import { UsersManager } from "@/components/UsersManager";
 import { BusinessesManager } from "@/components/BusinessesManager";
+import { ComplaintsManager } from "@/components/ComplaintsManager";
 import logo from "@/assets/union-logo.png.asset.json";
 
 export const Route = createFileRoute("/admin")({
@@ -37,7 +38,7 @@ function Admin() {
   const [state, setState] = useState<"loading" | "admin" | "editor" | "denied">("loading");
   const [email, setEmail] = useState("");
   const [myId, setMyId] = useState("");
-  const [tab, setTab] = useState<ContentTable | "users" | "activity" | "businesses">("news");
+  const [tab, setTab] = useState<ContentTable | "users" | "activity" | "businesses" | "complaints">("news");
 
   useEffect(() => {
     (async () => {
@@ -74,7 +75,8 @@ function Admin() {
       </div>
     );
 
-  const tabs: { key: ContentTable | "users" | "activity" | "businesses"; label: string }[] = [
+  const tabs: { key: ContentTable | "users" | "activity" | "businesses" | "complaints"; label: string }[] = [
+    { key: "complaints", label: "الشكاوى والملاحظات" },
     { key: "activity", label: "نشاط الطلاب" },
     { key: "businesses", label: "المتاجر والعروض" },
     ...(Object.keys(sections) as ContentTable[]).map((t) => ({ key: t, label: sections[t].label })),
@@ -104,7 +106,7 @@ function Admin() {
         </nav>
       </header>
       <main className="mx-auto max-w-5xl p-5">
-        {tab === "users" ? <UsersManager myId={myId} /> : tab === "activity" ? <ActivityManager /> : tab === "businesses" ? <BusinessesManager /> : <SectionManager key={tab} table={tab} />}
+        {tab === "complaints" ? <ComplaintsManager /> : tab === "users" ? <UsersManager myId={myId} /> : tab === "activity" ? <ActivityManager /> : tab === "businesses" ? <BusinessesManager /> : <SectionManager key={tab} table={tab} />}
       </main>
     </div>
   );

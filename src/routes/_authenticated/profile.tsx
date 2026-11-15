@@ -8,12 +8,13 @@ import { isMembershipActive } from "@/lib/membership";
 import { CityUniversitySelect } from "@/components/CityUniversitySelect";
 import { AvatarUpload } from "@/components/AvatarUpload";
 import { Avatar } from "@/components/Avatar";
+import { ContactLinks } from "@/components/ContactLinks";
 import { removeAvatar, saveAvatarPath } from "@/lib/avatar";
 import { useMine } from "@/lib/activity";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { CreditCard, Camera, MapPin, GraduationCap, BookOpen, CalendarDays, TicketPercent, ShoppingBag, ArrowLeft, Save, Loader2, LogOut, UserRound, CheckCircle2, CircleAlert } from "lucide-react";
+import { CreditCard, Camera, MapPin, GraduationCap, BookOpen, CalendarDays, TicketPercent, ShoppingBag, ArrowLeft, Save, Loader2, LogOut, UserRound, CheckCircle2, CircleAlert, ShieldCheck, FileText, LockKeyhole, MessageSquare } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/profile")({
   staticData: { sitemap: false },
@@ -50,6 +51,7 @@ function ProfilePage() {
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(false);
   const [photoOpen, setPhotoOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const { data: courses = [] } = useMine("course_enrollments");
   const { data: events = [] } = useMine("event_registrations");
   const { data: deals = [] } = useMine("deal_redemptions");
@@ -108,8 +110,8 @@ function ProfilePage() {
 
   return (
     <AppShell title="ملفي">
-      <div className="mx-auto max-w-5xl">
-      <header className="flex flex-wrap items-center gap-5 border-b pb-6 pt-2 sm:gap-6">
+      <div className="mx-auto max-w-3xl">
+      <header className="flex flex-wrap items-center gap-5 rounded-lg border bg-card p-5 shadow-soft sm:gap-6 sm:p-6">
         <div className="relative shrink-0 pb-1">
           <Avatar path={p?.avatar_url} name={p?.full_name} university={p?.university} className="h-24 w-24 ring-4 ring-card sm:h-28 sm:w-28" textClass="text-2xl" />
           <Button variant="outline" size="icon" className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-card shadow-sm" onClick={() => setPhotoOpen(true)} aria-label="تعديل الصورة الشخصية" title="تعديل الصورة الشخصية"><Camera className="h-4 w-4" /></Button>
@@ -120,7 +122,7 @@ function ProfilePage() {
           <p className="mt-2 flex items-start gap-2 text-sm text-muted-foreground"><GraduationCap className="mt-0.5 h-4 w-4 shrink-0" /><span className="min-w-0 break-words">{p?.university}</span></p>
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground"><span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{p?.city}</span><span dir="ltr" className="break-all font-mono">{p?.member_code}</span></div>
         </div>
-        <Button asChild variant="outline" className="max-sm:ms-auto"><Link to="/card"><CreditCard />بطاقتي<ArrowLeft /></Link></Button>
+        <div className="flex w-full flex-wrap gap-2"><Button variant="outline" onClick={() => setEditOpen(true)}><UserRound />تعديل بياناتي</Button><Button asChild variant="ghost"><Link to="/card"><CreditCard />بطاقتي<ArrowLeft /></Link></Button></div>
         {p && <section aria-label="حالة العضوية" className="flex w-full flex-wrap items-center justify-between gap-3 border-t pt-4">
           <div className="flex min-w-0 items-start gap-2">
             {membershipActive ? <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" /> : <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" />}
@@ -131,6 +133,13 @@ function ProfilePage() {
           <Button asChild variant={membershipActive ? "outline" : "default"} className="max-sm:w-full"><Link to="/subscription"><CreditCard />{membershipActive || membershipExpired ? "تجديد الاشتراك" : "فعّل اشتراكك الآن"}<ArrowLeft /></Link></Button>
         </section>}
       </header>
+      <section className="mt-6 divide-y border-y" aria-label="إعدادات الحساب">
+        {[{ to: "/privacy" as const, label: "سياسة الخصوصية", icon: ShieldCheck }, { to: "/terms" as const, label: "الشروط والأحكام", icon: FileText }, { to: "/change-password" as const, label: "تغيير كلمة المرور", icon: LockKeyhole }].map(item => <Button asChild key={item.to} variant="ghost" className="h-14 w-full justify-start rounded-none px-2"><Link to={item.to}><item.icon className="text-primary" />{item.label}<ArrowLeft className="ms-auto text-muted-foreground" /></Link></Button>)}
+        <Button variant="ghost" onClick={signOut} className="h-14 w-full justify-start rounded-none px-2 text-destructive"><LogOut />تسجيل الخروج<ArrowLeft className="ms-auto" /></Button>
+      </section>
+      <section className="py-5"><Button asChild variant="outline" className="h-14 w-full justify-start"><Link to="/complaints"><MessageSquare className="text-primary" />الشكاوى والملاحظات<ArrowLeft className="ms-auto text-muted-foreground" /></Link></Button></section>
+      <section className="border-t py-6"><h2 className="mb-4 font-display text-lg font-bold">التواصل مع الاتحاد</h2><ContactLinks /></section>
+      <Dialog open={editOpen} onOpenChange={setEditOpen}><DialogContent dir="rtl" className="max-h-[90vh] overflow-y-auto sm:max-w-3xl"><DialogHeader><DialogTitle>تعديل بياناتي</DialogTitle><DialogDescription>المعلومات الشخصية والجامعية</DialogDescription></DialogHeader>
       <section className="py-6" aria-label="نشاطي">
       <h2 className="mb-3 text-sm font-bold">نشاطي</h2>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -155,7 +164,7 @@ function ProfilePage() {
           <Button type="submit" disabled={saving || !p} className="ms-auto min-w-36 max-sm:w-full">{saving ? <Loader2 className="animate-spin" /> : <Save />}{saving ? "جارٍ الحفظ…" : "حفظ التعديلات"}</Button>
         </div>
       </form>
-      <footer className="mt-2 border-t py-4"><Button variant="ghost" onClick={signOut} className="text-muted-foreground hover:text-destructive"><LogOut />تسجيل الخروج</Button></footer>
+      </DialogContent></Dialog>
       <Dialog open={photoOpen} onOpenChange={setPhotoOpen}><DialogContent dir="rtl" className="max-w-md"><DialogHeader><DialogTitle>الصورة الشخصية</DialogTitle><DialogDescription>صورة ملفك وبطاقة الطالب</DialogDescription></DialogHeader>{p && <AvatarUpload userId={p.id} value={p.avatar_url} name={p.full_name} onChange={setAvatar} />}</DialogContent></Dialog>
       </div>
     </AppShell>

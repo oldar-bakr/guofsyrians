@@ -1,0 +1,1 @@
+CREATE POLICY "Staff read saved complaint media" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'complaint-media' AND public.can_edit_content(auth.uid()) AND EXISTS (SELECT 1 FROM public.student_complaints c WHERE c.attachment_path = storage.objects.name));

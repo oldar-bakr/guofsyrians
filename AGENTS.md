@@ -9,6 +9,9 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
+- Complaints are submitted through authenticated, validated server functions into staff-only rows; anonymous reports store no account ID and attachments use random private download-only paths so the dashboard cannot infer the sender from storage ownership.
+- Profile account actions link to separate public legal pages and protected password/complaint pages; existing student data editing remains available in a dialog to keep the account overview compact.
+
 - Subscription demonstrations are isolated client-side simulations in subscription-demo.ts; never use their results to charge money, update membership, or authorize services, because only verified provider payments can grant paid access.
 
 - App content (news, courses, deals, events, products, branches) lives in Lovable Cloud tables with public read and write limited to admin or editor roles (can_edit_content); user management goes through admin-checked server functions in src/lib/users.functions.ts; section fields are defined once in src/lib/content.ts so app pages and /admin stay in sync.

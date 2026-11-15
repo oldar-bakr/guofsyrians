@@ -1,5 +1,10 @@
 # Student subscription
 
+## Profile account and complaints
+- [x] Add student summary, account/legal links, password change form, logout and union contacts; password form renders, but the owner's actual password was not changed during testing.
+- [x] Add private complaints with optional anonymous identity and a 3 MB attachment limit, visible to staff in the dashboard.
+- [x] Verify submission, staff readback, database anonymity, private attachment download, oversized rejection and mobile/desktop layout; remove test report and attachment.
+
 ## Landing page refresh
 - [x] Refresh the public landing with campus imagery, union identity, and streamlined email/Google sign-in.
 - [x] Preserve separate course/product contributions, business entry, and official contacts.

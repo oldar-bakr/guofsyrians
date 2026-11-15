@@ -15,9 +15,13 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BusinessRouteImport } from './routes/business'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedAssistantRouteImport } from './routes/_authenticated/assistant'
 import { Route as AuthenticatedCardRouteImport } from './routes/_authenticated/card'
+import { Route as AuthenticatedChangePasswordRouteImport } from './routes/_authenticated/change-password'
+import { Route as AuthenticatedComplaintsRouteImport } from './routes/_authenticated/complaints'
 import { Route as AuthenticatedContributeRouteImport } from './routes/_authenticated/contribute'
 import { Route as AuthenticatedDealsRouteImport } from './routes/_authenticated/deals'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
@@ -70,9 +74,19 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAssistantRoute = AuthenticatedAssistantRouteImport.update({
@@ -83,6 +97,17 @@ const AuthenticatedAssistantRoute = AuthenticatedAssistantRouteImport.update({
 const AuthenticatedCardRoute = AuthenticatedCardRouteImport.update({
   id: '/card',
   path: '/card',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedChangePasswordRoute =
+  AuthenticatedChangePasswordRouteImport.update({
+    id: '/change-password',
+    path: '/change-password',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedComplaintsRoute = AuthenticatedComplaintsRouteImport.update({
+  id: '/complaints',
+  path: '/complaints',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedContributeRoute = AuthenticatedContributeRouteImport.update({
@@ -211,9 +236,13 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/business': typeof BusinessRoute
   '/onboarding': typeof OnboardingRoute
+  '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/assistant': typeof AuthenticatedAssistantRoute
   '/card': typeof AuthenticatedCardRoute
+  '/change-password': typeof AuthenticatedChangePasswordRoute
+  '/complaints': typeof AuthenticatedComplaintsRoute
   '/contribute': typeof AuthenticatedContributeRouteWithChildren
   '/deals': typeof AuthenticatedDealsRoute
   '/home': typeof AuthenticatedHomeRoute
@@ -243,9 +272,13 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/business': typeof BusinessRoute
   '/onboarding': typeof OnboardingRoute
+  '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/assistant': typeof AuthenticatedAssistantRoute
   '/card': typeof AuthenticatedCardRoute
+  '/change-password': typeof AuthenticatedChangePasswordRoute
+  '/complaints': typeof AuthenticatedComplaintsRoute
   '/deals': typeof AuthenticatedDealsRoute
   '/home': typeof AuthenticatedHomeRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -276,9 +309,13 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/business': typeof BusinessRoute
   '/onboarding': typeof OnboardingRoute
+  '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/_authenticated/assistant': typeof AuthenticatedAssistantRoute
   '/_authenticated/card': typeof AuthenticatedCardRoute
+  '/_authenticated/change-password': typeof AuthenticatedChangePasswordRoute
+  '/_authenticated/complaints': typeof AuthenticatedComplaintsRoute
   '/_authenticated/contribute': typeof AuthenticatedContributeRouteWithChildren
   '/_authenticated/deals': typeof AuthenticatedDealsRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
@@ -310,9 +347,13 @@ export interface FileRouteTypes {
     | '/auth'
     | '/business'
     | '/onboarding'
+    | '/privacy'
     | '/sitemap.xml'
+    | '/terms'
     | '/assistant'
     | '/card'
+    | '/change-password'
+    | '/complaints'
     | '/contribute'
     | '/deals'
     | '/home'
@@ -342,9 +383,13 @@ export interface FileRouteTypes {
     | '/auth'
     | '/business'
     | '/onboarding'
+    | '/privacy'
     | '/sitemap.xml'
+    | '/terms'
     | '/assistant'
     | '/card'
+    | '/change-password'
+    | '/complaints'
     | '/deals'
     | '/home'
     | '/profile'
@@ -374,9 +419,13 @@ export interface FileRouteTypes {
     | '/auth'
     | '/business'
     | '/onboarding'
+    | '/privacy'
     | '/sitemap.xml'
+    | '/terms'
     | '/_authenticated/assistant'
     | '/_authenticated/card'
+    | '/_authenticated/change-password'
+    | '/_authenticated/complaints'
     | '/_authenticated/contribute'
     | '/_authenticated/deals'
     | '/_authenticated/home'
@@ -408,7 +457,9 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BusinessRoute: typeof BusinessRoute
   OnboardingRoute: typeof OnboardingRoute
+  PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
@@ -458,11 +509,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/assistant': {
@@ -477,6 +542,20 @@ declare module '@tanstack/react-router' {
       path: '/card'
       fullPath: '/card'
       preLoaderRoute: typeof AuthenticatedCardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/change-password': {
+      id: '/_authenticated/change-password'
+      path: '/change-password'
+      fullPath: '/change-password'
+      preLoaderRoute: typeof AuthenticatedChangePasswordRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/complaints': {
+      id: '/_authenticated/complaints'
+      path: '/complaints'
+      fullPath: '/complaints'
+      preLoaderRoute: typeof AuthenticatedComplaintsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/contribute': {
@@ -657,6 +736,8 @@ const AuthenticatedContributeRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAssistantRoute: typeof AuthenticatedAssistantRoute
   AuthenticatedCardRoute: typeof AuthenticatedCardRoute
+  AuthenticatedChangePasswordRoute: typeof AuthenticatedChangePasswordRoute
+  AuthenticatedComplaintsRoute: typeof AuthenticatedComplaintsRoute
   AuthenticatedContributeRoute: typeof AuthenticatedContributeRouteWithChildren
   AuthenticatedDealsRoute: typeof AuthenticatedDealsRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
@@ -678,6 +759,8 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAssistantRoute: AuthenticatedAssistantRoute,
   AuthenticatedCardRoute: AuthenticatedCardRoute,
+  AuthenticatedChangePasswordRoute: AuthenticatedChangePasswordRoute,
+  AuthenticatedComplaintsRoute: AuthenticatedComplaintsRoute,
   AuthenticatedContributeRoute: AuthenticatedContributeRouteWithChildren,
   AuthenticatedDealsRoute: AuthenticatedDealsRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
@@ -706,7 +789,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BusinessRoute: BusinessRoute,
   OnboardingRoute: OnboardingRoute,
+  PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,

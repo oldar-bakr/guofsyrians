@@ -615,6 +615,45 @@ export type Database = {
         }
         Relationships: []
       }
+      student_complaints: {
+        Row: {
+          anonymous: boolean
+          attachment_name: string | null
+          attachment_path: string | null
+          attachment_size: number | null
+          body: string
+          created_at: string
+          id: string
+          status: string
+          title: string
+          user_id: string | null
+        }
+        Insert: {
+          anonymous?: boolean
+          attachment_name?: string | null
+          attachment_path?: string | null
+          attachment_size?: number | null
+          body: string
+          created_at?: string
+          id?: string
+          status?: string
+          title: string
+          user_id?: string | null
+        }
+        Update: {
+          anonymous?: boolean
+          attachment_name?: string | null
+          attachment_path?: string | null
+          attachment_size?: number | null
+          body?: string
+          created_at?: string
+          id?: string
+          status?: string
+          title?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
