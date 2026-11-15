@@ -26,4 +26,4 @@
 - Deal cards link to student-facing partner profiles; the shared redemption dialog preserves the same QR payload and is separate from card navigation, including legacy staff-created offers without a business row.
 - Deal filtering uses shared pure predicates with normalized city matching and business IDs (legacy partner names only when unlinked); company options depend on the selected city to avoid unrelated selections.
 - Assistant answers render through a shared safe Markdown view with GFM/email links and phone linkification; raw HTML, remote images, and unsafe URL schemes are disabled to keep model output untrusted.
-- News detail images use an RTL Embla gallery with contained full images and the existing private signing flow; other content galleries retain their current layout.
+- News list covers and inline RTL Embla detail images fill their frames; expanded images and upload previews remain contained so the original can be inspected, and other content galleries retain their current layout. The shared cover fit defaults to contain to avoid cropping unrelated content.

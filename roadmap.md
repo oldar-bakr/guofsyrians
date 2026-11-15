@@ -1,5 +1,10 @@
 # Student subscription
 
+## News image frame sweep
+- [x] Audit home slider, news list, detail carousel, expanded viewer, admin upload previews, and image upload/signing paths.
+- [x] Fill news list covers as well as home/detail frames without changing other galleries or stored images.
+- [x] Check current compilation; authenticated visual checks remain unavailable because the injected account redirects to onboarding.
+
 ## Profile presentation
 - [x] Redesign profile summary, activity shortcuts, grouped student fields, and photo editing without changing access or subscription rules.
 - [x] Verify existing real data saves and reads back, photo dialog opens, and desktop/mobile summary and university fields render correctly.

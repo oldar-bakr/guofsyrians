@@ -15,7 +15,7 @@ function useImages(paths: string[]) {
   });
 }
 
-export function ContentImages({ paths = [], title, cover = false, className = "" }: { paths?: string[]; title: string; cover?: boolean; className?: string }) {
+export function ContentImages({ paths = [], title, cover = false, coverFit = "contain", className = "" }: { paths?: string[]; title: string; cover?: boolean; coverFit?: "contain" | "cover"; className?: string }) {
   const { data: urls = [], isPending, isError } = useImages(paths);
   const [selected, setSelected] = useState<number | null>(null);
   if (!paths.length) return null;
@@ -26,7 +26,7 @@ export function ContentImages({ paths = [], title, cover = false, className = ""
         {display.map((path, i) => (
           cover ? (
             <div key={path} className="grid aspect-[4/3] w-full place-items-center overflow-hidden rounded-lg bg-muted">
-              {urls[i] ? <img src={urls[i]} alt={title} loading="lazy" className="h-full w-full object-contain" /> : isPending ? <Loader2 className="animate-spin text-muted-foreground" /> : <ImageOff className="text-muted-foreground" />}
+              {urls[i] ? <img src={urls[i]} alt={title} loading="lazy" className={`h-full w-full ${coverFit === "cover" ? "object-cover" : "object-contain"}`} /> : isPending ? <Loader2 className="animate-spin text-muted-foreground" /> : <ImageOff className="text-muted-foreground" />}
             </div>
           ) : (
             <Button key={path} variant="ghost" className="h-auto w-full overflow-hidden p-0" disabled={!urls[i]} onClick={() => setSelected(i)} aria-label={`عرض صورة ${i + 1} — ${title}`}>
