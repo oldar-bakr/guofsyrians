@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { Ban, CheckCircle2, Trash2 } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
+import { Switch } from "@/components/ui/switch";
 import { UserDetailsDialog } from "@/components/UserDetailsDialog";
 import { listUsers, setUserRole, setUserBlocked, deleteUser, setMembership, type ManagedRole, type ManagedUser } from "@/lib/users.functions";
 
@@ -23,6 +24,7 @@ export function UsersManager({ myId }: { myId: string }) {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState<ManagedUser | null>(null);
+  const [membershipBusy, setMembershipBusy] = useState<string | null>(null);
   const { data = [], isLoading } = useQuery({ queryKey: ["admin-users"], queryFn: () => list() });
 
   const run = async (fn: () => Promise<unknown>) => {
@@ -103,7 +105,7 @@ export function UsersManager({ myId }: { myId: string }) {
                   </td>
                   <td className="px-4 py-3">
                     <label className="flex items-center gap-1 text-xs">
-                      <input type="checkbox" checked={u.membershipActive} onChange={(e) => run(() => membership({ data: { userId: u.id, active: e.target.checked, expires: u.membershipExpires } }))} />
+                      <Switch aria-label={`عضوية ${u.fullName || u.email}`} checked={u.membershipActive} disabled={membershipBusy === u.id} onCheckedChange={async (active) => { setMembershipBusy(u.id); await run(() => membership({ data: { userId: u.id, active, expires: u.membershipExpires } })); await qc.invalidateQueries({ queryKey: ["admin-users"] }); setMembershipBusy(null); }} />
                       {u.membershipActive ? "مدفوعة" : "غير مفعّلة"}
                     </label>
                     {u.membershipActive && (

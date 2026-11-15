@@ -11,6 +11,7 @@ import { parseStudentQr } from "@/lib/membership";
 import { QrScanner } from "@/components/QrScanner";
 import { UniversityLogo } from "@/components/UniversityLogo";
 import logo from "@/assets/union-logo.png.asset.json";
+import { Switch } from "@/components/ui/switch";
 
 export const Route = createFileRoute("/business")({
   staticData: { sitemap: false },
@@ -299,7 +300,7 @@ function DealsTab({ biz, deals, refresh }: { biz: Business; deals: any[]; refres
             <div className="flex justify-between"><h3 className="font-display text-lg font-bold">{editing.id ? "تعديل العرض" : "عرض جديد"}</h3><button type="button" onClick={() => setEditing(null)}><X className="h-5 w-5" /></button></div>
             <label className="block text-sm">قيمة الخصم<input required value={editing.discount ?? ""} onChange={(e) => setEditing({ ...editing, discount: e.target.value })} placeholder="20% أو قهوة مجانية" className={input} /></label>
             <label className="block text-sm">الشروط<textarea rows={3} value={editing.terms ?? ""} onChange={(e) => setEditing({ ...editing, terms: e.target.value })} placeholder="مثال: على الطلبات داخل المحل فقط" className={input} /></label>
-            <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={editing.active ?? true} onChange={(e) => setEditing({ ...editing, active: e.target.checked })} />إتاحة العرض بعد موافقة الإدارة</label>
+            <label className="flex items-center justify-between gap-3 py-2 text-sm">إتاحة العرض بعد موافقة الإدارة<Switch checked={editing.active ?? true} onCheckedChange={(active) => setEditing({ ...editing, active })} aria-label="إتاحة العرض بعد موافقة الإدارة" /></label>
             <button className="w-full rounded-xl bg-primary py-2 font-bold text-primary-foreground">حفظ</button>
           </form>
         </div>

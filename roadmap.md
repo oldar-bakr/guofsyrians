@@ -1,5 +1,10 @@
 # Student subscription
 
+## Toggle consistency
+- [x] Fix RTL thumb placement and consistent active/inactive contrast across shared switches.
+- [x] Give content activation immediate feedback, saving protection and rollback on errors; align membership and business controls.
+- [x] Verify branch activation persisted through refresh and restore it; inspect desktop/mobile switches and exercise complaint switches with mouse and keyboard. Eleven existing visibility/membership tests pass.
+
 ## Content visibility and previews
 - [x] Add first-column thumbnails and staff activation switches to content and store management.
 - [x] Hide disabled content from student surfaces, details and assistant while preserving owner/staff access.
