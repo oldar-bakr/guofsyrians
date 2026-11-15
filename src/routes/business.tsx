@@ -58,8 +58,16 @@ function BusinessPage() {
   return (
     <div dir="rtl" className="min-h-screen bg-background">
       <header className="border-b bg-card">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-8">
-          <div className="flex min-w-0 items-center gap-3">
+        <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 sm:flex sm:justify-between sm:px-8 sm:py-4">
+          {biz ? <div className="flex min-w-0 items-center gap-3 sm:hidden">
+            <BusinessLogo path={biz.logo_url} name={biz.name} className="h-12 w-12 shrink-0" />
+            <div className="min-w-0">
+              <h1 className="truncate font-display text-lg font-bold">{biz.name}</h1>
+              <p className="mt-0.5 truncate text-xs text-muted-foreground">{biz.city} · {biz.category}</p>
+              <span className="mt-1 flex items-center gap-1 text-[11px] font-medium text-primary"><ShieldCheck className="h-3 w-3 shrink-0" />{biz.status === "approved" ? biz.active ? "متجر معتمد" : "المتجر غير فعّال" : statusLabels[biz.status]}</span>
+            </div>
+          </div> : null}
+          <div className={`min-w-0 items-center gap-3 ${biz ? "hidden sm:flex" : "flex"}`}>
             <img src={logo.url} alt="اتحاد الطلبة" className="h-11 w-11 shrink-0 object-contain" />
             <div className="min-w-0">
               <h1 className="font-display text-lg font-bold sm:text-xl">لوحة أصحاب الأعمال</h1>
@@ -69,7 +77,7 @@ function BusinessPage() {
           <Button onClick={signOut} variant="ghost" aria-label="تسجيل الخروج" title="تسجيل الخروج" className="shrink-0 text-muted-foreground"><LogOut /> <span className="hidden sm:inline">تسجيل الخروج</span></Button>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-8 sm:py-8">
+      <main className={`mx-auto max-w-7xl px-4 pt-3 sm:px-8 sm:py-8 ${biz?.status === "approved" ? "pb-[calc(6.5rem+env(safe-area-inset-bottom))]" : "pb-6"}`}>
         {!biz ? (
           <BusinessForm uid={uid} onSaved={() => qc.invalidateQueries({ queryKey: ["my-business"] })} />
         ) : biz.status !== "approved" ? (
@@ -158,14 +166,14 @@ function Dashboard({ biz, uid }: { biz: Business; uid: string }) {
   const pending = deals.filter((deal) => deal.status === "pending").length;
   return (
     <div className="grid items-start gap-6 lg:grid-cols-[230px_minmax(0,1fr)] lg:gap-8">
-      <aside className="min-w-0 lg:sticky lg:top-6">
-        <div className="flex items-center gap-3 border-b pb-5 lg:flex-col lg:items-start">
+      <aside className="min-w-0 max-sm:contents lg:sticky lg:top-6">
+        <div className="hidden items-center gap-3 border-b pb-5 sm:flex lg:flex-col lg:items-start">
           <BusinessLogo path={biz.logo_url} name={biz.name} className="h-16 w-16" />
           <div className="min-w-0"><h2 className="break-words font-display text-xl font-bold">{biz.name}</h2><p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground"><MapPin className="h-3.5 w-3.5 shrink-0" />{biz.city} · {biz.category}</p><span className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary"><ShieldCheck className="h-3.5 w-3.5" />{biz.active ? "متجر معتمد" : "المتجر غير فعّال"}</span></div>
         </div>
-        <nav aria-label="أقسام لوحة المتجر" className="mt-4 grid grid-cols-4 gap-1 lg:grid-cols-1 lg:gap-2">
+        <nav aria-label="أقسام لوحة المتجر" className="fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-20 mx-auto grid max-w-md grid-cols-4 gap-1 rounded-full border bg-card/95 px-2 py-2 shadow-soft backdrop-blur-md sm:static sm:mt-4 sm:max-w-none sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-none lg:grid-cols-1 lg:gap-2">
           {tabs.map(({ k, label, icon: Icon }) => (
-            <Button key={k} onClick={() => setTab(k)} variant="ghost" aria-current={tab === k ? "page" : undefined} className={`h-auto min-h-16 flex-col gap-2 whitespace-normal rounded-lg px-1 py-3 text-[11px] lg:min-h-11 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:text-sm ${tab === k ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground" : "text-muted-foreground hover:bg-secondary"}`}><Icon className="h-5 w-5" />{label}<ChevronLeft className="ms-auto hidden lg:block" /></Button>
+            <Button key={k} onClick={() => setTab(k)} variant="ghost" aria-label={label} aria-current={tab === k ? "page" : undefined} className={`h-14 min-w-0 flex-col gap-1 rounded-full px-1 py-2 text-[11px] sm:h-auto sm:min-h-16 sm:gap-2 sm:whitespace-normal sm:rounded-lg sm:py-3 lg:min-h-11 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:text-sm ${tab === k ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground" : "text-muted-foreground hover:bg-secondary"}`}><Icon className="h-5 w-5 shrink-0" /><span className="sm:hidden">{k === "scan" ? "المسح" : k === "info" ? "المتجر" : label}</span><span className="hidden sm:inline">{label}</span><ChevronLeft className="ms-auto hidden lg:block" /></Button>
           ))}
         </nav>
       </aside>
@@ -226,10 +234,10 @@ function ScanTab({ deals }: { deals: any[] }) {
   };
 
   return (
-    <section className="space-y-5">
-      <div><h2 className="font-display text-2xl font-bold">التحقق من عضوية الطالب</h2><p className="mt-2 text-sm text-muted-foreground">تقديم التخفيض للطلاب أصحاب العضوية الفعّالة</p></div>
-      {active.length === 0 && <p className="rounded-lg border border-accent bg-accent/10 p-3 text-sm">أضف عرضاً من تبويب «عروضي» أولاً.</p>}
-      <div className="grid gap-6 border-y py-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:gap-8">
+    <section className="flex flex-col gap-5">
+      <div className="order-2 sm:order-none"><h2 className="font-display text-xl font-bold sm:text-2xl">التحقق من عضوية الطالب</h2><p className="mt-2 text-sm text-muted-foreground">تقديم التخفيض للطلاب أصحاب العضوية الفعّالة</p></div>
+      {active.length === 0 && <p className="order-2 rounded-lg border border-accent bg-accent/10 p-3 text-sm sm:order-none">أضف عرضاً من تبويب «عروضي» أولاً.</p>}
+      <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:gap-8 sm:border-y sm:py-6">
         <div className="flex min-h-64 flex-col items-center justify-center gap-3 rounded-lg border bg-card p-3 text-center sm:p-4">
           {scanning ? <><QrScanner onResult={open} /><Button variant="ghost" onClick={() => setScanning(false)}>إيقاف الكاميرا</Button></> : <><div className="relative grid h-24 w-24 place-items-center rounded-lg border-2 border-primary/30 bg-secondary/40"><QrCode className="h-14 w-14 text-primary" /></div><Button disabled={busy} onClick={() => { setMsg(""); setScanning(true); }} className="h-11 w-full max-w-64"><Camera />{msg ? "مسح الطالب التالي" : "امسح رمز الطالب"}</Button></>}
         </div>

@@ -1,6 +1,7 @@
 # Student subscription
 
 ## Business page presentation
+- [x] Put business details in the mobile header, float mobile navigation at the bottom, and keep the scanner first; verified all four tabs signed-in on mobile and unchanged desktop navigation. Camera-unavailable fallback checked.
 - [x] Refine store identity, desktop side navigation, mobile navigation, scanning, offers, history and store form without changing permissions or payment rules.
 - [x] Verify signed-in desktop/mobile navigation, offer dialog, store data and invalid-member lookup; 11 regression tests pass.
 
