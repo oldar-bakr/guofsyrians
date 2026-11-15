@@ -265,6 +265,28 @@ function ScanTab({ deals }: { deals: any[] }) {
   );
 }
 
+function DealActiveToggle({ deal }: { deal: any }) {
+  const qc = useQueryClient();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(false);
+  const [checked, setChecked] = useState(Boolean(deal.active));
+  useEffect(() => { if (!busy) setChecked(Boolean(deal.active)); }, [deal.active, busy]);
+  async function change(value: boolean) {
+    if (busy) return;
+    setBusy(true); setError(false); setChecked(value);
+    const { data, error: err } = await supabase.from("deals").update({ active: value }).eq("id", deal.id).select("id, active").single();
+    if (err || !data || data.active !== value) { setChecked(Boolean(deal.active)); setError(true); }
+    else await qc.invalidateQueries({ queryKey: ["biz-deals", deal.business_id] });
+    setBusy(false);
+  }
+  return (
+    <div className="flex min-w-14 flex-col items-center gap-1" aria-busy={busy} title={deal.staff_active ? undefined : "الإدارة أوقفت هذا العرض"}>
+      <Switch aria-label={`تفعيل عرض ${deal.discount}`} checked={checked} disabled={busy} onCheckedChange={change} />
+      <span aria-live="polite" className={`flex h-4 items-center gap-1 whitespace-nowrap text-[11px] ${error ? "text-destructive" : checked ? "font-medium text-primary" : "text-muted-foreground"}`}>{busy ? <><Loader2 className="h-3 w-3 animate-spin" />حفظ</> : error ? "تعذّر الحفظ" : checked ? "مفعّل" : "معطّل"}</span>
+    </div>
+  );
+}
+
 function DealsTab({ biz, deals, refresh }: { biz: Business; deals: any[]; refresh: () => void }) {
   const [editing, setEditing] = useState<any | null>(null);
   const [err, setErr] = useState("");
@@ -293,7 +315,7 @@ function DealsTab({ biz, deals, refresh }: { biz: Business; deals: any[]; refres
           <article key={d.id} className="min-w-0 rounded-lg border bg-card p-5">
             <div className="flex items-start justify-between gap-3"><span className="max-w-[65%] break-words font-display text-2xl font-bold text-primary">{d.discount}</span><span className={`shrink-0 rounded-md px-2 py-1 text-[11px] font-medium ${d.status === "pending" ? "bg-accent/20 text-accent-foreground" : d.status === "rejected" ? "bg-destructive/10 text-destructive" : d.active && d.staff_active ? "bg-secondary text-primary" : "bg-muted text-muted-foreground"}`}>{d.status === "pending" ? "بانتظار الموافقة" : d.status === "rejected" ? "مرفوض" : d.active && d.staff_active ? "منشور" : "متوقف"}</span></div>
             <p className="mt-4 break-words text-sm leading-7">{d.terms || "بدون شروط"}</p>
-            <div className="mt-5 flex items-center justify-between gap-2 border-t pt-3"><span className="text-xs text-muted-foreground">{d.category}</span><div className="flex gap-1"><Button variant="ghost" size="icon" aria-label="تعديل العرض" title="تعديل العرض" onClick={() => { setErr(""); setEditing(d); }}><Pencil /></Button><Button variant="ghost" size="icon" aria-label="حذف العرض" title="حذف العرض" onClick={() => remove(d.id)} className="text-destructive"><Trash2 /></Button></div></div>
+            <div className="mt-5 flex items-center justify-between gap-2 border-t pt-3"><span className="text-xs text-muted-foreground">{d.category}</span><div className="flex items-center gap-2"><DealActiveToggle deal={d} /><Button variant="ghost" size="icon" aria-label="تعديل العرض" title="تعديل العرض" onClick={() => { setErr(""); setEditing(d); }}><Pencil /></Button><Button variant="ghost" size="icon" aria-label="حذف العرض" title="حذف العرض" onClick={() => remove(d.id)} className="text-destructive"><Trash2 /></Button></div></div>
           </article>
         ))}
       </div>
