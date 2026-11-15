@@ -21,7 +21,6 @@ export const Route = createFileRoute("/_authenticated/scholarships")({
 function Scholarships() {
   const { data = [], isLoading, isError, refetch } = useContent<Database["public"]["Tables"]["scholarships"]["Row"]>("scholarships");
   return <AppShell title="المنح الدراسية">
-    <header className="mb-5 flex flex-wrap items-center justify-between gap-2 border-b pb-4"><h1 className="font-display text-2xl font-bold text-primary">المنح الدراسية</h1><span className="text-xs text-muted-foreground">{data.length} فرصة</span></header>
     {isLoading ? <div role="status" className="flex min-h-48 items-center justify-center gap-2 text-sm text-muted-foreground"><Loader2 className="h-5 w-5 animate-spin" />جارٍ تحميل المنح…</div> : isError ? <div className="py-12 text-center"><p role="alert" className="mb-3 text-sm text-destructive">تعذّر تحميل المنح</p><Button variant="outline" onClick={() => refetch()}>إعادة المحاولة</Button></div> : !data.length ? <div className="py-12 text-center"><Award className="mx-auto mb-3 h-10 w-10 text-primary" /><h2 className="font-display text-xl font-bold">لا توجد منح معلنة حالياً</h2></div> : <div className="grid items-start gap-4 md:grid-cols-2">
       {data.map((s) => {
         const url = /^https?:\/\//i.test(s.application_url ?? "") ? s.application_url : null;
