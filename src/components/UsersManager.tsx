@@ -24,7 +24,7 @@ export function UsersManager({ myId }: { myId: string }) {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState<ManagedUser | null>(null);
-  const [membershipBusy, setMembershipBusy] = useState<string | null>(null);
+  const [membershipBusy, setMembershipBusy] = useState<Set<string>>(new Set());
   const { data = [], isLoading } = useQuery({ queryKey: ["admin-users"], queryFn: () => list() });
 
   const run = async (fn: () => Promise<unknown>) => {
@@ -105,11 +105,18 @@ export function UsersManager({ myId }: { myId: string }) {
                   </td>
                   <td className="px-4 py-3">
                     <label className="flex items-center gap-1 text-xs">
-                      <Switch aria-label={`عضوية ${u.fullName || u.email}`} checked={u.membershipActive} disabled={membershipBusy === u.id} onCheckedChange={async (active) => { setMembershipBusy(u.id); await run(() => membership({ data: { userId: u.id, active, expires: u.membershipExpires } })); await qc.invalidateQueries({ queryKey: ["admin-users"] }); setMembershipBusy(null); }} />
-                      {u.membershipActive ? "مدفوعة" : "غير مفعّلة"}
+                      <Switch aria-label={`عضوية ${u.fullName || u.email}`} checked={u.membershipActive} disabled={membershipBusy.has(u.id)} onCheckedChange={async (active) => {
+                        if (membershipBusy.has(u.id)) return;
+                        setMembershipBusy((ids) => new Set(ids).add(u.id));
+                        try {
+                          await run(() => membership({ data: { userId: u.id, active, expires: u.membershipExpires } }));
+                          await qc.invalidateQueries({ queryKey: ["admin-users"] });
+                        } finally { setMembershipBusy((ids) => { const next = new Set(ids); next.delete(u.id); return next; }); }
+                      }} />
+                      <span aria-live="polite">{membershipBusy.has(u.id) ? "جارٍ الحفظ" : u.membershipActive ? "مفعّلة" : "غير مفعّلة"}</span>
                     </label>
                     {u.membershipActive && (
-                      <input type="date" title="تنتهي في" defaultValue={u.membershipExpires ?? ""} onBlur={(e) => e.target.value !== (u.membershipExpires ?? "") && run(() => membership({ data: { userId: u.id, active: true, expires: e.target.value || null } }))} className="mt-1 rounded border bg-background px-1 text-xs" />
+                      <input type="date" title="تنتهي في" disabled={membershipBusy.has(u.id)} defaultValue={u.membershipExpires ?? ""} onBlur={(e) => !membershipBusy.has(u.id) && e.target.value !== (u.membershipExpires ?? "") && run(() => membership({ data: { userId: u.id, active: true, expires: e.target.value || null } }))} className="mt-1 rounded border bg-background px-1 text-xs" />
                     )}
                   </td>
                   <td className="px-4 py-3">

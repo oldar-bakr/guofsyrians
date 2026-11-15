@@ -1,6 +1,7 @@
 # Student subscription
 
 ## Toggle consistency
+- [x] Sweep every dashboard content/approval switch, store and nested offer switch, business draft switch, membership control and anonymous-complaint switch. Add owner-view cache refresh and independent pending locks for membership controls; keep permissions and settled records unchanged.
 - [x] Fix RTL thumb placement and consistent active/inactive contrast across shared switches.
 - [x] Give content activation immediate feedback, saving protection and rollback on errors; align membership and business controls.
 - [x] Verify branch activation persisted through refresh and restore it; inspect desktop/mobile switches and exercise complaint switches with mouse and keyboard. Eleven existing visibility/membership tests pass.

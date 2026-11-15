@@ -24,6 +24,8 @@ export function ContentActivation({ table, id, active, title }: { table: Content
         qc.invalidateQueries({ queryKey: ["admin-businesses"] }),
         qc.invalidateQueries({ queryKey: ["shops"] }),
         qc.invalidateQueries({ queryKey: ["partner"] }),
+        qc.invalidateQueries({ queryKey: ["my-business"] }),
+        qc.invalidateQueries({ queryKey: ["biz-deals"] }),
       ]);
     } catch { setChecked(active); setError(true); }
     finally { setBusy(false); }
