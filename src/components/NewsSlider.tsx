@@ -19,7 +19,7 @@ function NewsSlide({ news }: { news: News }) {
     enabled: paths.length > 0,
     staleTime: 30 * 60 * 1000,
   });
-  return <Link to="/news/$id" params={{ id: news.id }} className="relative block h-[320px] overflow-hidden bg-secondary sm:h-[360px]" aria-label={`اقرأ الخبر: ${news.title}`}>
+  return <Link to="/news/$id" params={{ id: news.id }} className="relative block h-[260px] overflow-hidden bg-secondary sm:h-[360px]" aria-label={`اقرأ الخبر: ${news.title}`}>
     {urls[0] ? <img src={urls[0]} alt={news.title} className="h-full w-full object-cover" /> : <div className="grid h-full place-items-center pb-24"><img src={logo.url} alt="الاتحاد العام لطلبة سوريا" className="h-28 w-28 object-contain sm:h-36 sm:w-36" /></div>}
     <div className="absolute inset-x-0 bottom-0 bg-primary/95 px-5 py-4 text-primary-foreground sm:px-7 sm:py-5">
       <div className="mb-1 flex items-center gap-2 text-xs"><span className="font-bold text-accent">أخبار الاتحاد</span>{news.date && <><span aria-hidden="true">·</span><span>{news.date}</span></>}</div>
@@ -47,7 +47,7 @@ export function NewsSlider() {
     const timer = window.setInterval(() => { if (!document.hidden) api.scrollNext(); }, 6000);
     return () => window.clearInterval(timer);
   }, [api, slides.length, paused, interacting]);
-  if (isLoading) return <div className="grid h-[320px] place-items-center rounded-lg bg-secondary sm:h-[360px]" aria-label="تحميل الأخبار"><Loader2 className="animate-spin text-primary" /></div>;
+  if (isLoading) return <div className="grid h-[260px] place-items-center rounded-lg bg-secondary sm:h-[360px]" aria-label="تحميل الأخبار"><Loader2 className="animate-spin text-primary" /></div>;
   if (!slides.length) return <section className="flex min-h-48 flex-col items-center justify-center gap-3 bg-secondary py-8 text-center"><img src={logo.url} alt="الاتحاد العام لطلبة سوريا" className="h-16 w-16" /><h2 className="font-display text-xl font-bold">أخبار الاتحاد</h2><p className="text-sm text-muted-foreground">{isError ? "تعذّر تحميل الأخبار حالياً" : "لا توجد أخبار منشورة حالياً"}</p></section>;
   return <section aria-label="آخر أخبار الاتحاد" onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)} onFocusCapture={() => setInteracting(true)} onBlurCapture={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setInteracting(false); }}>
     <Carousel opts={{ direction: "rtl", loop: slides.length > 1 }} setApi={setApi} aria-label="أخبار الاتحاد" className="overflow-hidden rounded-lg">
