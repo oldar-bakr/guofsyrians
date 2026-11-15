@@ -1,0 +1,28 @@
+import { createServerFn } from "@tanstack/react-start";
+import { z } from "zod";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+
+export const getVisibleContentImages = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(z.object({ paths: z.array(z.string().max(300).regex(/^[a-f0-9-]{36}\/[a-f0-9-]{36}\.webp$/i)).max(100) }))
+  .handler(async ({ data, context }) => {
+    if (!data.paths.length) return [];
+    const { data: staff, error: roleError } = await context.supabase.rpc("can_edit_content", { _user_id: context.userId });
+    if (roleError) throw new Error("تعذّر التحقق من صلاحية الصور");
+    const allowed = new Set<string>();
+    if (staff) data.paths.forEach((path) => allowed.add(path));
+    else {
+      // All queries use the caller's RLS, including owner visibility for pending rows.
+      for (const table of ["news", "events", "products", "courses"] as const) {
+        const { data: rows, error } = await context.supabase.from(table).select("images").overlaps("images", data.paths);
+        if (error) throw new Error("تعذّر التحقق من الصور");
+        for (const row of rows ?? []) for (const path of row.images) if (data.paths.includes(path)) allowed.add(path);
+      }
+    }
+    const paths = data.paths.filter((path) => allowed.has(path));
+    if (!paths.length) return data.paths.map(() => "");
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: signed, error } = await supabaseAdmin.storage.from("content-images").createSignedUrls(paths, 3600);
+    if (error) throw new Error("تعذّر تحميل الصور");
+    return data.paths.map((path) => signed?.find((item) => item.path === path)?.signedUrl ?? "");
+  });

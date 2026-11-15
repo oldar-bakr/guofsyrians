@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { getVisibleContentImages } from "@/lib/content-images.functions";
 
 export const CONTENT_IMAGE_BUCKET = "content-images";
 
@@ -27,7 +28,5 @@ export async function uploadContentImage(file: File): Promise<string> {
 
 export async function resolveContentImages(paths: string[]): Promise<string[]> {
   if (!paths.length) return [];
-  const { data, error } = await supabase.storage.from(CONTENT_IMAGE_BUCKET).createSignedUrls(paths, 3600);
-  if (error) throw new Error("تعذّر تحميل الصور");
-  return paths.map((path) => data?.find((item) => item.path === path)?.signedUrl ?? "");
+  return getVisibleContentImages({ data: { paths } });
 }

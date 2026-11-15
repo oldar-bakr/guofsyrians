@@ -20,7 +20,7 @@ function NewsSlide({ news }: { news: News }) {
     staleTime: 30 * 60 * 1000,
   });
   return <Link to="/news/$id" params={{ id: news.id }} className="relative block h-[320px] overflow-hidden bg-secondary sm:h-[360px]" aria-label={`اقرأ الخبر: ${news.title}`}>
-    {urls[0] ? <img src={urls[0]} alt={news.title} className="h-full w-full object-contain" /> : <div className="grid h-full place-items-center pb-24"><img src={logo.url} alt="الاتحاد العام لطلبة سوريا" className="h-28 w-28 object-contain sm:h-36 sm:w-36" /></div>}
+    {urls[0] ? <img src={urls[0]} alt={news.title} className="h-full w-full object-cover" /> : <div className="grid h-full place-items-center pb-24"><img src={logo.url} alt="الاتحاد العام لطلبة سوريا" className="h-28 w-28 object-contain sm:h-36 sm:w-36" /></div>}
     <div className="absolute inset-x-0 bottom-0 bg-primary/95 px-5 py-4 text-primary-foreground sm:px-7 sm:py-5">
       <div className="mb-1 flex items-center gap-2 text-xs"><span className="font-bold text-accent">أخبار الاتحاد</span>{news.date && <><span aria-hidden="true">·</span><span>{news.date}</span></>}</div>
       <h2 className="line-clamp-2 break-words font-display text-xl font-bold leading-relaxed sm:text-2xl">{news.title}</h2>

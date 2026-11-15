@@ -120,6 +120,13 @@
       "when": 1794741194496,
       "tag": "0016_course_quizzes_and_covers",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1794741468655,
+      "tag": "0017_content_images_owner_staff_read",
+      "breakpoints": true
     }
   ]
 }

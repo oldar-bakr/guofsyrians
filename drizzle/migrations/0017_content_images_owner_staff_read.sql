@@ -1,0 +1,2 @@
+DROP POLICY IF EXISTS "content images visible read" ON storage.objects;
+CREATE POLICY "content images owner staff read" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'content-images' AND (owner_id = (SELECT auth.uid()::text) OR public.can_edit_content((SELECT auth.uid()))));
