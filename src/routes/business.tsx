@@ -286,7 +286,7 @@ function DealsTab({ biz, deals, refresh }: { biz: Business; deals: any[]; refres
             <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-accent font-display text-lg font-bold text-accent-foreground">{d.discount}</span>
             <div className="flex-1">
               <p className="font-bold">{d.terms || "بدون شروط"}</p>
-              <p className="text-xs text-muted-foreground">{d.category} · {d.active ? "منشور" : "متوقف"}</p>
+              <p className="text-xs text-muted-foreground">{d.category} · {d.status === "pending" ? "بانتظار الموافقة" : d.status === "rejected" ? "مرفوض" : d.active && d.staff_active ? "منشور" : "متوقف"}</p>
             </div>
             <button aria-label="تعديل" onClick={() => setEditing(d)} className="text-primary"><Pencil className="h-4 w-4" /></button>
             <button aria-label="حذف" onClick={() => remove(d.id)} className="text-destructive"><Trash2 className="h-4 w-4" /></button>
@@ -299,7 +299,7 @@ function DealsTab({ biz, deals, refresh }: { biz: Business; deals: any[]; refres
             <div className="flex justify-between"><h3 className="font-display text-lg font-bold">{editing.id ? "تعديل العرض" : "عرض جديد"}</h3><button type="button" onClick={() => setEditing(null)}><X className="h-5 w-5" /></button></div>
             <label className="block text-sm">قيمة الخصم<input required value={editing.discount ?? ""} onChange={(e) => setEditing({ ...editing, discount: e.target.value })} placeholder="20% أو قهوة مجانية" className={input} /></label>
             <label className="block text-sm">الشروط<textarea rows={3} value={editing.terms ?? ""} onChange={(e) => setEditing({ ...editing, terms: e.target.value })} placeholder="مثال: على الطلبات داخل المحل فقط" className={input} /></label>
-            <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={editing.active ?? true} onChange={(e) => setEditing({ ...editing, active: e.target.checked })} />منشور للطلاب</label>
+            <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={editing.active ?? true} onChange={(e) => setEditing({ ...editing, active: e.target.checked })} />إتاحة العرض بعد موافقة الإدارة</label>
             <button className="w-full rounded-xl bg-primary py-2 font-bold text-primary-foreground">حفظ</button>
           </form>
         </div>

@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 - AdminLayout owns grouped RTL desktop/sidebar and mobile drawer navigation; validated admin search state keeps existing section managers shareable and refresh-safe without changing their authorization.
+- Staff activation is enforced by RLS plus published-only content hooks; management queries retain hidden rows, and offers keep separate owner/staff switches and trigger-enforced review so owners cannot undo staff suspension.
 
 - Complaints are submitted through authenticated, validated server functions into staff-only rows; anonymous reports store no account ID and attachments use random private download-only paths so the dashboard cannot infer the sender from storage ownership.
 - Profile account actions link to separate public legal pages and protected password/complaint pages; existing student data editing remains available in a dialog to keep the account overview compact.

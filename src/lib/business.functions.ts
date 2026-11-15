@@ -16,8 +16,8 @@ export type ScannedStudent = {
 };
 
 async function myApprovedBusiness(supabase: any, userId: string) {
-  const { data } = await supabase.from("businesses").select("id, status").eq("owner_id", userId).maybeSingle();
-  if (!data || data.status !== "approved") throw new Error("متجرك غير مفعّل بعد");
+  const { data } = await supabase.from("businesses").select("id, status, active").eq("owner_id", userId).maybeSingle();
+  if (!data || data.status !== "approved" || !data.active) throw new Error("متجرك غير مفعّل بعد");
   return data.id as string;
 }
 
@@ -54,9 +54,9 @@ export const confirmDiscount = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const businessId = await myApprovedBusiness(context.supabase, context.userId);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: deal } = await supabaseAdmin.from("deals").select("id, business_id, active").eq("id", data.dealId).maybeSingle();
+    const { data: deal } = await supabaseAdmin.from("deals").select("id, business_id, active, staff_active, status").eq("id", data.dealId).maybeSingle();
     if (!deal || deal.business_id !== businessId) throw new Error("هذا العرض لا يخص متجرك");
-    if (!deal.active) throw new Error("هذا العرض متوقف");
+    if (!deal.active || !deal.staff_active || deal.status !== "approved") throw new Error("هذا العرض متوقف");
     const { p, active } = await findStudent(supabaseAdmin, data.code);
     if (!active) throw new Error("عضوية الطالب غير فعّالة");
     const { error } = await supabaseAdmin.from("deal_redemptions").insert({ user_id: p.id, deal_id: deal.id, business_id: businessId });
@@ -93,7 +93,7 @@ export const getApprovedLogoUrl = createServerFn({ method: "POST" })
   })
   .handler(async ({ data, context }) => {
     const { data: b } = await context.supabase
-      .from("businesses").select("id").eq("logo_url", data.path).eq("status", "approved").maybeSingle();
+      .from("businesses").select("id").eq("logo_url", data.path).eq("status", "approved").eq("active", true).maybeSingle();
     if (!b) return { url: null as string | null };
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: s } = await supabaseAdmin.storage.from("business-logos").createSignedUrl(data.path, 60 * 60 * 12);

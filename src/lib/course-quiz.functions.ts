@@ -10,7 +10,7 @@ export const getCourseQuiz = createServerFn({ method: "POST" })
     const { data: enrollment, error } = await context.supabase.from("course_enrollments").select("id").eq("course_id", data.courseId).eq("user_id", context.userId).limit(1).maybeSingle();
     if (error) throw new Error("تعذّر التحقق من التسجيل");
     if (!enrollment) throw new Error("سجّل في الدورة أولاً");
-    const { data: course } = await context.supabase.from("courses").select("id").eq("id", data.courseId).maybeSingle();
+    const { data: course } = await context.supabase.from("courses").select("id").eq("id", data.courseId).eq("active", true).eq("status", "approved").maybeSingle();
     if (!course) throw new Error("الدورة غير متاحة");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: quiz, error: quizError } = await supabaseAdmin.from("course_quizzes").select("id,title,questions").eq("course_id", data.courseId).maybeSingle();
@@ -28,7 +28,7 @@ export const submitCourseQuiz = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { data: enrollment, error } = await context.supabase.from("course_enrollments").select("id").eq("course_id", data.courseId).eq("user_id", context.userId).limit(1).maybeSingle();
     if (error || !enrollment) throw new Error("سجّل في الدورة أولاً");
-    const { data: course } = await context.supabase.from("courses").select("id").eq("id", data.courseId).maybeSingle();
+    const { data: course } = await context.supabase.from("courses").select("id").eq("id", data.courseId).eq("active", true).eq("status", "approved").maybeSingle();
     if (!course) throw new Error("الدورة غير متاحة");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: quiz, error: quizError } = await supabaseAdmin.from("course_quizzes").select("id,questions").eq("id", data.quizId).eq("course_id", data.courseId).maybeSingle();

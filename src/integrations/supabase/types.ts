@@ -40,6 +40,7 @@ export type Database = {
       }
       branches: {
         Row: {
+          active: boolean
           city: string
           contact: string
           created_at: string
@@ -49,6 +50,7 @@ export type Database = {
           university: string
         }
         Insert: {
+          active?: boolean
           city: string
           contact?: string
           created_at?: string
@@ -58,6 +60,7 @@ export type Database = {
           university?: string
         }
         Update: {
+          active?: boolean
           city?: string
           contact?: string
           created_at?: string
@@ -70,6 +73,7 @@ export type Database = {
       }
       businesses: {
         Row: {
+          active: boolean
           address: string
           category: string
           city: string
@@ -84,6 +88,7 @@ export type Database = {
           status: string
         }
         Insert: {
+          active?: boolean
           address?: string
           category?: string
           city?: string
@@ -98,6 +103,7 @@ export type Database = {
           status?: string
         }
         Update: {
+          active?: boolean
           address?: string
           category?: string
           city?: string
@@ -217,6 +223,7 @@ export type Database = {
       }
       courses: {
         Row: {
+          active: boolean
           category: string
           contact: string
           created_at: string
@@ -232,6 +239,7 @@ export type Database = {
           video_url: string
         }
         Insert: {
+          active?: boolean
           category?: string
           contact?: string
           created_at?: string
@@ -247,6 +255,7 @@ export type Database = {
           video_url?: string
         }
         Update: {
+          active?: boolean
           category?: string
           contact?: string
           created_at?: string
@@ -312,6 +321,8 @@ export type Database = {
           discount: string
           id: string
           partner: string
+          staff_active: boolean
+          status: string
           terms: string
         }
         Insert: {
@@ -323,6 +334,8 @@ export type Database = {
           discount?: string
           id?: string
           partner: string
+          staff_active?: boolean
+          status?: string
           terms?: string
         }
         Update: {
@@ -334,6 +347,8 @@ export type Database = {
           discount?: string
           id?: string
           partner?: string
+          staff_active?: boolean
+          status?: string
           terms?: string
         }
         Relationships: [
@@ -377,6 +392,7 @@ export type Database = {
       }
       events: {
         Row: {
+          active: boolean
           created_at: string
           date: string
           description: string
@@ -388,6 +404,7 @@ export type Database = {
           title: string
         }
         Insert: {
+          active?: boolean
           created_at?: string
           date?: string
           description?: string
@@ -399,6 +416,7 @@ export type Database = {
           title: string
         }
         Update: {
+          active?: boolean
           created_at?: string
           date?: string
           description?: string
@@ -413,18 +431,21 @@ export type Database = {
       }
       faqs: {
         Row: {
+          active: boolean
           answer: string
           created_at: string
           id: string
           question: string
         }
         Insert: {
+          active?: boolean
           answer?: string
           created_at?: string
           id?: string
           question: string
         }
         Update: {
+          active?: boolean
           answer?: string
           created_at?: string
           id?: string
@@ -434,6 +455,7 @@ export type Database = {
       }
       news: {
         Row: {
+          active: boolean
           body: string
           created_at: string
           date: string
@@ -442,6 +464,7 @@ export type Database = {
           title: string
         }
         Insert: {
+          active?: boolean
           body?: string
           created_at?: string
           date?: string
@@ -450,6 +473,7 @@ export type Database = {
           title: string
         }
         Update: {
+          active?: boolean
           body?: string
           created_at?: string
           date?: string
@@ -488,6 +512,7 @@ export type Database = {
       }
       products: {
         Row: {
+          active: boolean
           contact: string
           created_at: string
           description: string
@@ -500,6 +525,7 @@ export type Database = {
           submitted_by: string | null
         }
         Insert: {
+          active?: boolean
           contact?: string
           created_at?: string
           description?: string
@@ -512,6 +538,7 @@ export type Database = {
           submitted_by?: string | null
         }
         Update: {
+          active?: boolean
           contact?: string
           created_at?: string
           description?: string
@@ -581,6 +608,7 @@ export type Database = {
       }
       scholarships: {
         Row: {
+          active: boolean
           application_url: string
           country: string
           created_at: string
@@ -592,6 +620,7 @@ export type Database = {
           title: string
         }
         Insert: {
+          active?: boolean
           application_url?: string
           country?: string
           created_at?: string
@@ -603,6 +632,7 @@ export type Database = {
           title: string
         }
         Update: {
+          active?: boolean
           application_url?: string
           country?: string
           created_at?: string

@@ -1,5 +1,11 @@
 # Student subscription
 
+## Content visibility and previews
+- [ ] Add first-column thumbnails and staff activation switches to content and store management.
+- [ ] Hide disabled content from student surfaces, details and assistant while preserving owner/staff access.
+- [ ] Separate course, product and deal approval queues above published records.
+- [ ] Test activation, review rules and authenticated dashboard/student readback.
+
 ## Dashboard side navigation
 - [x] Replace horizontal tabs with grouped RTL side navigation, desktop collapse and a phone drawer.
 - [x] Keep management actions and permissions intact; preserve selected section on refresh and browser navigation.

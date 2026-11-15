@@ -4,6 +4,7 @@ import { Pencil, Trash2, X, ChevronDown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { cities } from "@/lib/turkey-universities";
 import { BusinessLogo, businessCategories, statusLabels, type Business } from "@/lib/business";
+import { ContentActivation } from "@/components/ContentActivation";
 
 const input = "mt-1 w-full rounded-xl border bg-background px-3 py-2";
 
@@ -92,6 +93,7 @@ export function BusinessesManager() {
                 <select value={b.status} onChange={(e) => setStatus(b.id, e.target.value)} className={`rounded-xl border px-2 py-1 text-sm ${b.status === "approved" ? "text-primary" : b.status === "pending" ? "font-bold" : "text-destructive"}`}>
                   {Object.entries(statusLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                 </select>
+                <ContentActivation table="businesses" id={b.id} active={b.active !== false} title={b.name} />
                 <button aria-label="تعديل" onClick={() => setEditing(b)} className="text-primary"><Pencil className="h-4 w-4" /></button>
                 <button aria-label="حذف" onClick={() => removeBiz(b.id)} className="text-destructive"><Trash2 className="h-4 w-4" /></button>
                 <button aria-label="التفاصيل" onClick={() => setOpenId(isOpen ? null : b.id)}><ChevronDown className={`h-5 w-5 transition ${isOpen ? "rotate-180" : ""}`} /></button>
@@ -150,7 +152,7 @@ function DealRow({ deal, onChange }: { deal: any; onChange: () => void }) {
     <div className="mb-2 flex items-center gap-2 rounded-lg bg-muted p-2 text-sm">
       <input defaultValue={d.discount} onBlur={(e) => e.target.value !== d.discount && save({ discount: e.target.value })} className="w-20 rounded border bg-background px-2 py-1" />
       <input defaultValue={d.terms} onBlur={(e) => e.target.value !== d.terms && save({ terms: e.target.value })} className="flex-1 rounded border bg-background px-2 py-1" />
-      <label className="flex items-center gap-1 text-xs"><input type="checkbox" checked={d.active} onChange={(e) => save({ active: e.target.checked })} />منشور</label>
+      <ContentActivation table="deals" id={d.id} active={deal.staff_active !== false} title={deal.partner + " " + deal.discount} />
       <button aria-label="حذف" onClick={async () => { if (confirm("حذف العرض؟")) { await supabase.from("deals").delete().eq("id", d.id); onChange(); } }} className="text-destructive"><Trash2 className="h-4 w-4" /></button>
     </div>
   );

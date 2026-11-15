@@ -14,6 +14,11 @@ import { UsersManager } from "@/components/UsersManager";
 import { BusinessesManager } from "@/components/BusinessesManager";
 import { ComplaintsManager } from "@/components/ComplaintsManager";
 import { AdminLayout, adminSectionKeys, type AdminSection } from "@/components/AdminLayout";
+import { ContentActivation } from "@/components/ContentActivation";
+import { BusinessLogo } from "@/lib/business";
+import { splitReviewRows } from "@/lib/content-visibility";
+import { useQuery } from "@tanstack/react-query";
+import { ImageOff } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   staticData: { sitemap: false },
@@ -90,13 +95,21 @@ function Admin() {
 function SectionManager({ table }: { table: ContentTable }) {
   const qc = useQueryClient();
   const { fields, label } = sections[table];
-  const { data = [], isLoading } = useContent(table);
+  const { data = [], isLoading } = useContent(table, true);
+  const { data: shops = [] } = useQuery({ queryKey: ["admin-thumbnail-shops"], enabled: table === "deals", queryFn: async () => (await supabase.from("businesses").select("id,name,logo_url")).data ?? [] });
   const [editing, setEditing] = useState<Record<string, any> | null>(null);
   const [quizCourse, setQuizCourse] = useState<Record<string, any> | null>(null);
   const [error, setError] = useState("");
-  const hasReview = table === "courses" || table === "products";
-  const pending = hasReview ? data.filter((r: any) => r["status"] === "pending") : [];
-  const rows = hasReview ? data.filter((r: any) => r["status"] !== "pending") : data;
+  const hasReview = ["courses", "products", "deals"].includes(table);
+  const split = splitReviewRows(data);
+  const pending = hasReview ? split.pending : [];
+  const rows = hasReview ? split.published : data;
+  const hasImages = ["news", "events", "products", "courses", "deals"].includes(table);
+  function thumbnail(row: Record<string, any>) {
+    const title = row[fields[0]?.key ?? "title"] ?? "";
+    if (table === "deals") { const shop = shops.find(b => b.id === row["business_id"]); return <BusinessLogo path={shop?.logo_url} name={title} className="h-12 w-16" />; }
+    return row["images"]?.length ? <ContentImages paths={row["images"].slice(0, 1)} title={title} cover coverFit="cover" className="w-16" /> : <div className="grid h-12 w-16 place-items-center rounded-md bg-muted"><ImageOff className="h-4 w-4 text-muted-foreground" /></div>;
+  }
 
   const refresh = () => qc.invalidateQueries({ queryKey: ["content", table] });
 
@@ -131,39 +144,43 @@ function SectionManager({ table }: { table: ContentTable }) {
         <Button onClick={() => setEditing({})}><Plus className="h-4 w-4" />إضافة</Button>
       </div>
       {error && <p className="mb-3 rounded-xl bg-destructive/10 p-3 text-sm text-destructive">{error}</p>}
-      {(table === "courses" || table === "products") && pending.length > 0 && (
-        <div className="mb-6 rounded-2xl border-2 border-accent bg-accent/10 p-4">
+      {hasReview && (
+        <section aria-label="بانتظار الموافقة" className="mb-8 border-b pb-6">
           <h3 className="mb-3 font-display text-lg font-bold">بحاجة إلى موافقة <span className="text-sm text-muted-foreground">({pending.length})</span></h3>
+          {!pending.length && <p className="text-sm text-muted-foreground">لا توجد طلبات تنتظر الموافقة</p>}
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {pending.map((row: any) => (
-              <div key={row["id"]} className="flex flex-col gap-2 rounded-2xl bg-card p-4 shadow-soft">
-                <ContentImages paths={row["images"]} title={row[fields[0]?.key ?? "title"] ?? ""} cover />
+              <div key={row["id"]} className="flex flex-col gap-2 rounded-lg border bg-card p-4">
+                {thumbnail(row)}
                 <p className="font-bold">{row[fields[0]?.key ?? "title"]}</p>
                 <p className="text-xs text-muted-foreground">
-                  {table === "courses" ? `${row["category"] || "بدون تصنيف"} · ${row["lessons"] ?? 0} دروس · ${row["instructor"] || ""}` : `${row["price"] || ""} · ${row["seller"] || ""}`}
+                  {table === "courses" ? `${row["category"] || "بدون تصنيف"} · ${row["lessons"] ?? 0} دروس · ${row["instructor"] || ""}` : table === "deals" ? `${row["discount"]} · ${row["city"]}` : `${row["price"] || ""} · ${row["seller"] || ""}`}
                 </p>
                 {row["description"] && <p className="line-clamp-3 text-sm">{row["description"]}</p>}
                 <div className="mt-auto flex gap-2 pt-2">
-                  <button onClick={() => save({ ...row, status: "approved" })} className="flex-1 rounded-xl bg-primary py-1.5 text-sm font-bold text-primary-foreground">موافقة</button>
-                  <button onClick={() => save({ ...row, status: "rejected" })} className="flex-1 rounded-xl border border-destructive py-1.5 text-sm text-destructive">رفض</button>
-                  <button aria-label="تعديل" onClick={() => setEditing(row)} className="rounded-xl border px-3 text-primary"><Pencil className="h-4 w-4" /></button>
+                  <Button onClick={() => save({ ...row, status: "approved" })} className="flex-1">موافقة</Button>
+                  <Button variant="outline" onClick={() => save({ ...row, status: "rejected" })} className="flex-1 text-destructive">رفض</Button>
+                  <Button variant="ghost" size="icon" aria-label="تعديل" onClick={() => setEditing(row)}><Pencil className="h-4 w-4" /></Button>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
       )}
+      {hasReview && <h3 className="mb-3 font-display text-lg font-bold">{label} <span className="text-sm text-muted-foreground">({rows.length})</span></h3>}
       <div className="overflow-x-auto rounded-lg border bg-card">
         <table className="w-full text-sm">
           <thead className="bg-muted/50 text-right text-xs text-muted-foreground">
-            <tr>{fields.filter((f) => !f.hideInTable).map((f) => <th key={f.key} className="px-4 py-3 font-bold">{f.label}</th>)}<th className="w-24" /></tr>
+            <tr>{hasImages && <th className="px-4 py-3">الصورة</th>}{fields.filter((f) => !f.hideInTable).map((f) => <th key={f.key} className="px-4 py-3 font-bold">{f.label}</th>)}<th className="px-4 py-3">التفعيل</th><th className="w-24" /></tr>
           </thead>
           <tbody>
-            {isLoading && <tr><td className="p-4" colSpan={fields.length + 1}>جارٍ التحميل...</td></tr>}
-            {!isLoading && rows.length === 0 && <tr><td className="py-14 text-center text-muted-foreground" colSpan={fields.length + 1}>لا توجد سجلات في هذا القسم</td></tr>}
+            {isLoading && <tr><td className="p-4" colSpan={fields.length + 3}>جارٍ التحميل...</td></tr>}
+            {!isLoading && rows.length === 0 && <tr><td className="py-14 text-center text-muted-foreground" colSpan={fields.length + 3}>لا توجد سجلات في هذا القسم</td></tr>}
             {rows.map((row: any) => (
               <tr key={row["id"]} className="border-t transition-colors hover:bg-muted/40">
+                {hasImages && <td className="px-4 py-3">{thumbnail(row)}</td>}
                 {fields.filter((f) => !f.hideInTable).map((f) => <td key={f.key} className="px-4 py-3">{f.type === "status" ? <span className={`rounded-full px-2 py-0.5 text-xs ${row[f.key] === "pending" ? "bg-accent text-accent-foreground" : row[f.key] === "rejected" ? "bg-destructive/10 text-destructive" : "bg-secondary text-primary"}`}>{statusLabels[row[f.key]] ?? row[f.key]}{row["submitted_by"] ? " · من طالب" : ""}</span> : row[f.key]}</td>)}
+                <td className="px-4 py-3"><ContentActivation table={table} id={row["id"]} title={row[fields[0]?.key ?? "title"] ?? ""} active={(table === "deals" ? row["staff_active"] : row["active"]) !== false} /></td>
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     {table === "courses" && <Button size="sm" variant="outline" onClick={() => setQuizCourse(row)}>الاختبار</Button>}

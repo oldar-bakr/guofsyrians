@@ -141,6 +141,13 @@
       "when": 1794750349993,
       "tag": "0019_complaint_media_staff_read",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1794750861988,
+      "tag": "0020_content_activation_and_deal_review",
+      "breakpoints": true
     }
   ]
 }

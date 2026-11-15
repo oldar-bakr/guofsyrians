@@ -9,7 +9,7 @@ export const statusLabels: Record<string, string> = { pending: "بانتظار �
 
 export type Business = {
   id: string; owner_id: string; name: string; category: string; city: string; address: string;
-  phone: string; email: string; description: string; logo_url: string | null; status: string; created_at: string;
+  phone: string; email: string; description: string; logo_url: string | null; status: string; active: boolean; created_at: string;
 };
 
 export async function fetchMyBusiness(): Promise<Business | null> {
@@ -33,9 +33,10 @@ export function useLogoUrl(path: string | null | undefined) {
     enabled: Boolean(path),
     staleTime: 1000 * 60 * 60,
     queryFn: async () => {
-      const { data } = await supabase.storage.from(LOGO_BUCKET).createSignedUrl(path!, 60 * 60 * 12);
+      if (!path) return null;
+      const { data } = await supabase.storage.from(LOGO_BUCKET).createSignedUrl(path, 60 * 60 * 12);
       if (data?.signedUrl) return data.signedUrl;
-      const res = await getApprovedLogoUrl({ data: { path: path! } });
+      const res = await getApprovedLogoUrl({ data: { path } });
       return res.url;
     },
   });

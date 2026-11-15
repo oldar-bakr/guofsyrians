@@ -35,7 +35,7 @@ export const Route = createFileRoute("/_authenticated/deals")({
 function Deals() {
   const { data: all = [], isLoading, isError } = useContent<Deal>("deals");
   const deals = all.filter((d) => d.active !== false);
-  const { data: shops = [] } = useQuery({ queryKey: ["shops", "store-types"], queryFn: async () => (await supabase.from("businesses").select("id, name, category, logo_url, address, phone").eq("status", "approved")).data ?? [] });
+  const { data: shops = [] } = useQuery({ queryKey: ["shops", "store-types"], queryFn: async () => (await supabase.from("businesses").select("id, name, category, logo_url, address, phone").eq("status", "approved").eq("active", true)).data ?? [] });
   const shop = (d: Deal) => shops.find((b) => b.id === d.business_id);
   const student = useStudent();
   const [picked, setPicked] = useState<string | null>(null);

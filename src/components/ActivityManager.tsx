@@ -17,9 +17,9 @@ const orderStatuses = ["جديد", "قيد التجهيز", "تم التسليم
 export function ActivityManager() {
   const [tab, setTab] = useState<ActivityTable>("orders");
   const qc = useQueryClient();
-  const { data: courses = [] } = useContent<any>("courses");
-  const { data: events = [] } = useContent<any>("events");
-  const { data: deals = [] } = useContent<any>("deals");
+  const { data: courses = [] } = useContent<any>("courses", true);
+  const { data: events = [] } = useContent<any>("events", true);
+  const { data: deals = [] } = useContent<any>("deals", true);
   const { data: profiles = [] } = useQuery({
     queryKey: ["admin-profiles"],
     queryFn: async () => (await supabase.from("profiles").select("id, full_name, phone, university")).data ?? [],

@@ -16,12 +16,12 @@ export const askAssistant = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { supabase, userId } = context;
     const [faqs, branches, deals, events, courses, news, profile] = await Promise.all([
-      supabase.from("faqs").select("question, answer"),
-      supabase.from("branches").select("city, university, head, contact"),
-      supabase.from("deals").select("partner, category, discount, city, terms"),
-      supabase.from("events").select("title, date, time, place, org, description"),
-      supabase.from("courses").select("title, category, lessons, description").eq("status", "approved"),
-      supabase.from("news").select("title, date, body").order("created_at", { ascending: false }).limit(10),
+      supabase.from("faqs").select("question, answer").eq("active", true),
+      supabase.from("branches").select("city, university, head, contact").eq("active", true),
+      supabase.from("deals").select("partner, category, discount, city, terms").eq("active", true).eq("staff_active", true).eq("status", "approved"),
+      supabase.from("events").select("title, date, time, place, org, description").eq("active", true),
+      supabase.from("courses").select("title, category, lessons, description").eq("status", "approved").eq("active", true),
+      supabase.from("news").select("title, date, body").eq("active", true).order("created_at", { ascending: false }).limit(10),
       supabase.from("profiles").select("full_name, city, university, faculty").eq("id", userId).maybeSingle(),
     ]);
 

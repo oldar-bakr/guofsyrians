@@ -25,7 +25,7 @@ function Partner() {
   const { id } = Route.useParams();
   const { data: deals = [], isLoading: dealsLoading } = useContent<Deal>("deals");
   const { data: business, isLoading, isError } = useQuery({ queryKey: ["partner", id], queryFn: async () => {
-    const { data, error } = await supabase.from("businesses").select("id,name,category,city,address,phone,email,description,logo_url").eq("id", id).eq("status", "approved").maybeSingle();
+    const { data, error } = await supabase.from("businesses").select("id,name,category,city,address,phone,email,description,logo_url").eq("id", id).eq("status", "approved").eq("active", true).maybeSingle();
     if (error) throw error;
     return data;
   } });
