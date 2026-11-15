@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ShoppingBag, Minus, Plus } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
@@ -46,8 +46,10 @@ function Market() {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {products.map((p: any) => (
           <article key={p.id} className="rounded-2xl bg-card p-3 shadow-soft">
-            {p.images?.length > 0 ? <ContentImages paths={p.images} title={p.name} className="mb-3" /> : <div className="mb-3 grid aspect-square place-items-center rounded-xl bg-muted text-primary"><ShoppingBag className="h-8 w-8" /></div>}
-            <h3 className="text-sm font-bold">{p.name}</h3>
+            <Link to="/market/$id" params={{ id: p.id }} className="block" aria-label={`تفاصيل ${p.name}`}>
+              {p.images?.length > 0 ? <ContentImages paths={p.images} title={p.name} cover className="mb-3" /> : <div className="mb-3 grid aspect-square place-items-center rounded-xl bg-muted text-primary"><ShoppingBag className="h-8 w-8" /></div>}
+              <h3 className="break-words text-sm font-bold hover:text-primary">{p.name}</h3>
+            </Link>
             <p className="text-xs text-muted-foreground">{p.seller}</p>
             <div className="mt-2 flex items-center justify-between">
               <span className="font-bold text-primary">{p.price}</span>

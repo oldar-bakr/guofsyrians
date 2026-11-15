@@ -33,6 +33,7 @@ import { Route as AuthenticatedCoursesIdRouteImport } from './routes/_authentica
 import { Route as AuthenticatedEventsIndexRouteImport } from './routes/_authenticated/events.index'
 import { Route as AuthenticatedEventsIdRouteImport } from './routes/_authenticated/events.$id'
 import { Route as AuthenticatedMarketIndexRouteImport } from './routes/_authenticated/market.index'
+import { Route as AuthenticatedMarketIdRouteImport } from './routes/_authenticated/market.$id'
 import { Route as AuthenticatedNewsIndexRouteImport } from './routes/_authenticated/news.index'
 import { Route as AuthenticatedNewsIdRouteImport } from './routes/_authenticated/news.$id'
 import { Route as AuthenticatedPartnersIdRouteImport } from './routes/_authenticated/partners.$id'
@@ -167,6 +168,11 @@ const AuthenticatedMarketIndexRoute =
     path: '/market/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedMarketIdRoute = AuthenticatedMarketIdRouteImport.update({
+  id: '/market/$id',
+  path: '/market/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedNewsIndexRoute = AuthenticatedNewsIndexRouteImport.update({
   id: '/news/',
   path: '/news/',
@@ -219,6 +225,7 @@ export interface FileRoutesByFullPath {
   '/contribute/products': typeof AuthenticatedContributeProductsRoute
   '/courses/$id': typeof AuthenticatedCoursesIdRoute
   '/events/$id': typeof AuthenticatedEventsIdRoute
+  '/market/$id': typeof AuthenticatedMarketIdRoute
   '/news/$id': typeof AuthenticatedNewsIdRoute
   '/partners/$id': typeof AuthenticatedPartnersIdRoute
   '/contribute/': typeof AuthenticatedContributeIndexRoute
@@ -249,6 +256,7 @@ export interface FileRoutesByTo {
   '/contribute/products': typeof AuthenticatedContributeProductsRoute
   '/courses/$id': typeof AuthenticatedCoursesIdRoute
   '/events/$id': typeof AuthenticatedEventsIdRoute
+  '/market/$id': typeof AuthenticatedMarketIdRoute
   '/news/$id': typeof AuthenticatedNewsIdRoute
   '/partners/$id': typeof AuthenticatedPartnersIdRoute
   '/contribute': typeof AuthenticatedContributeIndexRoute
@@ -282,6 +290,7 @@ export interface FileRoutesById {
   '/_authenticated/contribute/products': typeof AuthenticatedContributeProductsRoute
   '/_authenticated/courses/$id': typeof AuthenticatedCoursesIdRoute
   '/_authenticated/events/$id': typeof AuthenticatedEventsIdRoute
+  '/_authenticated/market/$id': typeof AuthenticatedMarketIdRoute
   '/_authenticated/news/$id': typeof AuthenticatedNewsIdRoute
   '/_authenticated/partners/$id': typeof AuthenticatedPartnersIdRoute
   '/_authenticated/contribute/': typeof AuthenticatedContributeIndexRoute
@@ -315,6 +324,7 @@ export interface FileRouteTypes {
     | '/contribute/products'
     | '/courses/$id'
     | '/events/$id'
+    | '/market/$id'
     | '/news/$id'
     | '/partners/$id'
     | '/contribute/'
@@ -345,6 +355,7 @@ export interface FileRouteTypes {
     | '/contribute/products'
     | '/courses/$id'
     | '/events/$id'
+    | '/market/$id'
     | '/news/$id'
     | '/partners/$id'
     | '/contribute'
@@ -377,6 +388,7 @@ export interface FileRouteTypes {
     | '/_authenticated/contribute/products'
     | '/_authenticated/courses/$id'
     | '/_authenticated/events/$id'
+    | '/_authenticated/market/$id'
     | '/_authenticated/news/$id'
     | '/_authenticated/partners/$id'
     | '/_authenticated/contribute/'
@@ -572,6 +584,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMarketIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/market/$id': {
+      id: '/_authenticated/market/$id'
+      path: '/market/$id'
+      fullPath: '/market/$id'
+      preLoaderRoute: typeof AuthenticatedMarketIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/news/': {
       id: '/_authenticated/news/'
       path: '/news'
@@ -647,6 +666,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedUnionRoute: typeof AuthenticatedUnionRoute
   AuthenticatedCoursesIdRoute: typeof AuthenticatedCoursesIdRoute
   AuthenticatedEventsIdRoute: typeof AuthenticatedEventsIdRoute
+  AuthenticatedMarketIdRoute: typeof AuthenticatedMarketIdRoute
   AuthenticatedNewsIdRoute: typeof AuthenticatedNewsIdRoute
   AuthenticatedPartnersIdRoute: typeof AuthenticatedPartnersIdRoute
   AuthenticatedCoursesIndexRoute: typeof AuthenticatedCoursesIndexRoute
@@ -667,6 +687,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedUnionRoute: AuthenticatedUnionRoute,
   AuthenticatedCoursesIdRoute: AuthenticatedCoursesIdRoute,
   AuthenticatedEventsIdRoute: AuthenticatedEventsIdRoute,
+  AuthenticatedMarketIdRoute: AuthenticatedMarketIdRoute,
   AuthenticatedNewsIdRoute: AuthenticatedNewsIdRoute,
   AuthenticatedPartnersIdRoute: AuthenticatedPartnersIdRoute,
   AuthenticatedCoursesIndexRoute: AuthenticatedCoursesIndexRoute,

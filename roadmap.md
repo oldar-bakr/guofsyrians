@@ -1,5 +1,10 @@
 # Student subscription
 
+## Product details
+- [x] Add approved product detail pages and market image/title links, preserving cart controls.
+- [x] Display published seller contacts as phone/email links; never expose private profiles or fabricate missing contacts.
+- [ ] Verify actual product navigation and contact links (blocked: the available injected account redirects to onboarding; a completed signed-in profile is required). Contact parsing tests and compilation pass.
+
 ## News image frame sweep
 - [x] Audit home slider, news list, detail carousel, expanded viewer, admin upload previews, and image upload/signing paths.
 - [x] Fill news list covers as well as home/detail frames without changing other galleries or stored images.
