@@ -1,10 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarDays, ShoppingBag, Building2, GraduationCap, Tag, Sparkles, Award } from "lucide-react";
-import { ContentImages } from "@/components/ContentImages";
+import { NewsSlider } from "@/components/NewsSlider";
 import { AppShell } from "@/components/AppShell";
-import { useStudent } from "@/lib/profile";
-import { Avatar } from "@/components/Avatar";
-import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/_authenticated/home")({
   staticData: { sitemap: false },
@@ -32,23 +29,9 @@ const services = [
 ] as const;
 
 function Index() {
-  const student = useStudent();
-  const { data: news = [] } = useContent<any>("news");
   return (
     <AppShell>
-      <section className="bg-hero rounded-3xl p-6 text-primary-foreground shadow-soft">
-        <div className="flex items-center gap-3">
-          <Avatar path={student.avatar} name={student.name} university={student.university} className="h-12 w-12" />
-          <div className="min-w-0">
-            <p className="text-sm opacity-80">مرحباً،</p>
-            <h2 className="font-display text-2xl font-bold">{student.name}</h2>
-          </div>
-        </div>
-        <p className="mt-1 text-sm opacity-80">{student.university} · {student.city}</p>
-        <Link to="/card" className="mt-4 inline-block rounded-full bg-accent px-4 py-2 text-sm font-bold text-accent-foreground">
-          عرض بطاقتي الرقمية
-        </Link>
-      </section>
+      <NewsSlider />
 
       <h3 className="mb-3 mt-7 font-display text-lg font-bold">الخدمات</h3>
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-7">
@@ -78,18 +61,6 @@ function Index() {
         <Link to="/contribute/products" className="rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground">انشر منتج</Link>
       </section>
 
-      <div className="mb-3 mt-7 flex items-center justify-between"><h3 className="font-display text-lg font-bold">آخر الأخبار</h3><Link to="/news" className="text-sm text-primary">عرض الكل</Link></div>
-      <ul className="grid gap-3 md:grid-cols-2">
-        {news.map((n: any) => (
-          <li key={n.id} className="rounded-2xl border-r-4 border-accent bg-card p-4">
-            <Link to="/news/$id" params={{ id: n.id }} className="block w-full text-right">
-              <ContentImages paths={n.images} title={n.title} cover className="mb-3" />
-              <p className="font-medium">{n.title}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{n.date} · اقرأ المزيد</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
     </AppShell>
   );
 }
