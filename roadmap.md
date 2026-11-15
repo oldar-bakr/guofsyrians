@@ -1,9 +1,9 @@
 # Student subscription
 
 ## Student market examples
-- [ ] Replace existing products with exactly three detailed, clearly labelled student resale examples.
-- [ ] Upload book, laptop, and study-supply illustrations through the existing private image flow.
-- [ ] Verify the three products and their pictures in the market and detail pages.
+- [x] Replace existing products with exactly three detailed, clearly labelled student resale examples, preserving previous orders.
+- [x] Upload book, laptop, and study-supply illustrations through the existing private image flow.
+- [x] Verify all three approved products, loaded pictures, and detail navigation on desktop and mobile using the owner's authenticated account.
 
 ## Product details
 - [x] Add approved product detail pages and market image/title links, preserving cart controls.
