@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Home, IdCard, GraduationCap, Tag } from "lucide-react";
+import { Home, IdCard, GraduationCap, Tag, Landmark } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
 import { UniversityLogo } from "@/components/UniversityLogo";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,15 @@ const tabs = [
   { to: "/courses", label: "الدورات", icon: GraduationCap },
   { to: "/card", label: "بطاقتي", icon: IdCard },
   { to: "/deals", label: "التخفيضات", icon: Tag },
+  { to: "/assistant", label: "المساعد", icon: Home },
+] as const;
+
+// Mobile floating bar: deals replaces courses, union guide replaces deals.
+const mobileTabs = [
+  { to: "/home", label: "الرئيسية", icon: Home },
+  { to: "/deals", label: "التخفيضات", icon: Tag },
+  { to: "/card", label: "بطاقتي", icon: IdCard },
+  { to: "/union", label: "دليل الاتحاد", icon: Landmark },
   { to: "/assistant", label: "المساعد", icon: Home },
 ] as const;
 
@@ -51,7 +60,7 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
       </header>
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-28 pt-5 md:px-6 md:pb-10">{children}</main>
       <nav aria-label="التنقل الرئيسي للهاتف" className="fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-20 mx-auto grid max-w-md grid-cols-5 gap-1 rounded-full border bg-card/95 px-2 py-2 shadow-soft backdrop-blur-md md:hidden">
-        {tabs.map(({ to, label, icon: Icon }) => (
+        {mobileTabs.map(({ to, label, icon: Icon }) => (
           <Button asChild variant="ghost" key={to} className="group h-14 min-w-0 flex-col gap-1 rounded-full px-0 py-1 text-[10px] text-muted-foreground hover:bg-secondary hover:text-primary data-[status=active]:bg-secondary data-[status=active]:font-bold data-[status=active]:text-primary">
           <Link
             to={to}
