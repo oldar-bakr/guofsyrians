@@ -1,5 +1,9 @@
 # Student subscription
 
+## Assistant answer presentation
+- [x] Render formatted answers with safe links, readable lists, and clickable phone/email contacts.
+- [x] Verify an actual assistant response, bold/list formatting, callable phone/email links, and phone layout; three safety tests pass.
+
 ## Deal filtering
 - [x] Add compact search and combined city/company filters, preserving the student-city default.
 - [x] Verify combined filters, reset, and mobile display with real offers and five passing filtering tests.

@@ -25,3 +25,4 @@
 - The university directory is a bundled domestic YÖK catalogue enriched with sourced institutional office emails; staff-managed branch contacts override demo representatives, which remain explicitly labelled as fictional.
 - Deal cards link to student-facing partner profiles; the shared redemption dialog preserves the same QR payload and is separate from card navigation, including legacy staff-created offers without a business row.
 - Deal filtering uses shared pure predicates with normalized city matching and business IDs (legacy partner names only when unlinked); company options depend on the selected city to avoid unrelated selections.
+- Assistant answers render through a shared safe Markdown view with GFM/email links and phone linkification; raw HTML, remote images, and unsafe URL schemes are disabled to keep model output untrusted.

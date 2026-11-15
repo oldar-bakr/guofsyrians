@@ -6,6 +6,7 @@ import { AppShell } from "@/components/AppShell";
 import { Avatar } from "@/components/Avatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { AssistantAnswer } from "@/components/AssistantAnswer";
 import { askAssistant } from "@/lib/assistant.functions";
 import { useStudent } from "@/lib/profile";
 import logo from "@/assets/union-logo.png.asset.json";
@@ -107,7 +108,7 @@ function Assistant() {
                   {m.from === "me" ? <Avatar path={student.avatar} name={student.name} university={student.university} className="size-8" textClass="text-xs" /> : <img src={logo.url} alt="المساعد" className="size-8 shrink-0 object-contain" />}
                   <div className={`min-w-0 max-w-[85%] ${m.from === "me" ? "text-end" : ""}`}>
                     <p className="mb-1.5 text-xs text-muted-foreground">{m.from === "me" ? "أنت" : "مساعد الاتحاد"}</p>
-                    <div className={`whitespace-pre-wrap break-words rounded-lg text-start text-sm leading-7 ${m.from === "me" ? "bg-secondary px-4 py-3 text-secondary-foreground" : m.error ? "text-destructive" : "text-foreground"}`}>{m.text}</div>
+                    {m.from === "bot" && !m.error ? <AssistantAnswer text={m.text} /> : <div className={`whitespace-pre-wrap break-words rounded-lg text-start text-sm leading-7 ${m.from === "me" ? "bg-secondary px-4 py-3 text-secondary-foreground" : "text-destructive"}`}>{m.text}</div>}
                     {m.from === "bot" && <div className="mt-1 flex items-center gap-1">{m.error ? <Button size="sm" variant="ghost" disabled={busy} onClick={() => { if (m.question) void send(m.question); }} className="text-xs text-muted-foreground"><RotateCcw />حاول مجدداً</Button> : <Button variant="ghost" size="icon" aria-label={copied === i ? "تم نسخ الإجابة" : "نسخ الإجابة"} title={copied === i ? "تم نسخ الإجابة" : "نسخ الإجابة"} onClick={() => void copy(m.text, i)} className="size-8 text-muted-foreground">{copied === i ? <Check /> : <Copy />}</Button>}</div>}
                   </div>
                 </div>
