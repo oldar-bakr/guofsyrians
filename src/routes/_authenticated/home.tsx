@@ -20,12 +20,12 @@ export const Route = createFileRoute("/_authenticated/home")({
 });
 
 const services = [
+  { to: "/events", label: "الفعاليات", icon: CalendarDays },
   { to: "/scholarships", label: "المنح", icon: Award },
+  { to: "/deals", label: "التخفيضات", icon: Tag },
   { to: "/courses", label: "الدورات", icon: GraduationCap },
   { to: "/market", label: "السوق", icon: ShoppingBag },
   { to: "/assistant", label: "المساعد الذكي", icon: Building2 },
-  { to: "/deals", label: "التخفيضات", icon: Tag },
-  { to: "/events", label: "الفعاليات", icon: CalendarDays },
   { to: "/union", label: "دليل الاتحاد", icon: Building2 },
 ] as const;
 
