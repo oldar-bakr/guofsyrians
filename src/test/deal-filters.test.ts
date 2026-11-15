@@ -7,6 +7,15 @@ const offers = [
 ] as const;
 const shops = [{ id: "a", name: "Student Cafe" }, { id: "b", name: "Other Cafe" }];
 describe("Deal filters", () => {
+  it("filters cafes and restaurants using the linked store type, not the offer category", () => {
+    const typedShops = [{ id: "a", name: "Student Cafe", category: "مقهى" }, { id: "b", name: "Other Cafe", category: "مطعم" }];
+    expect(filterDeals(offers, typedShops, { city: "", company: "", query: "", storeType: "مقهى" }).map((d) => d.id)).toEqual(["1"]);
+    expect(filterDeals(offers, typedShops, { city: "İstanbul", company: "business:b", query: "وجبات", storeType: "مطعم" }).map((d) => d.id)).toEqual(["2"]);
+    expect(filterDeals(offers, typedShops, { city: "", company: "business:a", query: "", storeType: "مطعم" })).toEqual([]);
+  });
+  it("uses the offer category for legacy offers without a store", () => {
+    expect(filterDeals(offers, shops, { city: "", company: "", query: "", storeType: "كتب" }).map((d) => d.id)).toEqual(["3"]);
+  });
   it("filters all offers in a city, including Arabic and Turkish spellings", () => {
     expect(filterDeals(offers, shops, { city: "İstanbul", company: "", query: "" }).map((d) => d.id)).toEqual(["1", "2"]);
   });

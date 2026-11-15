@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { BusinessLogo } from "@/lib/business";
 import { useStudent } from "@/lib/profile";
 import { cityKey, sameCity } from "@/lib/city-match";
-import { dealCompanyKey, filterDeals } from "@/lib/deal-filters";
+import { dealCompanyKey, dealStoreType, filterDeals } from "@/lib/deal-filters";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -35,26 +35,30 @@ export const Route = createFileRoute("/_authenticated/deals")({
 function Deals() {
   const { data: all = [], isLoading, isError } = useContent<Deal>("deals");
   const deals = all.filter((d) => d.active !== false);
-  const { data: shops = [] } = useQuery({ queryKey: ["shops"], queryFn: async () => (await supabase.from("businesses").select("id, name, logo_url, address, phone").eq("status", "approved")).data ?? [] });
+  const { data: shops = [] } = useQuery({ queryKey: ["shops", "store-types"], queryFn: async () => (await supabase.from("businesses").select("id, name, category, logo_url, address, phone").eq("status", "approved")).data ?? [] });
   const shop = (d: Deal) => shops.find((b) => b.id === d.business_id);
   const student = useStudent();
   const [picked, setPicked] = useState<string | null>(null);
   const [active, setActive] = useState<Deal | null>(null);
   const [query, setQuery] = useState("");
   const [company, setCompany] = useState("");
+  const [storeType, setStoreType] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const cities = Array.from(new Map(deals.filter((d) => d.city).map((d) => [cityKey(d.city), d.city])).values()).sort((a, b) => a.localeCompare(b, "ar"));
   // Default to the student's own city when deals exist there.
   const mine = cities.find((c) => sameCity(c, student.city));
   const city = picked ?? mine ?? "";
   const cityDeals = filterDeals(deals, shops, { city, company: "", query: "" });
-  const companies = Array.from(new Map(cityDeals.map((d) => [dealCompanyKey(d), shop(d)?.name ?? d.partner])).entries()).sort((a, b) => a[1].localeCompare(b[1], "ar"));
+  const storeTypes = Array.from(new Set(cityDeals.map((d) => dealStoreType(d, shops)).filter(Boolean))).sort((a, b) => a.localeCompare(b, "ar"));
+  const typeDeals = filterDeals(cityDeals, shops, { city: "", company: "", query: "", storeType });
+  const companies = Array.from(new Map(typeDeals.map((d) => [dealCompanyKey(d), shop(d)?.name ?? d.partner])).entries()).sort((a, b) => a[1].localeCompare(b[1], "ar"));
   const companyName = companies.find(([key]) => key === company)?.[1];
-  const setCity = (next: string) => { setPicked(next); setCompany(""); };
-  const resetFilters = () => { setPicked(""); setCompany(""); };
+  const setCity = (next: string) => { setPicked(next); setCompany(""); setStoreType(""); };
+  const setType = (next: string) => { setStoreType(next); setCompany(""); };
+  const resetFilters = () => { setPicked(""); setCompany(""); setStoreType(""); };
   const clearAll = () => { resetFilters(); setQuery(""); };
-  const activeFilters = Number(Boolean(city)) + Number(Boolean(company));
-  const list = filterDeals(deals, shops, { city, company, query });
+  const activeFilters = Number(Boolean(city)) + Number(Boolean(company)) + Number(Boolean(storeType));
+  const list = filterDeals(deals, shops, { city, company, query, storeType });
 
   const use = (d: Deal) => setActive(d);
 
@@ -68,6 +72,7 @@ function Deals() {
             <PopoverContent align="end" dir="rtl" className="w-80 max-w-[calc(100vw-2rem)] space-y-4" aria-label="تصفية التخفيضات">
               <div className="flex items-center justify-between"><h3 className="text-sm font-bold">تصفية التخفيضات</h3><Button variant="ghost" size="icon" className="h-8 w-8" disabled={!activeFilters} onClick={resetFilters} aria-label="إعادة ضبط الفلاتر" title="إعادة ضبط الفلاتر"><RotateCcw /></Button></div>
               <div className="space-y-1.5"><label htmlFor="deal-city" className="text-xs text-muted-foreground">المدينة</label><Select dir="rtl" value={city || "all"} onValueChange={(v) => setCity(v === "all" ? "" : v)}><SelectTrigger id="deal-city" className="h-10"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">كل المدن</SelectItem>{cities.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent></Select></div>
+              <div className="space-y-1.5"><label htmlFor="deal-type" className="text-xs text-muted-foreground">نوع المتجر</label><Select dir="rtl" value={storeType || "all"} onValueChange={(v) => setType(v === "all" ? "" : v)}><SelectTrigger id="deal-type" className="h-10"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">كل أنواع المتاجر</SelectItem>{storeTypes.map((type) => <SelectItem key={type} value={type}>{type}</SelectItem>)}</SelectContent></Select></div>
               <div className="space-y-1.5"><label htmlFor="deal-company" className="text-xs text-muted-foreground">الشركة</label><Select dir="rtl" value={company || "all"} onValueChange={(v) => setCompany(v === "all" ? "" : v)}><SelectTrigger id="deal-company" className="h-10"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">كل الشركات</SelectItem>{companies.map(([key, name]) => <SelectItem key={key} value={key}>{name}</SelectItem>)}</SelectContent></Select></div>
               <Button className="w-full" onClick={() => setFiltersOpen(false)}>عرض النتائج ({list.length})<ArrowLeft /></Button>
             </PopoverContent>
@@ -75,6 +80,7 @@ function Deals() {
         </div>
         <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"><span role="status" aria-live="polite">{list.length} عرض متاح</span>{city && <Button variant="secondary" size="sm" className="h-auto min-h-7 max-w-full py-1 text-xs" aria-label="إزالة فلتر المدينة" onClick={() => setCity("")}><MapPin className="h-3 w-3 shrink-0" /><span className="min-w-0 break-words whitespace-normal">{city}</span><X className="h-3 w-3 shrink-0" /></Button>}{companyName && <Button variant="secondary" size="sm" className="h-auto min-h-7 max-w-full py-1 text-xs" aria-label="إزالة فلتر الشركة" onClick={() => setCompany("")}><span className="min-w-0 break-words whitespace-normal">{companyName}</span><X className="h-3 w-3 shrink-0" /></Button>}{(query || activeFilters > 0) && <Button variant="ghost" size="sm" className="mr-auto h-7 text-xs" onClick={clearAll}><RotateCcw className="h-3 w-3" />مسح الكل</Button>}</div>
       </div>
+      {storeType && <div className="mb-4"><Button variant="secondary" size="sm" className="h-auto min-h-7 max-w-full py-1 text-xs" aria-label="إزالة فلتر نوع المتجر" onClick={() => setType("")}><span className="min-w-0 whitespace-normal break-words">{storeType}</span><X className="h-3 w-3 shrink-0" /></Button></div>}
       <div className="grid items-stretch gap-4 md:grid-cols-2 xl:grid-cols-3">
         {list.map((d) => (
           <article key={d.id} className="relative flex min-w-0 flex-col gap-4 rounded-lg border bg-card p-4 transition-colors hover:border-primary/40 sm:p-5">
