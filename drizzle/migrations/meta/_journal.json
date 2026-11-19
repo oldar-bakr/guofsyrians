@@ -148,6 +148,13 @@
       "when": 1794750861988,
       "tag": "0020_content_activation_and_deal_review",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1795125286099,
+      "tag": "0021_stop_email_based_admin_grant",
+      "breakpoints": true
     }
   ]
 }

@@ -22,7 +22,10 @@ async function myApprovedBusiness(supabase: any, userId: string) {
 }
 
 async function findStudent(admin: any, code: string) {
-  const { data: p } = await admin.from("profiles").select("*").ilike("member_code", code.trim()).maybeSingle();
+  const clean = code.trim().toUpperCase();
+  // Exact match only (no wildcards); the code comes from the student's own QR card.
+  if (!/^[A-Z0-9-]{4,40}$/.test(clean)) throw new Error("رمز الطالب غير صالح");
+  const { data: p } = await admin.from("profiles").select("*").eq("member_code", clean).maybeSingle();
   if (!p) throw new Error("لم يتم العثور على طالب بهذا الرمز");
   const { data: u } = await admin.auth.admin.getUserById(p.id);
   const banned = !!u?.user && !!(u.user as any).banned_until && new Date((u.user as any).banned_until) > new Date();
@@ -37,7 +40,7 @@ export const lookupStudent = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { p, active } = await findStudent(supabaseAdmin, data.code);
     let avatarUrl: string | null = null;
-    if (p.avatar_url) {
+    if (typeof p.avatar_url === "string" && p.avatar_url.startsWith(`${p.id}/`) && !p.avatar_url.includes("..")) {
       const { data: s } = await supabaseAdmin.storage.from("avatars").createSignedUrl(p.avatar_url, 600);
       avatarUrl = s?.signedUrl ?? null;
     }
@@ -50,7 +53,11 @@ export const lookupStudent = createServerFn({ method: "POST" })
 
 export const confirmDiscount = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: { code: string; dealId: string }) => d)
+  .inputValidator((d: { code: string; dealId: string }) => {
+    const dealId = String(d?.dealId ?? "");
+    if (!/^[0-9a-f-]{36}$/i.test(dealId)) throw new Error("bad deal");
+    return { code: String(d?.code ?? "").slice(0, 40), dealId };
+  })
   .handler(async ({ data, context }) => {
     const businessId = await myApprovedBusiness(context.supabase, context.userId);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");

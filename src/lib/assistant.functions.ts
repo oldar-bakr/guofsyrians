@@ -11,7 +11,13 @@ export const askAssistant = createServerFn({ method: "POST" })
   .inputValidator((d: { question: string; history: { from: "me" | "bot"; text: string }[] }) => {
     const q = String(d.question ?? "").trim().slice(0, 1000);
     if (!q) throw new Error("السؤال فارغ");
-    return { question: q, history: (d.history ?? []).slice(-8) };
+    // Only the student's own earlier questions are kept; client-supplied "assistant" turns are never trusted.
+    const history = (Array.isArray(d.history) ? d.history : [])
+      .filter((m) => m && m.from === "me" && typeof m.text === "string")
+      .slice(-4)
+      .map((m) => ({ from: "me" as const, text: m.text.trim().slice(0, 1000) }))
+      .filter((m) => m.text);
+    return { question: q, history };
   })
   .handler(async ({ data, context }) => {
     const { supabase, userId } = context;
@@ -69,7 +75,7 @@ ${lines(news.data, (r) => `- ${r.date}: ${r.title}. ${r.body ?? ""}`)}
           "أنت المساعد الذكي لتطبيق خدمات الاتحاد العام لطلبة سوريا. أجب بالعربية بإيجاز ووضوح، واعتمد فقط على المعلومات المعتمدة التالية. إن لم تجد الإجابة فيها فقل ذلك بلطف واقترح التواصل مع فرع الطالب.\n" +
           knowledge,
         messages: [
-          ...data.history.map((m) => ({ role: m.from === "me" ? ("user" as const) : ("assistant" as const), content: m.text })),
+          ...data.history.map((m) => ({ role: "user" as const, content: m.text })),
           { role: "user" as const, content: data.question },
         ],
         providerOptions: {

@@ -14,9 +14,18 @@ export const getVisibleContentImages = createServerFn({ method: "POST" })
     else {
       // All queries use the caller's RLS, including owner visibility for pending rows.
       for (const table of ["news", "events", "products", "courses"] as const) {
-        const { data: rows, error } = await context.supabase.from(table).select("images").overlaps("images", data.paths);
+        const cols = table === "products" || table === "courses" ? "images, active, status" : "images, active";
+        const { data: rows, error } = await context.supabase.from(table).select(cols).overlaps("images", data.paths);
         if (error) throw new Error("تعذّر التحقق من الصور");
-        for (const row of rows ?? []) for (const path of row.images) if (data.paths.includes(path)) allowed.add(path);
+        for (const row of (rows ?? []) as any[]) {
+          // Published rows may show any of their images; unpublished rows only the caller's own uploads,
+          // so referencing someone else's file in your own record never yields a link to it.
+          const published = row.active && (row.status === undefined || row.status === "approved");
+          for (const path of row.images as string[]) {
+            if (!data.paths.includes(path)) continue;
+            if (published || path.startsWith(`${context.userId}/`)) allowed.add(path);
+          }
+        }
       }
     }
     const paths = data.paths.filter((path) => allowed.has(path));

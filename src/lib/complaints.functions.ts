@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
-import { complaintSchema, validateComplaintSize, complaintIdentity } from "./complaints";
+import { complaintSchema, validateComplaintSize, complaintIdentity, detectComplaintFileType } from "./complaints";
 
 export const submitComplaint = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -13,10 +13,12 @@ export const submitComplaint = createServerFn({ method: "POST" })
     if (data.attachment) {
       const bytes = Uint8Array.from(atob(data.attachment.base64), c => c.charCodeAt(0));
       validateComplaintSize(bytes.length);
+      const contentType = detectComplaintFileType(bytes);
+      if (!contentType) throw new Error("نوع الملف غير مدعوم. المسموح: صور، PDF، فيديو أو صوت");
       size = bytes.length;
       // Random paths, no owner identifier or original filename; download-only binary storage.
       path = `${crypto.randomUUID()}/attachment`;
-      const { error } = await supabaseAdmin.storage.from("complaint-media").upload(path, bytes, { contentType: "application/octet-stream", upsert: false });
+      const { error } = await supabaseAdmin.storage.from("complaint-media").upload(path, bytes, { contentType, upsert: false });
       if (error) throw new Error("تعذّر رفع المرفق");
     }
     const { data: row, error } = await supabaseAdmin.from("student_complaints").insert({
